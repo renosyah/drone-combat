@@ -2,7 +2,7 @@ class_name VirtualJoystick
 
 extends Control
 
-signal on_joystick_input(output)
+signal on_joystick_input(output,is_pressed)
 
 # https://github.com/MarcoFazioRandom/Virtual-Joystick-Godot
 
@@ -127,7 +127,7 @@ func _update_joystick(touch_position: Vector2) -> void:
 	if use_input_actions:
 		_update_input_actions()
 		
-	emit_signal("on_joystick_input", get_output())
+	emit_signal("on_joystick_input", _output, _pressed)
 
 func _update_input_actions():
 	if _output.x < 0:

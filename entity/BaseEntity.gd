@@ -6,7 +6,7 @@ signal on_dead(_entity)
 signal on_take_damage(_entity, _damage)
 
 # vitality
-var _is_dead = false
+var is_dead = false
 export var hp : int = 100.0
 export var max_hp : int = 100.0
 
@@ -18,7 +18,7 @@ var _network_timmer : Timer = null
 ############################################################
 # multiplayer func
 func _network_timmer_timeout():
-	if _is_dead:
+	if is_dead:
 		return
 		
 	if _is_master():
@@ -34,13 +34,13 @@ func _set_puppet_hp(_val :float):
 	hp = _puppet_hp
 	
 remotesync func _take_damage(_damage : int):
-	if _is_dead:
+	if is_dead:
 		return
 		
 	emit_signal("on_take_damage", self, _damage)
 	
 remotesync func _dead():
-	_is_dead = true
+	is_dead = true
 	set_process(false)
 	
 ############################################################
@@ -78,7 +78,7 @@ func take_damage(_damage : int):
 		
 	hp -= _damage
 	
-	if _is_dead:
+	if is_dead:
 		return
 		
 	if hp < 1:

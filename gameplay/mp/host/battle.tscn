@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://gameplay/mp/host/battle.gd" type="Script" id=1]
 [ext_resource path="res://map/map_0/map_0.tscn" type="PackedScene" id=2]
@@ -10,6 +10,12 @@
 [ext_resource path="res://entity/drone_turrets/turret_1/turret_1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://entity/sensor/sensor_1/sensor_1.tscn" type="PackedScene" id=9]
 [ext_resource path="res://gameplay/mp/ui/ui.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entity/drone_hulls/hull_2/hull_2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entity/drone_hulls/hull_3/hull_3.tscn" type="PackedScene" id=12]
+[ext_resource path="res://entity/drone_turrets/turret_2/turret_2.tscn" type="PackedScene" id=13]
+[ext_resource path="res://entity/weapons/auto_cannon/auto_cannon.tscn" type="PackedScene" id=14]
+[ext_resource path="res://entity/drone_turrets/turret_3/turret_3.tscn" type="PackedScene" id=15]
+[ext_resource path="res://entity/weapons/cannon/cannon.tscn" type="PackedScene" id=16]
 
 [node name="battle" type="Node"]
 script = ExtResource( 1 )
@@ -21,22 +27,21 @@ ui_scene = ExtResource( 10 )
 
 [node name="player1" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003, 0, 0.01 )
-speed = 6.0
-turret_scene = ExtResource( 8 )
-weapon_scene = ExtResource( 7 )
+turret_scene = ExtResource( 13 )
+weapon_scene = ExtResource( 14 )
 sensor_scene = ExtResource( 9 )
 color = Color( 0.0196078, 0, 0.658824, 1 )
 
-[node name="player2" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.568, 0, 0.01 )
+[node name="player2" parent="." instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.72098, 4.76837e-07, 0.0104241 )
 turret_scene = ExtResource( 8 )
 weapon_scene = ExtResource( 7 )
 sensor_scene = ExtResource( 9 )
-color = Color( 0.780392, 0, 0, 1 )
+color = Color( 0.8, 0, 0, 1 )
 
-[node name="player3" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.70992, 0, 0.01 )
-turret_scene = ExtResource( 8 )
-weapon_scene = ExtResource( 7 )
+[node name="player3" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.36234, 4.76837e-07, 0.0104241 )
+turret_scene = ExtResource( 15 )
+weapon_scene = ExtResource( 16 )
 sensor_scene = ExtResource( 9 )
-color = Color( 0.054902, 1, 0, 1 )
+color = Color( 0, 0.533333, 0.0352941, 1 )

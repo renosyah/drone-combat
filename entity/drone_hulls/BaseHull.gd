@@ -47,7 +47,7 @@ func set_network_master(id: int, recursive: bool = true):
 func _network_timmer_timeout():
 	._network_timmer_timeout()
 	
-	if _is_dead:
+	if is_dead:
 		return
 		
 	if _is_master():
@@ -59,7 +59,7 @@ puppet var _puppet_translation :Vector3 setget _set_puppet_translation
 func _set_puppet_translation(_val :Vector3):
 	_puppet_translation = _val
 	
-	if _is_dead:
+	if is_dead:
 		return
 	
 	if _is_master():
@@ -118,7 +118,7 @@ func spawn_turret():
 ############################################################
 # function
 func master_moving(delta):
-	if _is_dead:
+	if is_dead:
 		return
 		
 	if waypoint_mode:
@@ -127,16 +127,17 @@ func master_moving(delta):
 		move_by_input(delta)
 	
 func move_by_input(delta):
-	if direction != Vector2.ZERO:
+	if  direction != Vector2.ZERO:
 		direction.normalized()
 		_transform_turning(Vector3(direction.x, 0.0 , direction.y) + translation, delta)
 		_moving_state = MOVING
 		_velocity = Vector3(direction.x, 0.0 , direction.y) * speed
+		move_and_slide(_velocity, Vector3.UP)
+		
 	else:
 		_moving_state = IDDLE
 		_velocity = Vector3.ZERO
 		
-	_velocity = move_and_slide(_velocity, Vector3.UP)
 		
 func move_to_waypoint(delta):
 	if not waypoint:
@@ -162,11 +163,11 @@ func move_to_waypoint(delta):
 	
 	
 func moving(_delta):
-	if _is_dead:
+	if is_dead:
 		return
 	
 func puppet_moving(_delta):
-	if _is_dead:
+	if is_dead:
 		return
 		
 	rotation.x = lerp_angle(rotation.x, _puppet_rotation.x, _delta * 5)
@@ -193,6 +194,4 @@ func _transform_turning(direction, delta):
 	direction.y = translation.y
 	var new_transform = transform.looking_at(direction, Vector3.UP)
 	transform = transform.interpolate_with(new_transform, turning_speed * delta)
-	
-
 

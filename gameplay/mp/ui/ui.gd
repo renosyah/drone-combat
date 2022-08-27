@@ -1,10 +1,10 @@
 extends Control
 
-signal on_joystick_input(output)
+signal on_joystick_input(output,is_pressed)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
-func _on_Virtual_joystick_on_joystick_input(output):
-	emit_signal("on_joystick_input", output)
+func _on_Virtual_joystick_on_joystick_input(output, is_pressed):
+	emit_signal("on_joystick_input", output, is_pressed)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entity/sensor/BaseSensor.gd" type="Script" id=1]
 
@@ -10,6 +10,9 @@ albedo_color = Color( 0.392157, 0.392157, 0.392157, 1 )
 
 [sub_resource type="CubeMesh" id=3]
 size = Vector3( 0.5, 0.3, 0.2 )
+
+[sub_resource type="CubeMesh" id=8]
+size = Vector3( 0.4, 0.4, 0.2 )
 
 [sub_resource type="CylinderMesh" id=4]
 top_radius = 0.03
@@ -29,11 +32,7 @@ albedo_color = Color( 0.345098, 0.345098, 0.345098, 1 )
 
 [node name="sensor_1" type="Spatial"]
 script = ExtResource( 1 )
-raycast_path = [ NodePath("RayCast"), NodePath("RayCast2") ]
-
-[node name="RayCast" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
-cast_to = Vector3( 0, 0, 10 )
+raycast_path = [ NodePath("RayCast2") ]
 
 [node name="RayCast2" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 3 )
@@ -50,6 +49,11 @@ material/0 = SubResource( 2 )
 [node name="MeshInstance2" type="MeshInstance" parent="pivot"]
 transform = Transform( 0.862849, 0, -0.505462, 0, 1, 0, 0.505462, 0, 0.862849, 0.528179, 0.00708187, 0.10568 )
 mesh = SubResource( 3 )
+material/0 = SubResource( 2 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="pivot"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.0581073, -0.312777 )
+mesh = SubResource( 8 )
 material/0 = SubResource( 2 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="pivot"]

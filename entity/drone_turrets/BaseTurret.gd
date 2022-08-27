@@ -47,7 +47,7 @@ var active: bool = true
 func _network_timmer_timeout():
 	._network_timmer_timeout()
 	
-	if _is_dead:
+	if is_dead:
 		return
 		
 	if _is_master():
@@ -63,7 +63,7 @@ func _set_puppet_elevation(_val: float):
 	_puppet_elevation = _val
 	
 remotesync func _weapon_open_fire(_target : NodePath):
-	if _is_dead:
+	if is_dead:
 		return
 		
 	var _enemy = get_node_or_null(_target)
@@ -107,7 +107,7 @@ func master_moving(delta):
 	if not active:
 		return
 		
-	if _is_dead:
+	if is_dead:
 		return
 		
 	# move
@@ -115,7 +115,7 @@ func master_moving(delta):
 	_elevate(delta)
 	
 func puppet_moving(_delta):
-	if _is_dead:
+	if is_dead:
 		return
 		
 	body.rotation.y = lerp_angle(body.rotation.y, _puppet_rotation, _delta * 5)
@@ -133,7 +133,18 @@ func _on_sensor_spotted(_target : BaseEntity):
 	if not _is_master():
 		return
 		
-	current_aim = _target.global_transform.origin
+	var pos = _target.global_transform.origin
+	
+	if not current_aim:
+		current_aim = pos
+		return
+		
+	var new_aim_dis = pos.distance_to(global_transform.origin)
+	var current_aim_dis = current_aim.distance_to(global_transform.origin)
+	if new_aim_dis > current_aim_dis:
+		return
+		
+	current_aim = pos
 	
 ################################
 # MAIN FUNCTIONS
@@ -147,7 +158,7 @@ func _rotate(delta: float) -> void:
 		
 	var y_target = _get_local_y()
 	var final_y = sign(y_target) * min(rotation_speed * delta, abs(y_target))
-	body.rotate_y(-final_y)
+	body.rotate_y(final_y)
 	
 func _elevate(delta: float) -> void:
 	if not current_aim:
@@ -171,7 +182,7 @@ func _elevate(delta: float) -> void:
 func _get_local_y() -> float:
 	var local_target = head.to_local(current_aim)
 	var y_angle = Vector3.FORWARD.angle_to(local_target * Vector3(1, 0, 1))
-	return y_angle * -sign(local_target.x)
+	return y_angle * sign(local_target.x)
 	
 func _get_global_x() -> float:
 	var local_target = current_aim - head.global_transform.origin

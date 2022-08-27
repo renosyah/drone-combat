@@ -92,7 +92,7 @@ func _load_ui():
 	_ui = _ui_asset
 	_ui.connect("on_joystick_input", self, "on_joystick_input")
 	
-func on_joystick_input(output : Vector2):
+func on_joystick_input(output : Vector2, is_pressed : bool):
 	pass
 	
 ################################################################
