@@ -1,0 +1,64 @@
+extends Area
+class_name BaseProjectile
+
+const MAX_DISTANCE = 80.0
+
+var attack_damage : int = 0
+var is_master = false
+
+# speed
+var speed = 15.0
+var spread = 0.8
+var travel_distance = 0.0
+
+var velocity = Vector3.ZERO
+
+func _ready():
+	set_as_toplevel(true)
+
+func launch(to : Vector3):
+	to.z += rand_range(-spread, spread)
+	to.x += rand_range(-spread, spread)
+	to.y += rand_range(-spread, spread)
+	velocity = translation.direction_to(to)
+	look_at(to, Vector3.UP)
+	
+func _process(delta):
+	var _distance = speed * delta
+	translation += velocity * _distance
+	travel_distance += _distance
+	
+	if travel_distance > MAX_DISTANCE:
+		stop_projectile()
+		queue_free()
+	
+func _on_projectile_body_entered(body):
+	if not is_instance_valid(body):
+		return
+		
+	if not body is BaseEntity:
+		return
+		
+	if body.is_a_parent_of(self):
+		return
+		
+	if body is GameplayCamera:
+		return
+		
+	if body is StaticBody:
+		stop_projectile()
+		queue_free()
+		return
+
+	if is_master:
+		body.take_damage(attack_damage)
+	
+	stop_projectile()
+	queue_free()
+	
+func stop_projectile():
+	set_process(false)
+	
+	
+	
+	

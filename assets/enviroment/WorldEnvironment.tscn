@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="ProceduralSky" id=1]
+
+[sub_resource type="Environment" id=2]
+background_mode = 3
+background_sky = SubResource( 1 )
+background_color = Color( 0.254902, 0.823529, 1, 1 )
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource( 2 )

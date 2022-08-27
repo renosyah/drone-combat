@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/enviroment/WorldEnvironment.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/gameplay-camera/gameplay_camera.tscn" type="PackedScene" id=2]
+[ext_resource path="res://menu/main-menu/ui/ui.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/enviroment/DirectionalLight.tscn" type="PackedScene" id=4]
+
+[node name="main_menu" type="Node"]
+
+[node name="cameraPivot" parent="." instance=ExtResource( 2 )]
+is_enable = false
+
+[node name="DirectionalLight" parent="." instance=ExtResource( 4 )]
+
+[node name="main_menu" parent="." instance=ExtResource( 3 )]
+
+[node name="WorldEnvironment" parent="." instance=ExtResource( 1 )]
