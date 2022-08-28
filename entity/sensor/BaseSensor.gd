@@ -3,7 +3,7 @@ class_name BaseSensor
 
 signal on_spotted(_node)
 
-export var spotting_rotation_speed = 0.07
+export var scanning_speed:float = 0.07
 export var raycast_path: Array
 export var spotting_range : int = 1
 
@@ -23,8 +23,7 @@ func _ready():
 	set_process(true)
 	
 func _process(delta):
-	var rot_speed = rad2deg(spotting_rotation_speed)
-	rotate_y(rot_speed * delta)
+	rotate_y(rad2deg(scanning_speed) * delta)
 	
 	for raycast in _raycasts:
 		validate_detection(raycast)

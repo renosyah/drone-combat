@@ -32,6 +32,7 @@ albedo_color = Color( 0.345098, 0.345098, 0.345098, 1 )
 
 [node name="sensor_1" type="Spatial"]
 script = ExtResource( 1 )
+spotting_rotation_speed = null
 raycast_path = [ NodePath("RayCast2") ]
 spotting_range = 18
 

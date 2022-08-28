@@ -24,7 +24,7 @@ var player_joined : Array = []
 
 remote func _request_append_player_joined(from : int, data : Dictionary):
 	for i in player_joined:
-		if i.id == data.id:
+		if i["player_id"] == data["player_id"]:
 			player_joined.erase(i)
 			break
 			
@@ -34,7 +34,7 @@ remote func _request_append_player_joined(from : int, data : Dictionary):
 	
 remote func _request_erase_player_joined(data : Dictionary):
 	for i in player_joined:
-		if i.id == data.id:
+		if i["player_id"] == data["player_id"]:
 			player_joined.erase(i)
 			break
 			
@@ -51,11 +51,11 @@ remotesync func _update_player_joined(data : Array):
 	
 remotesync func _kick_player(data : Dictionary):
 	for i in player_joined:
-		if i.id == data.id:
+		if i.id == data["player_id"]:
 			player_joined.erase(i)
 			break
 			
-	if data.id == Global.player_data.id:
+	if data.id == Global.player.player_id:
 		Network.connect("connection_closed", self , "_got_kickout")
 		Network.disconnect_from_server()
 		return
@@ -96,7 +96,7 @@ func _notification(what):
 # host player section
 func _init_host():
 	Network.connect("server_player_connected", self ,"_server_player_connected")
-	var err = Network.create_server(Global.server.max_player, Global.server.port,{"name" : Global.player_data.name})
+	var err = Network.create_server(Global.server.max_player, Global.server.port,{"name" : Global.player.player_name})
 	if err != OK:
 		return
 	
@@ -104,10 +104,11 @@ func _server_player_connected(_player_network_unique_id : int, _player : Diction
 	var player = create_mp_player()
 	player["status"] = "Ready"
 	player["flag"] = PLAYER_STATUS_READY
-	_request_append_player_joined(Global.client.network_unique_id,player)
+	player["drone_data"] = Global.player_drone_data.to_dictionary()
+	_request_append_player_joined(Global.client.network_unique_id, player)
 	
 	_server_advertise.setup()
-	_server_advertise.serverInfo["name"] = Global.player_data.name
+	_server_advertise.serverInfo["name"] = Global.player.player_name
 	_server_advertise.serverInfo["port"] = Global.server.port
 	_server_advertise.serverInfo["public"] = true
 	_server_advertise.serverInfo["player"] = player_joined.size()
@@ -120,13 +121,15 @@ func _init_join():
 	Network.connect("server_disconnected", self , "_server_disconnected")
 	Network.connect("client_player_connected", self , "_client_player_connected")
 	
-	var err = Network.connect_to_server(Global.client.ip, Global.client.port , {"name" : Global.player_data.name})
+	var err = Network.connect_to_server(Global.client.ip, Global.client.port , {"name" : Global.player.player_name})
 	if err != OK:
 		return
 	
-func _client_player_connected(_player_network_unique_id : int, player : Dictionary):
+func _client_player_connected(_player_network_unique_id : int, _player : Dictionary):
 	Global.client.network_unique_id = _player_network_unique_id
-	rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id, create_mp_player())
+	var player = create_mp_player()
+	player["drone_data"] = Global.player_drone_data.to_dictionary()
+	rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id, player)
 	
 func _on_host_game_session_ready(_mp_game_data : Dictionary):
 	Global.mp_game_data = _mp_game_data
@@ -181,14 +184,15 @@ func fill_player_slot():
 	for i in player_joined:
 		var item = preload("res://menu/lobby-menu/ui/item/item.tscn").instance()
 		item.data = i
-		item.can_kick = (i.id != Global.player_data.id and is_server())
+		item.can_kick = (i["player_id"] != Global.player.player_id and is_server())
 		item.connect("kick", self, "_on_player_get_kick")
 		_player_holder.add_child(item)
 		
 func set_player_ready():
 	var data = create_mp_player()
-	data.status = "Ready"
-	data.flag = PLAYER_STATUS_READY
+	data["status"] = "Ready"
+	data["flag"] = PLAYER_STATUS_READY
+	data["drone_data"] = Global.player_drone_data.to_dictionary()
 	
 	if not is_server():
 		rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id,data)
@@ -218,7 +222,7 @@ func _on_simple_dialog_option_on_yes():
 		return
 		
 	_exit_timer.start()
-	rpc("_request_erase_player_joined",{ id = Global.player_data.id })
+	rpc("_request_erase_player_joined",{ id = Global.player.player_id })
 	
 func _on_exit_timer_timeout():
 	Network.disconnect_from_server()
@@ -228,21 +232,23 @@ func _on_exit_timer_timeout():
 # utils
 func create_mp_player() -> Dictionary:
 	return {
-		"id" : Global.player_data.id,
+		"player_id" : Global.player.player_id,
+		"player_name" : Global.player.player_name,
 		"order" : 0,
-		"name" : Global.player_data.name,
 		"status" : "Not Ready",
-		"flag" : PLAYER_STATUS_NOT_READY
+		"flag" : PLAYER_STATUS_NOT_READY,
+		"drone_data" : {}
 	}
 	
 func create_bot_player() -> Dictionary:
 	return {
-		"id" : "BOT-" + str(GDUUID.v4()),
+		"player_id" : "BOT-" + str(GDUUID.v4()),
+		"player_name" : RandomNameGenerator.generate() + " (Bot)",
 		"order" : 0,
-		"name" : RandomNameGenerator.generate() + " (Bot)",
 		"status" : "Ready",
 		"is_bot" : true,
-		"flag" : PLAYER_STATUS_READY
+		"flag" : PLAYER_STATUS_READY,
+		"drone_data" : DroneData.new().to_dictionary()
 	}
 	
 class MyCustomSorter:

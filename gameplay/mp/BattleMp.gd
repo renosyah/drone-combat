@@ -16,6 +16,10 @@ var _light: DirectionalLight
 export var ui_scene : Resource
 var _ui: Control
 
+# misc network
+onready var latency_delay = Network.LATENCY_DELAY
+var network_timmer : Timer
+
 func _ready():
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
@@ -25,6 +29,9 @@ func _ready():
 	_load_enviroment()
 	_load_light()
 	_load_ui()
+	
+	# client only
+	_init_client()
 	
 ################################################################
 # network connection watcher
@@ -55,6 +62,39 @@ func on_player_disynchronize(_player_name : String):
 func on_host_disconnected():
 	pass
 	
+################################################################
+# client pooling request
+func _init_client():
+	if is_server():
+		return
+		
+	network_timmer = Timer.new()
+	network_timmer.wait_time = latency_delay
+	network_timmer.connect("timeout", self , "on_client_pool_network_request")
+	network_timmer.autostart = true
+	add_child(network_timmer)
+	
+func on_client_pool_network_request():
+	# send request every latency
+	# to server for commanding
+	# client unit
+	pass
+	
+################################################################
+# for commanding
+func move_drone(_target : NodePath, _input : Vector2):
+	pass
+	
+remote func _move_drone(_target : NodePath, _input : Vector2):
+	var drone = get_node_or_null(_target)
+	if not is_instance_valid(drone):
+		return
+		
+	if not drone is BaseHull:
+		return
+		
+	drone.direction = _input
+		
 ################################################################
 # map
 func _load_map():
@@ -114,6 +154,58 @@ func _load_light():
 	var _light_asset = light_scene.instance()
 	add_child(_light_asset)
 	_light = _light_asset
+	
+################################################################
+# drone spawner
+func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
+	var drones = []
+	
+	for data in Global.mp_players:
+		var d = data["drone_data"].duplicate()
+		d["player_id"] = data["player_id"]
+		drones.append(d)
+		
+	var drone : BaseHull
+	
+	for data in drones:
+		var spawner  = DroneData.new()
+		spawner.from_dictionary(data)
+		var spawned = spawner.spawn(data["player_id"], self, get_rand_pos())
+		
+		if spawned is BaseEntity:
+			spawned.connect("on_ready", self, "on_drone_ready")
+			spawned.connect("on_dead", self, "on_drone_dead")
+			spawned.connect("on_take_damage", self, "on_drone_take_damage")
+			
+		if data["player_id"] == local_player_id:
+			drone = spawned
+		
+	return drone
+	
+################################################################
+# drone event signal handler
+func on_drone_ready(_entity):
+	pass
+	
+func on_drone_take_damage(_entity, _damage):
+	pass
+	
+func on_drone_dead(_entity):
+	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
+	add_child(msg)
+	msg.translation = _entity.global_transform.origin
+	msg.set_color(Color.white)
+	msg.set_message("tank disabled" if _entity.tag == "hull" else "turret disabled")
+	
+################################################################
+# utils code
+func get_rand_pos() -> Vector3:
+	var angle := rand_range(0, TAU)
+	var distance := rand_range(15, 35)
+	var posv2 = polar2cartesian(distance, angle)
+	var posv3 = _map.global_transform.origin + Vector3(posv2.x, 0.0, posv2.y)
+	posv3.y = 0
+	return posv3
 	
 ################################################################
 # network utils code

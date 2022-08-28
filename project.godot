@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "BaseData",
+"language": "GDScript",
+"path": "res://data/BaseData.gd"
+}, {
 "base": "KinematicBody",
 "class": "BaseEntity",
 "language": "GDScript",
@@ -54,6 +59,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://gameplay/sp/BattleSp.gd"
 }, {
+"base": "BaseData",
+"class": "DroneData",
+"language": "GDScript",
+"path": "res://data/drone/DroneData.gd"
+}, {
 "base": "Node",
 "class": "GDUUID",
 "language": "GDScript",
@@ -94,6 +104,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/Godot-Touch-Input-Manager/CustomInputEvents/InputEventSingleScreenTouch.gd"
 }, {
+"base": "BaseData",
+"class": "PlayerData",
+"language": "GDScript",
+"path": "res://data/player/PlayerData.gd"
+}, {
 "base": "Node",
 "class": "RandomNameGenerator",
 "language": "GDScript",
@@ -125,6 +140,7 @@ _global_script_classes=[ {
 "path": "res://addons/joystick/virtual_joystick.gd"
 } ]
 _global_script_class_icons={
+"BaseData": "",
 "BaseEntity": "",
 "BaseHull": "",
 "BaseMap": "",
@@ -134,6 +150,7 @@ _global_script_class_icons={
 "BaseWeapon": "",
 "BattleMp": "",
 "BattleSp": "",
+"DroneData": "",
 "GDUUID": "",
 "GameplayCamera": "",
 "InputEventMultiScreenDrag": "",
@@ -142,6 +159,7 @@ _global_script_class_icons={
 "InputEventSingleScreenDrag": "",
 "InputEventSingleScreenTap": "",
 "InputEventSingleScreenTouch": "",
+"PlayerData": "",
 "RandomNameGenerator": "",
 "SaveLoad": "",
 "ServerAdvertiser": "res://addons/LANServerBroadcast/server_advertiser/server_advertiser.png",

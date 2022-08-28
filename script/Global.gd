@@ -1,41 +1,27 @@
 extends Node
 
-const DEKSTOP =  ["Server", "Windows", "WinRT", "X11"]
-const VERSION_SAVE = "1.0"
-var PERSISTEN_SAVE = true
-
 func _ready():
-	PERSISTEN_SAVE = not OS.get_name() in DEKSTOP
 	load_player_data()
+	load_player_drone_data()
 	
 ################################################################
-# player data
-const PLAYER_DATA_SAVE_FILE = "player" + "_" + VERSION_SAVE + ".dat"
-var player_data = {}
+# player
+var player: PlayerData = PlayerData.new()
 
-func new_player_data() -> Dictionary:
-	var _data = {
-		id = "PLAYER-" + GDUUID.v4(),
-		name = RandomNameGenerator.generate()
-	}
-	return _data
-	
-func save_player_data():
-	if PERSISTEN_SAVE:
-		SaveLoad.save(PLAYER_DATA_SAVE_FILE, player_data)
-	
 func load_player_data():
-	var _player_data = null 
+	player.load_data("player.data")
+	if player.is_empty():
+		player.player_id = GDUUID.v4()
+		player.player_name = RandomNameGenerator.generate()
+		player.save_data("player.data")
 	
-	if PERSISTEN_SAVE:
-		_player_data = SaveLoad.load_save(PLAYER_DATA_SAVE_FILE)
-		
-	if not _player_data:
-		_player_data = new_player_data()
-		
-	player_data = _player_data
-	save_player_data()
+################################################################
+# player drone
+var player_drone_data : DroneData = DroneData.new()
 
+func load_player_drone_data():
+	player_drone_data.load_data("player_drone_data.data")
+	
 ################################################################
 # multiplayer connection and data
 signal on_host_game_session_ready(_mp_game_data)

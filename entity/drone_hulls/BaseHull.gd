@@ -8,17 +8,25 @@ const NONE = 1
 const IDDLE = 1
 const MOVING = 2
 
-
 # will be waypoint vector 3
 var waypoint = null
 var direction = Vector2.ZERO
+
 export var waypoint_mode = false
+
 export var speed : float = 2.0
 export var turning_speed : float = 4.0
+
+export var turret_hp :int = 100
+export var turret_max_hp :int = 100
+
+export var spotting_range :int = 18
+export var scanning_speed:float = 0.07
 
 export var turret_scene: Resource
 export var weapon_scene: Resource
 export var sensor_scene: Resource
+
 export var color : Color
 
 var _turret : BaseTurret
@@ -112,8 +120,22 @@ func _ready():
 	emit_signal("on_ready", self)
 	
 	
-func spawn_turret():
-	if _turret:
+func spawn_turret(_pos : Vector3 = Vector3.ZERO):
+	if turret_scene:
+		var _turret_asset = turret_scene.instance()
+		_turret_asset.hp = turret_hp
+		_turret_asset.max_hp = turret_max_hp
+		_turret_asset.weapon_scene = weapon_scene
+		_turret_asset.sensor_scene = sensor_scene
+		_turret_asset.color = color
+		_turret_asset.spotting_range = spotting_range
+		_turret_asset.scanning_speed = scanning_speed
+		add_child(_turret_asset)
+		_turret = _turret_asset
+		_turret.translation = _pos
+		_turret.rotation.y = 180
+		
+	if is_instance_valid(_turret):
 		_turret.connect("on_take_damage", self,"_on_turret_take_damage" )
 		_turret.connect("on_dead", self,"_on_turret_on_dead" )
 	

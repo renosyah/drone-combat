@@ -1,36 +1,26 @@
 extends BattleMp
-	
+
+var drone : BaseHull
+
 func _ready():
+	drone = spawn_drones_and_get_dronw_owned_by(Global.player.player_id)
 	Global.on_host_game_session_ready()
-	$player1.set_network_master(Network.PLAYER_HOST_ID)
-	$player2.set_network_master(Network.PLAYER_HOST_ID)
-	$player3.set_network_master(Network.PLAYER_HOST_ID)
 	
 func on_joystick_input(output : Vector2, is_pressed : bool):
 	.on_joystick_input(output, is_pressed)
-	$player1.direction = output if is_pressed else Vector2.ZERO
-
+	if not is_instance_valid(drone):
+		return
+		
+	move_drone(drone.get_path() , output)
+	
+func move_drone(_target : NodePath, _input : Vector2):
+	.move_drone(_target, _input)
+	._move_drone(_target, _input)
+	
 func _process(delta):
-	_camera.translation = $player1.global_transform.origin
+	if not is_instance_valid(drone):
+		return
 	
-func _on_player_on_dead(_entity):
-	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
-	add_child(msg)
-	msg.translation = _entity.global_transform.origin
-	msg.set_color(Color.white)
-	msg.set_message("tank disabled" if _entity.tag == "hull" else "turret disabled")
+	_camera.translation = drone.global_transform.origin
 	
-func _on_Timer_timeout():
-	$player2.waypoint_mode = true
-	$player2.waypoint = get_rand_pos()
-	
-	$player3.waypoint_mode = true
-	$player3.waypoint = get_rand_pos()
-	
-func get_rand_pos() -> Vector3:
-	var angle := rand_range(0, TAU)
-	var distance := rand_range(15, 35)
-	var posv2 = polar2cartesian(distance, angle)
-	var posv3 = _map.global_transform.origin + Vector3(posv2.x, 0.0, posv2.y)
-	posv3.y = 0
-	return posv3
+

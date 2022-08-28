@@ -11,7 +11,7 @@ var data = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	_name.text = data.name
+	_name.text = data.player_name
 	_status.text = data.status
 	_kick_btn.visible = can_kick
 
