@@ -1,13 +1,12 @@
 extends Spatial
 class_name BaseWeapon
 
-signal on_weapon_sensor_detect(_entity)
-
 export var sensor_path: NodePath
 export var attack_range :int = 0
 
 var attack_delay : float = 0.3
 var is_master = false
+var is_firing = false
 
 onready var _sensor : RayCast = get_node(sensor_path)
 
@@ -31,6 +30,9 @@ func _ready():
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if not is_master:
+		return
+		
 	if not _sensor.is_colliding():
 		return
 		
@@ -38,8 +40,7 @@ func _process(delta):
 	if not _is_valid_target(body):
 		return
 		
-	emit_signal("on_weapon_sensor_detect", body)
-	
+	open_fire(body)
 	
 func open_fire(_target : BaseEntity):
 	if _attack_timmer.is_stopped():

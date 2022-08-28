@@ -62,22 +62,6 @@ puppet var _puppet_elevation: float setget _set_puppet_elevation
 func _set_puppet_elevation(_val: float):
 	_puppet_elevation = _val
 	
-remotesync func _weapon_open_fire(_target : NodePath):
-	if is_dead:
-		return
-		
-	var _enemy = get_node_or_null(_target)
-	if not is_instance_valid(_enemy):
-		return
-		
-	if not _enemy is BaseEntity:
-		return false
-		
-	if not _weapon.has_method("open_fire"):
-		return
-		
-	_weapon.open_fire(_enemy)
-	
 ################################
 # OVERRIDE FUNCTIONS
 ################################
@@ -90,7 +74,6 @@ func spawn_weapon():
 		return
 		
 	if _weapon:
-		_weapon.connect("on_weapon_sensor_detect", self, "_on_weapon_sensor_detect")
 		_weapon.is_master = true
 	
 	
@@ -124,12 +107,6 @@ func puppet_moving(_delta):
 	
 ################################
 # signal handling
-func _on_weapon_sensor_detect(_target : BaseEntity):
-	if not _is_master():
-		return
-		
-	rpc_unreliable("_weapon_open_fire", _target.get_path())
-	
 func _on_sensor_spotted(_target : BaseEntity):
 	if not _is_master():
 		return
