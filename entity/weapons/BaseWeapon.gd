@@ -1,6 +1,8 @@
 extends Spatial
 class_name BaseWeapon
 
+signal on_weapon_ready_open_fire(_target)
+
 export var sensor_path: NodePath
 export var attack_range :int = 0
 
@@ -40,15 +42,15 @@ func _process(delta):
 	if not _is_valid_target(body):
 		return
 		
-	open_fire(body)
-	
-func open_fire(_target : BaseEntity):
 	if _attack_timmer.is_stopped():
-		_play_firing_animation()
-		_spawn_projectile_to(_target.global_transform.origin)
+		emit_signal("on_weapon_ready_open_fire", body)
 		_attack_timmer.wait_time = attack_delay
 		_attack_timmer.start()
 		
+func open_fire(_target : BaseEntity):
+	_play_firing_animation()
+	_spawn_projectile_to(_target.global_transform.origin)
+
 func _play_firing_animation():
 	# override where project
 	# want to animate each firing

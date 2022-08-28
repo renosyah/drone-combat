@@ -62,6 +62,26 @@ puppet var _puppet_elevation: float setget _set_puppet_elevation
 func _set_puppet_elevation(_val: float):
 	_puppet_elevation = _val
 	
+remotesync func _open_fire(_target : NodePath):
+	if not is_instance_valid(_weapon):
+		return
+		
+	var _to = get_node_or_null(_target)
+	if not is_instance_valid(_to):
+		return
+		
+	_weapon.open_fire(_to)
+	
+remotesync func _dead():
+	._dead()
+	
+	if is_instance_valid(_sensor):
+		_sensor.set_process(false)
+		
+	if is_instance_valid(_weapon):
+		_weapon.set_process(false)
+		
+	
 ################################
 # OVERRIDE FUNCTIONS
 ################################
@@ -73,15 +93,15 @@ func spawn_weapon():
 	if not _is_master():
 		return
 		
-	if _weapon:
+	if is_instance_valid(_weapon):
+		_weapon.connect("on_weapon_ready_open_fire", self,"_on_weapon_ready_open_fire")
 		_weapon.is_master = true
-	
 	
 func spawn_sensor():
 	if not _is_master():
 		return
 		
-	if _sensor:
+	if is_instance_valid(_sensor):
 		_sensor.connect("on_spotted", self, "_on_sensor_spotted")
 	
 ############################################################
@@ -107,10 +127,22 @@ func puppet_moving(_delta):
 	
 ################################
 # signal handling
+func _on_weapon_ready_open_fire(_target : BaseEntity):
+	if not _is_master():
+		return
+	
+	if is_dead:
+		return
+	
+	rpc_unreliable("_open_fire", _target.get_path())
+	
 func _on_sensor_spotted(_target : BaseEntity):
 	if not _is_master():
 		return
 		
+	if is_dead:
+		return
+	
 	current_aim = _target.global_transform.origin
 	
 ################################

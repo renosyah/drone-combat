@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://gameplay/mp/client/battle.gd" type="Script" id=1]
 [ext_resource path="res://entity/drone_hulls/hull_1/hull_1.tscn" type="PackedScene" id=2]
@@ -15,9 +15,6 @@
 [ext_resource path="res://entity/weapons/auto_cannon/auto_cannon.tscn" type="PackedScene" id=13]
 [ext_resource path="res://entity/drone_turrets/turret_2/turret_2.tscn" type="PackedScene" id=14]
 [ext_resource path="res://entity/drone_hulls/hull_3/hull_3.tscn" type="PackedScene" id=15]
-[ext_resource path="res://entity/drone_hulls/hull_1/hull_1.gd" type="Script" id=16]
-[ext_resource path="res://entity/drone_hulls/hull_2/hull_2.gd" type="Script" id=17]
-[ext_resource path="res://entity/drone_hulls/hull_3/hull_3.gd" type="Script" id=18]
 [ext_resource path="res://entity/weapons/cannon/cannon.tscn" type="PackedScene" id=19]
 
 [node name="battle" type="Node"]
@@ -28,25 +25,22 @@ env_scene = ExtResource( 6 )
 light_scene = ExtResource( 8 )
 ui_scene = ExtResource( 5 )
 
-[node name="player1" type="KinematicBody" parent="." instance=ExtResource( 2 )]
+[node name="player1" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.003, 0, 0.01 )
-script = ExtResource( 16 )
 turret_scene = ExtResource( 14 )
 weapon_scene = ExtResource( 13 )
 sensor_scene = ExtResource( 10 )
 color = Color( 0.0196078, 0, 0.658824, 1 )
 
-[node name="player2" type="KinematicBody" parent="." instance=ExtResource( 12 )]
+[node name="player2" parent="." instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5825, 4.76837e-07, -17.2227 )
-script = ExtResource( 17 )
 turret_scene = ExtResource( 4 )
 weapon_scene = ExtResource( 3 )
 sensor_scene = ExtResource( 10 )
 color = Color( 0.8, 0, 0, 1 )
 
-[node name="player3" type="KinematicBody" parent="." instance=ExtResource( 15 )]
+[node name="player3" parent="." instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9316, 4.76837e-07, 14.4234 )
-script = ExtResource( 18 )
 turret_scene = ExtResource( 11 )
 weapon_scene = ExtResource( 19 )
 sensor_scene = ExtResource( 10 )
