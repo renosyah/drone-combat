@@ -7,6 +7,7 @@ signal on_take_damage(_entity, _damage)
 
 # vitality
 var is_dead = false
+var tag : String = "entity"
 export var hp : int = 100.0
 export var max_hp : int = 100.0
 
@@ -43,6 +44,8 @@ remotesync func _dead():
 	is_dead = true
 	set_process(false)
 	
+	emit_signal("on_dead", self)
+	
 ############################################################
 func _ready():
 	if not _network_timmer:
@@ -54,8 +57,9 @@ func _ready():
 		
 	emit_signal("on_ready", self)
 	
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	moving(delta)
 	
 	if _is_master():
@@ -91,6 +95,9 @@ func dead():
 		return
 		
 	rpc("_dead")
+############################################################
+func is_dead() -> bool:
+	return is_dead
 	
 ############################################################
 # multiplayer func

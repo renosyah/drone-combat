@@ -86,6 +86,7 @@ func _set_puppet_moving_state(_val : int):
 # override methods
 func _ready():
 	set_process(true)
+	tag = "hull"
 	
 	connect("input_event", self, "_on_input_event")
 	
@@ -112,8 +113,15 @@ func _ready():
 	
 	
 func spawn_turret():
-	pass
+	if _turret:
+		_turret.connect("on_take_damage", self,"_on_turret_take_damage" )
+		_turret.connect("on_dead", self,"_on_turret_on_dead" )
 	
+func _on_turret_take_damage(_entity, _damage):
+	emit_signal("on_take_damage", _entity, _damage)
+	
+func _on_turret_on_dead(_entity):
+	emit_signal("on_dead",_entity)
 	
 ############################################################
 # function
@@ -132,13 +140,12 @@ func move_by_input(delta):
 		_transform_turning(Vector3(direction.x, 0.0 , direction.y) + translation, delta)
 		_moving_state = MOVING
 		_velocity = Vector3(direction.x, 0.0 , direction.y) * speed
-		move_and_slide(_velocity, Vector3.UP)
-		
 	else:
 		_moving_state = IDDLE
 		_velocity = Vector3.ZERO
 		
-		
+	_velocity = move_and_slide(_velocity, Vector3.UP)
+	
 func move_to_waypoint(delta):
 	if not waypoint:
 		return 
@@ -173,6 +180,12 @@ func puppet_moving(_delta):
 	rotation.x = lerp_angle(rotation.x, _puppet_rotation.x, _delta * 5)
 	rotation.y = lerp_angle(rotation.y, _puppet_rotation.y, _delta * 5)
 	rotation.z = lerp_angle(rotation.z, _puppet_rotation.z, _delta * 5)
+	
+func is_dead() -> bool:
+	if not _turret:
+		return is_dead
+		
+	return is_dead && _turret.is_dead()
 	
 ############################################################
 # input

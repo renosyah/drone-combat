@@ -114,6 +114,7 @@ tracks/1/keys = {
 [node name="auto_cannon" type="Spatial"]
 script = ExtResource( 1 )
 sensor_path = NodePath("RayCast")
+attack_range = 18
 
 [node name="pivot" type="Spatial" parent="."]
 
@@ -155,10 +156,13 @@ material/0 = SubResource( 11 )
 [node name="RayCast" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5 )
 enabled = true
-cast_to = Vector3( 0, 0, 12 )
+cast_to = Vector3( 0, 0, 1 )
 
 [node name="projectile_spawn_pos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.46318 )
+
+[node name="projectile_target_pos" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.17587 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0

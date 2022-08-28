@@ -37,7 +37,7 @@ sensor_scene = ExtResource( 10 )
 color = Color( 0.0196078, 0, 0.658824, 1 )
 
 [node name="player2" type="KinematicBody" parent="." instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.72098, 4.76837e-07, 0.0104241 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5825, 4.76837e-07, -17.2227 )
 script = ExtResource( 17 )
 turret_scene = ExtResource( 4 )
 weapon_scene = ExtResource( 3 )
@@ -45,7 +45,7 @@ sensor_scene = ExtResource( 10 )
 color = Color( 0.8, 0, 0, 1 )
 
 [node name="player3" type="KinematicBody" parent="." instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.36234, 4.76837e-07, 0.0104241 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9316, 4.76837e-07, 14.4234 )
 script = ExtResource( 18 )
 turret_scene = ExtResource( 11 )
 weapon_scene = ExtResource( 19 )

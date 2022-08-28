@@ -4,6 +4,7 @@ class_name BaseWeapon
 signal on_weapon_sensor_detect(_entity)
 
 export var sensor_path: NodePath
+export var attack_range :int = 0
 
 var attack_delay : float = 0.3
 var is_master = false
@@ -24,6 +25,9 @@ func _ready():
 		_attack_timmer.autostart = false
 		_attack_timmer.one_shot = true
 		add_child(_attack_timmer)
+		
+	if _sensor:
+		_sensor.cast_to =  _sensor.cast_to * attack_range
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

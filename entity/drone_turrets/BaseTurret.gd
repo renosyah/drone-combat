@@ -82,6 +82,7 @@ remotesync func _weapon_open_fire(_target : NodePath):
 # OVERRIDE FUNCTIONS
 ################################
 func _ready() -> void:
+	tag = "turret"
 	active = is_instance_valid(body) and is_instance_valid(head)
 	
 func spawn_weapon():
@@ -133,18 +134,7 @@ func _on_sensor_spotted(_target : BaseEntity):
 	if not _is_master():
 		return
 		
-	var pos = _target.global_transform.origin
-	
-	if not current_aim:
-		current_aim = pos
-		return
-		
-	var new_aim_dis = pos.distance_to(global_transform.origin)
-	var current_aim_dis = current_aim.distance_to(global_transform.origin)
-	if new_aim_dis > current_aim_dis:
-		return
-		
-	current_aim = pos
+	current_aim = _target.global_transform.origin
 	
 ################################
 # MAIN FUNCTIONS

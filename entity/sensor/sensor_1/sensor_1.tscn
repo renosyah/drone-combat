@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://entity/sensor/BaseSensor.gd" type="Script" id=1]
+[ext_resource path="res://entity/sensor/sensor_1/sensor_1.gd" type="Script" id=1]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.8, 0.3, 0.2 )
@@ -33,6 +33,7 @@ albedo_color = Color( 0.345098, 0.345098, 0.345098, 1 )
 [node name="sensor_1" type="Spatial"]
 script = ExtResource( 1 )
 raycast_path = [ NodePath("RayCast2") ]
+spotting_range = 8
 
 [node name="RayCast2" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 3 )

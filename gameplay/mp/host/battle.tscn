@@ -33,15 +33,24 @@ sensor_scene = ExtResource( 9 )
 color = Color( 0.0196078, 0, 0.658824, 1 )
 
 [node name="player2" parent="." instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.72098, 4.76837e-07, 0.0104241 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -21.5825, 4.76837e-07, -17.2227 )
 turret_scene = ExtResource( 8 )
 weapon_scene = ExtResource( 7 )
 sensor_scene = ExtResource( 9 )
 color = Color( 0.8, 0, 0, 1 )
 
 [node name="player3" parent="." instance=ExtResource( 12 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.36234, 4.76837e-07, 0.0104241 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.9316, 4.76837e-07, 14.4234 )
 turret_scene = ExtResource( 15 )
 weapon_scene = ExtResource( 16 )
 sensor_scene = ExtResource( 9 )
 color = Color( 0, 0.533333, 0.0352941, 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="on_dead" from="player1" to="." method="_on_player_on_dead"]
+[connection signal="on_dead" from="player2" to="." method="_on_player_on_dead"]
+[connection signal="on_dead" from="player3" to="." method="_on_player_on_dead"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

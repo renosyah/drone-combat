@@ -10,8 +10,6 @@ func _ready():
 	spawn_turret()
 		
 func spawn_turret():
-	.spawn_turret()
-	
 	if not _turret and turret_scene:
 		var _turret_asset = turret_scene.instance()
 		_turret_asset.weapon_scene = weapon_scene
@@ -21,4 +19,5 @@ func spawn_turret():
 		_turret = _turret_asset
 		_turret.translation = _turret_pos.translation
 		_turret.rotate_y(180)
-	
+		
+	.spawn_turret()
