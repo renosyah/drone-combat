@@ -16,10 +16,6 @@ var _light: DirectionalLight
 export var ui_scene : Resource
 var _ui: Control
 
-# misc network
-onready var latency_delay = Network.LATENCY_DELAY
-var network_timmer : Timer
-
 func _ready():
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
@@ -29,9 +25,6 @@ func _ready():
 	_load_enviroment()
 	_load_light()
 	_load_ui()
-	
-	# client only
-	_init_client()
 	
 ################################################################
 # network connection watcher
@@ -64,7 +57,10 @@ func on_host_disconnected():
 	
 ################################################################
 # client pooling request
-func _init_client():
+onready var latency_delay = 0.08
+var network_timmer : Timer
+
+func init_client():
 	if is_server():
 		return
 		
@@ -82,9 +78,6 @@ func on_client_pool_network_request():
 	
 ################################################################
 # for commanding
-func move_drone(_target : NodePath, _input : Vector2):
-	pass
-	
 remote func _move_drone(_target : NodePath, _input : Vector2):
 	var drone = get_node_or_null(_target)
 	if not is_instance_valid(drone):
@@ -130,9 +123,14 @@ func _load_ui():
 	var _ui_asset = ui_scene.instance()
 	add_child(_ui_asset)
 	_ui = _ui_asset
+	
 	_ui.connect("on_joystick_input", self, "on_joystick_input")
+	_ui.connect("on_respawn_button_press", self, "on_respawn_button_press")
 	
 func on_joystick_input(output : Vector2, is_pressed : bool):
+	pass
+	
+func on_respawn_button_press():
 	pass
 	
 ################################################################
@@ -181,6 +179,23 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 			drone = spawned
 		
 	return drone
+	
+func respawn_drone(drone : NodePath):
+	if is_server():
+		_respawn_drone(drone)
+	else:
+		rpc_id( Network.PLAYER_HOST_ID ,"_respawn_drone", drone)
+	
+remote func _respawn_drone(drone : NodePath):
+	var drone_node = get_node_or_null(drone)
+	if not is_instance_valid(drone_node):
+		return
+		
+	if not drone_node is BaseHull:
+		return
+		
+	drone_node.reset()
+	drone_node.translation = get_rand_pos()
 	
 ################################################################
 # drone event signal handler

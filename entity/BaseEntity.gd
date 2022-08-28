@@ -46,6 +46,14 @@ remotesync func _dead():
 	
 	emit_signal("on_dead", self)
 	
+remotesync func _reset():
+	hp = max_hp
+	is_dead = false
+	
+	set_process(true)
+	
+	emit_signal("on_ready", self)
+	
 ############################################################
 func _ready():
 	if not _network_timmer:
@@ -95,6 +103,13 @@ func dead():
 		return
 		
 	rpc("_dead")
+	
+func reset():
+	if not _is_master():
+		return
+		
+	rpc("_reset")
+	
 ############################################################
 func is_dead() -> bool:
 	return is_dead

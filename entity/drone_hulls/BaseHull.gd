@@ -133,7 +133,7 @@ func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 		add_child(_turret_asset)
 		_turret = _turret_asset
 		_turret.translation = _pos
-		_turret.rotation.y = 180
+		_turret.rotation_degrees.y = 180
 		
 	if is_instance_valid(_turret):
 		_turret.connect("on_take_damage", self,"_on_turret_take_damage" )
@@ -143,7 +143,7 @@ func _on_turret_take_damage(_entity, _damage):
 	emit_signal("on_take_damage", _entity, _damage)
 	
 func _on_turret_on_dead(_entity):
-	emit_signal("on_dead",_entity)
+	emit_signal("on_dead", self)
 	
 ############################################################
 # function
@@ -202,6 +202,14 @@ func puppet_moving(_delta):
 	rotation.x = lerp_angle(rotation.x, _puppet_rotation.x, _delta * 5)
 	rotation.y = lerp_angle(rotation.y, _puppet_rotation.y, _delta * 5)
 	rotation.z = lerp_angle(rotation.z, _puppet_rotation.z, _delta * 5)
+	
+	
+func reset():
+	.reset()
+	
+	if is_instance_valid(_turret):
+		_turret.reset()
+	
 	
 func is_dead() -> bool:
 	if not _turret:

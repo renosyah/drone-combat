@@ -83,6 +83,15 @@ remotesync func _dead():
 	if is_instance_valid(_weapon):
 		_weapon.set_process(false)
 		
+remotesync func _reset():
+	._reset()
+	
+	if is_instance_valid(_sensor):
+		_sensor.set_process(true)
+		
+	if is_instance_valid(_weapon):
+		_weapon.set_process(true)
+		
 	
 ################################
 # OVERRIDE FUNCTIONS
@@ -125,6 +134,7 @@ func spawn_sensor(_pos : Vector3):
 ############################################################
 # function
 func master_moving(delta):
+	.master_moving(delta)
 	# if not active do nothing
 	if not active:
 		return
@@ -137,6 +147,8 @@ func master_moving(delta):
 	_elevate(delta)
 	
 func puppet_moving(_delta):
+	.puppet_moving(_delta)
+	
 	if is_dead:
 		return
 		

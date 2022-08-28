@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://map/BaseMap.gd" type="Script" id=1]
 
@@ -17,6 +17,12 @@ size = Vector3( 100, 1, 100 )
 [sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.458824, 0.298039, 0, 1 )
 
+[sub_resource type="CubeMesh" id=7]
+size = Vector3( 100, 15, 2 )
+
+[sub_resource type="ConvexPolygonShape" id=8]
+points = PoolVector3Array( -50.1859, -7.68587, -1.18587, 48.1784, 7.25093, 1, 48.1784, -7.38104, 1, 50.1859, 7.55576, -1.18587, -48.1784, 7.25093, 1, 50.1859, -7.68587, -1.18587, -50.1859, 7.55576, -1.18587, -48.1784, -7.38104, 1 )
+
 [node name="map_0" type="StaticBody"]
 script = ExtResource( 1 )
 
@@ -32,3 +38,47 @@ material/0 = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.735428, 0 )
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
+
+[node name="wall" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.45908, 48.8977 )
+
+[node name="CSGMesh" type="MeshInstance" parent="wall"]
+visible = false
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="wall"]
+shape = SubResource( 8 )
+
+[node name="wall2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.45908, -49.2263 )
+
+[node name="CSGMesh" type="MeshInstance" parent="wall2"]
+visible = false
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="wall2"]
+shape = SubResource( 8 )
+
+[node name="wall3" type="StaticBody" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -48.7415, 6.45908, -0.339489 )
+
+[node name="CSGMesh" type="MeshInstance" parent="wall3"]
+visible = false
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="wall3"]
+shape = SubResource( 8 )
+
+[node name="wall4" type="StaticBody" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 48.8835, 6.45908, -0.339489 )
+
+[node name="CSGMesh" type="MeshInstance" parent="wall4"]
+visible = false
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="wall4"]
+shape = SubResource( 8 )

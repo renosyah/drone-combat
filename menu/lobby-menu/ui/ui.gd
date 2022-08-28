@@ -1,6 +1,6 @@
 extends Control
 
-const ENABLE_BOT = true
+const ENABLE_BOT = false
 
 const BUTTON_BATTLE_ENABLE_COLOR = Color(0, 0.592157, 0.035294)
 const BUTTON_BATTLE_DISABLE_COLOR = Color(0.27451, 0.27451, 0.27451)
@@ -261,7 +261,7 @@ func is_server():
 	return Global.mode == Global.MODE_HOST
 	
 func is_all_player_ready() -> bool:
-	if player_joined.size() == 1:
+	if player_joined.size() == 0:
 		return false
 		
 	for i in player_joined:
