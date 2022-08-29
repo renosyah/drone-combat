@@ -8,7 +8,6 @@ export var attack_range :int = 0
 
 var attack_delay : float = 0.3
 var is_master = false
-var is_firing = false
 
 onready var _sensor : RayCast = get_node(sensor_path)
 

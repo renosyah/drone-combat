@@ -155,12 +155,16 @@ func _load_light():
 	
 ################################################################
 # drone spawner
+var _bots = []
+var _players = []
+
 func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 	var drones = []
 	
 	for data in Global.mp_players:
 		var d = data["drone_data"].duplicate()
 		d["player_id"] = data["player_id"]
+		d["is_bot"] =  data.has("is_bot")
 		drones.append(d)
 		
 	var drone : BaseHull
@@ -177,7 +181,13 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 			
 		if data["player_id"] == local_player_id:
 			drone = spawned
-		
+			
+		if data["is_bot"]:
+			spawned.waypoint_mode = true
+			_bots.append(spawned)
+		else:
+			_players.append(spawned)
+			
 	return drone
 	
 func respawn_drone(drone : NodePath):
@@ -210,7 +220,7 @@ func on_drone_dead(_entity):
 	add_child(msg)
 	msg.translation = _entity.global_transform.origin
 	msg.set_color(Color.white)
-	msg.set_message("tank disabled" if _entity.tag == "hull" else "turret disabled")
+	msg.set_message("hull disabled!" if _entity.tag == "hull" else "turret disabled!")
 	
 ################################################################
 # utils code

@@ -14,3 +14,13 @@ camera_scene = ExtResource( 3 )
 env_scene = ExtResource( 4 )
 light_scene = ExtResource( 6 )
 ui_scene = ExtResource( 10 )
+
+[node name="bot_action_timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="bot_checker_timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="bot_action_timer" to="." method="_on_bot_action_timer_timeout"]
+[connection signal="timeout" from="bot_checker_timer" to="." method="_on_bot_checker_timer_timeout"]

@@ -32,6 +32,7 @@ export var color : Color
 var _turret : BaseTurret
 
 var _offset_distance = 0.5
+var _altitude = 0.0
 var _velocity = Vector3.ZERO
 
 var _moving_state : int = IDDLE
@@ -159,9 +160,9 @@ func master_moving(delta):
 func move_by_input(delta):
 	if  direction != Vector2.ZERO:
 		direction.normalized()
-		_transform_turning(Vector3(direction.x, 0.0 , direction.y) + translation, delta)
+		_transform_turning(Vector3(direction.x, _altitude , direction.y) + translation, delta)
 		_moving_state = MOVING
-		_velocity = Vector3(direction.x, 0.0 , direction.y) * speed
+		_velocity = Vector3(direction.x, _altitude , direction.y) * speed
 	else:
 		_moving_state = IDDLE
 		_velocity = Vector3.ZERO
@@ -175,11 +176,12 @@ func move_to_waypoint(delta):
 	if not waypoint is Vector3:
 		return
 		
-	var direction_to_waypoint = global_transform.origin.direction_to(waypoint)
-	var distance_to_target = global_transform.origin.distance_to(waypoint)
+	var _waypoint = Vector3(waypoint.x, _altitude, waypoint.z)
+	var direction_to_waypoint = global_transform.origin.direction_to(_waypoint)
+	var distance_to_target = global_transform.origin.distance_to(_waypoint)
 	
 	if distance_to_target > _offset_distance:
-		_transform_turning(waypoint, delta)
+		_transform_turning(_waypoint, delta)
 		_moving_state = MOVING
 		_velocity = direction_to_waypoint * speed
 		
@@ -189,7 +191,6 @@ func move_to_waypoint(delta):
 		waypoint = null
 		
 	_velocity = move_and_slide(_velocity, Vector3.UP)
-	
 	
 func moving(_delta):
 	if is_dead:

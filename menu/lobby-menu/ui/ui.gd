@@ -1,6 +1,6 @@
 extends Control
 
-const ENABLE_BOT = false
+const ENABLE_BOT = true
 
 const BUTTON_BATTLE_ENABLE_COLOR = Color(0, 0.592157, 0.035294)
 const BUTTON_BATTLE_DISABLE_COLOR = Color(0.27451, 0.27451, 0.27451)
@@ -241,6 +241,9 @@ func create_mp_player() -> Dictionary:
 	}
 	
 func create_bot_player() -> Dictionary:
+	var drone = DroneData.new()
+	drone.color = Color(randf(), randf(), randf(), 1.0)
+	
 	return {
 		"player_id" : "BOT-" + str(GDUUID.v4()),
 		"player_name" : RandomNameGenerator.generate() + " (Bot)",
@@ -248,7 +251,7 @@ func create_bot_player() -> Dictionary:
 		"status" : "Ready",
 		"is_bot" : true,
 		"flag" : PLAYER_STATUS_READY,
-		"drone_data" : DroneData.new().to_dictionary()
+		"drone_data" : drone.to_dictionary()
 	}
 	
 class MyCustomSorter:
@@ -261,7 +264,7 @@ func is_server():
 	return Global.mode == Global.MODE_HOST
 	
 func is_all_player_ready() -> bool:
-	if player_joined.size() == 0:
+	if player_joined.size() == 1:
 		return false
 		
 	for i in player_joined:

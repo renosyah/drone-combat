@@ -47,4 +47,35 @@ func _process(delta):
 	
 	_camera.translation = drone.global_transform.origin
 	
+################################################################
+# bot action
+func _on_bot_action_timer_timeout():
+	var bot = _bots[rand_range(0, _bots.size() - 1)]
+	var waypoint = get_rand_pos()
+	
+	if bot.is_dead():
+		return
+		
+	if randf() > 0.5:
+		var player = _players[rand_range(0, _players.size() - 1)]
+		waypoint =  player.translation
+		
+	bot.waypoint = waypoint
+	
+func _on_bot_checker_timer_timeout():
+	for bot in _bots:
+		if bot.is_dead():
+			.respawn_drone(bot.get_path())
+
+
+
+
+
+
+
+
+
+
+
+
 
