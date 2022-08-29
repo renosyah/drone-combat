@@ -195,7 +195,7 @@ func respawn_drone(drone : NodePath):
 	if is_server():
 		_respawn_drone(drone)
 	else:
-		rpc_id( Network.PLAYER_HOST_ID ,"_respawn_drone", drone)
+		rpc_id(Network.PLAYER_HOST_ID ,"_respawn_drone", drone)
 	
 remote func _respawn_drone(drone : NodePath):
 	var drone_node = get_node_or_null(drone)
@@ -237,7 +237,7 @@ func get_rand_pos() -> Vector3:
 	var distance := rand_range(15, 35)
 	var posv2 = polar2cartesian(distance, angle)
 	var posv3 = _map.global_transform.origin + Vector3(posv2.x, 0.0, posv2.y)
-	posv3.y = 0
+	posv3.y = 0.0
 	return posv3
 	
 ################################################################

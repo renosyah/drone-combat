@@ -217,12 +217,6 @@ func reset():
 	if is_instance_valid(_turret):
 		_turret.reset()
 	
-func is_dead() -> bool:
-	if not is_instance_valid(_turret):
-		return is_dead
-		
-	return is_dead && _turret.is_dead()
-	
 ############################################################
 # input
 func _on_input_event(camera, event, position, normal, shape_idx):

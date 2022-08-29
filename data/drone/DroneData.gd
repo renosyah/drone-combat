@@ -1,14 +1,14 @@
 extends BaseData
 class_name DroneData
 
-export var hp :int = 100
-export var max_hp:int = 100
+export var hp :int = 80
+export var max_hp:int = 80
 
-export var turret_hp :int = 70
-export var turret_max_hp:int = 70
+export var turret_hp :int = 40
+export var turret_max_hp:int = 40
 
-export var speed:float = 4
-export var turning_speed:float = 6
+export var speed:float = 2
+export var turning_speed:float = 4
 
 export var spotting_range :int = 16
 export var scanning_speed:float = 0.07
