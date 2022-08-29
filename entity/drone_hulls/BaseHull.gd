@@ -2,6 +2,7 @@ extends BaseEntity
 class_name BaseHull
 
 signal on_hull_click(_hull)
+signal on_turret_dead(_turret)
 
 # variables
 const NONE = 1
@@ -144,7 +145,7 @@ func _on_turret_take_damage(_entity, _damage):
 	emit_signal("on_take_damage", _entity, _damage)
 	
 func _on_turret_on_dead(_entity):
-	emit_signal("on_dead", self)
+	emit_signal("on_turret_dead", _entity)
 	
 ############################################################
 # function
@@ -175,6 +176,12 @@ func move_to_waypoint(delta):
 		
 	if not waypoint is Vector3:
 		return
+		
+	if translation.y > _altitude:
+		translation.y -= 1.0 * delta
+		
+	elif translation.y < _altitude:
+		translation.y = _altitude
 		
 	var _waypoint = Vector3(waypoint.x, _altitude, waypoint.z)
 	var direction_to_waypoint = global_transform.origin.direction_to(_waypoint)

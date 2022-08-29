@@ -177,6 +177,7 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 		if spawned is BaseEntity:
 			spawned.connect("on_ready", self, "on_drone_ready")
 			spawned.connect("on_dead", self, "on_drone_dead")
+			spawned.connect("on_turret_dead", self, "on_drone_turret_dead")
 			spawned.connect("on_take_damage", self, "on_drone_take_damage")
 			
 		if data["player_id"] == local_player_id:
@@ -215,12 +216,19 @@ func on_drone_ready(_entity):
 func on_drone_take_damage(_entity, _damage):
 	pass
 	
+func on_drone_turret_dead(_turret):
+	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
+	add_child(msg)
+	msg.translation = _turret.global_transform.origin
+	msg.set_color(Color.white)
+	msg.set_message("turret disabled!")
+	
 func on_drone_dead(_entity):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
 	msg.translation = _entity.global_transform.origin
 	msg.set_color(Color.white)
-	msg.set_message("hull disabled!" if _entity.tag == "hull" else "turret disabled!")
+	msg.set_message("hull disabled!")
 	
 ################################################################
 # utils code
