@@ -15,6 +15,8 @@ var direction = Vector2.ZERO
 
 export var waypoint_mode = false
 
+export var player_name:String = ""
+
 export var speed : float = 2.0
 export var turning_speed : float = 4.0
 
@@ -38,13 +40,19 @@ var _velocity = Vector3.ZERO
 
 var _moving_state : int = IDDLE
 
+onready var _dead_sounds = [
+	preload("res://entity/drone_hulls/hull_destroy_sound/explosion_1.wav"),
+	preload("res://entity/drone_hulls/hull_destroy_sound/explosion_2.wav"),
+	preload("res://entity/drone_hulls/hull_destroy_sound/explosion_3.wav"),
+]
+
 # input
 var _click_translation = Vector3.ZERO
 var _input_detector : Node
 
 # misc
-var _tween_movement : Tween = null
-
+var _tween_movement : Tween
+var _sound : AudioStreamPlayer3D
 
 ############################################################
 # multiplayer func
@@ -91,12 +99,27 @@ func _set_puppet_moving_state(_val : int):
 		
 	_moving_state = _puppet_moving_state
 	
+remotesync func _dead():
+	._dead()
+	
+	_sound.stream = _dead_sounds[rand_range(0,_dead_sounds.size() - 1)]
+	_sound.play()
+	
+	if is_instance_valid(_turret):
+		_turret.dead()
+		
 ############################################################
 # Called when the node enters the scene tree for the first time.
 # override methods
 func _ready():
 	set_process(true)
 	tag = "hull"
+	
+	_sound = AudioStreamPlayer3D.new()
+	_sound.bus = "sfx"
+	_sound.unit_db = Global.sound_amplified
+	_sound.unit_size = Global.sound_amplified
+	add_child(_sound)
 	
 	connect("input_event", self, "_on_input_event")
 	
@@ -105,19 +128,17 @@ func _ready():
 	_input_detector = _detector
 	_input_detector.connect("any_gesture", self, "_on_inputDetection_any_gesture")
 	
-	if not _tween_movement:
-		_tween_movement = Tween.new()
-		add_child(_tween_movement)
+	_tween_movement = Tween.new()
+	add_child(_tween_movement)
 		
 	if not _is_master():
 		return
 		
-	if not _network_timmer:
-		_network_timmer = Timer.new()
-		_network_timmer.wait_time = _latency_delay
-		_network_timmer.connect("timeout", self , "_network_timmer_timeout")
-		_network_timmer.autostart = true
-		add_child(_network_timmer)
+	_network_timmer = Timer.new()
+	_network_timmer.wait_time = _latency_delay
+	_network_timmer.connect("timeout", self , "_network_timmer_timeout")
+	_network_timmer.autostart = true
+	add_child(_network_timmer)
 		
 	emit_signal("on_ready", self)
 	
@@ -145,6 +166,9 @@ func _on_turret_take_damage(_entity, _damage):
 	emit_signal("on_take_damage", _entity, _damage)
 	
 func _on_turret_on_dead(_entity):
+	if is_dead:
+		return
+		
 	emit_signal("on_turret_dead", _entity)
 	
 ############################################################

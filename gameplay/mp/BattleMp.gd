@@ -100,6 +100,16 @@ func _load_map():
 	_map.translation.y = -0.8
 	_map.connect("on_map_click", self,"on_map_click")
 	
+func load_map_stuff():
+	if is_server():
+		_map.generate_random_stuff_placement()
+		_map.spawn_random_stuff_placement()
+		Global.on_host_game_session_ready({"stuffs" : _map.stuffs})
+		
+	else:
+		_map.stuffs = Global.mp_game_data["stuffs"]
+		_map.spawn_random_stuff_placement()
+	
 func on_map_click(_pos : Vector3):
 	pass
 	
@@ -112,7 +122,6 @@ func _load_camera():
 	var _camera_asset = camera_scene.instance()
 	add_child(_camera_asset)
 	_camera = _camera_asset
-	_camera.translation.y = 5
 	
 ################################################################
 # ui
@@ -163,6 +172,7 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 	
 	for data in Global.mp_players:
 		var d = data["drone_data"].duplicate()
+		d["player_name"] = data["player_name"]
 		d["player_id"] = data["player_id"]
 		d["is_bot"] =  data.has("is_bot")
 		drones.append(d)
@@ -172,7 +182,7 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 	for data in drones:
 		var spawner  = DroneData.new()
 		spawner.from_dictionary(data)
-		var spawned = spawner.spawn(data["player_id"], self, get_rand_pos())
+		var spawned = spawner.spawn(data["player_id"], self, _map.get_rand_pos())
 		
 		if spawned is BaseEntity:
 			spawned.connect("on_ready", self, "on_drone_ready")
@@ -206,7 +216,15 @@ remote func _respawn_drone(drone : NodePath):
 		return
 		
 	drone_node.reset()
-	drone_node.translation = get_rand_pos()
+	
+	rpc("_reposition_drone",drone, _map.get_rand_pos())
+	
+remotesync func _reposition_drone(drone : NodePath, pos : Vector3):
+	var drone_node = get_node_or_null(drone)
+	if not is_instance_valid(drone_node):
+		return
+		
+	drone_node.translation = pos
 	
 ################################################################
 # drone event signal handler
@@ -214,31 +232,34 @@ func on_drone_ready(_entity):
 	pass
 	
 func on_drone_take_damage(_entity, _damage):
-	pass
+	if randf() > 0.5:
+		return
+		
+	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
+	add_child(msg)
+	
+	var spread = 0.35
+	msg.translation = _entity.global_transform.origin
+	msg.translation.z += rand_range(-spread, spread)
+	msg.translation.x += rand_range(-spread, spread)
+	msg.translation.y += 2.0 + rand_range(-spread, spread)
+	
+	msg.set_color(Color.orange)
+	msg.set_message("-" + str(_damage))
 	
 func on_drone_turret_dead(_turret):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
 	msg.translation = _turret.global_transform.origin
-	msg.set_color(Color.white)
-	msg.set_message("turret disabled!")
+	msg.set_color(Color.red)
+	msg.set_message("Turret Disabled!")
 	
 func on_drone_dead(_entity):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
 	msg.translation = _entity.global_transform.origin
-	msg.set_color(Color.white)
-	msg.set_message("hull disabled!")
-	
-################################################################
-# utils code
-func get_rand_pos() -> Vector3:
-	var angle := rand_range(0, TAU)
-	var distance := rand_range(15, 35)
-	var posv2 = polar2cartesian(distance, angle)
-	var posv3 = _map.global_transform.origin + Vector3(posv2.x, 0.0, posv2.y)
-	posv3.y = 0.0
-	return posv3
+	msg.set_color(Color.red)
+	msg.set_message("Drone Destroyed!")
 	
 ################################################################
 # network utils code

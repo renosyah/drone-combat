@@ -20,16 +20,16 @@ var drag_speed : float = 0.0025
 func camera_keep_aspect(_aspect):
 	_camera.keep_aspect = _aspect
 
-func _process(delta):
-	if not is_enable:
-		return
-		
-	var velocity = Vector3.ZERO
-	velocity.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	velocity.z = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up") 
-	
-	move_and_slide(velocity * speed)
-	
+#func _process(delta):
+#	if not is_enable:
+#		return
+#
+#	var velocity = Vector3.ZERO
+#	velocity.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+#	velocity.z = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up") 
+#
+#	move_and_slide(velocity * speed)
+#
 	
 func parsing_input(event):
 	_unhandled_input(event)

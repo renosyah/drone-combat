@@ -1,5 +1,7 @@
 extends Node
 
+const sound_amplified = 10
+
 func _ready():
 	load_player_data()
 	load_player_drone_data()

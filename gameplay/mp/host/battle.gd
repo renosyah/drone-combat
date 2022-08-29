@@ -5,7 +5,7 @@ onready var respawn_delay_timer : Timer = $respawn_delay_timer
 
 func _ready():
 	drone = spawn_drones_and_get_dronw_owned_by(Global.player.player_id)
-	Global.on_host_game_session_ready()
+	.load_map_stuff()
 	
 ################################################################
 # drone control
@@ -55,7 +55,7 @@ func _process(delta):
 # bot action
 func _on_bot_action_timer_timeout():
 	var bot = _bots[rand_range(0, _bots.size() - 1)]
-	var waypoint = get_rand_pos()
+	var waypoint = _map.get_rand_pos()
 	
 	if bot.is_dead():
 		return

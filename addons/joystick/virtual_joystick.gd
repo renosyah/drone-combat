@@ -1,6 +1,5 @@
-class_name VirtualJoystick
-
 extends Control
+class_name VirtualJoystick
 
 signal on_joystick_input(output,is_pressed)
 

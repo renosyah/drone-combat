@@ -51,11 +51,11 @@ remotesync func _update_player_joined(data : Array):
 	
 remotesync func _kick_player(data : Dictionary):
 	for i in player_joined:
-		if i.id == data["player_id"]:
+		if i["player_id"] == data["player_id"]:
 			player_joined.erase(i)
 			break
 			
-	if data.id == Global.player.player_id:
+	if data["player_id"] == Global.player.player_id:
 		Network.connect("connection_closed", self , "_got_kickout")
 		Network.disconnect_from_server()
 		return

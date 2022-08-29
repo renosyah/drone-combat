@@ -1,6 +1,8 @@
 extends BaseData
 class_name DroneData
 
+export var player_name:String = ""
+
 export var hp :int = 80
 export var max_hp:int = 80
 
@@ -24,6 +26,8 @@ func from_dictionary(data : Dictionary):
 	
 	if data.empty():
 		return
+		
+	player_name = data["player_name"]
 	
 	hp = data["hp"]
 	max_hp = data["max_hp"]
@@ -47,6 +51,8 @@ func from_dictionary(data : Dictionary):
 	
 func to_dictionary() -> Dictionary :
 	var data : Dictionary = {}
+	data["player_name"] = player_name
+	
 	data["hp"] = hp
 	data["max_hp"] = max_hp
 	
@@ -70,6 +76,9 @@ func to_dictionary() -> Dictionary :
 	
 func spawn(name : String, _parent : Node, _at : Vector3) -> Node:
 	var drone = load(hull_scene).instance()
+	
+	drone.player_name = player_name
+	
 	drone.hp = hp
 	drone.max_hp = max_hp
 	

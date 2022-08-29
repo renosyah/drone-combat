@@ -1,6 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://entity/drone_hulls/hull_2/hull_2.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/bar-3d/hp_bar_3d.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/ui/bar-3d/hp_bar_3d.gd" type="Script" id=3]
+[ext_resource path="res://assets/ui/bar/bar.png" type="Texture" id=4]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 1.2, 0.4, 3 )
@@ -107,3 +110,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.704847 )
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0837836, 0 )
 shape = SubResource( 7 )
+
+[node name="hpBar" type="Sprite3D" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8626, 0 )
+billboard = 1
+texture = ExtResource( 4 )
+script = ExtResource( 3 )

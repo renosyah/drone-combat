@@ -12,7 +12,8 @@ var is_master = false
 onready var _sensor : RayCast = get_node(sensor_path)
 
 # misc
-var _attack_timmer : Timer = null
+var _attack_timmer : Timer
+var _sound : AudioStreamPlayer3D
 
 ############################################################
 # Called when the node enters the scene tree for the first time.
@@ -20,13 +21,18 @@ var _attack_timmer : Timer = null
 func _ready():
 	set_process(true)
 	
-	if not _attack_timmer:
-		_attack_timmer = Timer.new()
-		_attack_timmer.autostart = false
-		_attack_timmer.one_shot = true
-		add_child(_attack_timmer)
+	_attack_timmer = Timer.new()
+	_attack_timmer.autostart = false
+	_attack_timmer.one_shot = true
+	add_child(_attack_timmer)
+	
+	_sound = AudioStreamPlayer3D.new()
+	_sound.bus = "sfx"
+	_sound.unit_db = Global.sound_amplified
+	_sound.unit_size = Global.sound_amplified
+	add_child(_sound)
 		
-	if _sensor:
+	if is_instance_valid(_sensor):
 		_sensor.cast_to =  _sensor.cast_to * attack_range
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.

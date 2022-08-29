@@ -7,6 +7,7 @@ onready var respawn_delay_timer : Timer = $respawn_delay_timer
 func _ready():
 	drone = spawn_drones_and_get_dronw_owned_by(Global.player.player_id)
 	init_client()
+	.load_map_stuff()
 	
 ################################################################
 # drone control

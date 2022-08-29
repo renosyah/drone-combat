@@ -19,6 +19,7 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="joystick" parent="CanvasLayer/control" instance=ExtResource( 1 )]
+visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -35,7 +36,7 @@ anchor_bottom = 1.0
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/death_screen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.117647, 0.117647, 0.117647, 1 )
+color = Color( 0.117647, 0.117647, 0.117647, 0.670588 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/death_screen"]
 anchor_right = 1.0

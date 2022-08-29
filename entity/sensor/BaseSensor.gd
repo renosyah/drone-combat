@@ -7,8 +7,16 @@ export var scanning_speed:float = 0.07
 export var raycast_path: Array
 export var spotting_range : int = 1
 
+onready var _detected_sounds = [
+	preload("res://entity/sensor/sensor_sound/detected_1.wav"),
+	preload("res://entity/sensor/sensor_sound/detected_2.wav"),
+	preload("res://entity/sensor/sensor_sound/detected_3.wav"),
+	preload("res://entity/sensor/sensor_sound/detected_4.wav")
+]
+
 var _raycasts: Array = []
 var _current_detected : BaseEntity
+var _sound : AudioStreamPlayer3D
 
 func add_exception(_node : BaseEntity):
 	for raycast in _raycasts:
@@ -20,6 +28,12 @@ func _ready():
 		ray.cast_to = ray.cast_to * spotting_range
 		_raycasts.append(ray)
 		
+	_sound = AudioStreamPlayer3D.new()
+	_sound.bus = "sfx"
+	_sound.unit_db = Global.sound_amplified
+	_sound.unit_size = Global.sound_amplified
+	add_child(_sound)
+	
 	set_process(true)
 	
 func _process(delta):
@@ -42,6 +56,10 @@ func validate_detection(raycast : RayCast):
 		
 	if not _is_close_to(body):
 		return
+		
+	if _current_detected != body:
+		_sound.stream = _detected_sounds[rand_range(0,_detected_sounds.size() - 1)]
+		_sound.play()
 		
 	_current_detected = body
 	

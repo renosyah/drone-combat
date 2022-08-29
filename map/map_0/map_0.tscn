@@ -9,7 +9,7 @@ points = PoolVector3Array( -50.2732, 0.569672, -50.2732, 50.2732, 0.569672, 50.2
 size = Vector3( 100, 0.5, 100 )
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.0941176, 0.537255, 0, 1 )
+albedo_color = Color( 0.0980392, 0.301961, 0.0509804, 1 )
 
 [sub_resource type="CubeMesh" id=4]
 size = Vector3( 100, 1, 100 )
