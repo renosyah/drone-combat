@@ -211,16 +211,14 @@ func puppet_moving(_delta):
 	rotation.y = lerp_angle(rotation.y, _puppet_rotation.y, _delta * 5)
 	rotation.z = lerp_angle(rotation.z, _puppet_rotation.z, _delta * 5)
 	
-	
 func reset():
 	.reset()
 	
 	if is_instance_valid(_turret):
 		_turret.reset()
 	
-	
 func is_dead() -> bool:
-	if not _turret:
+	if not is_instance_valid(_turret):
 		return is_dead
 		
 	return is_dead && _turret.is_dead()
