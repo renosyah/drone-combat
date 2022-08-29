@@ -43,6 +43,8 @@ var current_aim = Vector3.ZERO
 # states
 var active: bool = true
 
+# misc
+var _reset_turret_timer : Timer
 
 ############################################################
 # multiplayer func
@@ -98,6 +100,22 @@ remotesync func _reset():
 ################################
 func _ready() -> void:
 	tag = "turret"
+	active = false
+	
+	if not _is_master():
+		return
+		
+	_reset_turret_timer = Timer.new()
+	_reset_turret_timer.wait_time = 5.0
+	_reset_turret_timer.autostart = true
+	_reset_turret_timer.connect("timeout", self ,"_on_reset_turret_timer_timeout")
+	add_child(_reset_turret_timer)
+	
+func _on_reset_turret_timer_timeout():
+	if not _is_master():
+		return
+		
+	current_aim = Vector3.ZERO
 	active = false
 	
 func spawn_weapon(_pos : Vector3):
