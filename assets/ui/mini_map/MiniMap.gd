@@ -1,7 +1,7 @@
 extends MarginContainer
 class_name MiniMap
 
-const DIMESION_MULTIPLIER = 100.0
+const DIMESION_MULTIPLIER = 90.0
 
 var zoom = 2.5 # Scale multiplier.
 

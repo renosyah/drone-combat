@@ -11,6 +11,10 @@ remotesync func _reset():
 	._reset()
 	_hpBar.update_bar(hp, max_hp)
 	
+remotesync func _dead():
+	._dead()
+	_hpBar.update_bar(0, max_hp)
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var _material = $pivot/MeshInstance.get_surface_material(0).duplicate()

@@ -91,7 +91,7 @@ rect_min_size = Vector2( 80, 0 )
 margin_left = 45.0
 margin_top = 45.0
 margin_right = -45.0
-margin_bottom = -141.0
+margin_bottom = -241.0
 
 [connection signal="on_joystick_input" from="CanvasLayer/control/joystick" to="." method="_on_Virtual_joystick_on_joystick_input"]
 [connection signal="pressed" from="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn" to="." method="_on_respawn_pressed"]
