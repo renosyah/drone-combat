@@ -36,9 +36,6 @@ func _on_projectile_body_entered(body):
 	if not is_instance_valid(body):
 		return
 		
-	if not body is BaseEntity:
-		return
-		
 	if body.is_a_parent_of(self):
 		return
 		
@@ -49,7 +46,10 @@ func _on_projectile_body_entered(body):
 		stop_projectile()
 		queue_free()
 		return
-
+		
+	if not body is BaseEntity:
+		return
+		
 	if is_master:
 		body.take_damage(attack_damage)
 	

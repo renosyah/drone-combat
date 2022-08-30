@@ -76,7 +76,7 @@ func _is_valid_target(_body) -> bool:
 	if _body is StaticBody:
 		return false
 		
-	if not _body is BaseEntity:
+	if  not _body is BaseEntity:
 		return false
 		
 	return true

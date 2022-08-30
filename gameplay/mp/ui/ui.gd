@@ -9,11 +9,18 @@ onready var _is_dekstop :bool = OS.get_name() in DEKSTOP
 onready var _joystick: VirtualJoystick = $CanvasLayer/control/joystick
 onready var _control: Control = $CanvasLayer/control
 onready var _death_screen: Control = $CanvasLayer/death_screen
+onready var _mini_map = $CanvasLayer/MiniMap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	show_control_screen()
 	validate_input_by_platform()
+	
+func add_minimap_object(spawned):
+	_mini_map.add_object(spawned)
+
+func set_camera(_camera : GameplayCamera):
+	_mini_map.set_camera(_camera)
 	
 func validate_input_by_platform():
 	_joystick.visible = not _is_dekstop

@@ -136,6 +136,8 @@ func _load_ui():
 	_ui.connect("on_joystick_input", self, "on_joystick_input")
 	_ui.connect("on_respawn_button_press", self, "on_respawn_button_press")
 	
+	_ui.set_camera(_camera)
+	
 func on_joystick_input(output : Vector2, is_pressed : bool):
 	pass
 	
@@ -181,6 +183,7 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 		var spawner  = DroneData.new()
 		spawner.from_dictionary(data)
 		var spawned = spawner.spawn(data["player_id"], self, _map.get_rand_pos())
+		_ui.add_minimap_object(spawned)
 		
 		if spawned is BaseEntity:
 			spawned.connect("on_ready", self, "on_drone_ready")
@@ -230,13 +233,10 @@ func on_drone_ready(_entity):
 	pass
 	
 func on_drone_take_damage(_entity, _damage):
-	if randf() > 0.5:
-		return
-		
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
 	
-	var spread = 0.35
+	var spread = 2.0
 	msg.translation = _entity.global_transform.origin
 	msg.translation.z += rand_range(-spread, spread)
 	msg.translation.x += rand_range(-spread, spread)
@@ -248,7 +248,12 @@ func on_drone_take_damage(_entity, _damage):
 func on_drone_turret_dead(_turret):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
+	
+	var spread = 2.0
 	msg.translation = _turret.global_transform.origin
+	msg.translation.z += rand_range(-spread, spread)
+	msg.translation.x += rand_range(-spread, spread)
+	msg.translation.y += 2.0 + rand_range(-spread, spread)
 	msg.set_color(Color.red)
 	msg.set_message("Turret Disabled!")
 	

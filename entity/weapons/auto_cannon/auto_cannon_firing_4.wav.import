@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/auto_cannon_firing_4.wav-6ef4fe96d5f71ff5f0a8b44da89bf754.sample"
+
+[deps]
+
+source_file="res://entity/weapons/auto_cannon/auto_cannon_firing_4.wav"
+dest_files=[ "res://.import/auto_cannon_firing_4.wav-6ef4fe96d5f71ff5f0a8b44da89bf754.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
