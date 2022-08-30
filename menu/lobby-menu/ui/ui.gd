@@ -127,9 +127,7 @@ func _init_join():
 	
 func _client_player_connected(_player_network_unique_id : int, _player : Dictionary):
 	Global.client.network_unique_id = _player_network_unique_id
-	var player = create_mp_player()
-	player["drone_data"] = Global.player_drone_data.to_dictionary()
-	rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id, player)
+	rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id, create_mp_player())
 	
 func _on_host_game_session_ready(_mp_game_data : Dictionary):
 	Global.mp_game_data = _mp_game_data
@@ -192,8 +190,7 @@ func set_player_ready():
 	var data = create_mp_player()
 	data["status"] = "Ready"
 	data["flag"] = PLAYER_STATUS_READY
-	data["drone_data"] = Global.player_drone_data.to_dictionary()
-	
+
 	if not is_server():
 		rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id,data)
 		return
@@ -237,13 +234,10 @@ func create_mp_player() -> Dictionary:
 		"order" : 0,
 		"status" : "Not Ready",
 		"flag" : PLAYER_STATUS_NOT_READY,
-		"drone_data" : {}
+		"drone_data" : Global.player_drone_data.to_dictionary()
 	}
 	
 func create_bot_player() -> Dictionary:
-	var drone = DroneData.new()
-	drone.color = Color(randf(), randf(), randf(), 1.0)
-	
 	return {
 		"player_id" : "BOT-" + str(GDUUID.v4()),
 		"player_name" : RandomNameGenerator.generate() + " (Bot)",
@@ -251,7 +245,7 @@ func create_bot_player() -> Dictionary:
 		"status" : "Ready",
 		"is_bot" : true,
 		"flag" : PLAYER_STATUS_READY,
-		"drone_data" : drone.to_dictionary()
+		"drone_data" : Global.randomize_drone().to_dictionary()
 	}
 	
 class MyCustomSorter:

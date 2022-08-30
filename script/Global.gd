@@ -19,7 +19,18 @@ func load_player_data():
 	
 ################################################################
 # player drone
-var player_drone_data : DroneData = DroneData.new()
+var player_drone_data : DroneData = randomize_drone()
+
+static func randomize_drone() -> DroneData:
+	var data = DroneData.new()
+	randomize()
+	data.hull_scene = DroneData.drone_hulls[rand_range(0, DroneData.drone_hulls.size() - 1)]
+	data.turret_scene =  DroneData.drone_turrets[rand_range(0, DroneData.drone_turrets.size() - 1)]
+	data.weapon_scene =  DroneData.drone_weapons[rand_range(0, DroneData.drone_weapons.size() - 1)]
+	data.sensor_scene =  DroneData.drone_sensors[rand_range(0, DroneData.drone_sensors.size() - 1)]
+	data.color = Color(randf(), randf(), randf(), 1.0)
+	return data
+
 
 func load_player_drone_data():
 	player_drone_data.load_data("player_drone_data.data")

@@ -1,6 +1,25 @@
 extends BaseData
 class_name DroneData
 
+const drone_hulls = [
+	"res://entity/drone_hulls/hull_1/hull_1.tscn",
+	"res://entity/drone_hulls/hull_2/hull_2.tscn",
+	"res://entity/drone_hulls/hull_3/hull_3.tscn"
+]
+const drone_turrets = [
+	"res://entity/drone_turrets/turret_1/turret_1.tscn",
+	"res://entity/drone_turrets/turret_2/turret_2.tscn",
+	"res://entity/drone_turrets/turret_3/turret_3.tscn",
+]
+const drone_weapons = [
+	"res://entity/weapons/mg/mg.tscn",
+	"res://entity/weapons/cannon/cannon.tscn",
+	"res://entity/weapons/auto_cannon/auto_cannon.tscn"
+]
+const drone_sensors = [
+	"res://entity/sensor/sensor_1/sensor_1.tscn"
+]
+
 export var player_name:String = ""
 
 export var hp :int = 80
@@ -16,10 +35,11 @@ export var spotting_range :int = 16
 export var scanning_speed:float = 0.07
 
 export var hull_scene:String = "res://entity/drone_hulls/hull_1/hull_1.tscn"
-export var turret_scene:String = "res://entity/drone_turrets/turret_1/turret_1.tscn"
-export var weapon_scene:String = "res://entity/weapons/mg/mg.tscn"
+export var turret_scene:String = "res://entity/drone_turrets/turret_2/turret_2.tscn"
+export var weapon_scene:String = "res://entity/weapons/auto_cannon/auto_cannon.tscn"
 export var sensor_scene:String = "res://entity/sensor/sensor_1/sensor_1.tscn"
 export var color :Color = Color.gray
+
 
 func from_dictionary(data : Dictionary):
 	.from_dictionary(data)

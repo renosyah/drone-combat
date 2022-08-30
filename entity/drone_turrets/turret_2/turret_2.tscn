@@ -2,8 +2,8 @@
 
 [ext_resource path="res://entity/drone_turrets/turret_2/turret_2.gd" type="Script" id=1]
 
-[sub_resource type="BoxShape" id=1]
-extents = Vector3( 0.58533, 0.282358, 0.561141 )
+[sub_resource type="ConvexPolygonShape" id=13]
+points = PoolVector3Array( 0.747869, 0.2, 0.495455, -0.724858, -0.2, -0.486364, -0.724858, -0.2, 0.480114, -0.747869, 0.2, 0.495455, -0.745313, 0.199306, -0.5, 0.724858, -0.2, -0.486364, 0.745313, 0.199306, -0.5, 0.724858, -0.2, 0.480114 )
 
 [sub_resource type="CubeMesh" id=12]
 size = Vector3( 1.5, 0.4, 1 )
@@ -30,8 +30,8 @@ body_path = NodePath(".")
 head_path = NodePath("pivot/weapon")
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.299484, 0 )
-shape = SubResource( 1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.240624, 0 )
+shape = SubResource( 13 )
 
 [node name="pivot" type="Spatial" parent="."]
 
