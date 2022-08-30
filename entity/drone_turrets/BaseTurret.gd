@@ -119,8 +119,7 @@ func _on_reset_turret_timer_timeout():
 	if not _is_master():
 		return
 		
-	if not active:
-		
+	if not active and not is_dead:
 		_tween.interpolate_property(self, "rotation_degrees:y", rotation_degrees.y, 180.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		_tween.start()
 		
