@@ -19,11 +19,13 @@ func load_player_data():
 	
 ################################################################
 # player drone
-var player_drone_data : DroneData = randomize_drone()
+var player_drone_data : DroneData = DroneData.new()
 
-static func randomize_drone() -> DroneData:
+static func randomize_drone(player_id, player_name :String ) -> DroneData:
 	var data = DroneData.new()
 	randomize()
+	data.player_id =  player_id
+	data.player_name =  player_name
 	data.hull_scene = DroneData.drone_hulls[rand_range(0, DroneData.drone_hulls.size() - 1)]
 	data.turret_scene =  DroneData.drone_turrets[rand_range(0, DroneData.drone_turrets.size() - 1)]
 	data.weapon_scene =  DroneData.drone_weapons[rand_range(0, DroneData.drone_weapons.size() - 1)]
@@ -33,7 +35,8 @@ static func randomize_drone() -> DroneData:
 
 
 func load_player_drone_data():
-	player_drone_data.load_data("player_drone_data.data")
+	#player_drone_data.load_data("player_drone_data.data")
+	player_drone_data = randomize_drone(player.player_id, player.player_name)
 	
 ################################################################
 # multiplayer connection and data

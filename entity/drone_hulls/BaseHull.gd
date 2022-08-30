@@ -15,6 +15,7 @@ var direction = Vector2.ZERO
 
 export var waypoint_mode = false
 
+export var player_id:String = ""
 export var player_name:String = ""
 
 export var speed : float = 2.0

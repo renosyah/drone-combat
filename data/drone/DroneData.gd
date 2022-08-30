@@ -20,16 +20,17 @@ const drone_sensors = [
 	"res://entity/sensor/sensor_1/sensor_1.tscn"
 ]
 
+export var player_id:String = ""
 export var player_name:String = ""
 
-export var hp :int = 80
-export var max_hp:int = 80
+export var hp :int = 120
+export var max_hp:int = 120
 
-export var turret_hp :int = 40
-export var turret_max_hp:int = 40
+export var turret_hp :int = 80
+export var turret_max_hp:int = 80
 
-export var speed:float = 2
-export var turning_speed:float = 4
+export var speed:float = 2.0
+export var turning_speed:float = 4.0
 
 export var spotting_range :int = 16
 export var scanning_speed:float = 0.07
@@ -47,6 +48,7 @@ func from_dictionary(data : Dictionary):
 	if data.empty():
 		return
 		
+	player_id = data["player_id"]
 	player_name = data["player_name"]
 	
 	hp = data["hp"]
@@ -71,6 +73,7 @@ func from_dictionary(data : Dictionary):
 	
 func to_dictionary() -> Dictionary :
 	var data : Dictionary = {}
+	data["player_id"] = player_id
 	data["player_name"] = player_name
 	
 	data["hp"] = hp
@@ -97,6 +100,7 @@ func to_dictionary() -> Dictionary :
 func spawn(name : String, _parent : Node, _at : Vector3) -> Node:
 	var drone = load(hull_scene).instance()
 	
+	drone.player_id = player_id
 	drone.player_name = player_name
 	
 	drone.hp = hp

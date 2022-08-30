@@ -238,14 +238,17 @@ func create_mp_player() -> Dictionary:
 	}
 	
 func create_bot_player() -> Dictionary:
+	var bot_id = "BOT-" + str(GDUUID.v4())
+	var bot_name = RandomNameGenerator.generate() + " (Bot)"
+	
 	return {
-		"player_id" : "BOT-" + str(GDUUID.v4()),
-		"player_name" : RandomNameGenerator.generate() + " (Bot)",
+		"player_id" : bot_id,
+		"player_name" : bot_name,
 		"order" : 0,
 		"status" : "Ready",
 		"is_bot" : true,
 		"flag" : PLAYER_STATUS_READY,
-		"drone_data" : Global.randomize_drone().to_dictionary()
+		"drone_data" : Global.randomize_drone(bot_id, bot_name).to_dictionary()
 	}
 	
 class MyCustomSorter:

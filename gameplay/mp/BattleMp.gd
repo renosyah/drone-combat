@@ -172,9 +172,7 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 	
 	for data in Global.mp_players:
 		var d = data["drone_data"].duplicate()
-		d["player_name"] = data["player_name"]
-		d["player_id"] = data["player_id"]
-		d["is_bot"] =  data.has("is_bot")
+		d["is_bot"] = data.has("is_bot")
 		drones.append(d)
 		
 	var drone : BaseHull
