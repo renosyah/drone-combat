@@ -37,7 +37,7 @@ func _ready():
 	get_tree().connect('network_peer_disconnected', self, '_on_peer_disconnected')
 	get_tree().connect('server_disconnected', self, '_on_server_disconnected')
 	
-	setup_ping()
+	#setup_ping()
 	
 func setup_ping():
 	ping_interval_timer = Timer.new()
@@ -100,8 +100,14 @@ func connect_to_server(_ip:String = DEFAULT_IP, _port :int = DEFAULT_PORT, _data
 	get_tree().set_network_peer(null) 
 	get_tree().set_network_peer(peer)
 	
-	ping_interval_timer.start()
-	ping_increment_timer.start()
+	if not ping_interval_timer:
+		return OK
+		
+	if not ping_increment_timer:
+		return OK
+	
+	ping_interval_timer.stop()
+	ping_increment_timer.stop()
 	
 	return OK
 	
@@ -115,10 +121,16 @@ func _on_server_disconnected():
 	for _signal in get_tree().get_signal_connection_list("connection_failed"):
 		get_tree().disconnect("connection_failed",self, _signal.method)
 		
+	emit_signal("server_disconnected")
+	
+	if not ping_interval_timer:
+		return
+		
+	if not ping_increment_timer:
+		return
+	
 	ping_interval_timer.stop()
 	ping_increment_timer.stop()
-
-	emit_signal("server_disconnected")
 	
 # if player want to disconnect
 # from server, just call this func
@@ -132,11 +144,16 @@ func disconnect_from_server() -> void:
 	get_tree().get_network_peer().close_connection()
 	get_tree().set_network_peer(null)
 	
-	ping_interval_timer.stop()
-	ping_increment_timer.stop()
-	
 	emit_signal("connection_closed")
 	
+	if not ping_interval_timer:
+		return
+		
+	if not ping_increment_timer:
+		return
+	
+	ping_interval_timer.stop()
+	ping_increment_timer.stop()
 	
 	
 # player connect to server

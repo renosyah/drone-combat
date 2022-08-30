@@ -6,8 +6,7 @@ onready var _animation_player = $AnimationPlayer
 onready var _firing_sounds = [
 	preload("res://entity/weapons/auto_cannon/auto_cannon_firing_1.wav"),
 	preload("res://entity/weapons/auto_cannon/auto_cannon_firing_2.wav"),
-	preload("res://entity/weapons/auto_cannon/auto_cannon_firing_3.wav"),
-	preload("res://entity/weapons/auto_cannon/auto_cannon_firing_4.wav")
+	preload("res://entity/weapons/auto_cannon/auto_cannon_firing_3.wav")
 ]
 
 func _ready():

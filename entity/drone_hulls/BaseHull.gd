@@ -41,10 +41,10 @@ var _velocity = Vector3.ZERO
 
 var _moving_state : int = IDDLE
 
-onready var _dead_sounds = [
-	preload("res://entity/drone_hulls/hull_destroy_sound/explosion_1.wav"),
-	preload("res://entity/drone_hulls/hull_destroy_sound/explosion_2.wav"),
-	preload("res://entity/drone_hulls/hull_destroy_sound/explosion_3.wav"),
+onready var _hit_sounds = [
+	preload("res://entity/drone_hulls/hull_hit_sound/explosion_1.wav"),
+	preload("res://entity/drone_hulls/hull_hit_sound/explosion_2.wav"),
+	preload("res://entity/drone_hulls/hull_hit_sound/explosion_3.wav"),
 ]
 
 # input
@@ -100,10 +100,11 @@ func _set_puppet_moving_state(_val : int):
 		
 	_moving_state = _puppet_moving_state
 	
+	
 remotesync func _dead():
 	._dead()
 	
-	_sound.stream = _dead_sounds[rand_range(0,_dead_sounds.size() - 1)]
+	_sound.stream = _hit_sounds[rand_range(0, _hit_sounds.size() - 1)]
 	_sound.play()
 	
 	if is_instance_valid(_turret):

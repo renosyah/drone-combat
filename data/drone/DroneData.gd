@@ -4,17 +4,20 @@ class_name DroneData
 const drone_hulls = [
 	"res://entity/drone_hulls/hull_1/hull_1.tscn",
 	"res://entity/drone_hulls/hull_2/hull_2.tscn",
-	"res://entity/drone_hulls/hull_3/hull_3.tscn"
+	"res://entity/drone_hulls/hull_3/hull_3.tscn",
+	"res://entity/drone_hulls/hull_1/hull_1.tscn",
 ]
 const drone_turrets = [
 	"res://entity/drone_turrets/turret_1/turret_1.tscn",
 	"res://entity/drone_turrets/turret_2/turret_2.tscn",
 	"res://entity/drone_turrets/turret_3/turret_3.tscn",
+	"res://entity/drone_turrets/turret_1/turret_1.tscn",
 ]
 const drone_weapons = [
 	"res://entity/weapons/mg/mg.tscn",
 	"res://entity/weapons/cannon/cannon.tscn",
-	"res://entity/weapons/auto_cannon/auto_cannon.tscn"
+	"res://entity/weapons/auto_cannon/auto_cannon.tscn",
+	"res://entity/weapons/mg/mg.tscn",
 ]
 const drone_sensors = [
 	"res://entity/sensor/sensor_1/sensor_1.tscn"

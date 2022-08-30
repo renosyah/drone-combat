@@ -20,15 +20,14 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="joystick" parent="CanvasLayer/control" instance=ExtResource( 1 )]
-visible = false
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -92.0
-margin_top = -283.0
-margin_right = 108.0
-margin_bottom = -100.0
+margin_left = -100.0
+margin_top = -376.0
+margin_right = 100.0
+margin_bottom = -193.0
 
 [node name="death_screen" type="Control" parent="CanvasLayer"]
 visible = false
@@ -91,7 +90,7 @@ rect_min_size = Vector2( 80, 0 )
 margin_left = 45.0
 margin_top = 45.0
 margin_right = -45.0
-margin_bottom = -241.0
+margin_bottom = -393.0
 
 [connection signal="on_joystick_input" from="CanvasLayer/control/joystick" to="." method="_on_Virtual_joystick_on_joystick_input"]
 [connection signal="pressed" from="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn" to="." method="_on_respawn_pressed"]

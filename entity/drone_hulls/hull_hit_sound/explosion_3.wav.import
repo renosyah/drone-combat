@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/explosion_3.wav-4fcf6431683c1fafd5e92b8ca185bfed.sample"
+
+[deps]
+
+source_file="res://entity/drone_hulls/hull_hit_sound/explosion_3.wav"
+dest_files=[ "res://.import/explosion_3.wav-4fcf6431683c1fafd5e92b8ca185bfed.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
