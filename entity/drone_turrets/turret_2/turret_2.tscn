@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://entity/drone_turrets/turret_2/turret_2.gd" type="Script" id=1]
+[ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=2]
 
 [sub_resource type="ConvexPolygonShape" id=13]
 points = PoolVector3Array( 0.747869, 0.2, 0.495455, -0.724858, -0.2, -0.486364, -0.724858, -0.2, 0.480114, -0.747869, 0.2, 0.495455, -0.745313, 0.199306, -0.5, 0.724858, -0.2, -0.486364, 0.745313, 0.199306, -0.5, 0.724858, -0.2, 0.480114 )
@@ -9,18 +10,21 @@ points = PoolVector3Array( 0.747869, 0.2, 0.495455, -0.724858, -0.2, -0.486364, 
 size = Vector3( 1.5, 0.4, 1 )
 
 [sub_resource type="SpatialMaterial" id=10]
+next_pass = ExtResource( 2 )
 albedo_color = Color( 0.635294, 0.635294, 0.635294, 1 )
 
 [sub_resource type="CubeMesh" id=6]
 size = Vector3( 2, 0.4, 1 )
 
 [sub_resource type="SpatialMaterial" id=7]
+next_pass = ExtResource( 2 )
 albedo_color = Color( 0.329412, 0.329412, 0.329412, 1 )
 
 [sub_resource type="CubeMesh" id=9]
 size = Vector3( 0.6, 0.6, 0.4 )
 
 [sub_resource type="SpatialMaterial" id=11]
+next_pass = ExtResource( 2 )
 albedo_color = Color( 0.317647, 0.317647, 0.317647, 1 )
 
 [node name="turret_2" type="KinematicBody"]

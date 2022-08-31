@@ -22,6 +22,9 @@ func _network_timmer_timeout():
 	if is_dead:
 		return
 		
+	if not _is_network_running():
+		return
+		
 	if _is_master():
 		rset_unreliable("_puppet_hp", hp)
 		
@@ -70,6 +73,9 @@ func _ready():
 func _physics_process(delta):
 	moving(delta)
 	
+	if not _is_network_running():
+		return
+	
 	if _is_master():
 		master_moving(delta)
 	else:
@@ -116,11 +122,16 @@ func is_dead() -> bool:
 	
 ############################################################
 # multiplayer func
-func _is_master() -> bool:
+func _is_network_running():
 	if not get_tree().network_peer:
 		return false
 		
 	if get_tree().network_peer.get_connection_status() == NetworkedMultiplayerPeer.CONNECTION_DISCONNECTED:
+		return false
+		
+	return true
+func _is_master() -> bool:
+	if not get_tree().network_peer:
 		return false
 		
 	if not is_network_master():

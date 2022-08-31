@@ -42,19 +42,13 @@ var _velocity = Vector3.ZERO
 
 var _moving_state : int = IDDLE
 
-onready var _hit_sounds = [
-	preload("res://entity/drone_hulls/hull_hit_sound/explosion_1.wav"),
-	preload("res://entity/drone_hulls/hull_hit_sound/explosion_2.wav"),
-	preload("res://entity/drone_hulls/hull_hit_sound/explosion_3.wav"),
-]
-
 # input
 var _click_translation = Vector3.ZERO
 var _input_detector : Node
 
 # misc
 var _tween_movement : Tween
-var _sound : AudioStreamPlayer3D
+var _explosion : Explosion
 
 ############################################################
 # multiplayer func
@@ -105,8 +99,7 @@ func _set_puppet_moving_state(_val : int):
 remotesync func _dead():
 	._dead()
 	
-	_sound.stream = _hit_sounds[rand_range(0, _hit_sounds.size() - 1)]
-	_sound.play()
+	_explosion.explode()
 	
 	if is_instance_valid(_turret):
 		_turret.dead()
@@ -118,12 +111,6 @@ func _ready():
 	set_process(true)
 	tag = "hull"
 	
-	_sound = AudioStreamPlayer3D.new()
-	_sound.bus = "sfx"
-	_sound.unit_db = Global.sound_amplified
-	_sound.unit_size = Global.sound_amplified
-	add_child(_sound)
-	
 	connect("input_event", self, "_on_input_event")
 	
 	var _detector = preload("res://assets/other/input_detection/input_detection.tscn").instance()
@@ -133,6 +120,9 @@ func _ready():
 	
 	_tween_movement = Tween.new()
 	add_child(_tween_movement)
+	
+	_explosion = preload("res://assets/other/explosion/explosion.tscn").instance()
+	add_child(_explosion)
 		
 	if not _is_master():
 		return
@@ -159,7 +149,7 @@ func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 		add_child(_turret_asset)
 		_turret = _turret_asset
 		_turret.translation = _pos
-		_turret.rotation_degrees.y = 180
+		_turret.rotation_degrees.y = 180.0
 		
 	if is_instance_valid(_turret):
 		_turret.connect("on_take_damage", self,"_on_turret_take_damage" )

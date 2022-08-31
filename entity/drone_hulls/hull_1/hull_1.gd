@@ -5,6 +5,7 @@ onready var _hpBar = $hpBar
 
 remotesync func _take_damage(_damage : int):
 	._take_damage(_damage)
+	_hpBar.visible = true
 	_hpBar.update_bar(hp, max_hp)
 	
 remotesync func _reset():
@@ -24,3 +25,4 @@ func _ready():
 	
 	_hpBar.update_bar(hp, max_hp)
 	_hpBar.set_player_name(player_name)
+	_hpBar.visible = false

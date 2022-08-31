@@ -100,7 +100,7 @@ func to_dictionary() -> Dictionary :
 	
 	return data
 	
-func spawn(name : String, _parent : Node, _at : Vector3) -> Node:
+func spawn(node_name : String, _parent : Node, _at : Vector3) -> Node:
 	var drone = load(hull_scene).instance()
 	
 	drone.player_id = player_id
@@ -125,7 +125,7 @@ func spawn(name : String, _parent : Node, _at : Vector3) -> Node:
 	drone.color = color
 	_parent.add_child(drone)
 	drone.translation = _at
-	drone.name = name
+	drone.name = node_name
 	drone.set_network_master(Network.PLAYER_HOST_ID)
 	return drone
 	

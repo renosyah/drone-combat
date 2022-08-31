@@ -1,11 +1,22 @@
 extends Control
 
+signal on_drone_data_change()
+
 onready var _server_browser = $CanvasLayer/server_browser
 onready var _dialog_exit_option = $CanvasLayer/simple_dialog_option
 
+onready var _player_name_label = $CanvasLayer/VBoxContainer/Control3/HBoxContainer/player_name_label
+onready var _input_name_dialog = $CanvasLayer/input_name
+
+onready var _input_color_dialog = $CanvasLayer/input_color
+onready var _input_color_btn_color = $CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_color_btn/ColorRect
+
 func _ready():
 	_dialog_exit_option.visible = false
+	
 	_server_browser.start_finding()
+	init_drone_data_setting()
+	
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
 	
@@ -19,6 +30,43 @@ func _notification(what):
 			_on_back_pressed()
 			return
 	
+func init_drone_data_setting():
+	_player_name_label.text = Global.player.player_name
+	_input_color_btn_color.color = Global.player_drone_data.color
+	
+func _on_battle_pressed():
+	Network.connect("server_player_connected", self ,"_server_player_connected")
+	var err = Network.create_server(Global.server.max_player, Global.server.port,{"name" : Global.player.player_name})
+	if err != OK:
+		return
+		
+func _server_player_connected(_player_network_unique_id : int, _player : Dictionary):
+	var player = {
+		"player_id" : Global.player.player_id,
+		"player_name" : Global.player.player_name,
+		"order" : 0,
+		"status" : "Ready",
+		"flag" : "READY",
+		"drone_data" : Global.player_drone_data.to_dictionary()
+	}
+	Global.mp_players = [player]
+	
+	for i in range(4):
+		var bot_id = "BOT-" + str(GDUUID.v4())
+		var bot_name = RandomNameGenerator.generate() + " (Bot)"
+		var bot = {
+			"player_id" : bot_id,
+			"player_name" : bot_name,
+			"order" : 0,
+			"is_bot" : true,
+			"status" : "Ready",
+			"flag" : "READY",
+			"drone_data" : Global.randomize_drone(bot_id, bot_name).to_dictionary()
+		}
+		Global.mp_players.append(bot)
+		
+	get_tree().change_scene("res://gameplay/mp/host/battle.tscn")
+	
 func _on_host_pressed():
 	Global.mode = Global.MODE_HOST
 	get_tree().change_scene("res://menu/lobby-menu/lobby_menu.tscn")
@@ -30,8 +78,9 @@ func _on_server_browser_on_error(msg):
 	print(msg)
 	
 func _on_input_name_on_continue(_player_name, html_color):
-	Global.player_data.name = _player_name
-	Global.save_player_data()
+	Global.player.player_name = _player_name
+	Global.player.save_data(Global.player_data_file)
+	_player_name_label.text = Global.player.player_name
 	
 func _on_server_browser_on_join(info):
 	Global.mode = Global.MODE_JOIN
@@ -47,6 +96,43 @@ func _on_back_pressed():
 	
 func _on_simple_dialog_option_on_yes():
 	get_tree().quit()
+	
+func _on_setting_pressed():
+	_input_name_dialog.visible = true
+	
+func _on_drone_turret_btn_pressed():
+	pass # Replace with function body.
+	
+func _on_drone_hull_btn_pressed():
+	pass # Replace with function body.
+	
+func _on_drone_sensor_btn_pressed():
+	pass # Replace with function body.
+	
+func _on_drone_color_btn_pressed():
+	_input_color_dialog.visible = true
+	
+func _on_input_color_on_pick(_color):
+	_input_color_btn_color.color = _color
+	Global.player_drone_data.color = _color
+	Global.player_drone_data.save_data(Global.player_drone_data_file)
+	emit_signal("on_drone_data_change")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

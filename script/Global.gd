@@ -1,6 +1,8 @@
 extends Node
 
 const sound_amplified = 10
+const player_data_file = "player.data"
+const player_drone_data_file = "player_drone_data.data"
 
 func _ready():
 	load_player_data()
@@ -11,11 +13,11 @@ func _ready():
 var player: PlayerData = PlayerData.new()
 
 func load_player_data():
-	player.load_data("player.data")
+	player.load_data(player_data_file)
 	if player.is_empty():
 		player.player_id = GDUUID.v4()
 		player.player_name = RandomNameGenerator.generate()
-		player.save_data("player.data")
+		player.save_data(player_data_file)
 	
 ################################################################
 # player drone
@@ -32,11 +34,12 @@ static func randomize_drone(player_id, player_name :String ) -> DroneData:
 	data.sensor_scene =  DroneData.drone_sensors[rand_range(0, DroneData.drone_sensors.size() - 1)]
 	data.color = Color(randf(), randf(), randf(), 1.0)
 	return data
-
-
+	
+	
 func load_player_drone_data():
-	#player_drone_data.load_data("player_drone_data.data")
-	player_drone_data = randomize_drone(player.player_id, player.player_name)
+	player_drone_data.load_data(player_drone_data_file)
+	player_drone_data.player_id = player.player_id
+	player_drone_data.player_name = player.player_name
 	
 ################################################################
 # multiplayer connection and data

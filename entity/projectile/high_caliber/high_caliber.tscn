@@ -1,6 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entity/projectile/high_caliber/high_caliber.gd" type="Script" id=1]
+[ext_resource path="res://addons/TrailRenderer/TrailRender.tscn" type="PackedScene" id=2]
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0.0613208, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.79717, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1, 0.494118, 0, 0.768627 )
 
 [sub_resource type="CylinderMesh" id=2]
 top_radius = 0.08
@@ -8,7 +15,7 @@ bottom_radius = 0.25
 height = 0.7
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.231373, 0.231373, 0.231373, 1 )
+albedo_color = Color( 0.360784, 0.360784, 0.360784, 1 )
 
 [sub_resource type="SphereShape" id=1]
 radius = 0.184096
@@ -17,6 +24,12 @@ radius = 0.184096
 input_ray_pickable = false
 monitorable = false
 script = ExtResource( 1 )
+
+[node name="TrailRender" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.388022 )
+width = 0.4
+width_curve = SubResource( 5 )
+material = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )

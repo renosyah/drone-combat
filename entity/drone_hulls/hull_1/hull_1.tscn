@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://entity/drone_hulls/hull_1/hull_1.gd" type="Script" id=1]
 [ext_resource path="res://assets/ui/bar-3d/hp_bar_3d.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=3]
 
 [sub_resource type="ConvexPolygonShape" id=14]
 points = PoolVector3Array( -0.576273, -0.2, -1.42363, 0.57678, 0.2, 1.40018, 0.586357, -0.2, 1.42363, -0.576273, -0.2, 1.42363, 0.586357, -0.2, -1.42363, -0.566584, 0.2, -1.3999, 0.57678, 0.2, -1.40018, -0.566584, 0.2, 1.3999 )
@@ -10,6 +11,7 @@ points = PoolVector3Array( -0.576273, -0.2, -1.42363, 0.57678, 0.2, 1.40018, 0.5
 size = Vector3( 1.3, 0.1, 0.6 )
 
 [sub_resource type="SpatialMaterial" id=11]
+next_pass = ExtResource( 3 )
 albedo_color = Color( 0.439216, 0.439216, 0.439216, 1 )
 
 [sub_resource type="CubeMesh" id=1]
@@ -22,6 +24,7 @@ albedo_color = Color( 0, 0.376471, 0.756863, 1 )
 size = Vector3( 0.6, 0.5, 3.5 )
 
 [sub_resource type="SpatialMaterial" id=13]
+next_pass = ExtResource( 3 )
 albedo_color = Color( 0.294118, 0.294118, 0.294118, 1 )
 
 [sub_resource type="CylinderMesh" id=5]
@@ -30,6 +33,7 @@ bottom_radius = 0.8
 height = 0.5
 
 [sub_resource type="SpatialMaterial" id=6]
+next_pass = ExtResource( 3 )
 albedo_color = Color( 0.462745, 0.462745, 0.462745, 1 )
 
 [sub_resource type="CubeMesh" id=8]
@@ -83,3 +87,4 @@ material/0 = SubResource( 9 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
 
 [node name="hpBar" parent="." instance=ExtResource( 2 )]
+visible = false

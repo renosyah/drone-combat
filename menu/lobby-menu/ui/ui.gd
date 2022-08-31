@@ -104,7 +104,6 @@ func _server_player_connected(_player_network_unique_id : int, _player : Diction
 	var player = create_mp_player()
 	player["status"] = "Ready"
 	player["flag"] = PLAYER_STATUS_READY
-	player["drone_data"] = Global.player_drone_data.to_dictionary()
 	_request_append_player_joined(Global.client.network_unique_id, player)
 	
 	_server_advertise.setup()
