@@ -8,6 +8,8 @@ onready var _dialog_exit_option = $CanvasLayer/simple_dialog_option
 onready var _player_name_label = $CanvasLayer/VBoxContainer/Control3/HBoxContainer/player_name_label
 onready var _input_name_dialog = $CanvasLayer/input_name
 
+onready var _sfx_sound_setting_icon = $CanvasLayer/VBoxContainer/Control3/HBoxContainer/sfx_setting/TextureRect
+
 onready var _input_color_dialog = $CanvasLayer/input_color
 onready var _input_color_btn_color = $CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_color_btn/ColorRect
 
@@ -18,6 +20,11 @@ func _ready():
 	
 	_server_browser.start_finding()
 	init_drone_data_setting()
+	
+	if not Global.is_sfx_mute:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_on.png")
+	else:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_off.png")
 	
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
@@ -101,6 +108,13 @@ func _on_simple_dialog_option_on_yes():
 	
 func _on_change_name_pressed():
 	_input_name_dialog.visible = true
+
+func _on_sfx_setting_pressed():
+	Global.is_sfx_mute = not Global.is_sfx_mute
+	if not Global.is_sfx_mute:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_on.png")
+	else:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_off.png")
 	
 func _on_drone_weapon_btn_pressed():
 	_choose_module_dialog.modules = [
@@ -219,6 +233,8 @@ func _on_input_color_on_pick(_color):
 	Global.player_drone_data.color = _color
 	Global.player_drone_data.save_data(Global.player_drone_data_file)
 	emit_signal("on_drone_data_change")
+
+
 
 
 

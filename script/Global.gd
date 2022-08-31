@@ -42,6 +42,14 @@ func load_player_drone_data():
 	player_drone_data.player_name = player.player_name
 	
 ################################################################
+# sound
+var is_sfx_mute :bool = false setget _set_is_sfx_mute
+
+func _set_is_sfx_mute(val:bool):
+	is_sfx_mute = val
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("sfx"), is_sfx_mute)
+
+################################################################
 # multiplayer connection and data
 signal on_host_game_session_ready(_mp_game_data)
 	

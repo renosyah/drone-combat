@@ -49,6 +49,7 @@ var _input_detector : Node
 # misc
 var _tween_movement : Tween
 var _explosion : Explosion
+var _hp_bar : Sprite3D
 
 ############################################################
 # multiplayer func
@@ -95,10 +96,21 @@ func _set_puppet_moving_state(_val : int):
 		
 	_moving_state = _puppet_moving_state
 	
+remotesync func _take_damage(_damage : int):
+	._take_damage(_damage)
+	
+	_hp_bar.update_bar(hp, max_hp)
+	
+remotesync func _reset():
+	._reset()
+	
+	_hp_bar.visible = true
+	_hp_bar.update_bar(hp, max_hp)
 	
 remotesync func _dead():
 	._dead()
 	
+	_hp_bar.update_bar(0, max_hp)
 	_explosion.explode()
 	
 	if is_instance_valid(_turret):
@@ -110,6 +122,13 @@ remotesync func _dead():
 func _ready():
 	set_process(true)
 	tag = "hull"
+	
+	_hp_bar = preload("res://assets/ui/bar-3d/hp_bar_3d.tscn").instance()
+	add_child(_hp_bar)
+	_hp_bar.update_bar(hp, max_hp)
+	_hp_bar.set_player_name(player_name)
+	_hp_bar.translation.y = 3.8
+	_hp_bar.visible = false
 	
 	connect("input_event", self, "_on_input_event")
 	
@@ -135,6 +154,12 @@ func _ready():
 		
 	emit_signal("on_ready", self)
 	
+func set_hp_bar(_hp_bar_color :Color, _hp_bar_visible :bool):
+	if not is_instance_valid(_hp_bar):
+		return
+		
+	_hp_bar.visible = _hp_bar_visible
+	_hp_bar.set_hp_bar_color(_hp_bar_color )
 	
 func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 	if turret_scene:

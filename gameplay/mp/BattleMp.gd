@@ -195,8 +195,11 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 			spawned.connect("on_turret_dead", self, "on_drone_turret_dead")
 			spawned.connect("on_take_damage", self, "on_drone_take_damage")
 			
+		spawned.set_hp_bar(Color.red, true)
+			
 		if data["player_id"] == local_player_id:
 			drone = spawned
+			spawned.set_hp_bar(Color.green, true)
 			
 		if data["is_bot"]:
 			spawned.waypoint_mode = true

@@ -14,12 +14,20 @@ onready var _menu = $CanvasLayer/menu
 
 onready var _mini_map = $CanvasLayer/MiniMap
 
+onready var _sfx_sound_setting_icon = $CanvasLayer/menu/VBoxContainer2/HBoxContainer2/sfx_setting/TextureRect
+
 onready var _dialog_exit = $CanvasLayer/simple_dialog_on_exit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	show_control_screen()
 	validate_input_by_platform()
+	
+	if not Global.is_sfx_mute:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_on.png")
+	else:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_off.png")
+	
 	
 func add_minimap_object(spawned):
 	_mini_map.add_object(spawned)
@@ -44,7 +52,14 @@ func show_menu_screen():
 	_death_screen.visible = false
 	_control.visible = false
 	_menu.visible = true
-
+	
+func _on_sfx_setting_pressed():
+	Global.is_sfx_mute = not Global.is_sfx_mute
+	if not Global.is_sfx_mute:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_on.png")
+	else:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_off.png")
+	
 func _on_button_menu_pressed():
 	show_menu_screen()
 	
@@ -81,6 +96,8 @@ func _on_simple_dialog_on_exit_on_yes():
 	
 	
 	
+
+
 
 
 

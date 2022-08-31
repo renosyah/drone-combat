@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entity/drone_hulls/hull_1/hull_1.gd" type="Script" id=1]
-[ext_resource path="res://assets/ui/bar-3d/hp_bar_3d.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=3]
 
 [sub_resource type="ConvexPolygonShape" id=14]
@@ -85,6 +84,3 @@ material/0 = SubResource( 9 )
 
 [node name="turret_pos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
-
-[node name="hpBar" parent="." instance=ExtResource( 2 )]
-visible = false

@@ -194,9 +194,10 @@ _global_script_class_icons={
 
 [application]
 
-config/name="drone-combat"
+config/name="Drone Combat"
+config/description="is a game about drone combating each other"
 run/main_scene="res://menu/main-menu/main_menu.tscn"
-config/icon="res://icon.png"
+config/icon="res://icn.png"
 
 [autoload]
 
