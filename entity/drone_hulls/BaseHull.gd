@@ -179,6 +179,12 @@ func master_moving(delta):
 	if is_dead:
 		return
 		
+	if translation.y > _altitude:
+		translation.y -= 4.0 * delta
+		
+	elif translation.y < _altitude:
+		translation.y += 4.0 * delta
+		
 	if waypoint_mode:
 		move_to_waypoint(delta)
 	else:
@@ -202,12 +208,6 @@ func move_to_waypoint(delta):
 		
 	if not waypoint is Vector3:
 		return
-		
-	if translation.y > _altitude:
-		translation.y -= 1.0 * delta
-		
-	elif translation.y < _altitude:
-		translation.y = _altitude
 		
 	var _waypoint = Vector3(waypoint.x, _altitude, waypoint.z)
 	var direction_to_waypoint = global_transform.origin.direction_to(_waypoint)

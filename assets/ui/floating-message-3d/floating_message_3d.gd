@@ -14,7 +14,7 @@ func _ready():
 	_tween.start()
 	
 func _process(delta):
-	translation.y += 4 * delta
+	translation.y += 4.0 * delta
 
 	if translation.y > 8.0:
 		set_process(false)

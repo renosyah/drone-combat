@@ -218,7 +218,10 @@ remote func _respawn_drone(drone : NodePath):
 		
 	drone_node.reset()
 	
-	rpc("_reposition_drone",drone, _map.get_rand_pos())
+	var respawn_pos = _map.get_rand_pos()
+	respawn_pos.y = 8.0
+	
+	rpc("_reposition_drone",drone, respawn_pos)
 	
 remotesync func _reposition_drone(drone : NodePath, pos : Vector3):
 	var drone_node = get_node_or_null(drone)

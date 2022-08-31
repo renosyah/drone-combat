@@ -54,5 +54,10 @@ func on_respawn_button_press():
 func _process(delta):
 	if not is_instance_valid(drone):
 		return
+		
+	if not is_instance_valid(_camera):
+		return
 	
 	_camera.translation = drone.global_transform.origin
+	_camera.translation.y = 0.0
+	
