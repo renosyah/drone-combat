@@ -140,6 +140,11 @@ _global_script_classes=[ {
 "path": "res://addons/LANServerBroadcast/server_listener/ServerListener.gd"
 }, {
 "base": "Node",
+"class": "TweenRotation",
+"language": "GDScript",
+"path": "res://assets/other/tween_rotation/tween_rotation.gd"
+}, {
+"base": "Node",
 "class": "Utils",
 "language": "GDScript",
 "path": "res://script/Utils.gd"
@@ -176,6 +181,7 @@ _global_script_class_icons={
 "SaveLoad": "",
 "ServerAdvertiser": "res://addons/LANServerBroadcast/server_advertiser/server_advertiser.png",
 "ServerListener": "res://addons/LANServerBroadcast/server_listener/server_listener.png",
+"TweenRotation": "",
 "Utils": "",
 "VirtualJoystick": ""
 }

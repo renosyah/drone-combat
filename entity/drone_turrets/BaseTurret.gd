@@ -45,7 +45,7 @@ var active: bool = true
 
 # misc
 var _reset_turret_timer : Timer
-var _tween : Tween
+var _tween_rotation : TweenRotation
 
 ############################################################
 # multiplayer func
@@ -107,22 +107,23 @@ func _ready() -> void:
 		return
 		
 	_reset_turret_timer = Timer.new()
-	_reset_turret_timer.wait_time = 2.0
+	_reset_turret_timer.wait_time = 5.0
 	_reset_turret_timer.autostart = true
 	_reset_turret_timer.connect("timeout", self ,"_on_reset_turret_timer_timeout")
 	add_child(_reset_turret_timer)
 	
-	_tween = Tween.new()
-	add_child(_tween)
+	_tween_rotation = preload("res://assets/other/tween_rotation/tween_rotation.tscn").instance()
+	add_child(_tween_rotation)
+	_tween_rotation.rotation_degree = 180.0
+	_tween_rotation.target = self
 	
 func _on_reset_turret_timer_timeout():
 	if not _is_master():
 		return
-		
+	
 	if not active and not is_dead:
-		_tween.interpolate_property(self, "rotation_degrees:y", rotation_degrees.y, 180.0, 1.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		_tween.start()
-		
+		_tween_rotation.set_process(true)
+	
 	current_aim = Vector3.ZERO
 	active = false
 	
@@ -199,6 +200,7 @@ func _on_sensor_spotted(_target : BaseEntity):
 	if is_dead:
 		return
 		
+	_tween_rotation.set_process(false)
 	current_aim = _target.global_transform.origin
 	active = true
 	
