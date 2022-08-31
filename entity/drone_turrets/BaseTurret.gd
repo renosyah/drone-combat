@@ -114,7 +114,6 @@ func _ready() -> void:
 	
 	_tween_rotation = preload("res://assets/other/tween_rotation/tween_rotation.tscn").instance()
 	add_child(_tween_rotation)
-	_tween_rotation.rotation_degree = 180.0
 	_tween_rotation.target = self
 	
 func _on_reset_turret_timer_timeout():
@@ -122,7 +121,8 @@ func _on_reset_turret_timer_timeout():
 		return
 	
 	if not active and not is_dead:
-		_tween_rotation.set_process(true)
+		_tween_rotation.default_rotation_degree = 180.0
+		_tween_rotation.start_reset_rotation()
 	
 	current_aim = Vector3.ZERO
 	active = false
@@ -133,6 +133,8 @@ func spawn_weapon(_pos : Vector3):
 		head.add_child(_weapon_asset)
 		_weapon = _weapon_asset
 		_weapon.translation = _pos
+		_weapon.add_exception(self)
+		_weapon.add_exception(get_parent())
 		
 	if not _is_master():
 		return
@@ -200,7 +202,8 @@ func _on_sensor_spotted(_target : BaseEntity):
 	if is_dead:
 		return
 		
-	_tween_rotation.set_process(false)
+	_tween_rotation.stop_reset_rotation()
+	
 	current_aim = _target.global_transform.origin
 	active = true
 	

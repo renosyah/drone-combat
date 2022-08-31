@@ -6,6 +6,7 @@ signal on_spotted(_node)
 export var scanning_speed:float = 0.07
 export var raycast_path: Array
 export var spotting_range : int = 1
+export var sensor_altitude = 0.5
 
 onready var _detected_sounds = [
 	preload("res://entity/sensor/sensor_sound/detected_1.wav"),
@@ -18,10 +19,6 @@ var _raycasts: Array = []
 var _current_detected : BaseEntity
 var _sound : AudioStreamPlayer3D
 
-func add_exception(_node : BaseEntity):
-	for raycast in _raycasts:
-		raycast.add_exception(_node)
-	
 func _ready():
 	for raycast in raycast_path:
 		var ray = get_node(raycast)
@@ -36,12 +33,18 @@ func _ready():
 	
 	set_process(true)
 	
+func add_exception(_node : BaseEntity):
+	for raycast in _raycasts:
+		raycast.add_exception(_node)
+	
 func _process(delta):
 	rotate_y(rad2deg(scanning_speed) * delta)
 	
 	for raycast in _raycasts:
+		raycast.global_transform.origin.y = sensor_altitude
+		
+	for raycast in _raycasts:
 		validate_detection(raycast)
-	
 	
 func validate_detection(raycast : RayCast):
 	if not raycast.is_colliding():
@@ -68,10 +71,7 @@ func validate_detection(raycast : RayCast):
 func _is_type_entity(_body) -> bool:
 	if not is_instance_valid(_body):
 		return false
-		
-	if _body is GameplayCamera:
-		return false
-		
+			
 	if _body is StaticBody:
 		return false
 		

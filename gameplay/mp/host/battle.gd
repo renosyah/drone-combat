@@ -20,6 +20,10 @@ func on_joystick_input(output : Vector2, is_pressed : bool):
 func on_drone_dead(_entity):
 	.on_drone_dead(_entity)
 	
+	if _entity in _bots:
+		respawn_bot_drone(_entity.get_path())
+		return
+	
 	if _entity != drone:
 		return
 		
@@ -73,13 +77,7 @@ func _on_bot_action_timer_timeout():
 		
 	bot.waypoint = waypoint
 	
-func _on_bot_checker_timer_timeout():
-	for bot in _bots:
-		if bot.is_dead():
-			respawn_drone(bot.get_path())
-		
-	
-func respawn_drone(drone : NodePath):
+func respawn_bot_drone(drone : NodePath):
 	var _respawn_delay_timer = _create_respawn_time_delay()
 	
 	_respawn_delay_timer.start()

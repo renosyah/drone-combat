@@ -97,7 +97,7 @@ func _load_map():
 	var _map_asset = map_scene.instance()
 	add_child(_map_asset)
 	_map = _map_asset
-	_map.translation.y = -0.8
+	_map.translation.y = -0.5
 	_map.connect("on_map_click", self,"on_map_click")
 	
 func load_map_stuff():

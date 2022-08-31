@@ -33,8 +33,11 @@ func _ready():
 	add_child(_sound)
 		
 	if is_instance_valid(_sensor):
-		_sensor.cast_to =  _sensor.cast_to * attack_range
-		
+		_sensor.cast_to = _sensor.cast_to * attack_range
+	
+func add_exception(_node : BaseEntity):
+	_sensor.add_exception(_node)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not is_master:
@@ -68,9 +71,6 @@ func _spawn_projectile_to(direction : Vector3):
 	
 func _is_valid_target(_body) -> bool:
 	if not is_instance_valid(_body):
-		return false
-		
-	if _body is GameplayCamera:
 		return false
 		
 	if _body is StaticBody:
