@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/ui/choose-module/module_item/module_item.gd" type="Script" id=3]
+
+[node name="module_item" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+alignment = 1
+script = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 600.0
+margin_bottom = 266.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_top = 270.0
+margin_right = 600.0
+margin_bottom = 670.0
+rect_min_size = Vector2( 300, 400 )
+expand = true
+
+[node name="mount" type="Button" parent="."]
+margin_top = 674.0
+margin_right = 600.0
+margin_bottom = 754.0
+rect_min_size = Vector2( 250, 80 )
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="mount"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0.517647, 0.164706, 1 )
+
+[node name="Label" type="Label" parent="mount"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Mount"
+align = 1
+valign = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+margin_top = 758.0
+margin_right = 600.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 0, 80 )
+size_flags_vertical = 3
+
+[connection signal="pressed" from="mount" to="." method="_on_mount_pressed"]

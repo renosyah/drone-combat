@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/ui/server-browser/server_browser.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://assets/ui/icon/radar.png" type="Texture" id=10]
 [ext_resource path="res://assets/ui/input-color/input_color.tscn" type="PackedScene" id=11]
 [ext_resource path="res://assets/ui/icon/weapon.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/choose-module/choose_drone_module.tscn" type="PackedScene" id=13]
 
 [node name="main_menu" type="Control"]
 anchor_right = 1.0
@@ -55,14 +56,14 @@ margin_right = 148.5
 margin_bottom = 40.0
 alignment = 1
 
-[node name="setting" type="Button" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+[node name="change_name" type="Button" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
 margin_left = 62.0
 margin_right = 122.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 60, 80 )
 flat = true
 
-[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer/setting"]
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer/change_name"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -98,21 +99,36 @@ size_flags_vertical = 3
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -124.0
+margin_top = -160.0
+
+[node name="player_name_label2" type="Label" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 4 )
+text = "Customize Your Drone"
+align = 1
+valign = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
+margin_top = 32.0
+margin_right = 600.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 0, 14 )
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
+margin_top = 50.0
 margin_right = 600.0
-margin_bottom = 80.0
+margin_bottom = 130.0
 alignment = 1
 
-[node name="drone_turret_btn" type="Button" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2"]
+[node name="drone_weapon_btn" type="Button" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2"]
 margin_left = 92.0
 margin_right = 172.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 80 )
 flat = true
 
-[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn"]
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_weapon_btn"]
 modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -191,10 +207,10 @@ margin_bottom = 39.0
 mouse_filter = 2
 color = Color( 0.909804, 0.909804, 0.909804, 1 )
 
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
-margin_top = 84.0
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
+margin_top = 134.0
 margin_right = 600.0
-margin_bottom = 104.0
+margin_bottom = 154.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
@@ -331,8 +347,11 @@ visible = false
 [node name="input_color" parent="CanvasLayer" instance=ExtResource( 11 )]
 visible = false
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control3/HBoxContainer/setting" to="." method="_on_setting_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn" to="." method="_on_drone_turret_btn_pressed"]
+[node name="choose_drone_module" parent="CanvasLayer" instance=ExtResource( 13 )]
+visible = false
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control3/HBoxContainer/change_name" to="." method="_on_change_name_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_weapon_btn" to="." method="_on_drone_weapon_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn2" to="." method="_on_drone_turret_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_hull_btn" to="." method="_on_drone_hull_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_sensor_btn" to="." method="_on_drone_sensor_btn_pressed"]

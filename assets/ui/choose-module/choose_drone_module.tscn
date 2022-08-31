@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/ui/choose-module/choose_drone_module.gd" type="Script" id=2]
+
+[node name="choose_drone_module" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.603922 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 20 )
+
+[node name="title" type="Label" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 600.0
+margin_bottom = 84.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Hull"
+align = 1
+valign = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 88.0
+margin_right = 600.0
+margin_bottom = 1024.0
+size_flags_vertical = 3
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 248.0
+margin_bottom = 936.0
+size_flags_vertical = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 936.0
+rect_min_size = Vector2( 40, 80 )
+size_flags_vertical = 3
+
+[node name="holder" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+margin_left = 44.0
+margin_right = 44.0
+margin_bottom = 936.0
+size_flags_vertical = 3
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+margin_left = 48.0
+margin_right = 248.0
+margin_bottom = 936.0
+rect_min_size = Vector2( 200, 80 )
+size_flags_vertical = 3

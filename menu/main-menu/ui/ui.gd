@@ -11,6 +11,8 @@ onready var _input_name_dialog = $CanvasLayer/input_name
 onready var _input_color_dialog = $CanvasLayer/input_color
 onready var _input_color_btn_color = $CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_color_btn/ColorRect
 
+onready var _choose_module_dialog = $CanvasLayer/choose_drone_module
+
 func _ready():
 	_dialog_exit_option.visible = false
 	
@@ -97,17 +99,117 @@ func _on_back_pressed():
 func _on_simple_dialog_option_on_yes():
 	get_tree().quit()
 	
-func _on_setting_pressed():
+func _on_change_name_pressed():
 	_input_name_dialog.visible = true
 	
+func _on_drone_weapon_btn_pressed():
+	_choose_module_dialog.modules = [
+		{
+			"data" : "res://entity/weapons/mg/mg.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/weapon_1.png"
+		},
+		{
+			"data" : "res://entity/weapons/auto_cannon/auto_cannon.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/weapon_2.png"
+		},
+		{
+			"data" : "res://entity/weapons/cannon/cannon.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/weapon_3.png"
+		}
+	]
+	clear_choose_module_dialog_signal()
+	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_weapon_choosed")
+	_choose_module_dialog.title = "Weapon"
+	_choose_module_dialog.show_modules()
+	_choose_module_dialog.visible = true
+	
+func _on_module_weapon_choosed(_schene : String):
+	Global.player_drone_data.weapon_scene = _schene
+	Global.player_drone_data.save_data(Global.player_drone_data_file)
+	_choose_module_dialog.visible = false
+	emit_signal("on_drone_data_change")
+	
+	
 func _on_drone_turret_btn_pressed():
-	pass # Replace with function body.
+	_choose_module_dialog.modules = [
+		{
+			"data" : "res://entity/drone_turrets/turret_1/turret_1.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/turret_1.png"
+		},
+		{
+			"data" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/turret_2.png"
+		},
+		{
+			"data" : "res://entity/drone_turrets/turret_3/turret_3.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/turret_3.png"
+		}
+	]
+	clear_choose_module_dialog_signal()
+	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_turret_choosed")
+	_choose_module_dialog.title = "Turret"
+	_choose_module_dialog.show_modules()
+	_choose_module_dialog.visible = true
+	
+func _on_module_turret_choosed(_schene : String):
+	Global.player_drone_data.turret_scene = _schene
+	Global.player_drone_data.save_data(Global.player_drone_data_file)
+	_choose_module_dialog.visible = false
+	emit_signal("on_drone_data_change")
+	
 	
 func _on_drone_hull_btn_pressed():
-	pass # Replace with function body.
+	_choose_module_dialog.modules = [
+		{
+			"data" : "res://entity/drone_hulls/hull_1/hull_1.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/hull_1.png"
+		},
+		{
+			"data" : "res://entity/drone_hulls/hull_2/hull_2.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/hull_2.png"
+		},
+		{
+			"data" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/hull_3.png"
+		}
+	]
+	clear_choose_module_dialog_signal()
+	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_hull_choosed")
+	_choose_module_dialog.title = "Hull"
+	_choose_module_dialog.show_modules()
+	_choose_module_dialog.visible = true
+	
+	
+func _on_module_hull_choosed(_schene : String):
+	Global.player_drone_data.hull_scene = _schene
+	Global.player_drone_data.save_data(Global.player_drone_data_file)
+	_choose_module_dialog.visible = false
+	emit_signal("on_drone_data_change")
+	
 	
 func _on_drone_sensor_btn_pressed():
-	pass # Replace with function body.
+	_choose_module_dialog.modules = [
+		{
+			"data" : "res://entity/sensor/sensor_1/sensor_1.tscn",
+			"icon" : "res://assets/ui/choose-module/drone/sensor_1.png"
+		},
+	]
+	clear_choose_module_dialog_signal()
+	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_sensor_choosed")
+	_choose_module_dialog.title = "Sensor"
+	_choose_module_dialog.show_modules()
+	_choose_module_dialog.visible = true
+	
+func _on_module_sensor_choosed(_schene : String):
+	Global.player_drone_data.sensor_scene = _schene
+	Global.player_drone_data.save_data(Global.player_drone_data_file)
+	_choose_module_dialog.visible = false
+	emit_signal("on_drone_data_change")
+	
+	
+func clear_choose_module_dialog_signal():
+	for i in _choose_module_dialog.get_signal_connection_list("on_module_choosed"):
+		_choose_module_dialog.disconnect("on_module_choosed", self, i.method)
 	
 func _on_drone_color_btn_pressed():
 	_input_color_dialog.visible = true
@@ -117,6 +219,12 @@ func _on_input_color_on_pick(_color):
 	Global.player_drone_data.color = _color
 	Global.player_drone_data.save_data(Global.player_drone_data_file)
 	emit_signal("on_drone_data_change")
+
+
+
+
+
+
 
 
 
