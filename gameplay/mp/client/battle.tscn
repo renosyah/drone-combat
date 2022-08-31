@@ -14,7 +14,3 @@ camera_scene = ExtResource( 9 )
 env_scene = ExtResource( 6 )
 light_scene = ExtResource( 8 )
 ui_scene = ExtResource( 5 )
-
-[node name="respawn_delay_timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true

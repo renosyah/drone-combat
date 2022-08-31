@@ -37,6 +37,7 @@ var _turret : BaseTurret
 
 var _offset_distance = 0.5
 var _altitude = 0.0
+var _gravity = -12.0
 var _velocity = Vector3.ZERO
 
 var _moving_state : int = IDDLE
@@ -179,16 +180,16 @@ func master_moving(delta):
 	if is_dead:
 		return
 		
-	if translation.y > _altitude:
-		translation.y -= 4.0 * delta
-		
-	elif translation.y < _altitude:
-		translation.y += 4.0 * delta
+	if int(round(translation.y)) > int(_altitude):
+		_velocity.y += _gravity * delta
+		_velocity = move_and_slide(_velocity, Vector3.UP)
+		return
 		
 	if waypoint_mode:
 		move_to_waypoint(delta)
 	else:
 		move_by_input(delta)
+		
 	
 func move_by_input(delta):
 	if  direction != Vector2.ZERO:
@@ -201,6 +202,7 @@ func move_by_input(delta):
 		_velocity = Vector3.ZERO
 		
 	_velocity = move_and_slide(_velocity, Vector3.UP)
+		
 	
 func move_to_waypoint(delta):
 	if not waypoint:
@@ -224,6 +226,7 @@ func move_to_waypoint(delta):
 		waypoint = null
 		
 	_velocity = move_and_slide(_velocity, Vector3.UP)
+		
 	
 func moving(_delta):
 	if is_dead:

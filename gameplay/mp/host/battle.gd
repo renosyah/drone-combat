@@ -1,7 +1,6 @@
 extends BattleMp
 
 var drone : BaseHull
-onready var respawn_delay_timer : Timer = $respawn_delay_timer
 
 func _ready():
 	drone = spawn_drones_and_get_dronw_owned_by(Global.player.player_id)
@@ -27,8 +26,11 @@ func on_drone_dead(_entity):
 	if not _entity.is_dead():
 		return
 		
-	respawn_delay_timer.start()
-	yield(respawn_delay_timer, "timeout")
+	var _respawn_delay_timer = _create_respawn_time_delay()
+		
+	_respawn_delay_timer.start()
+	yield(_respawn_delay_timer, "timeout")
+	_respawn_delay_timer.queue_free()
 		
 		
 	_ui.show_death_screen()
@@ -74,10 +76,18 @@ func _on_bot_action_timer_timeout():
 func _on_bot_checker_timer_timeout():
 	for bot in _bots:
 		if bot.is_dead():
-			.respawn_drone(bot.get_path())
-
-
-
+			respawn_drone(bot.get_path())
+		
+	
+func respawn_drone(drone : NodePath):
+	var _respawn_delay_timer = _create_respawn_time_delay()
+	
+	_respawn_delay_timer.start()
+	yield(_respawn_delay_timer, "timeout")
+	_respawn_delay_timer.queue_free()
+	
+	.respawn_drone(drone)
+	
 
 
 

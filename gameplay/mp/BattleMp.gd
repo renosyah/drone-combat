@@ -182,7 +182,11 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 	for data in drones:
 		var spawner  = DroneData.new()
 		spawner.from_dictionary(data)
-		var spawned = spawner.spawn(data["player_id"], self, _map.get_rand_pos())
+		
+		var spawn_pos = _map.get_rand_pos()
+		spawn_pos.y = 8.0
+		
+		var spawned = spawner.spawn(data["player_id"], self, spawn_pos)
 		_ui.add_minimap_object(spawned)
 		
 		if spawned is BaseEntity:
@@ -266,6 +270,16 @@ func on_drone_dead(_entity):
 	msg.translation = _entity.global_transform.origin
 	msg.set_color(Color.red)
 	msg.set_message("Drone Destroyed!")
+	
+################################################################
+# utils code
+func _create_respawn_time_delay() -> Timer:
+	var _respawn_delay_timer = Timer.new()
+	_respawn_delay_timer.wait_time = 3
+	_respawn_delay_timer.one_shot = true
+	_respawn_delay_timer.autostart = false
+	add_child(_respawn_delay_timer)
+	return _respawn_delay_timer
 	
 ################################################################
 # network utils code

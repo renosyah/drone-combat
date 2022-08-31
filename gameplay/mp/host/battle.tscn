@@ -22,9 +22,5 @@ autostart = true
 [node name="bot_checker_timer" type="Timer" parent="."]
 autostart = true
 
-[node name="respawn_delay_timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
 [connection signal="timeout" from="bot_action_timer" to="." method="_on_bot_action_timer_timeout"]
 [connection signal="timeout" from="bot_checker_timer" to="." method="_on_bot_checker_timer_timeout"]

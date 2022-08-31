@@ -2,7 +2,6 @@ extends BattleMp
 
 var command : Vector2
 var drone : BaseHull
-onready var respawn_delay_timer : Timer = $respawn_delay_timer
 
 func _ready():
 	drone = spawn_drones_and_get_dronw_owned_by(Global.player.player_id)
@@ -33,8 +32,12 @@ func on_drone_dead(_entity):
 	if not _entity.is_dead():
 		return
 		
-	respawn_delay_timer.start()
-	yield(respawn_delay_timer, "timeout")
+	var _respawn_delay_timer = _create_respawn_time_delay()
+		
+	_respawn_delay_timer.start()
+	yield(_respawn_delay_timer, "timeout")
+	_respawn_delay_timer.queue_free()
+		
 		
 	_ui.show_death_screen()
 	
