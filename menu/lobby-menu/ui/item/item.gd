@@ -2,6 +2,7 @@ extends Control
 
 signal kick(_data)
 
+onready var _color = $Panel/HBoxContainer/team_color
 onready var _name = $Panel/HBoxContainer/VBoxContainer/player_name
 onready var _status = $Panel/HBoxContainer/VBoxContainer/Label
 onready var _kick_btn = $Panel/HBoxContainer/panel
@@ -11,6 +12,7 @@ var data = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	_color.color = data.color
 	_name.text = data.player_name
 	_status.text = data.status
 	_kick_btn.visible = can_kick

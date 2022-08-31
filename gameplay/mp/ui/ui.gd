@@ -6,10 +6,15 @@ signal on_respawn_button_press()
 const DEKSTOP =  ["Server", "Windows", "WinRT", "X11"]
 
 onready var _is_dekstop :bool = OS.get_name() in DEKSTOP
+
 onready var _joystick: VirtualJoystick = $CanvasLayer/control/joystick
 onready var _control: Control = $CanvasLayer/control
 onready var _death_screen: Control = $CanvasLayer/death_screen
+onready var _menu = $CanvasLayer/menu
+
 onready var _mini_map = $CanvasLayer/MiniMap
+
+onready var _dialog_exit = $CanvasLayer/simple_dialog_on_exit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,12 +31,25 @@ func validate_input_by_platform():
 	_joystick.visible = not _is_dekstop
 	
 func show_death_screen():
-	_death_screen.visible = true
+	_menu.visible = false
 	_control.visible = false
+	_death_screen.visible = true
 	
 func show_control_screen():
 	_death_screen.visible = false
+	_menu.visible = false
 	_control.visible = true
+	
+func show_menu_screen():
+	_death_screen.visible = false
+	_control.visible = false
+	_menu.visible = true
+
+func _on_button_menu_pressed():
+	show_menu_screen()
+	
+func _on_button_close_menu_pressed():
+	show_control_screen()
 	
 func _on_Virtual_joystick_on_joystick_input(output, is_pressed):
 	if _is_dekstop:
@@ -51,3 +69,22 @@ func _unhandled_input(event):
 func _on_respawn_pressed():
 	emit_signal("on_respawn_button_press")
 	
+func _on_exit_pressed():
+	_dialog_exit.visible = true
+	
+func exit_game_session():
+	Network.disconnect_from_server()
+	get_tree().change_scene("res://menu/main-menu/main_menu.tscn")
+	
+func _on_simple_dialog_on_exit_on_yes():
+	exit_game_session()
+	
+	
+	
+
+
+
+
+
+
+

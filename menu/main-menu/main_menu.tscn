@@ -18,7 +18,7 @@
 script = ExtResource( 6 )
 
 [node name="cameraPivot" parent="." instance=ExtResource( 2 )]
-transform = Transform( -1, 5.26318e-08, -6.98042e-08, 0, 0.798467, 0.602038, 8.74228e-08, 0.602038, -0.798467, 0, 0, 0.0998206 )
+transform = Transform( -0.904172, 0.257172, -0.34108, 0, 0.798467, 0.602038, 0.427169, 0.544346, -0.721951, 0, 0, 0.0998206 )
 
 [node name="map_0" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0 )

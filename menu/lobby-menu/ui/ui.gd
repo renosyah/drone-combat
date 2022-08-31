@@ -227,18 +227,21 @@ func _on_exit_timer_timeout():
 ################################################################
 # utils
 func create_mp_player() -> Dictionary:
+	var drone = Global.player_drone_data
 	return {
 		"player_id" : Global.player.player_id,
 		"player_name" : Global.player.player_name,
 		"order" : 0,
 		"status" : "Not Ready",
 		"flag" : PLAYER_STATUS_NOT_READY,
-		"drone_data" : Global.player_drone_data.to_dictionary()
+		"drone_data" : drone.to_dictionary(),
+		"color" : drone.color,
 	}
 	
 func create_bot_player() -> Dictionary:
 	var bot_id = "BOT-" + str(GDUUID.v4())
 	var bot_name = RandomNameGenerator.generate() + " (Bot)"
+	var drone = Global.randomize_drone(bot_id, bot_name)
 	
 	return {
 		"player_id" : bot_id,
@@ -247,7 +250,8 @@ func create_bot_player() -> Dictionary:
 		"status" : "Ready",
 		"is_bot" : true,
 		"flag" : PLAYER_STATUS_READY,
-		"drone_data" : Global.randomize_drone(bot_id, bot_name).to_dictionary()
+		"drone_data" : drone.to_dictionary(),
+		"color" : drone.color,
 	}
 	
 class MyCustomSorter:

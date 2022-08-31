@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/joystick/virtual_joystick.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/mp/ui/ui.gd" type="Script" id=2]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/ui/mini_map/MiniMap.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/ui/simple_dialog_option/simple_dialog_option.gd" type="Script" id=6]
+[ext_resource path="res://assets/ui/simple_dialog_option/simple_dialog_option.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/ui/input-name/close.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/icon/setting.png" type="Texture" id=9]
 
 [node name="ui" type="Control"]
 anchor_right = 1.0
@@ -28,6 +32,23 @@ margin_left = -100.0
 margin_top = -376.0
 margin_right = 100.0
 margin_bottom = -193.0
+
+[node name="button_menu" type="Button" parent="CanvasLayer/control"]
+modulate = Color( 1, 1, 1, 0.407843 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -80.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 80, 0 )
+icon = ExtResource( 9 )
+flat = true
+expand_icon = true
+
+[node name="MiniMap" parent="CanvasLayer" instance=ExtResource( 5 )]
+margin_left = 45.0
+margin_top = 45.0
+margin_right = -45.0
+margin_bottom = -393.0
 
 [node name="death_screen" type="Control" parent="CanvasLayer"]
 visible = false
@@ -114,11 +135,97 @@ margin_right = 600.0
 margin_bottom = 1024.0
 rect_min_size = Vector2( 80, 200 )
 
-[node name="MiniMap" parent="CanvasLayer" instance=ExtResource( 5 )]
-margin_left = 45.0
-margin_top = 45.0
-margin_right = -45.0
-margin_bottom = -393.0
+[node name="menu" type="Control" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.117647, 0.117647, 0.117647, 0.917647 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="MarginContainer5" type="Control" parent="CanvasLayer/menu/VBoxContainer2"]
+margin_right = 600.0
+margin_bottom = 468.0
+rect_min_size = Vector2( 80, 60 )
+size_flags_vertical = 3
+
+[node name="button_close_menu" type="Button" parent="CanvasLayer/menu/VBoxContainer2/MarginContainer5"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -80.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 80, 0 )
+icon = ExtResource( 8 )
+flat = true
+expand_icon = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/menu/VBoxContainer2"]
+margin_top = 472.0
+margin_right = 600.0
+margin_bottom = 552.0
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/menu/VBoxContainer2/HBoxContainer"]
+margin_left = 91.0
+margin_right = 171.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 0 )
+
+[node name="exit" type="Button" parent="CanvasLayer/menu/VBoxContainer2/HBoxContainer"]
+margin_left = 175.0
+margin_right = 425.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 250, 80 )
+flat = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/menu/VBoxContainer2/HBoxContainer/exit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.607843, 0.113725, 0, 1 )
+
+[node name="Label" type="Label" parent="CanvasLayer/menu/VBoxContainer2/HBoxContainer/exit"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "Exit"
+align = 1
+valign = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/menu/VBoxContainer2/HBoxContainer"]
+margin_left = 429.0
+margin_right = 509.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 0 )
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/menu/VBoxContainer2"]
+margin_top = 556.0
+margin_right = 600.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 80, 200 )
+size_flags_vertical = 3
+
+[node name="simple_dialog_on_exit" type="Control" parent="CanvasLayer" instance=ExtResource( 7 )]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="on_joystick_input" from="CanvasLayer/control/joystick" to="." method="_on_Virtual_joystick_on_joystick_input"]
+[connection signal="pressed" from="CanvasLayer/control/button_menu" to="." method="_on_button_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn" to="." method="_on_respawn_pressed"]
+[connection signal="pressed" from="CanvasLayer/menu/VBoxContainer2/MarginContainer5/button_close_menu" to="." method="_on_button_close_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/menu/VBoxContainer2/HBoxContainer/exit" to="." method="_on_exit_pressed"]
+[connection signal="on_yes" from="CanvasLayer/simple_dialog_on_exit" to="." method="_on_simple_dialog_on_exit_on_yes"]
