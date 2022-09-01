@@ -28,10 +28,10 @@ static func randomize_drone(player_id, player_name :String ) -> DroneData:
 	randomize()
 	data.player_id =  player_id
 	data.player_name =  player_name
-	data.hull_scene = DroneData.drone_hulls[rand_range(0, DroneData.drone_hulls.size() - 1)]
-	data.turret_scene =  DroneData.drone_turrets[rand_range(0, DroneData.drone_turrets.size() - 1)]
-	data.weapon_scene =  DroneData.drone_weapons[rand_range(0, DroneData.drone_weapons.size() - 1)]
-	data.sensor_scene =  DroneData.drone_sensors[rand_range(0, DroneData.drone_sensors.size() - 1)]
+	data.hull_module = DroneModuleData.new().parse_from_dictionary(DroneData.hulls[rand_range(0, DroneData.hulls.size() - 1)])
+	data.turret_module = DroneModuleData.new().parse_from_dictionary(DroneData.turrets[rand_range(0, DroneData.turrets.size() - 1)])
+	data.weapon_module = DroneModuleData.new().parse_from_dictionary(DroneData.weapons[rand_range(0, DroneData.weapons.size() - 1)])
+	data.sensor_module = DroneModuleData.new().parse_from_dictionary(DroneData.sensors[rand_range(0, DroneData.sensors.size() - 1)])
 	data.color = Color(randf(), randf(), randf(), 1.0)
 	return data
 	

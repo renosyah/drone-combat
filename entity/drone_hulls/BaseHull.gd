@@ -15,6 +15,8 @@ var direction = Vector2.ZERO
 
 export var waypoint_mode = false
 
+var drone_data: DroneData
+
 export var player_id:String = ""
 export var player_name:String = ""
 
@@ -122,6 +124,27 @@ remotesync func _dead():
 func _ready():
 	set_process(true)
 	tag = "hull"
+	
+	player_id = drone_data.player_id
+	player_name = drone_data.player_name
+
+	hp = drone_data.hp
+	max_hp = drone_data.max_hp
+	
+	speed = drone_data.speed
+	turning_speed = drone_data.turning_speed
+
+	turret_hp = drone_data.turret_hp
+	turret_max_hp = drone_data.turret_max_hp
+
+	spotting_range = drone_data.spotting_range
+	scanning_speed = drone_data.scanning_speed
+
+	turret_scene = load(drone_data.turret_module.scene)
+	weapon_scene = load(drone_data.weapon_module.scene)
+	sensor_scene = load(drone_data.sensor_module.scene)
+	
+	color = drone_data.color
 	
 	_hp_bar = preload("res://assets/ui/bar-3d/hp_bar_3d.tscn").instance()
 	add_child(_hp_bar)

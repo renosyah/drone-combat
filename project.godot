@@ -67,7 +67,7 @@ _global_script_classes=[ {
 "base": "BaseData",
 "class": "DroneModuleData",
 "language": "GDScript",
-"path": "res://data/drone/DroneModule.gd"
+"path": "res://data/drone/DroneModuleData.gd"
 }, {
 "base": "Spatial",
 "class": "Explosion",

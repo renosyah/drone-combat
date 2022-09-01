@@ -5,7 +5,7 @@ export var module_name:String
 export var icon:String
 export var scene:String
 
-func parse_from_dictionary(data : Dictionary) -> DroneModuleData:
+func parse_from_dictionary(data : Dictionary):
 	from_dictionary(data)
 	return self
 	

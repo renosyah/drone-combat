@@ -133,53 +133,53 @@ func _on_sfx_setting_pressed():
 	
 func _on_drone_weapon_btn_pressed():
 	_choose_module_dialog.title = "Weapon"
-	_choose_module_dialog.modules = _choose_module_dialog.weapons
+	_choose_module_dialog.modules = DroneData.weapons
 	clear_choose_module_dialog_signal()
 	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_weapon_choosed")
 	show_module_dialog()
 	
 	
 func _on_module_weapon_choosed(_data :DroneModuleData):
-	Global.player_drone_data.weapon_scene = _data.scene
+	Global.player_drone_data.weapon_module = _data
 	apply_drone_module_update()
 	
 	
 func _on_drone_turret_btn_pressed():
 	_choose_module_dialog.title = "Turret"
-	_choose_module_dialog.modules = _choose_module_dialog.turrets
+	_choose_module_dialog.modules = DroneData.turrets
 	clear_choose_module_dialog_signal()
 	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_turret_choosed")
 	show_module_dialog()
 	
 	
 func _on_module_turret_choosed(_data :DroneModuleData):
-	Global.player_drone_data.turret_scene = _data.scene
+	Global.player_drone_data.turret_module = _data
 	apply_drone_module_update()
 	
 	
 func _on_drone_hull_btn_pressed():
 	_choose_module_dialog.title = "Hull"
-	_choose_module_dialog.modules = _choose_module_dialog.hulls
+	_choose_module_dialog.modules = DroneData.hulls
 	clear_choose_module_dialog_signal()
 	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_hull_choosed")
 	show_module_dialog()
 	
 	
 func _on_module_hull_choosed(_data :DroneModuleData):
-	Global.player_drone_data.hull_scene = _data.scene
+	Global.player_drone_data.hull_module = _data
 	apply_drone_module_update()
 	
 	
 func _on_drone_sensor_btn_pressed():
 	_choose_module_dialog.title = "Sensor"
-	_choose_module_dialog.modules = _choose_module_dialog.sensors
+	_choose_module_dialog.modules = DroneData.sensors
 	clear_choose_module_dialog_signal()
 	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_sensor_choosed")
 	show_module_dialog()
 	
 	
 func _on_module_sensor_choosed(_data :DroneModuleData):
-	Global.player_drone_data.sensor_scene = _data.scene
+	Global.player_drone_data.sensor_module = _data
 	apply_drone_module_update()
 	
 	
