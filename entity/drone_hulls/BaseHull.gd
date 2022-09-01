@@ -148,8 +148,9 @@ func _ready():
 	
 	color = drone_data.color
 	
-	_hp_bar = preload("res://assets/ui/bar-3d/hp_bar_3d.tscn").instance()
-	add_child(_hp_bar)
+	var _bar = preload("res://assets/ui/bar-3d/hp_bar_3d.tscn").instance()
+	add_child(_bar)
+	_hp_bar = _bar
 	_hp_bar.update_bar(hp, max_hp)
 	_hp_bar.set_player_name(player_name)
 	_hp_bar.translation.y = 3.8
