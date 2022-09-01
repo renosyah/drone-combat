@@ -15,8 +15,17 @@ the simple drone battle
 
 
 ## Gameplay
-![GitHub Logo](/ss/1.png)
+![GitHub Logo](/ss/1.jpg)
 
+![GitHub Logo](/ss/2.jpg)
+
+![GitHub Logo](/ss/3.jpg)
+
+![GitHub Logo](/ss/4.jpg)
+
+![GitHub Logo](/ss/5.jpg)
+
+![GitHub Logo](/ss/6.jpg)
 
 
 ### About GoDot
