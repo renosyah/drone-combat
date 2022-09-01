@@ -108,8 +108,9 @@ remotesync func _take_damage(_damage : int):
 remotesync func _reset():
 	._reset()
 	
-	_hp_bar.visible = true
 	_hp_bar.update_bar(hp, max_hp)
+	
+	emit_signal("on_ready", self)
 	
 remotesync func _dead():
 	._dead()

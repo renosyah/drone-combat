@@ -4,6 +4,7 @@ var drone : BaseHull
 
 func _ready():
 	drone = spawn_drones_and_get_dronw_owned_by(Global.player.player_id)
+	_ui.update_player_hp_bar(drone.player_name, drone.hp, drone.max_hp)
 	.load_map_stuff()
 	
 ################################################################
@@ -17,6 +18,23 @@ func on_joystick_input(output : Vector2, is_pressed : bool):
 	
 ################################################################
 # drone event handler
+func on_drone_ready(_entity):
+	.on_drone_ready(_entity)
+	
+	if _entity != drone:
+		return
+		
+	_ui.update_player_hp_bar(_entity.player_name, _entity.hp, _entity.max_hp)
+	
+	
+func on_drone_take_damage(_entity, _damage):
+	.on_drone_take_damage(_entity, _damage)
+	
+	if _entity != drone:
+		return
+		
+	_ui.update_player_hp_bar(_entity.player_name, _entity.hp, _entity.max_hp)
+	
 func on_drone_dead(_entity):
 	.on_drone_dead(_entity)
 	

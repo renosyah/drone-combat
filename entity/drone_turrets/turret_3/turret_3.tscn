@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://entity/drone_turrets/turret_3/turret_3.gd" type="Script" id=1]
 [ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=2]
@@ -36,13 +36,6 @@ size = Vector3( 0.3, 0.6, 0.5 )
 
 [sub_resource type="SpatialMaterial" id=11]
 albedo_color = Color( 0.435294, 0.435294, 0.435294, 1 )
-
-[sub_resource type="ProceduralSky" id=15]
-
-[sub_resource type="Environment" id=16]
-background_mode = 3
-background_sky = SubResource( 15 )
-background_color = Color( 0.254902, 0.823529, 1, 1 )
 
 [node name="turret_3" type="KinematicBody"]
 input_ray_pickable = false
@@ -83,11 +76,3 @@ material/0 = SubResource( 11 )
 
 [node name="sensor_pos" type="Position3D" parent="pivot"]
 transform = Transform( 1, 0, 7.10543e-15, 0, 1, 0, 0, 0, 1, 1.85619e-08, 0.425665, -0.683938 )
-
-[node name="Spatial" type="Spatial" parent="."]
-transform = Transform( 0.851965, -0.212199, 0.478673, 0, 0.914197, 0.405269, -0.5236, -0.345275, 0.778864, 1.78641, 1.51093, 2.91159 )
-
-[node name="Camera" type="Camera" parent="Spatial"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Spatial"]
-environment = SubResource( 16 )

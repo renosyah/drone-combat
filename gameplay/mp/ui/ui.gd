@@ -13,6 +13,8 @@ onready var _death_screen: Control = $CanvasLayer/death_screen
 onready var _menu = $CanvasLayer/menu
 
 onready var _mini_map = $CanvasLayer/MiniMap
+onready var _player_name = $CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar/player_name
+onready var _player_hp_bar = $CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar
 
 onready var _sfx_sound_setting_icon = $CanvasLayer/menu/VBoxContainer2/HBoxContainer2/sfx_setting/TextureRect
 
@@ -28,6 +30,10 @@ func _ready():
 	else:
 		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_off.png")
 	
+	
+func update_player_hp_bar(player_name :String, hp, max_hp :int):
+	_player_name.text = player_name
+	_player_hp_bar.update_bar(hp, max_hp)
 	
 func add_minimap_object(spawned):
 	_mini_map.add_object(spawned)

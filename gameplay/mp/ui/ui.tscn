@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://addons/joystick/virtual_joystick.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/mp/ui/ui.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/ui/simple_dialog_option/simple_dialog_option.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/ui/input-name/close.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/icon/setting.png" type="Texture" id=9]
+[ext_resource path="res://assets/ui/bar/hp_bar.tscn" type="PackedScene" id=10]
 
 [node name="ui" type="Control"]
 anchor_right = 1.0
@@ -33,20 +34,84 @@ margin_top = -376.0
 margin_right = 100.0
 margin_bottom = -193.0
 
-[node name="button_menu" type="Button" parent="CanvasLayer/control"]
-modulate = Color( 1, 1, 1, 0.407843 )
-anchor_left = 1.0
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/control"]
 anchor_right = 1.0
-margin_left = -80.0
 margin_bottom = 80.0
+rect_min_size = Vector2( 0, 120 )
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 100, 0 )
+
+[node name="MarginContainer" type="Control" parent="CanvasLayer/control/HBoxContainer"]
+margin_left = 104.0
+margin_right = 492.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/control/HBoxContainer/MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 20, 0 )
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 44.0
+margin_right = 344.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="player_hp_bar" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
+margin_top = 35.0
+margin_right = 300.0
+margin_bottom = 85.0
+
+[node name="player_name" type="Label" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_fonts/font = ExtResource( 4 )
+text = "Hull"
+align = 1
+valign = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer"]
+margin_left = 348.0
+margin_right = 388.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 20, 0 )
+size_flags_horizontal = 3
+
+[node name="button_menu" type="Button" parent="CanvasLayer/control/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.407843 )
+margin_left = 496.0
+margin_right = 576.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 80, 80 )
 icon = ExtResource( 9 )
 flat = true
 expand_icon = true
 
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer"]
+margin_left = 580.0
+margin_right = 600.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 20, 0 )
+
 [node name="MiniMap" parent="CanvasLayer" instance=ExtResource( 5 )]
 margin_left = 45.0
-margin_top = 45.0
+margin_top = 146.0
 margin_right = -45.0
 margin_bottom = -393.0
 
@@ -136,6 +201,7 @@ margin_bottom = 1024.0
 rect_min_size = Vector2( 80, 200 )
 
 [node name="menu" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
@@ -267,7 +333,7 @@ size_flags_vertical = 3
 visible = false
 
 [connection signal="on_joystick_input" from="CanvasLayer/control/joystick" to="." method="_on_Virtual_joystick_on_joystick_input"]
-[connection signal="pressed" from="CanvasLayer/control/button_menu" to="." method="_on_button_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/control/HBoxContainer/button_menu" to="." method="_on_button_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn" to="." method="_on_respawn_pressed"]
 [connection signal="pressed" from="CanvasLayer/menu/VBoxContainer2/MarginContainer5/button_close_menu" to="." method="_on_button_close_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/menu/VBoxContainer2/HBoxContainer2/sfx_setting" to="." method="_on_sfx_setting_pressed"]

@@ -4,6 +4,7 @@ signal on_module_choosed(_module_scene)
 
 const _item_module_template = preload("res://assets/ui/choose-module/module_item/module_item.tscn")
 
+export var current_module_id :String = ""
 export var modules : Array = []
 export var title:String = "Module"
 
@@ -16,9 +17,11 @@ func show_modules():
 	for child in _holder.get_children():
 		_holder.remove_child(child)
 		
-	for module in modules:
+	for m in modules:
+		var module :DroneModuleData = DroneModuleData.new().parse_from_dictionary(m)
 		var item = _item_module_template.instance()
-		item.module_data = DroneModuleData.new().parse_from_dictionary(module)
+		item.module_data = module
+		item.enable_mount = (current_module_id == module.module_id)
 		_holder.add_child(item)
 		item.connect("on_module_choosed", self, "_on_module_choosed")
 		

@@ -133,6 +133,7 @@ func _on_sfx_setting_pressed():
 	
 func _on_drone_weapon_btn_pressed():
 	_choose_module_dialog.title = "Weapon"
+	_choose_module_dialog.current_module_id = Global.player_drone_data.weapon_module.module_id
 	_choose_module_dialog.modules = DroneData.weapons
 	clear_choose_module_dialog_signal()
 	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_weapon_choosed")
@@ -146,6 +147,7 @@ func _on_module_weapon_choosed(_data :DroneModuleData):
 	
 func _on_drone_turret_btn_pressed():
 	_choose_module_dialog.title = "Turret"
+	_choose_module_dialog.current_module_id = Global.player_drone_data.turret_module.module_id
 	_choose_module_dialog.modules = DroneData.turrets
 	clear_choose_module_dialog_signal()
 	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_turret_choosed")
@@ -159,6 +161,7 @@ func _on_module_turret_choosed(_data :DroneModuleData):
 	
 func _on_drone_hull_btn_pressed():
 	_choose_module_dialog.title = "Hull"
+	_choose_module_dialog.current_module_id = Global.player_drone_data.hull_module.module_id
 	_choose_module_dialog.modules = DroneData.hulls
 	clear_choose_module_dialog_signal()
 	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_hull_choosed")
@@ -172,6 +175,7 @@ func _on_module_hull_choosed(_data :DroneModuleData):
 	
 func _on_drone_sensor_btn_pressed():
 	_choose_module_dialog.title = "Sensor"
+	_choose_module_dialog.current_module_id = Global.player_drone_data.sensor_module.module_id
 	_choose_module_dialog.modules = DroneData.sensors
 	clear_choose_module_dialog_signal()
 	_choose_module_dialog.connect("on_module_choosed", self, "_on_module_sensor_choosed")

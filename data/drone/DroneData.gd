@@ -8,8 +8,8 @@ const weapons :Array = [
 		"scene" : "res://entity/weapons/mg/mg.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_1.png",
 		"infos" : [
-			"++ Firing Rate",
-			"-- Damage"
+			"High Firing Rate",
+			"Low Damage"
 		],
 		"modifier" : {}
 	},
@@ -19,8 +19,8 @@ const weapons :Array = [
 		"scene" : "res://entity/weapons/auto_cannon/auto_cannon.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_2.png",
 		"infos" : [
-			"+- Firing Rate",
-			"+- Damage"
+			"Mid Firing Rate",
+			"Mid Damage"
 		],
 		"modifier" : {}
 	},
@@ -30,8 +30,8 @@ const weapons :Array = [
 		"scene" : "res://entity/weapons/cannon/cannon.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_3.png",
 		"infos" : [
-			"-- Firing Rate",
-			"++ Damage"
+			"Slow Firing Rate",
+			"High Damage"
 		],
 		"modifier" : {}
 	}
@@ -43,13 +43,13 @@ const turrets :Array = [
 		"scene" : "res://entity/drone_turrets/turret_1/turret_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_1.png",
 		"infos" : [
-			"-- Hp",
-			"++ Rotation"
+			"Hp : 20",
+			"Rotation : 90"
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 90,
-			"turret_hp" : 50,
-			"turret_max_hp" : 50
+			"turret_hp" : 20,
+			"turret_max_hp" : 20
 		}
 	},
 	{
@@ -58,13 +58,13 @@ const turrets :Array = [
 		"scene" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
 		"infos" : [
-			"+- Hp",
-			"+- Rotation"
+			"Hp : 120",
+			"Rotation : 70"
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 70,
-			"turret_hp" : 120,
-			"turret_max_hp" : 120
+			"turret_hp" : 90,
+			"turret_max_hp" : 90
 		}
 	},
 	{
@@ -73,13 +73,13 @@ const turrets :Array = [
 		"scene" : "res://entity/drone_turrets/turret_3/turret_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_3.png",
 		"infos" : [
-			"++ Hp",
-			"-- Rotation"
+			"Hp : 60",
+			"Rotation : 80"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 75,
-			"turret_hp" : 80,
-			"turret_max_hp" : 80
+			"turret_rotation_speed" : 80,
+			"turret_hp" : 60,
+			"turret_max_hp" : 60
 		}
 	}
 ]
@@ -90,14 +90,15 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_1/hull_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_1.png",
 		"infos" : [
-			"++ Hp",
-			"-- Mobility"
+			"Hp : 240",
+			"Speed : 2",
+			"Travese : 2"
 		],
 		"modifier" : {
-			"hp" : 140,
-			"max_hp" : 140,
+			"hp" : 240,
+			"max_hp" : 240,
 			"speed" : 2.0,
-			"turning_speed" : 1.0
+			"turning_speed" : 2.0
 		}
 	},
 	{
@@ -106,12 +107,13 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_2/hull_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_2.png",
 		"infos" : [
-			"-- Hp",
-			"++ Mobility"
+			"Hp : 40",
+			"Speed : 4",
+			"Travese : 3"
 		],
 		"modifier" : {
-			"hp" : 80,
-			"max_hp" : 80,
+			"hp" : 40,
+			"max_hp" : 40,
 			"speed" : 4.0,
 			"turning_speed" : 3.0
 		}
@@ -122,14 +124,15 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
 		"infos" : [
-			"+- Hp",
-			"+- Mobility"
+			"Hp : 90",
+			"Speed : 2.5",
+			"Travese : 2.0"
 		],
 		"modifier" : {
-			"hp" : 125,
-			"max_hp" : 125,
+			"hp" : 90,
+			"max_hp" : 90,
 			"speed" : 2.5,
-			"turning_speed" : 1.5
+			"turning_speed" : 2.0
 		}
 	}
 ]
