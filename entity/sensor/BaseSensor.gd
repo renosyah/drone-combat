@@ -4,8 +4,6 @@ class_name BaseSensor
 signal on_spotted(_node)
 
 export var scanning_speed:float = 0.07
-export var air_sensor: NodePath
-export var ground_sensor: NodePath
 export var spotting_range : int = 1
 export var ground_sensor_altitude = 0.5
 export var air_sensor_altitude = 10.0
@@ -17,14 +15,21 @@ onready var _detected_sounds = [
 	preload("res://entity/sensor/sensor_sound/detected_4.wav")
 ]
 
-onready var _air_sensor: RayCast = get_node(air_sensor)
-onready var _ground_sensor: RayCast  = get_node(ground_sensor)
+var _air_sensor: RayCast
+var _ground_sensor: RayCast
 var _current_detected : BaseEntity
 var _sound : AudioStreamPlayer3D
 
 func _ready():
-	_air_sensor.cast_to = _air_sensor.cast_to * spotting_range
-	_ground_sensor.cast_to = _ground_sensor.cast_to * spotting_range
+	_air_sensor = RayCast.new()
+	add_child(_air_sensor)
+	_air_sensor.enabled = true
+	_air_sensor.cast_to = Vector3(0,0,1) * spotting_range
+	
+	_ground_sensor= RayCast.new()
+	add_child(_ground_sensor)
+	_ground_sensor.enabled = true
+	_ground_sensor.cast_to = Vector3(0,0,1) * spotting_range
 	
 	_sound = AudioStreamPlayer3D.new()
 	_sound.bus = "sfx"

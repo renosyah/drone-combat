@@ -2,11 +2,12 @@
 
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/ui/choose-module/choose_drone_module.gd" type="Script" id=2]
-[ext_resource path="res://assets/ui/input-name/close.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/icon/back.png" type="Texture" id=3]
 
 [node name="choose_drone_module" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 600 )
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -34,10 +35,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Control/HBoxContainer"]
+[node name="button_close" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
 margin_right = 80.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 80, 80 )
+icon = ExtResource( 3 )
+flat = true
+expand_icon = true
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/Control/HBoxContainer"]
 margin_left = 84.0
@@ -63,14 +67,11 @@ margin_right = 516.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 
-[node name="button_close" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Control/HBoxContainer"]
 margin_left = 520.0
 margin_right = 600.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 80, 80 )
-icon = ExtResource( 3 )
-flat = true
-expand_icon = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_top = 104.0

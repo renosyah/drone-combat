@@ -6,7 +6,7 @@
 
 [node name="module_item" type="VBoxContainer"]
 margin_right = 300.0
-margin_bottom = 652.0
+margin_bottom = 891.0
 mouse_filter = 2
 size_flags_vertical = 3
 alignment = 1
@@ -16,7 +16,6 @@ script = ExtResource( 3 )
 margin_right = 300.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
-size_flags_vertical = 3
 
 [node name="Control" type="MarginContainer" parent="."]
 margin_top = 84.0
@@ -39,21 +38,22 @@ mouse_filter = 2
 alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer"]
-margin_top = 280.0
+margin_top = 240.0
 margin_right = 300.0
 margin_bottom = 400.0
+rect_min_size = Vector2( 0, 160 )
 mouse_filter = 2
 
 [node name="ColorRect" type="ColorRect" parent="Control/VBoxContainer/MarginContainer"]
 margin_right = 300.0
-margin_bottom = 120.0
+margin_bottom = 160.0
 rect_min_size = Vector2( 0, 120 )
 mouse_filter = 2
 color = Color( 0.254902, 0.254902, 0.254902, 0.796078 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/VBoxContainer/MarginContainer"]
 margin_right = 300.0
-margin_bottom = 120.0
+margin_bottom = 160.0
 grow_vertical = 0
 mouse_filter = 2
 
@@ -85,11 +85,17 @@ text = "Mount"
 align = 1
 valign = 1
 
-[node name="mount" type="Button" parent="."]
+[node name="MarginContainer3" type="MarginContainer" parent="."]
 margin_top = 488.0
 margin_right = 300.0
-margin_bottom = 568.0
-rect_min_size = Vector2( 250, 80 )
+margin_bottom = 496.0
+rect_min_size = Vector2( 0, 8 )
+
+[node name="mount" type="Button" parent="."]
+margin_top = 500.0
+margin_right = 300.0
+margin_bottom = 620.0
+rect_min_size = Vector2( 250, 120 )
 flat = true
 
 [node name="ColorRect" type="ColorRect" parent="mount"]
@@ -109,10 +115,10 @@ align = 1
 valign = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
-margin_top = 572.0
+margin_top = 624.0
 margin_right = 300.0
-margin_bottom = 652.0
-rect_min_size = Vector2( 0, 80 )
+margin_bottom = 891.0
+rect_min_size = Vector2( 0, 250 )
 size_flags_vertical = 3
 
 [connection signal="pressed" from="mount" to="." method="_on_mount_pressed"]

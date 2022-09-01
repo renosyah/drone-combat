@@ -28,10 +28,6 @@ func _ready():
 		dup.visible = true
 		_info_holder.add_child(dup)
 		
-	var dup = _module_info.duplicate()
-	dup.text = ""
-	_info_holder.add_child(dup)
-	
 	_module_image.texture = load(module_data.icon)
 	
 	if enable_mount:

@@ -83,6 +83,9 @@ func _process(delta):
 ################################################################
 # bot action
 func _on_bot_action_timer_timeout():
+	if _bots.empty():
+		return
+	
 	var bot = _bots[rand_range(0, _bots.size() - 1)]
 	var waypoint = _map.get_rand_pos()
 	

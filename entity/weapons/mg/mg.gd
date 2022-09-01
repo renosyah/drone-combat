@@ -25,6 +25,6 @@ func _spawn_projectile_to(direction : Vector3):
 	bullet.is_master = is_master
 	add_child(bullet)
 	bullet.attack_damage = int(rand_range(2,4))
-	bullet.spread = 0.20
+	bullet.spread = 0.40
 	bullet.translation = _projectile_spawn_pos.global_transform.origin
 	bullet.launch(_projectile_target_pos.global_transform.origin)

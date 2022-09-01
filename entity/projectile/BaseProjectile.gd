@@ -1,7 +1,7 @@
 extends Area
 class_name BaseProjectile
 
-const MAX_DISTANCE = 80.0
+const MAX_DISTANCE = 180.0
 
 var attack_damage : int = 0
 var is_master = false

@@ -139,15 +139,58 @@ const hulls :Array = [
 const sensors :Array = [
 	{
 		"module_id":"s-1",
-		"module_name" : "Mk 1 sensor",
+		"module_name" : "Mk 1 Watchmen",
 		"scene" : "res://entity/sensor/sensor_1/sensor_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/sensor_1.png",
 		"infos" : [
-			"+- Range",
+			"Scanning Range : 16",
+			"Scanning Speed : 0.07"
 		],
 		"modifier" : {
 			"spotting_range" : 16,
 			"scanning_speed" : 0.07
+		}
+	},
+	{
+		"module_id":"s-3",
+		"module_name" : "Mk 2 Eagle",
+		"scene" : "res://entity/sensor/sensor_2/sensor_2.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/sensor_2.png",
+		"infos" : [
+			"Scanning Range : 14",
+			"Scanning Speed : 0.11"
+		],
+		"modifier" : {
+			"spotting_range" : 14,
+			"scanning_speed" : 0.11
+		}
+	},
+	{
+		"module_id":"s-4",
+		"module_name" : "Mk 3 Hunter",
+		"scene" : "res://entity/sensor/sensor_3/sensor_3.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/sensor_3.png",
+		"infos" : [
+			"Scanning Range : 22",
+			"Scanning Speed : 0.04"
+		],
+		"modifier" : {
+			"spotting_range" : 22,
+			"scanning_speed" : 0.04
+		}
+	},
+	{
+		"module_id":"s-2",
+		"module_name" : "Mk 4 Raptor",
+		"scene" : "res://entity/sensor/sensor_4/sensor_4.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/sensor_4.png",
+		"infos" : [
+			"Scanning Range : 8",
+			"Scanning Speed : 0.16"
+		],
+		"modifier" : {
+			"spotting_range" : 8,
+			"scanning_speed" : 0.16
 		}
 	},
 ]
@@ -198,7 +241,7 @@ func from_dictionary(data : Dictionary):
 	
 	weapon_module = DroneModuleData.new().parse_from_dictionary(data["weapon_module"])
 	
-	sensor_module = DroneModuleData.new().parse_from_dictionary(data["sensor_module "])
+	sensor_module = DroneModuleData.new().parse_from_dictionary(data["sensor_module"])
 	spotting_range = sensor_module.modifier["spotting_range"]
 	scanning_speed = sensor_module.modifier["scanning_speed"]
 	
@@ -213,7 +256,7 @@ func to_dictionary() -> Dictionary :
 	data["hull_module"] = hull_module.to_dictionary()
 	data["turret_module"] = turret_module.to_dictionary()
 	data["weapon_module"] = weapon_module.to_dictionary()
-	data["sensor_module "] = sensor_module.to_dictionary()
+	data["sensor_module"] = sensor_module.to_dictionary()
 	
 	data["color"] = color
 	
