@@ -7,7 +7,7 @@ export var title:String = "Module"
 
 onready var _holder = $VBoxContainer/ScrollContainer/HBoxContainer/holder
 onready var _item_module_template = preload("res://assets/ui/choose-module/module_item/module_item.tscn")
-onready var _title = $VBoxContainer/title
+onready var _title = $VBoxContainer/Control/HBoxContainer/title
 
 func show_modules():
 	_title.text = title
@@ -27,3 +27,7 @@ func show_modules():
 		
 func _on_module_choosed(_module_scene:String):
 	emit_signal("on_module_choosed", _module_scene)
+	
+	
+func _on_button_close_pressed():
+	visible = false
