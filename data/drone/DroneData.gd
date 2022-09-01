@@ -7,6 +7,10 @@ const weapons :Array = [
 		"module_name" : ".50 cal HMG",
 		"scene" : "res://entity/weapons/mg/mg.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_1.png",
+		"infos" : [
+			"++ Firing Rate",
+			"-- Damage"
+		],
 		"modifier" : {}
 	},
 	{
@@ -14,6 +18,10 @@ const weapons :Array = [
 		"module_name" : "30mm auto",
 		"scene" : "res://entity/weapons/auto_cannon/auto_cannon.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_2.png",
+		"infos" : [
+			"+- Firing Rate",
+			"+- Damage"
+		],
 		"modifier" : {}
 	},
 	{
@@ -21,6 +29,10 @@ const weapons :Array = [
 		"module_name" : "75mm AD" ,
 		"scene" : "res://entity/weapons/cannon/cannon.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_3.png",
+		"infos" : [
+			"-- Firing Rate",
+			"++ Damage"
+		],
 		"modifier" : {}
 	}
 ]
@@ -30,6 +42,10 @@ const turrets :Array = [
 		"module_name" : "Mk 1 auto",
 		"scene" : "res://entity/drone_turrets/turret_1/turret_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_1.png",
+		"infos" : [
+			"-- Hp",
+			"++ Rotation"
+		],
 		"modifier" : {
 			"turret_rotation_speed" : 90,
 			"turret_hp" : 50,
@@ -41,6 +57,10 @@ const turrets :Array = [
 		"module_name" : "Recta mx-B",
 		"scene" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
+		"infos" : [
+			"+- Hp",
+			"+- Rotation"
+		],
 		"modifier" : {
 			"turret_rotation_speed" : 70,
 			"turret_hp" : 120,
@@ -52,6 +72,10 @@ const turrets :Array = [
 		"module_name" : "A-12 Homogen",
 		"scene" : "res://entity/drone_turrets/turret_3/turret_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_3.png",
+		"infos" : [
+			"++ Hp",
+			"-- Rotation"
+		],
 		"modifier" : {
 			"turret_rotation_speed" : 75,
 			"turret_hp" : 80,
@@ -65,6 +89,10 @@ const hulls :Array = [
 		"module_name" : "Heavy Hull",
 		"scene" : "res://entity/drone_hulls/hull_1/hull_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_1.png",
+		"infos" : [
+			"++ Hp",
+			"-- Mobility"
+		],
 		"modifier" : {
 			"hp" : 140,
 			"max_hp" : 140,
@@ -77,6 +105,10 @@ const hulls :Array = [
 		"module_name" : "Armored Car Hull",
 		"scene" : "res://entity/drone_hulls/hull_2/hull_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_2.png",
+		"infos" : [
+			"-- Hp",
+			"++ Mobility"
+		],
 		"modifier" : {
 			"hp" : 80,
 			"max_hp" : 80,
@@ -89,6 +121,10 @@ const hulls :Array = [
 		"module_name" : "Medium Hull",
 		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
+		"infos" : [
+			"+- Hp",
+			"+- Mobility"
+		],
 		"modifier" : {
 			"hp" : 125,
 			"max_hp" : 125,
@@ -103,6 +139,9 @@ const sensors :Array = [
 		"module_name" : "Mk 1 sensor",
 		"scene" : "res://entity/sensor/sensor_1/sensor_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/sensor_1.png",
+		"infos" : [
+			"+- Range",
+		],
 		"modifier" : {
 			"spotting_range" : 16,
 			"scanning_speed" : 0.07
