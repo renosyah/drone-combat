@@ -64,7 +64,7 @@ func _server_player_connected(_player_network_unique_id : int, _player : Diction
 	}
 	Global.mp_players = [player]
 	
-	for i in range(4):
+	for i in range(3):
 		var bot_id = "BOT-" + str(GDUUID.v4())
 		var bot_name = RandomNameGenerator.generate() + " (Bot)"
 		var bot = {
