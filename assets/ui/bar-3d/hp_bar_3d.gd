@@ -1,4 +1,5 @@
 extends Sprite3D
+class_name HpBar3D
 
 onready var _player_name = $Viewport/VBoxContainer/name
 onready var _viewport_hp_bar = $Viewport

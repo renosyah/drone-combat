@@ -42,16 +42,16 @@ var _altitude = 0.0
 var _gravity = -12.0
 var _velocity = Vector3.ZERO
 
-var _moving_state : int = IDDLE
+var _moving_state :int = IDDLE
 
 # input
 var _click_translation = Vector3.ZERO
-var _input_detector : Node
+var _input_detector :Node
 
 # misc
-var _tween_movement : Tween
-var _explosion : Explosion
-var _hp_bar : Sprite3D
+var _tween_movement :Tween
+var _explosion :Explosion
+var _hp_bar :HpBar3D
 
 ############################################################
 # multiplayer func
@@ -123,6 +123,8 @@ remotesync func _dead():
 # override methods
 func _ready():
 	set_process(true)
+	emit_signal("on_ready", self)
+	
 	tag = "hull"
 	
 	player_id = drone_data.player_id
@@ -175,7 +177,6 @@ func _ready():
 	_network_timmer.autostart = true
 	add_child(_network_timmer)
 		
-	emit_signal("on_ready", self)
 	
 func set_hp_bar(_hp_bar_color :Color, _hp_bar_visible :bool):
 	if not is_instance_valid(_hp_bar):
