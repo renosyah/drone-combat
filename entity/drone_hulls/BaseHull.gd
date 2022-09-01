@@ -26,6 +26,8 @@ export var turning_speed : float = 4.0
 export var turret_hp :int = 100
 export var turret_max_hp :int = 100
 
+export var turret_rotation_speed = 90
+
 export var spotting_range :int = 18
 export var scanning_speed:float = 0.07
 
@@ -129,19 +131,21 @@ func _ready():
 	
 	player_id = drone_data.player_id
 	player_name = drone_data.player_name
-
+	
 	hp = drone_data.hp
 	max_hp = drone_data.max_hp
 	
 	speed = drone_data.speed
 	turning_speed = drone_data.turning_speed
-
+	
 	turret_hp = drone_data.turret_hp
 	turret_max_hp = drone_data.turret_max_hp
-
+	
 	spotting_range = drone_data.spotting_range
 	scanning_speed = drone_data.scanning_speed
-
+	
+	turret_rotation_speed = drone_data.turret_rotation_speed
+	
 	turret_scene = load(drone_data.turret_module.scene)
 	weapon_scene = load(drone_data.weapon_module.scene)
 	sensor_scene = load(drone_data.sensor_module.scene)
@@ -196,6 +200,7 @@ func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 		_turret_asset.color = color
 		_turret_asset.spotting_range = spotting_range
 		_turret_asset.scanning_speed = scanning_speed
+		_turret_asset.rotation_speed_deg = turret_rotation_speed
 		add_child(_turret_asset)
 		_turret = _turret_asset
 		_turret.translation = _pos

@@ -1,32 +1,64 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_16.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/ui/choose-module/module_item/module_item.gd" type="Script" id=3]
 
 [node name="module_item" type="VBoxContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 300.0
+margin_bottom = 652.0
 size_flags_vertical = 3
 alignment = 1
 script = ExtResource( 3 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 600.0
-margin_bottom = 266.0
+margin_right = 300.0
+margin_bottom = 80.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_top = 270.0
-margin_right = 600.0
-margin_bottom = 670.0
+[node name="Control" type="MarginContainer" parent="."]
+margin_top = 84.0
+margin_right = 300.0
+margin_bottom = 484.0
+rect_min_size = Vector2( 0, 400 )
+mouse_filter = 2
+
+[node name="module_icon" type="TextureRect" parent="Control"]
+margin_right = 300.0
+margin_bottom = 400.0
 rect_min_size = Vector2( 300, 400 )
+mouse_filter = 2
 expand = true
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+margin_right = 300.0
+margin_bottom = 400.0
+mouse_filter = 2
+alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control/VBoxContainer"]
+margin_top = 280.0
+margin_right = 300.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 0, 120 )
+mouse_filter = 2
+color = Color( 0.254902, 0.254902, 0.254902, 0.796078 )
+
+[node name="module_name" type="Label" parent="Control/VBoxContainer/ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Mount"
+align = 1
+valign = 1
+
 [node name="mount" type="Button" parent="."]
-margin_top = 674.0
-margin_right = 600.0
-margin_bottom = 754.0
+margin_top = 488.0
+margin_right = 300.0
+margin_bottom = 568.0
 rect_min_size = Vector2( 250, 80 )
 flat = true
 
@@ -47,9 +79,9 @@ align = 1
 valign = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="."]
-margin_top = 758.0
-margin_right = 600.0
-margin_bottom = 1024.0
+margin_top = 572.0
+margin_right = 300.0
+margin_bottom = 652.0
 rect_min_size = Vector2( 0, 80 )
 size_flags_vertical = 3
 
