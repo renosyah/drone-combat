@@ -15,17 +15,14 @@ the simple drone battle
 
 
 ## Gameplay
-![GitHub Logo](/ss/1.jpg)
+- customize your drone
+![GitHub Logo](/ss/1.jpg) ![GitHub Logo](/ss/2.jpg)
 
-![GitHub Logo](/ss/2.jpg)
-
+- create lobby and play agains your friend
 ![GitHub Logo](/ss/3.jpg)
 
-![GitHub Logo](/ss/4.jpg)
-
-![GitHub Logo](/ss/5.jpg)
-
-![GitHub Logo](/ss/6.jpg)
+- have fun destroy all drone
+![GitHub Logo](/ss/4.jpg) ![GitHub Logo](/ss/5.jpg) ![GitHub Logo](/ss/6.jpg)
 
 
 ### About GoDot
