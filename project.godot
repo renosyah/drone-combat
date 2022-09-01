@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://data/drone/DroneData.gd"
 }, {
+"base": "BaseData",
+"class": "DroneModuleData",
+"language": "GDScript",
+"path": "res://data/drone/DroneModule.gd"
+}, {
 "base": "Spatial",
 "class": "Explosion",
 "language": "GDScript",
@@ -171,6 +176,7 @@ _global_script_class_icons={
 "BattleMp": "",
 "BattleSp": "",
 "DroneData": "",
+"DroneModuleData": "",
 "Explosion": "",
 "GDUUID": "",
 "GameplayCamera": "",

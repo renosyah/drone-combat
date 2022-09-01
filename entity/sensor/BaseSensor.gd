@@ -4,9 +4,11 @@ class_name BaseSensor
 signal on_spotted(_node)
 
 export var scanning_speed:float = 0.07
-export var raycast_path: Array
+export var air_sensor: NodePath
+export var ground_sensor: NodePath
 export var spotting_range : int = 1
-export var sensor_altitude = 0.5
+export var ground_sensor_altitude = 0.5
+export var air_sensor_altitude = 10.0
 
 onready var _detected_sounds = [
 	preload("res://entity/sensor/sensor_sound/detected_1.wav"),
@@ -15,16 +17,15 @@ onready var _detected_sounds = [
 	preload("res://entity/sensor/sensor_sound/detected_4.wav")
 ]
 
-var _raycasts: Array = []
+onready var _air_sensor: RayCast = get_node(air_sensor)
+onready var _ground_sensor: RayCast  = get_node(ground_sensor)
 var _current_detected : BaseEntity
 var _sound : AudioStreamPlayer3D
 
 func _ready():
-	for raycast in raycast_path:
-		var ray = get_node(raycast)
-		ray.cast_to = ray.cast_to * spotting_range
-		_raycasts.append(ray)
-		
+	_air_sensor.cast_to = _air_sensor.cast_to * spotting_range
+	_ground_sensor.cast_to = _ground_sensor.cast_to * spotting_range
+	
 	_sound = AudioStreamPlayer3D.new()
 	_sound.bus = "sfx"
 	_sound.unit_db = Global.sound_amplified
@@ -34,16 +35,16 @@ func _ready():
 	set_process(true)
 	
 func add_exception(_node : BaseEntity):
-	for raycast in _raycasts:
-		raycast.add_exception(_node)
+	_air_sensor.add_exception(_node)
+	_ground_sensor.add_exception(_node)
 	
 func _process(delta):
 	rotate_y(rad2deg(scanning_speed) * delta)
 	
-	for raycast in _raycasts:
-		raycast.global_transform.origin.y = sensor_altitude
-		
-	for raycast in _raycasts:
+	_air_sensor.global_transform.origin.y = air_sensor_altitude
+	_ground_sensor.global_transform.origin.y = ground_sensor_altitude
+	
+	for raycast in [_air_sensor, _ground_sensor]:
 		validate_detection(raycast)
 	
 func validate_detection(raycast : RayCast):
