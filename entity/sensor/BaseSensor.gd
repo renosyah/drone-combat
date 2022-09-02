@@ -18,8 +18,6 @@ onready var _detected_sounds = [
 	preload("res://entity/sensor/sensor_sound/detected_4.wav")
 ]
 
-var is_master = false
-
 var _air_sensor: RayCast
 var _ground_sensor: RayCast
 var _current_detected : BaseEntity
@@ -54,11 +52,9 @@ func _process(delta):
 	_air_sensor.global_transform.origin.y = air_sensor_altitude
 	_ground_sensor.global_transform.origin.y = ground_sensor_altitude
 	
-	if not is_master:
-		return
+	validate_detection(_air_sensor)
+	validate_detection(_ground_sensor)
 	
-	for raycast in [_air_sensor, _ground_sensor]:
-		validate_detection(raycast)
 	
 func validate_detection(raycast : RayCast):
 	if not raycast.is_colliding():

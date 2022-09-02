@@ -95,6 +95,7 @@ remotesync func _reset():
 	if is_instance_valid(_weapon):
 		_weapon.set_process(true)
 		
+	emit_signal("on_ready", self)
 	
 ################################
 # OVERRIDE FUNCTIONS
@@ -102,6 +103,7 @@ remotesync func _reset():
 func _ready() -> void:
 	tag = "turret"
 	active = false
+	emit_signal("on_ready", self)
 	
 	if not _is_master():
 		return
@@ -163,7 +165,6 @@ func spawn_sensor(_pos : Vector3):
 		
 	if is_instance_valid(_sensor):
 		_sensor.connect("on_spotted", self, "_on_sensor_spotted")
-		_sensor.is_master = true
 	
 ############################################################
 # function
