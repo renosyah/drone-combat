@@ -55,17 +55,17 @@ const turrets :Array = [
 		"icon" : "res://assets/ui/choose-module/drone/turret_1.png",
 		"infos" : [
 			"Hp : 20",
-			"Rotation : 90"
+			"Rotation : 120"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 90,
+			"turret_rotation_speed" : 120,
 			"turret_hp" : 20,
 			"turret_max_hp" : 20
 		}
 	},
 	{
 		"module_id":"t-2",
-		"module_name" : "Recta mx-B",
+		"module_name" : "Recta MX-B",
 		"scene" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
 		"infos" : [
@@ -74,8 +74,8 @@ const turrets :Array = [
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 65,
-			"turret_hp" : 90,
-			"turret_max_hp" : 90
+			"turret_hp" : 120,
+			"turret_max_hp" : 120
 		}
 	},
 	{
@@ -84,13 +84,13 @@ const turrets :Array = [
 		"scene" : "res://entity/drone_turrets/turret_3/turret_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_3.png",
 		"infos" : [
-			"Hp : 60",
+			"Hp : 90",
 			"Rotation : 75"
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 75,
-			"turret_hp" : 60,
-			"turret_max_hp" : 60
+			"turret_hp" : 90,
+			"turret_max_hp" : 90
 		}
 	},
 	{
@@ -99,13 +99,13 @@ const turrets :Array = [
 		"scene" : "res://entity/drone_turrets/turret_4/turret_4.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_4.png",
 		"infos" : [
-			"Hp : 40",
-			"Rotation : 85"
+			"Hp : 60",
+			"Rotation : 90"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 85,
-			"turret_hp" : 40,
-			"turret_max_hp" : 40
+			"turret_rotation_speed" : 90,
+			"turret_hp" : 60,
+			"turret_max_hp" : 60
 		}
 	},
 ]
