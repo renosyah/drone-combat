@@ -2,19 +2,21 @@ extends KinematicBody
 class_name BaseEntity
 
 signal on_ready(_entity)
-signal on_dead(_entity)
-signal on_take_damage(_entity, _damage)
+signal on_dead(_entity, _killed_by)
+signal on_take_damage(_entity, _damage, _hit_by)
+
+# identity owner
+var player :PlayerData
 
 # vitality
 var is_dead = false
+var hit_by_player :PlayerData = PlayerData.new()
 var tag : String = "entity"
 export var hp : int = 100.0
 export var max_hp : int = 100.0
 
 # misc network
-onready var _latency = Network.LATENCY
-onready var _latency_delay = Network.LATENCY_DELAY
-var _network_timmer : Timer = null
+var _network_timmer : Timer
 
 ############################################################
 # multiplayer func
@@ -37,17 +39,18 @@ func _set_puppet_hp(_val :float):
 	
 	hp = _puppet_hp
 	
-remotesync func _take_damage(_damage : int):
+remotesync func _take_damage(_damage : int, _hit_by :Dictionary):
 	if is_dead:
 		return
 		
-	emit_signal("on_take_damage", self, _damage)
+	hit_by_player.from_dictionary(_hit_by)
+	emit_signal("on_take_damage", self, _damage, hit_by_player)
 	
 remotesync func _dead():
 	is_dead = true
 	set_process(false)
 	
-	emit_signal("on_dead", self)
+	emit_signal("on_dead", self, hit_by_player)
 	
 remotesync func _reset():
 	hp = max_hp
@@ -59,14 +62,20 @@ remotesync func _reset():
 	
 ############################################################
 func _ready():
-	if not _network_timmer:
-		_network_timmer = Timer.new()
-		_network_timmer.wait_time = _latency_delay
-		_network_timmer.connect("timeout", self , "_network_timmer_timeout")
-		_network_timmer.autostart = true
-		add_child(_network_timmer)
-		
 	emit_signal("on_ready", self)
+	
+	if not _is_network_running():
+		return
+	
+	if not _is_master():
+		return
+	
+	var _timer = Timer.new()
+	_timer.wait_time = Network.LATENCY_DELAY
+	_timer.connect("timeout", self , "_network_timmer_timeout")
+	_timer.autostart = true
+	add_child(_timer)
+	_network_timmer = _timer
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -90,7 +99,7 @@ func moving(_delta):
 func puppet_moving(_delta):
 	pass
 		
-func take_damage(_damage : int):
+func take_damage(_damage : int, hit_by_player : PlayerData):
 	if not _is_master():
 		return
 		
@@ -102,7 +111,7 @@ func take_damage(_damage : int):
 	if hp < 1:
 		dead()
 		
-	rpc_unreliable("_take_damage", _damage)
+	rpc_unreliable("_take_damage", _damage, hit_by_player.to_dictionary())
 	
 func dead():
 	if not _is_master():
@@ -117,6 +126,12 @@ func reset():
 	rpc("_reset")
 	
 ############################################################
+func team():
+	if not player:
+		return ""
+		
+	return player.player_team
+	
 func is_dead() -> bool:
 	return is_dead
 	

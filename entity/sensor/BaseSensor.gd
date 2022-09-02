@@ -3,6 +3,9 @@ class_name BaseSensor
 
 signal on_spotted(_node)
 
+# identity owner
+var player:PlayerData
+
 export var scanning_speed:float = 0.07
 export var spotting_range : int = 1
 export var ground_sensor_altitude = 0.5
@@ -14,6 +17,8 @@ onready var _detected_sounds = [
 	preload("res://entity/sensor/sensor_sound/detected_3.wav"),
 	preload("res://entity/sensor/sensor_sound/detected_4.wav")
 ]
+
+var is_master = false
 
 var _air_sensor: RayCast
 var _ground_sensor: RayCast
@@ -48,6 +53,9 @@ func _process(delta):
 	
 	_air_sensor.global_transform.origin.y = air_sensor_altitude
 	_ground_sensor.global_transform.origin.y = ground_sensor_altitude
+	
+	if not is_master:
+		return
 	
 	for raycast in [_air_sensor, _ground_sensor]:
 		validate_detection(raycast)
@@ -88,6 +96,9 @@ func _is_type_entity(_body) -> bool:
 	
 func _is_valid_target(_body) -> bool:
 	if _body.is_dead():
+		return false
+		
+	if player.player_team == _body.team():
 		return false
 		
 	return true

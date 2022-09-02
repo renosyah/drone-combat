@@ -262,12 +262,13 @@ func to_dictionary() -> Dictionary :
 	
 	return data
 	
-func spawn(node_name : String, _parent : Node, _at : Vector3) -> Node:
+func spawn(player:PlayerData, _parent : Node, _at : Vector3) -> Node:
 	var drone = load(hull_module.scene).instance()
+	drone.player = player
 	drone.drone_data = self
 	_parent.add_child(drone)
 	drone.translation = _at
-	drone.name = node_name
+	drone.name = player.player_id
 	drone.set_network_master(Network.PLAYER_HOST_ID)
 	return drone
 	

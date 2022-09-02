@@ -28,7 +28,7 @@ remote func _request_append_player_joined(from : int, data : Dictionary):
 			player_joined.erase(i)
 			break
 			
-	data["order"] = player_joined.size()
+	data["player_team"] = player_joined.size()
 	player_joined.append(data)
 	rpc("_update_player_joined", player_joined)
 	
@@ -231,7 +231,7 @@ func create_mp_player() -> Dictionary:
 	return {
 		"player_id" : Global.player.player_id,
 		"player_name" : Global.player.player_name,
-		"order" : 0,
+		"player_team" : 0,
 		"status" : "Not Ready",
 		"flag" : PLAYER_STATUS_NOT_READY,
 		"drone_data" : drone.to_dictionary(),
@@ -246,7 +246,7 @@ func create_bot_player() -> Dictionary:
 	return {
 		"player_id" : bot_id,
 		"player_name" : bot_name,
-		"order" : 0,
+		"player_team" : 0,
 		"status" : "Ready",
 		"is_bot" : true,
 		"flag" : PLAYER_STATUS_READY,
@@ -256,7 +256,7 @@ func create_bot_player() -> Dictionary:
 	
 class MyCustomSorter:
 	static func sort(a, b):
-		if a["order"] < b["order"]:
+		if a["player_team"] < b["player_team"]:
 			return true
 		return false
 		

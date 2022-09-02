@@ -3,8 +3,8 @@ extends BattleMp
 var drone : BaseHull
 
 func _ready():
-	drone = spawn_drones_and_get_dronw_owned_by(Global.player.player_id)
-	_ui.update_player_hp_bar(drone.player_name, drone.hp, drone.max_hp)
+	drone = spawn_drones_and_get_drone_owned_by(Global.player.player_id)
+	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
 	.load_map_stuff()
 	
 ################################################################
@@ -18,25 +18,27 @@ func on_joystick_input(output : Vector2, is_pressed : bool):
 	
 ################################################################
 # drone event handler
-func on_drone_ready(_entity):
+func on_drone_ready(_entity :BaseEntity):
 	.on_drone_ready(_entity)
 	
 	if _entity != drone:
 		return
 		
-	_ui.update_player_hp_bar(_entity.player_name, _entity.hp, _entity.max_hp)
+	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
 	
 	
-func on_drone_take_damage(_entity, _damage):
-	.on_drone_take_damage(_entity, _damage)
+func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData):
+	.on_drone_take_damage(_entity, _damage, _hit_by)
 	
 	if _entity != drone:
 		return
 		
-	_ui.update_player_hp_bar(_entity.player_name, _entity.hp, _entity.max_hp)
+	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
 	
-func on_drone_dead(_entity):
-	.on_drone_dead(_entity)
+func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
+	.on_drone_dead(_entity, _hit_by)
+	
+	_ui.display_event_message(_entity.player.player_name + " Killed by " + _hit_by.player_name)
 	
 	if _entity in _bots:
 		respawn_bot_drone(_entity.get_path())
@@ -98,7 +100,7 @@ func _on_bot_action_timer_timeout():
 		
 	bot.waypoint = waypoint
 	
-func respawn_bot_drone(drone : NodePath):
+func respawn_bot_drone(drone :NodePath):
 	var _respawn_delay_timer = _create_respawn_time_delay()
 	
 	_respawn_delay_timer.start()

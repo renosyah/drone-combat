@@ -169,24 +169,20 @@ func _load_light():
 var _bots = []
 var _players = []
 
-func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
-	var drones = []
-	
-	for data in Global.mp_players:
-		var d = data["drone_data"].duplicate()
-		d["is_bot"] = data.has("is_bot")
-		drones.append(d)
-		
+func spawn_drones_and_get_drone_owned_by(local_player_id : String) -> BaseHull:
 	var drone : BaseHull
 	
-	for data in drones:
-		var spawner  = DroneData.new()
-		spawner.from_dictionary(data)
+	for data in Global.mp_players:
+		var spawner = DroneData.new()
+		spawner.from_dictionary(data["drone_data"])
 		
 		var spawn_pos = _map.get_rand_pos()
 		spawn_pos.y = 8.0
 		
-		var spawned = spawner.spawn(data["player_id"], self, spawn_pos)
+		var player = PlayerData.new()
+		player.from_dictionary(data)
+		
+		var spawned = spawner.spawn(player, self, spawn_pos)
 		_ui.add_minimap_object(spawned)
 		
 		if spawned is BaseEntity:
@@ -197,11 +193,11 @@ func spawn_drones_and_get_dronw_owned_by(local_player_id : String) -> BaseHull:
 			
 		spawned.set_hp_bar(Color.red, true)
 			
-		if data["player_id"] == local_player_id:
+		if player.player_id == local_player_id:
 			drone = spawned
 			spawned.set_hp_bar(Color.green, false)
 			
-		if data["is_bot"]:
+		if data.has("is_bot"):
 			spawned.waypoint_mode = true
 			_bots.append(spawned)
 		else:
@@ -239,10 +235,10 @@ remotesync func _reposition_drone(drone : NodePath, pos : Vector3):
 	
 ################################################################
 # drone event signal handler
-func on_drone_ready(_entity):
+func on_drone_ready(_entity :BaseEntity):
 	pass
 	
-func on_drone_take_damage(_entity, _damage):
+func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
 	
@@ -255,7 +251,7 @@ func on_drone_take_damage(_entity, _damage):
 	msg.set_color(Color.orange)
 	msg.set_message("-" + str(_damage))
 	
-func on_drone_turret_dead(_turret):
+func on_drone_turret_dead(_turret :BaseTurret, _hit_by: PlayerData):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
 	
@@ -267,7 +263,7 @@ func on_drone_turret_dead(_turret):
 	msg.set_color(Color.red)
 	msg.set_message("Turret Disabled!")
 	
-func on_drone_dead(_entity):
+func on_drone_dead(_entity :BaseEntity, _hit_by: PlayerData):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
 	msg.translation = _entity.global_transform.origin

@@ -19,9 +19,10 @@ func _play_firing_animation():
 	_sound.stream = _firing_sounds[rand_range(0, _firing_sounds.size() - 1)]
 	_sound.play()
 	
-func _spawn_projectile_to(direction : Vector3):
-	._spawn_projectile_to(direction)
+func _spawn_projectile_to(_target : BaseEntity):
+	._spawn_projectile_to(_target)
 	var bullet = preload("res://entity/projectile/med_caliber/med_caliber.tscn").instance()
+	bullet.player = player
 	bullet.is_master = is_master
 	add_child(bullet)
 	bullet.attack_damage = int(rand_range(12,14))

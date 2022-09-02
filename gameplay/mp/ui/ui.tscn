@@ -24,6 +24,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
+[node name="event_message" type="Label" parent="CanvasLayer/control"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -300.0
+margin_right = 300.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 0, 400 )
+custom_fonts/font = ExtResource( 4 )
+text = "Your Drone
+Is Dead!"
+align = 1
+valign = 1
+
 [node name="joystick" parent="CanvasLayer/control" instance=ExtResource( 1 )]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -331,6 +345,8 @@ size_flags_vertical = 3
 
 [node name="simple_dialog_on_exit" parent="CanvasLayer" instance=ExtResource( 7 )]
 visible = false
+
+[node name="Tween" type="Tween" parent="CanvasLayer"]
 
 [connection signal="on_joystick_input" from="CanvasLayer/control/joystick" to="." method="_on_Virtual_joystick_on_joystick_input"]
 [connection signal="pressed" from="CanvasLayer/control/HBoxContainer/button_menu" to="." method="_on_button_menu_pressed"]

@@ -1,5 +1,6 @@
 extends BaseWeapon
 
+
 onready var _projectile_spawn_pos = $projectile_spawn_pos
 onready var _projectile_target_pos = $projectile_target_pos
 onready var _animation_player = $AnimationPlayer
@@ -19,9 +20,10 @@ func _play_firing_animation():
 	_sound.stream = _firing_sounds[rand_range(0, _firing_sounds.size() - 1)]
 	_sound.play()
 	
-func _spawn_projectile_to(direction : Vector3):
-	._spawn_projectile_to(direction)
+func _spawn_projectile_to(_target : BaseEntity):
+	._spawn_projectile_to(_target)
 	var bullet = preload("res://entity/projectile/mg_bullet/mg_bullet.tscn").instance()
+	bullet.player = player
 	bullet.is_master = is_master
 	add_child(bullet)
 	bullet.attack_damage = int(rand_range(2,4))

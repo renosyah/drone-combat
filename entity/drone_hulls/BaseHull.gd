@@ -2,7 +2,7 @@ extends BaseEntity
 class_name BaseHull
 
 signal on_hull_click(_hull)
-signal on_turret_dead(_turret)
+signal on_turret_dead(_turret, _hit_by)
 
 # variables
 const NONE = 1
@@ -16,9 +16,6 @@ var direction = Vector2.ZERO
 export var waypoint_mode = false
 
 var drone_data: DroneData
-
-export var player_id:String = ""
-export var player_name:String = ""
 
 export var speed : float = 2.0
 export var turning_speed : float = 4.0
@@ -84,7 +81,7 @@ func _set_puppet_translation(_val :Vector3):
 	if _is_master():
 		return
 		
-	_tween_movement.interpolate_property(self,"translation", translation, _puppet_translation, 0.5)
+	_tween_movement.interpolate_property(self,"translation", translation, _puppet_translation, Network.LATENCY_TWEEN)
 	_tween_movement.start()
 	
 puppet var _puppet_rotation: Vector3 setget _set_puppet_rotation
@@ -100,8 +97,8 @@ func _set_puppet_moving_state(_val : int):
 		
 	_moving_state = _puppet_moving_state
 	
-remotesync func _take_damage(_damage : int):
-	._take_damage(_damage)
+remotesync func _take_damage(_damage : int, _hit_by :Dictionary):
+	._take_damage(_damage, _hit_by)
 	
 	_hp_bar.update_bar(hp, max_hp)
 	
@@ -130,9 +127,6 @@ func _ready():
 	
 	tag = "hull"
 	
-	player_id = drone_data.player_id
-	player_name = drone_data.player_name
-	
 	hp = drone_data.hp
 	max_hp = drone_data.max_hp
 	
@@ -157,7 +151,7 @@ func _ready():
 	add_child(_bar)
 	_hp_bar = _bar
 	_hp_bar.update_bar(hp, max_hp)
-	_hp_bar.set_player_name(player_name)
+	_hp_bar.set_player_name(player.player_name)
 	_hp_bar.translation.y = 3.8
 	_hp_bar.visible = false
 	
@@ -173,27 +167,19 @@ func _ready():
 	
 	_explosion = preload("res://assets/other/explosion/explosion.tscn").instance()
 	add_child(_explosion)
-		
-	if not _is_master():
-		return
-		
-	_network_timmer = Timer.new()
-	_network_timmer.wait_time = _latency_delay
-	_network_timmer.connect("timeout", self , "_network_timmer_timeout")
-	_network_timmer.autostart = true
-	add_child(_network_timmer)
-		
+	
 	
 func set_hp_bar(_hp_bar_color :Color, _hp_bar_visible :bool):
 	if not is_instance_valid(_hp_bar):
 		return
 		
 	_hp_bar.visible = _hp_bar_visible
-	_hp_bar.set_hp_bar_color(_hp_bar_color )
+	_hp_bar.set_hp_bar_color(_hp_bar_color)
 	
 func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 	if turret_scene:
 		var _turret_asset = turret_scene.instance()
+		_turret_asset.player = player
 		_turret_asset.hp = turret_hp
 		_turret_asset.max_hp = turret_max_hp
 		_turret_asset.weapon_scene = weapon_scene
@@ -208,17 +194,17 @@ func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 		_turret.rotation_degrees.y = 180.0
 		
 	if is_instance_valid(_turret):
-		_turret.connect("on_take_damage", self,"_on_turret_take_damage" )
-		_turret.connect("on_dead", self,"_on_turret_on_dead" )
+		_turret.connect("on_take_damage", self,"_on_turret_take_damage")
+		_turret.connect("on_dead", self,"_on_turret_on_dead")
 	
-func _on_turret_take_damage(_entity, _damage):
-	emit_signal("on_take_damage", _entity, _damage)
+func _on_turret_take_damage(_entity, _damage, _hit_by):
+	emit_signal("on_take_damage", _entity, _damage, _hit_by)
 	
-func _on_turret_on_dead(_entity):
+func _on_turret_on_dead(_entity, _hit_by):
 	if is_dead:
 		return
 		
-	emit_signal("on_turret_dead", _entity)
+	emit_signal("on_turret_dead", _entity, _hit_by)
 	
 ############################################################
 # function

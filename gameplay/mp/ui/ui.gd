@@ -12,6 +12,9 @@ onready var _control: Control = $CanvasLayer/control
 onready var _death_screen: Control = $CanvasLayer/death_screen
 onready var _menu = $CanvasLayer/menu
 
+onready var _event_message = $CanvasLayer/control/event_message
+onready var _tween = $CanvasLayer/Tween
+
 onready var _mini_map = $CanvasLayer/MiniMap
 onready var _player_name = $CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar/player_name
 onready var _player_hp_bar = $CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar
@@ -30,6 +33,12 @@ func _ready():
 	else:
 		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_off.png")
 	
+func display_event_message(text :String):
+	_event_message.modulate.a = 1.0
+	_event_message.text = text
+	
+	_tween.interpolate_property(_event_message, "modulate:a",_event_message.modulate.a, 0.0,1.5,Tween.TRANS_SINE)
+	_tween.start()
 	
 func update_player_hp_bar(player_name :String, hp, max_hp :int):
 	_player_name.text = player_name

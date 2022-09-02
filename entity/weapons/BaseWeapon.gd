@@ -3,6 +3,9 @@ class_name BaseWeapon
 
 signal on_weapon_ready_open_fire(_target)
 
+# identity owner
+var player:PlayerData
+
 export var sensor_path: NodePath
 export var attack_range :int = 0
 
@@ -57,14 +60,14 @@ func _process(delta):
 		
 func open_fire(_target : BaseEntity):
 	_play_firing_animation()
-	_spawn_projectile_to(_target.global_transform.origin)
+	_spawn_projectile_to(_target)
 
 func _play_firing_animation():
 	# override where project
 	# want to animate each firing
 	pass
 	
-func _spawn_projectile_to(direction : Vector3):
+func _spawn_projectile_to(_target : BaseEntity):
 	# override where project
 	# want to spawn in each weapon
 	pass
@@ -77,6 +80,9 @@ func _is_valid_target(_body) -> bool:
 		return false
 		
 	if  not _body is BaseEntity:
+		return false
+		
+	if player.player_team == _body.team():
 		return false
 		
 	return true

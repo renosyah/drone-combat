@@ -11,7 +11,7 @@ func spawn_player_drone():
 		drone.queue_free()
 		
 	Global.load_player_drone_data()
-	drone = Global.player_drone_data.spawn(Global.player.player_id, self, Vector3.ZERO)
+	drone = Global.player_drone_data.spawn(Global.player, self, Vector3.ZERO)
 
 
 func _on_main_menu_on_drone_data_change():

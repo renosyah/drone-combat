@@ -57,7 +57,7 @@ func _server_player_connected(_player_network_unique_id : int, _player : Diction
 	var player = {
 		"player_id" : Global.player.player_id,
 		"player_name" : Global.player.player_name,
-		"order" : 0,
+		"player_team" : 0,
 		"status" : "Ready",
 		"flag" : "READY",
 		"drone_data" : Global.player_drone_data.to_dictionary()
@@ -70,7 +70,7 @@ func _server_player_connected(_player_network_unique_id : int, _player : Diction
 		var bot = {
 			"player_id" : bot_id,
 			"player_name" : bot_name,
-			"order" : 0,
+			"player_team" : i + 1,
 			"is_bot" : true,
 			"status" : "Ready",
 			"flag" : "READY",

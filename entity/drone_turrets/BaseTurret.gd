@@ -106,15 +106,17 @@ func _ready() -> void:
 	if not _is_master():
 		return
 		
-	_reset_turret_timer = Timer.new()
-	_reset_turret_timer.wait_time = 5.0
-	_reset_turret_timer.autostart = true
-	_reset_turret_timer.connect("timeout", self ,"_on_reset_turret_timer_timeout")
-	add_child(_reset_turret_timer)
+	var _timer = Timer.new()
+	_timer.wait_time = 5.0
+	_timer.autostart = true
+	_timer.connect("timeout", self ,"_on_reset_turret_timer_timeout")
+	add_child(_timer)
+	_reset_turret_timer = _timer
 	
-	_tween_rotation = preload("res://assets/other/tween_rotation/tween_rotation.tscn").instance()
-	add_child(_tween_rotation)
-	_tween_rotation.target = self
+	var _tween_rot = preload("res://assets/other/tween_rotation/tween_rotation.tscn").instance()
+	_tween_rot.target = self
+	add_child(_tween_rot)
+	_tween_rotation = _tween_rot
 	
 func _on_reset_turret_timer_timeout():
 	if not _is_master():
@@ -130,6 +132,7 @@ func _on_reset_turret_timer_timeout():
 func spawn_weapon(_pos : Vector3):
 	if weapon_scene:
 		var _weapon_asset = weapon_scene.instance()
+		_weapon_asset.player = player
 		head.add_child(_weapon_asset)
 		_weapon = _weapon_asset
 		_weapon.translation = _pos
@@ -146,6 +149,7 @@ func spawn_weapon(_pos : Vector3):
 func spawn_sensor(_pos : Vector3):
 	if sensor_scene:
 		var _sensor_asset = sensor_scene.instance()
+		_sensor_asset.player = player
 		_sensor_asset.spotting_range = spotting_range
 		_sensor_asset.scanning_speed = scanning_speed
 		add_child(_sensor_asset)
@@ -159,6 +163,7 @@ func spawn_sensor(_pos : Vector3):
 		
 	if is_instance_valid(_sensor):
 		_sensor.connect("on_spotted", self, "_on_sensor_spotted")
+		_sensor.is_master = true
 	
 ############################################################
 # function

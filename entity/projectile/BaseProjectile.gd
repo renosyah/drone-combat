@@ -3,6 +3,9 @@ class_name BaseProjectile
 
 const MAX_DISTANCE = 180.0
 
+# identity owner
+var player:PlayerData
+
 var attack_damage : int = 0
 var is_master = false
 
@@ -50,8 +53,11 @@ func _on_projectile_body_entered(body):
 	if not body is BaseEntity:
 		return
 		
+	if not body.has_method("take_damage"):
+		return
+		
 	if is_master:
-		body.take_damage(attack_damage)
+		body.take_damage(attack_damage, player)
 	
 	stop_projectile()
 	queue_free()
