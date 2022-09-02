@@ -29,7 +29,7 @@ func _ready():
 	_air_sensor.enabled = true
 	_air_sensor.cast_to = Vector3(0,0,1) * spotting_range
 	
-	_ground_sensor= RayCast.new()
+	_ground_sensor = RayCast.new()
 	add_child(_ground_sensor)
 	_ground_sensor.enabled = true
 	_ground_sensor.cast_to = Vector3(0,0,1) * spotting_range

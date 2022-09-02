@@ -27,9 +27,12 @@ func _network_timmer_timeout():
 	if not _is_network_running():
 		return
 		
-	if _is_master():
-		rset_unreliable("_puppet_hp", hp)
+	if not _is_master():
+		return
 		
+	rset_unreliable("_puppet_hp", hp)
+	
+	
 puppet var _puppet_hp : float setget _set_puppet_hp
 func _set_puppet_hp(_val :float):
 	_puppet_hp = _val
@@ -145,6 +148,7 @@ func _is_network_running():
 		return false
 		
 	return true
+	
 func _is_master() -> bool:
 	if not get_tree().network_peer:
 		return false
