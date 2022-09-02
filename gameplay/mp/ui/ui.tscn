@@ -142,7 +142,6 @@ margin_right = -45.0
 margin_bottom = -393.0
 
 [node name="death_screen" type="Control" parent="CanvasLayer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -180,22 +179,22 @@ size_flags_vertical = 3
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/death_screen/VBoxContainer"]
 margin_top = 720.0
 margin_right = 600.0
-margin_bottom = 820.0
-rect_min_size = Vector2( 0, 100 )
+margin_bottom = 840.0
+rect_min_size = Vector2( 0, 120 )
 mouse_filter = 2
 alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
-margin_left = 22.0
 margin_right = 102.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 80, 0 )
+margin_bottom = 120.0
+rect_min_size = Vector2( 25, 0 )
 mouse_filter = 2
+size_flags_horizontal = 3
 
 [node name="prev" type="Button" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
 margin_left = 106.0
 margin_right = 186.0
-margin_bottom = 100.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 80, 80 )
 flat = true
 
@@ -214,14 +213,14 @@ expand = true
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
 margin_left = 190.0
 margin_right = 196.0
-margin_bottom = 100.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 6, 0 )
 mouse_filter = 2
 
 [node name="respawn" type="Button" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
 margin_left = 200.0
 margin_right = 400.0
-margin_bottom = 100.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 200, 80 )
 flat = true
 
@@ -229,7 +228,7 @@ flat = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0, 0.517647, 0.164706, 1 )
+color = Color( 0.619608, 0.105882, 0.105882, 1 )
 
 [node name="Label" type="Label" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn"]
 anchor_right = 1.0
@@ -244,14 +243,14 @@ valign = 1
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
 margin_left = 404.0
 margin_right = 410.0
-margin_bottom = 100.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 6, 0 )
 mouse_filter = 2
 
 [node name="next" type="Button" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
 margin_left = 414.0
 margin_right = 494.0
-margin_bottom = 100.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 80, 80 )
 flat = true
 
@@ -270,16 +269,17 @@ flip_h = true
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
 margin_left = 498.0
-margin_right = 578.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 80, 0 )
+margin_right = 600.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 25, 0 )
 mouse_filter = 2
+size_flags_horizontal = 3
 
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer"]
-margin_top = 824.0
+margin_top = 844.0
 margin_right = 600.0
 margin_bottom = 1024.0
-rect_min_size = Vector2( 80, 200 )
+rect_min_size = Vector2( 80, 180 )
 mouse_filter = 2
 
 [node name="scoreboard" parent="CanvasLayer" instance=ExtResource( 12 )]

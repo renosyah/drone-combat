@@ -3,6 +3,7 @@ extends BattleMp
 var drone :BaseHull
 var drone_to_follow :BaseHull
 var respawn_cicle_index = 0
+var bot_command_cicle = 0
 
 func _ready():
 	drone = spawn_drones_and_get_drone_owned_by(Global.player.player_id)
@@ -110,8 +111,12 @@ func _process(delta):
 func _on_bot_action_timer_timeout():
 	if _bots.empty():
 		return
+		
+	bot_command_cicle += 1
+	if bot_command_cicle > _bots.size() - 1:
+		bot_command_cicle = 0
 	
-	var bot = _bots[rand_range(0, _bots.size() - 1)]
+	var bot = _bots[bot_command_cicle]
 	var waypoint = _map.get_rand_pos()
 	
 	if bot.is_dead():
