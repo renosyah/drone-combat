@@ -27,11 +27,7 @@ onready var _dialog_exit = $CanvasLayer/simple_dialog_on_exit
 func _ready():
 	show_control_screen()
 	validate_input_by_platform()
-	
-	if not Global.is_sfx_mute:
-		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_on.png")
-	else:
-		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_off.png")
+	check_sfx_setting()
 	
 func display_event_message(text :String):
 	_event_message.modulate.a = 1.0
@@ -68,17 +64,20 @@ func show_menu_screen():
 	_control.visible = false
 	_menu.visible = true
 	
+func check_sfx_setting():
+	if not Global.is_sfx_mute:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/checkbox_check.png")
+	else:
+		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/checkbox_uncheck.png")
+	
 func _on_sfx_setting_pressed():
 	Global.is_sfx_mute = not Global.is_sfx_mute
-	if not Global.is_sfx_mute:
-		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_on.png")
-	else:
-		_sfx_sound_setting_icon.texture = preload("res://assets/ui/icon/sound_off.png")
+	check_sfx_setting()
 	
 func _on_button_menu_pressed():
 	show_menu_screen()
 	
-func _on_button_close_menu_pressed():
+func _on_button_resume_menu_pressed():
 	show_control_screen()
 	
 func _on_Virtual_joystick_on_joystick_input(output, is_pressed):
