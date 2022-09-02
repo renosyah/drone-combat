@@ -5,7 +5,7 @@ var drone : BaseHull
 
 func _ready():
 	drone = spawn_drones_and_get_drone_owned_by(Global.player.player_id)
-	_ui.update_player_hp_bar(drone.player_name, drone.hp, drone.max_hp)
+	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
 	.init_client()
 	.load_map_stuff()
 	
