@@ -64,7 +64,9 @@ func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData
 func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 	.on_drone_dead(_entity, _hit_by)
 	
-	_ui.display_event_message(_entity.player.player_name + " Killed by " + _hit_by.player_name)
+	_ui.display_event_message(_hit_by.player_name + " Kill " + _entity.player.player_name)
+	_ui.update_scoreboard(_entity.player.player_id, 0, 1)
+	_ui.update_scoreboard(_hit_by.player_id, 1, 0)
 	
 	if _entity != drone:
 		return

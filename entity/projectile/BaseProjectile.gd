@@ -22,7 +22,7 @@ func _ready():
 func launch(to : Vector3):
 	to.z += rand_range(-spread, spread)
 	to.x += rand_range(-spread, spread)
-	to.y += rand_range(-spread, spread)
+	to.y += rand_range(spread, spread + (spread * 0.05))
 	velocity = translation.direction_to(to)
 	look_at(to, Vector3.UP)
 	

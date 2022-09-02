@@ -25,6 +25,17 @@ const weapons :Array = [
 		"modifier" : {}
 	},
 	{
+		"module_id":"w-4",
+		"module_name" : "Twin .50 cal" ,
+		"scene" : "res://entity/weapons/twin_mg/twin_mg.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/weapon_4.png",
+		"infos" : [
+			"Very High Firing Rate",
+			"Very Low Damage"
+		],
+		"modifier" : {}
+	},
+	{
 		"module_id":"w-3",
 		"module_name" : "75mm AD" ,
 		"scene" : "res://entity/weapons/cannon/cannon.tscn",
@@ -59,10 +70,10 @@ const turrets :Array = [
 		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
 		"infos" : [
 			"Hp : 120",
-			"Rotation : 70"
+			"Rotation : 65"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 70,
+			"turret_rotation_speed" : 65,
 			"turret_hp" : 90,
 			"turret_max_hp" : 90
 		}
@@ -74,14 +85,29 @@ const turrets :Array = [
 		"icon" : "res://assets/ui/choose-module/drone/turret_3.png",
 		"infos" : [
 			"Hp : 60",
-			"Rotation : 80"
+			"Rotation : 75"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 80,
+			"turret_rotation_speed" : 75,
 			"turret_hp" : 60,
 			"turret_max_hp" : 60
 		}
-	}
+	},
+	{
+		"module_id":"t-4",
+		"module_name" : "OM-7 Auto",
+		"scene" : "res://entity/drone_turrets/turret_4/turret_4.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/turret_4.png",
+		"infos" : [
+			"Hp : 40",
+			"Rotation : 85"
+		],
+		"modifier" : {
+			"turret_rotation_speed" : 85,
+			"turret_hp" : 40,
+			"turret_max_hp" : 40
+		}
+	},
 ]
 const hulls :Array = [
 	{
@@ -107,13 +133,13 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_2/hull_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_2.png",
 		"infos" : [
-			"Hp : 40",
+			"Hp : 60",
 			"Speed : 4",
 			"Travese : 3"
 		],
 		"modifier" : {
-			"hp" : 40,
-			"max_hp" : 40,
+			"hp" : 60,
+			"max_hp" : 60,
 			"speed" : 4.0,
 			"turning_speed" : 3.0
 		}
@@ -124,13 +150,13 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
 		"infos" : [
-			"Hp : 90",
+			"Hp : 170",
 			"Speed : 2.5",
 			"Travese : 2.0"
 		],
 		"modifier" : {
-			"hp" : 90,
-			"max_hp" : 90,
+			"hp" : 170,
+			"max_hp" : 170,
 			"speed" : 2.5,
 			"turning_speed" : 2.0
 		}

@@ -12,6 +12,7 @@ onready var _is_dekstop :bool = OS.get_name() in DEKSTOP
 onready var _joystick: VirtualJoystick = $CanvasLayer/control/joystick
 onready var _control: Control = $CanvasLayer/control
 onready var _death_screen: Control = $CanvasLayer/death_screen
+onready var _scoreboard = $CanvasLayer/scoreboard
 onready var _menu = $CanvasLayer/menu
 
 onready var _event_message = $CanvasLayer/control/event_message
@@ -30,6 +31,15 @@ func _ready():
 	show_control_screen()
 	validate_input_by_platform()
 	check_sfx_setting()
+	
+func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = ""):
+	var score :ScoreData = ScoreData.new()
+	score.player_color = _color
+	score.player_id = player_id
+	score.player_name = player_name
+	score.kill_count = kill
+	score.death_count = death
+	_scoreboard.update_score(score)
 	
 func display_event_message(text :String):
 	_event_message.modulate.a = 1.0
@@ -52,19 +62,16 @@ func validate_input_by_platform():
 	_joystick.visible = not _is_dekstop
 	
 func show_death_screen():
-	_menu.visible = false
 	_control.visible = false
 	_death_screen.visible = true
 	
 func show_control_screen():
 	_death_screen.visible = false
-	_menu.visible = false
 	_control.visible = true
 	
 func show_menu_screen():
 	_death_screen.visible = false
 	_control.visible = false
-	_menu.visible = true
 	
 func check_sfx_setting():
 	if not Global.is_sfx_mute:
@@ -77,10 +84,10 @@ func _on_sfx_setting_pressed():
 	check_sfx_setting()
 	
 func _on_button_menu_pressed():
-	show_menu_screen()
+	_menu.visible = true
 	
 func _on_button_resume_menu_pressed():
-	show_control_screen()
+	_menu.visible = false
 	
 func _on_Virtual_joystick_on_joystick_input(output, is_pressed):
 	if _is_dekstop:
@@ -116,6 +123,11 @@ func _on_prev_pressed():
 func _on_next_pressed():
 	emit_signal("on_spectate_next")
 	
+func _on_button_score_pressed():
+	_scoreboard.visible = true
+
+
+
 
 
 

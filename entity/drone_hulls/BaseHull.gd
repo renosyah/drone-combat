@@ -197,14 +197,15 @@ func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 		_turret.connect("on_take_damage", self,"_on_turret_take_damage")
 		_turret.connect("on_dead", self,"_on_turret_on_dead")
 	
-func _on_turret_take_damage(_entity, _damage, _hit_by):
-	emit_signal("on_take_damage", _entity, _damage, _hit_by)
+func _on_turret_take_damage(_entity :BaseTurret, _damage :int, _hit_by :PlayerData):
+	emit_signal("on_take_damage", _entity, _damage, hit_by_player)
 	
-func _on_turret_on_dead(_entity, _hit_by):
+	
+func _on_turret_on_dead(_entity :BaseTurret, _hit_by :PlayerData):
 	if is_dead:
 		return
 		
-	emit_signal("on_turret_dead", _entity, _hit_by)
+	emit_signal("on_turret_dead", _entity, hit_by_player)
 	
 ############################################################
 # function

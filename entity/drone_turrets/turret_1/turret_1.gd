@@ -9,6 +9,7 @@ func _ready():
 	_material.albedo_color = color
 	$pivot/MeshInstance.set_surface_material(0, _material)
 	$pivot/MeshInstance2.set_surface_material(0, _material)
+	$pivot/weapon/MeshInstance3.set_surface_material(0, _material)
 	
 	.spawn_weapon(weapon_pos.translation)
 	.spawn_sensor(sensor_pos.translation)

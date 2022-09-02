@@ -193,6 +193,7 @@ func spawn_drones_and_get_drone_owned_by(local_player_id : String) -> BaseHull:
 		
 		var spawned = spawner.spawn(player, self, spawn_pos)
 		_ui.add_minimap_object(spawned)
+		_ui.update_scoreboard(player.player_id, 0, 0,spawner.color, player.player_name)
 		
 		if spawned is BaseEntity:
 			spawned.connect("on_ready", self, "on_drone_ready")
