@@ -37,7 +37,7 @@ func display_event_message(text :String):
 	_event_message.modulate.a = 1.0
 	_event_message.text = text
 	
-	_tween.interpolate_property(_event_message, "modulate:a",_event_message.modulate.a, 0.0,1.5,Tween.TRANS_SINE)
+	_tween.interpolate_property(_event_message, "modulate:a",_event_message.modulate.a, 0.0,3.5,Tween.TRANS_SINE)
 	_tween.start()
 	
 func update_player_hp_bar(player_name :String, hp, max_hp :int):
