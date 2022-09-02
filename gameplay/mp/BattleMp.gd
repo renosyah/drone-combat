@@ -135,6 +135,8 @@ func _load_ui():
 	
 	_ui.connect("on_joystick_input", self, "on_joystick_input")
 	_ui.connect("on_respawn_button_press", self, "on_respawn_button_press")
+	_ui.connect("on_spectate_previous", self, "_on_spectate_previous")
+	_ui.connect("on_spectate_next", self, "_on_spectate_next")
 	
 	_ui.set_camera(_camera)
 	
@@ -142,6 +144,12 @@ func on_joystick_input(output : Vector2, is_pressed : bool):
 	pass
 	
 func on_respawn_button_press():
+	pass
+	
+func _on_spectate_previous():
+	pass
+	
+func _on_spectate_next():
 	pass
 	
 ################################################################
@@ -168,6 +176,7 @@ func _load_light():
 # drone spawner
 var _bots = []
 var _players = []
+var _all = []
 
 func spawn_drones_and_get_drone_owned_by(local_player_id : String) -> BaseHull:
 	var drone : BaseHull
@@ -203,6 +212,8 @@ func spawn_drones_and_get_drone_owned_by(local_player_id : String) -> BaseHull:
 		else:
 			_players.append(spawned)
 			
+		_all.append(spawned)
+		
 	return drone
 	
 func respawn_drone(drone : NodePath):

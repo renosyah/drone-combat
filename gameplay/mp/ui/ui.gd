@@ -2,6 +2,8 @@ extends Control
 
 signal on_joystick_input(output,is_pressed)
 signal on_respawn_button_press()
+signal on_spectate_previous()
+signal on_spectate_next()
 
 const DEKSTOP =  ["Server", "Windows", "WinRT", "X11"]
 
@@ -108,8 +110,18 @@ func exit_game_session():
 func _on_simple_dialog_on_exit_on_yes():
 	exit_game_session()
 	
+func _on_prev_pressed():
+	emit_signal("on_spectate_previous")
 	
+func _on_next_pressed():
+	emit_signal("on_spectate_next")
 	
+
+
+
+
+
+
 
 
 

@@ -1,9 +1,12 @@
 extends BattleMp
 
-var drone : BaseHull
+var drone :BaseHull
+var drone_to_follow :BaseHull
+var respawn_cicle_index = 0
 
 func _ready():
 	drone = spawn_drones_and_get_drone_owned_by(Global.player.player_id)
+	_set_respawn_cicle_index(_all.find(drone,0))
 	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
 	.load_map_stuff()
 	
@@ -15,6 +18,23 @@ func on_joystick_input(output : Vector2, is_pressed : bool):
 		return
 		
 	._move_drone(drone.get_path(), output)
+	
+func _on_spectate_previous():
+	_set_respawn_cicle_index(respawn_cicle_index + 1)
+	
+func _on_spectate_next():
+	_set_respawn_cicle_index(respawn_cicle_index - 1)
+	
+func _set_respawn_cicle_index(val:int):
+	respawn_cicle_index = val
+	
+	if respawn_cicle_index > _all.size() - 1:
+		respawn_cicle_index = 0
+		
+	elif respawn_cicle_index < 0:
+		respawn_cicle_index = _all.size() - 1
+		
+	drone_to_follow = _all[respawn_cicle_index]
 	
 ################################################################
 # drone event handler
@@ -68,18 +88,19 @@ func on_respawn_button_press():
 	if not is_instance_valid(drone):
 		return
 		
+	_set_respawn_cicle_index(_all.find(drone,0))
 	.respawn_drone(drone.get_path())
 	
 ################################################################
 # process
 func _process(delta):
-	if not is_instance_valid(drone):
+	if not is_instance_valid(drone_to_follow):
 		return
 		
 	if not is_instance_valid(_camera):
 		return
 	
-	_camera.translation = drone.global_transform.origin
+	_camera.translation = drone_to_follow.global_transform.origin
 	_camera.translation.y = 0.0
 	
 ################################################################
