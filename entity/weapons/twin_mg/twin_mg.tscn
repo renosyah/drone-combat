@@ -11,6 +11,7 @@ albedo_color = Color( 0.239216, 0.239216, 0.239216, 1 )
 [sub_resource type="CylinderMesh" id=3]
 top_radius = 0.03
 bottom_radius = 0.04
+height = 1.8
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
@@ -144,7 +145,7 @@ skeleton = NodePath("../..")
 material/0 = SubResource( 2 )
 
 [node name="barel" type="MeshInstance" parent="pivot"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.286167 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.531169 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
@@ -183,7 +184,7 @@ skeleton = NodePath("../..")
 material/0 = SubResource( 2 )
 
 [node name="barel" type="MeshInstance" parent="pivot2"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.286167 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.531169 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )

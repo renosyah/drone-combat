@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://entity/drone_turrets/turret_1/turret_1.gd" type="Script" id=1]
+[ext_resource path="res://entity/drone_turrets/turret_4/turret_4.gd" type="Script" id=1]
 [ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=2]
 
 [sub_resource type="BoxShape" id=1]
@@ -26,6 +26,13 @@ size = Vector3( 1, 0.1, 0.6 )
 [sub_resource type="SpatialMaterial" id=5]
 next_pass = ExtResource( 2 )
 albedo_color = Color( 0.384314, 0.384314, 0.384314, 1 )
+
+[sub_resource type="PrismMesh" id=8]
+size = Vector3( 1, 0.4, 0.1 )
+
+[sub_resource type="SpatialMaterial" id=9]
+next_pass = ExtResource( 2 )
+albedo_color = Color( 0.32549, 0.32549, 0.32549, 1 )
 
 [node name="turret_4" type="KinematicBody"]
 input_ray_pickable = false
@@ -61,10 +68,20 @@ material/0 = SubResource( 7 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0.35 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="pivot/weapon"]
-transform = Transform( 1, 0, 0, 0, 0.648159, -0.761504, 0, 0.761504, 0.648159, 0, 0.0303313, -0.265605 )
+transform = Transform( 1, 0, 0, 0, 0.791852, -0.610712, 0, 0.610712, 0.791852, 0, 0.0904433, -0.230333 )
 mesh = SubResource( 4 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 5 )
 
 [node name="weapon_pos" type="Position3D" parent="pivot/weapon"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0802826, -0.0739476 )
+
+[node name="MeshInstance" type="MeshInstance" parent="pivot/weapon"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.491773, 0.124614, -0.498891 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="pivot/weapon"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.480221, 0.124614, -0.498891 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )

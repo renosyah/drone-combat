@@ -108,6 +108,21 @@ const turrets :Array = [
 			"turret_max_hp" : 60
 		}
 	},
+	{
+		"module_id":"t-5",
+		"module_name" : "Recta MX-A",
+		"scene" : "res://entity/drone_turrets/turret_5/turret_5.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
+		"infos" : [
+			"Hp : 100",
+			"Rotation : 70"
+		],
+		"modifier" : {
+			"turret_rotation_speed" : 70,
+			"turret_hp" : 100,
+			"turret_max_hp" : 100
+		}
+	},
 ]
 const hulls :Array = [
 	{
