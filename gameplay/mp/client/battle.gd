@@ -64,6 +64,11 @@ func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo
 	.on_drone_turret_ammo_update(_turret, _ammo_left, _max_ammo)
 	_ui.update_player_ammo_bar(_ammo_left, _max_ammo)
 	
+func on_drone_resupply(_entity :BaseHull, _ammo_added :int):
+	.on_drone_resupply(_entity, _ammo_added)
+	var turret = _entity.get_turret()
+	_ui.update_player_ammo_bar(turret.ammo, turret.max_ammo)
+	
 func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	.on_drone_heal(_entity, _hp_added)
 	

@@ -2,6 +2,7 @@ extends BaseEntity
 class_name BaseHull
 
 signal on_hull_click(_hull)
+signal on_resupply(_entity, _ammo_added)
 
 # variables
 const NONE = 1
@@ -100,12 +101,12 @@ func _set_puppet_moving_state(_val : int):
 	_moving_state = _puppet_moving_state
 	
 remotesync func _resupply(_ammo_added : int):
-	_hp_bar.update_ammo_bar(turret_ammo, turret_max_ammo)
-	
 	if not is_instance_valid(_turret):
 		return
 		
-	_turret.emit_signal("on_turret_ammo_update", _turret, turret_ammo, turret_max_ammo)
+	_hp_bar.update_ammo_bar(_turret.ammo, _turret.max_ammo)
+
+	emit_signal("on_resupply", self, _ammo_added)
 	
 remotesync func _heal(_hp_added : int):
 	._heal(_hp_added)

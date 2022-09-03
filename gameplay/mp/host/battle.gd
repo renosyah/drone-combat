@@ -6,11 +6,11 @@ var respawn_cicle_index = 0
 var bot_command_cicle = 0
 
 func _ready():
+	.load_map_stuff()
 	drone = spawn_drones_and_get_drone_owned_by(Global.player)
 	.set_minimap_player_objects(drone.player)
 	_set_respawn_cicle_index(_all.find(drone,0))
-	.load_map_stuff()
-	
+
 	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
 	_ui.update_player_ammo_bar(drone.turret_ammo, drone.turret_max_ammo)
 	
@@ -54,6 +54,11 @@ func on_drone_respawn(_entity :BaseHull):
 func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
 	.on_drone_turret_ammo_update(_turret, _ammo_left, _max_ammo)
 	_ui.update_player_ammo_bar(_ammo_left, _max_ammo)
+	
+func on_drone_resupply(_entity :BaseHull, _ammo_added :int):
+	.on_drone_resupply(_entity, _ammo_added)
+	var turret = _entity.get_turret()
+	_ui.update_player_ammo_bar(turret.ammo, turret.max_ammo)
 	
 func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	.on_drone_heal(_entity, _hp_added)
@@ -140,6 +145,7 @@ func _on_bot_action_timer_timeout():
 		
 	bot.waypoint = waypoint
 	
+	
 func respawn_bot_drone(drone :NodePath):
 	var _respawn_delay_timer = _create_respawn_time_delay()
 	
@@ -149,6 +155,13 @@ func respawn_bot_drone(drone :NodePath):
 	
 	.respawn_drone(drone)
 	
+func _on_loot_spawner_timer_timeout():
+	if randf() > 0.5:
+		rpc("spawn_healing_item", _map.get_rand_pos())
+	else:
+		rpc("spawn_ammo_item", _map.get_rand_pos())
+
+
 
 
 

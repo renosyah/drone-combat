@@ -47,10 +47,15 @@ func _ready():
 func _process(delta):
 	if _respawn_timer.is_stopped():
 		_respawn_btn_label.text = "Respawn"
+		_respawn_btn.disabled = false
+		_respawn_btn_color.color = BUTTON_RESPAWN_ENABLE_COLOR
 		set_process(false)
 		
 	else:
 		_respawn_btn_label.text = "Wait (" + str(int(_respawn_timer.time_left + 1)) + ")"
+		_respawn_btn.disabled = true
+		_respawn_btn_color.color = BUTTON_RESPAWN_DISABLE_COLOR
+	
 	
 func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = ""):
 	var score :ScoreData = ScoreData.new()
@@ -91,14 +96,6 @@ func show_death_screen():
 	
 	_control.visible = false
 	_death_screen.visible = true
-
-	_respawn_btn.disabled = true
-	_respawn_btn_color.color = BUTTON_RESPAWN_DISABLE_COLOR
-	
-	yield(_respawn_timer,"timeout")
-	
-	_respawn_btn.disabled = false
-	_respawn_btn_color.color = BUTTON_RESPAWN_ENABLE_COLOR
 	
 func show_control_screen():
 	_death_screen.visible = false

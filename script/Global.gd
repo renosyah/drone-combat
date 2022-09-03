@@ -56,7 +56,7 @@ signal on_host_game_session_ready(_mp_game_data)
 remotesync func _on_host_game_session_ready(_mp_game_data : Dictionary):
 	emit_signal("on_host_game_session_ready", _mp_game_data)
 	
-remotesync func on_host_game_session_ready(_mp_game_data : Dictionary = {}):	
+func on_host_game_session_ready(_mp_game_data : Dictionary = {}):	
 	rpc("_on_host_game_session_ready", _mp_game_data)
 	
 const MODE_HOST = 0

@@ -1,9 +1,15 @@
 extends Area
 class_name BaseItem
 
+var _altitude: float = 0.3
+
 func _ready():
 	connect("body_entered", self,"_on_body_entered")
 	
+func _process(delta):
+	if int(round(translation.y)) > int(_altitude):
+		translation.y -= 9.0 * delta
+		
 func _on_body_entered(body):
 	if not is_instance_valid(body):
 		return

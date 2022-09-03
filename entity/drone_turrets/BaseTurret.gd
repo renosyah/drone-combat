@@ -72,6 +72,10 @@ func _set_puppet_elevation(_val: float):
 puppet var _puppet_ammo :int setget _set_puppet_ammo
 func _set_puppet_ammo(_val : int):
 	_puppet_ammo = _val
+	
+	if _is_master():
+		return
+		
 	ammo = _puppet_ammo
 	
 remotesync func _open_fire(_target : NodePath):

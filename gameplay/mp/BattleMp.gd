@@ -198,6 +198,7 @@ func spawn_drones_and_get_drone_owned_by(local_player : PlayerData) -> BaseHull:
 			spawned.connect("on_dead", self, "on_drone_dead")
 			spawned.connect("on_take_damage", self, "on_drone_take_damage")
 			spawned.connect("on_heal", self, "on_drone_heal")
+			spawned.connect("on_resupply", self, "on_drone_resupply")
 			
 			var turret = spawned.get_turret()
 			turret.connect("on_take_damage", self, "on_drone_turret_take_damage")
@@ -255,17 +256,21 @@ remotesync func _reposition_drone(drone : NodePath, pos : Vector3):
 	if not is_instance_valid(drone_node):
 		return
 		
-	var pos_holder = drone_node.translation
 	drone_node.translation = pos
-	spawn_healing_item(pos_holder)
 	
 ################################################################
 # drop item
-func spawn_healing_item(at : Vector3):
+remotesync func spawn_healing_item(at : Vector3):
+	var item = preload("res://entity/item/healing_item/healing_item.tscn").instance()
+	add_child(item)
+	item.translation = at
+	item.translation.y = 5
+	
+remotesync func spawn_ammo_item(at : Vector3):
 	var item = preload("res://entity/item/ammo_item/ammo_item.tscn").instance()
 	add_child(item)
 	item.translation = at
-	item.translation.y = 0.8
+	item.translation.y = 5
 	
 ################################################################
 # drone event signal handler
@@ -274,6 +279,20 @@ func on_drone_respawn(_entity :BaseHull):
 	
 func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
 	pass
+	
+func on_drone_resupply(_entity :BaseHull, _ammo_added :int):
+	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
+	add_child(msg)
+	
+	var spread = 2.0
+	msg.translation = _entity.global_transform.origin
+	msg.translation.z += rand_range(-spread, spread)
+	msg.translation.x += rand_range(-spread, spread)
+	msg.translation.y += 2.0 + rand_range(-spread, spread)
+	
+	msg.set_color(Color.black)
+	msg.set_message("+" + str(_ammo_added))
+	
 	
 func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
