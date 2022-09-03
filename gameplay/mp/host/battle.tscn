@@ -1,19 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://gameplay/mp/host/battle.gd" type="Script" id=1]
-[ext_resource path="res://map/map_0/map_0.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/gameplay-camera/gameplay_camera.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/enviroment/WorldEnvironment.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/enviroment/DirectionalLight.tscn" type="PackedScene" id=6]
-[ext_resource path="res://gameplay/mp/ui/ui.tscn" type="PackedScene" id=10]
 
 [node name="battle" type="Node"]
 script = ExtResource( 1 )
-map_scene = ExtResource( 2 )
-camera_scene = ExtResource( 3 )
-env_scene = ExtResource( 4 )
-light_scene = ExtResource( 6 )
-ui_scene = ExtResource( 10 )
 
 [node name="bot_action_timer" type="Timer" parent="."]
 wait_time = 5.0

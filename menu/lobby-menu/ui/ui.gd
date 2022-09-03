@@ -8,6 +8,7 @@ const BUTTON_BATTLE_DISABLE_COLOR = Color(0.27451, 0.27451, 0.27451)
 const PLAYER_STATUS_NOT_READY = "NOT_READY"
 const PLAYER_STATUS_READY = "READY"
 
+
 onready var _server_advertise = $server_advertise
 onready var _player_holder = $CanvasLayer/control/VBoxContainer/ScrollContainer/VBoxContainer
 
@@ -155,6 +156,7 @@ func _on_play_pressed():
 		return
 		
 	Global.mp_players = player_joined
+	Global.mp_game_data["map"] = MapData.MAPS[rand_range(0, MapData.MAPS.size() - 1)]
 	get_tree().change_scene("res://gameplay/mp/host/battle.tscn")
 	
 func _on_add_bot_pressed():

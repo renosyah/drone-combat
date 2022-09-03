@@ -25,6 +25,7 @@ points = PoolVector3Array( -50.1859, -7.68587, -1.18587, 48.1784, 7.25093, 1, 48
 
 [node name="map_0" type="StaticBody"]
 script = ExtResource( 1 )
+max_stuff = 90
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 6 )

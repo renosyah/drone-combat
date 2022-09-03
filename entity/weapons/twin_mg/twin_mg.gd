@@ -21,11 +21,12 @@ func _play_firing_animation():
 	
 func _spawn_projectile_to(_target : BaseEntity):
 	._spawn_projectile_to(_target)
-	var bullet = preload("res://entity/projectile/mg_bullet/mg_bullet.tscn").instance()
-	bullet.player = player
-	bullet.is_master = is_master
-	add_child(bullet)
-	bullet.attack_damage = int(rand_range(2,4))
-	bullet.spread = 0.55
-	bullet.translation = _projectile_spawn_pos.global_transform.origin
-	bullet.launch(_projectile_target_pos.global_transform.origin)
+	for i in range(2):
+		var bullet = preload("res://entity/projectile/mg_bullet/mg_bullet.tscn").instance()
+		bullet.player = player
+		bullet.is_master = is_master
+		add_child(bullet)
+		bullet.attack_damage = int(rand_range(2,4))
+		bullet.spread = 0.55
+		bullet.translation = _projectile_spawn_pos.global_transform.origin
+		bullet.launch(_projectile_target_pos.global_transform.origin)

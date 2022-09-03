@@ -73,12 +73,13 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 	if not _entity.is_dead():
 		return
 		
+	_ui.update_player_hp_bar(_entity.player.player_name, 0, _entity.max_hp)
+	
 	var _respawn_delay_timer = _create_respawn_time_delay()
 		
 	_respawn_delay_timer.start()
 	yield(_respawn_delay_timer, "timeout")
 	_respawn_delay_timer.queue_free()
-		
 		
 	_ui.show_death_screen()
 	
@@ -121,10 +122,6 @@ func _on_bot_action_timer_timeout():
 	
 	if bot.is_dead():
 		return
-		
-	if randf() > 0.5:
-		var player = _players[rand_range(0, _players.size() - 1)]
-		waypoint = player.translation
 		
 	bot.waypoint = waypoint
 	

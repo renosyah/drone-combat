@@ -74,6 +74,8 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 	if not _entity.is_dead():
 		return
 		
+	_ui.update_player_hp_bar(_entity.player.player_name, 0, _entity.max_hp)
+	
 	var _respawn_delay_timer = _create_respawn_time_delay()
 		
 	_respawn_delay_timer.start()

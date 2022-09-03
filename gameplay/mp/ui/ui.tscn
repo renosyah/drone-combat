@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/ui/mini_map/MiniMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/ui/icon/checkbox_check.png" type="Texture" id=6]
 [ext_resource path="res://assets/ui/simple_dialog_option/simple_dialog_option.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/ui/icon/back.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/icon/arrow.png" type="Texture" id=8]
 [ext_resource path="res://assets/ui/icon/score.png" type="Texture" id=9]
 [ext_resource path="res://assets/ui/bar/hp_bar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/ui/icon/menu.png" type="Texture" id=11]
@@ -61,7 +61,7 @@ margin_bottom = 120.0
 rect_min_size = Vector2( 20, 0 )
 
 [node name="button_score" type="Button" parent="CanvasLayer/control/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.407843 )
+modulate = Color( 1, 1, 1, 0.658824 )
 margin_left = 24.0
 margin_right = 104.0
 margin_bottom = 120.0
@@ -120,7 +120,7 @@ rect_min_size = Vector2( 20, 0 )
 size_flags_horizontal = 3
 
 [node name="button_menu" type="Button" parent="CanvasLayer/control/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.407843 )
+modulate = Color( 1, 1, 1, 0.658824 )
 margin_left = 496.0
 margin_right = 576.0
 margin_bottom = 120.0
@@ -154,14 +154,19 @@ alignment = 1
 
 [node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer"]
 margin_right = 600.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 80, 60 )
+margin_bottom = 100.0
+rect_min_size = Vector2( 80, 100 )
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/death_screen/VBoxContainer"]
-margin_top = 64.0
+margin_top = 104.0
 margin_right = 600.0
-margin_bottom = 187.0
+margin_bottom = 227.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 3 )
 text = "Your Drone
 Is Dead!"
@@ -169,7 +174,7 @@ align = 1
 valign = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer"]
-margin_top = 191.0
+margin_top = 231.0
 margin_right = 600.0
 margin_bottom = 716.0
 rect_min_size = Vector2( 80, 60 )
@@ -185,36 +190,32 @@ mouse_filter = 2
 alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
-margin_right = 102.0
+margin_right = 78.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 25, 0 )
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="prev" type="Button" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
-margin_left = 106.0
-margin_right = 186.0
+margin_left = 82.0
+margin_right = 182.0
 margin_bottom = 120.0
-rect_min_size = Vector2( 80, 80 )
+rect_min_size = Vector2( 100, 80 )
 flat = true
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/prev"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0.415686, 0.415686, 0.415686, 1 )
-
 [node name="Label" type="TextureRect" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/prev"]
+modulate = Color( 1, 1, 1, 0.678431 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 8 )
 expand = true
+flip_h = true
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
-margin_left = 190.0
+margin_left = 186.0
 margin_right = 196.0
 margin_bottom = 120.0
-rect_min_size = Vector2( 6, 0 )
+rect_min_size = Vector2( 10, 0 )
 mouse_filter = 2
 
 [node name="respawn" type="Button" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
@@ -228,7 +229,7 @@ flat = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0.619608, 0.105882, 0.105882, 1 )
+color = Color( 0.402344, 0.402344, 0.402344, 1 )
 
 [node name="Label" type="Label" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn"]
 anchor_right = 1.0
@@ -242,33 +243,27 @@ valign = 1
 
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
 margin_left = 404.0
-margin_right = 410.0
+margin_right = 414.0
 margin_bottom = 120.0
-rect_min_size = Vector2( 6, 0 )
+rect_min_size = Vector2( 10, 0 )
 mouse_filter = 2
 
 [node name="next" type="Button" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
-margin_left = 414.0
-margin_right = 494.0
+margin_left = 418.0
+margin_right = 518.0
 margin_bottom = 120.0
-rect_min_size = Vector2( 80, 80 )
+rect_min_size = Vector2( 100, 80 )
 flat = true
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/next"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0.415686, 0.415686, 0.415686, 1 )
-
 [node name="Label" type="TextureRect" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/next"]
+modulate = Color( 1, 1, 1, 0.678431 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 8 )
 expand = true
-flip_h = true
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer/HBoxContainer"]
-margin_left = 498.0
+margin_left = 522.0
 margin_right = 600.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 25, 0 )
@@ -483,6 +478,10 @@ rect_min_size = Vector2( 0, 100 )
 
 [node name="simple_dialog_on_exit" parent="CanvasLayer" instance=ExtResource( 7 )]
 visible = false
+
+[node name="respawn_timer" type="Timer" parent="CanvasLayer"]
+wait_time = 5.0
+one_shot = true
 
 [node name="Tween" type="Tween" parent="CanvasLayer"]
 

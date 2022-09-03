@@ -63,6 +63,7 @@ func _server_player_connected(_player_network_unique_id : int, _player : Diction
 		"drone_data" : Global.player_drone_data.to_dictionary()
 	}
 	Global.mp_players = [player]
+	Global.mp_game_data["map"] = MapData.MAPS[rand_range(0, MapData.MAPS.size() - 1)]
 	
 	for i in range(3):
 		var bot_id = "BOT-" + str(GDUUID.v4())

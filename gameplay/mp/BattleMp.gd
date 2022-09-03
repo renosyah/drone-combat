@@ -1,19 +1,19 @@
 extends Node
 class_name BattleMp
 
-export var map_scene : Resource
+var map_scene : Resource
 var _map : BaseMap
 
-export var camera_scene : Resource
+export var camera_scene : Resource = preload("res://assets/gameplay-camera/gameplay_camera.tscn")
 var _camera : GameplayCamera
 
-export var env_scene : Resource
+export var env_scene : Resource = preload("res://assets/enviroment/WorldEnvironment.tscn")
 var _env : WorldEnvironment
 
-export var light_scene : Resource
+export var light_scene : Resource = preload("res://assets/enviroment/DirectionalLight.tscn")
 var _light: DirectionalLight
 
-export var ui_scene : Resource
+export var ui_scene : Resource = preload("res://gameplay/mp/ui/ui.tscn")
 var _ui: Control
 
 func _ready():
@@ -91,9 +91,7 @@ remote func _move_drone(_target : NodePath, _input : Vector2):
 ################################################################
 # map
 func _load_map():
-	if not map_scene:
-		return
-		
+	map_scene = load(Global.mp_game_data["map"])
 	var _map_asset = map_scene.instance()
 	add_child(_map_asset)
 	_map = _map_asset
@@ -104,7 +102,8 @@ func load_map_stuff():
 	if is_server():
 		_map.generate_random_stuff_placement()
 		_map.spawn_random_stuff_placement()
-		Global.on_host_game_session_ready({"stuffs" : _map.stuffs})
+		Global.mp_game_data["stuffs"] = _map.stuffs
+		Global.on_host_game_session_ready(Global.mp_game_data)
 		
 	else:
 		_map.stuffs = Global.mp_game_data["stuffs"]
@@ -251,6 +250,10 @@ func on_drone_ready(_entity :BaseEntity):
 	pass
 	
 func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData):
+		
+	if randf() > 0.2 and _damage < 10:
+		return
+		
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
 	

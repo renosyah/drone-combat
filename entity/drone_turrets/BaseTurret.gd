@@ -77,8 +77,8 @@ remotesync func _open_fire(_target : NodePath):
 		
 	_weapon.open_fire(_to)
 	
-remotesync func _dead():
-	._dead()
+remotesync func _dead(_kill_by :Dictionary):
+	._dead(_kill_by)
 	
 	if is_instance_valid(_sensor):
 		_sensor.set_process(false)

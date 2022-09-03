@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entity/weapons/cannon/cannon.gd" type="Script" id=1]
 
@@ -8,19 +8,19 @@ size = Vector3( 0.4, 0.4, 1 )
 [sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.239216, 0.239216, 0.239216, 1 )
 
+[sub_resource type="CylinderMesh" id=16]
+top_radius = 0.12
+bottom_radius = 0.14
+
+[sub_resource type="SpatialMaterial" id=17]
+albedo_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
+
 [sub_resource type="CylinderMesh" id=3]
 top_radius = 0.09
 bottom_radius = 0.09
 height = 4.0
 
 [sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
-
-[sub_resource type="CylinderMesh" id=16]
-top_radius = 0.12
-bottom_radius = 0.14
-
-[sub_resource type="SpatialMaterial" id=17]
 albedo_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
 
 [sub_resource type="CylinderMesh" id=12]
@@ -30,6 +30,20 @@ height = 0.4
 
 [sub_resource type="SpatialMaterial" id=13]
 albedo_color = Color( 0.364706, 0.364706, 0.364706, 1 )
+
+[sub_resource type="CubeMesh" id=18]
+size = Vector3( 0.6, 0.4, 0.4 )
+
+[sub_resource type="SpatialMaterial" id=19]
+albedo_color = Color( 0.270588, 0.270588, 0.270588, 1 )
+
+[sub_resource type="CylinderMesh" id=20]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+
+[sub_resource type="SpatialMaterial" id=21]
+albedo_color = Color( 0.337255, 0.27451, 0.27451, 1 )
 
 [sub_resource type="CubeMesh" id=10]
 size = Vector3( 0.6, 0.2, 0.2 )
@@ -75,6 +89,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/MeshInstance2:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 1.11783 ) ]
+}
 
 [sub_resource type="Animation" id=15]
 resource_name = "firing"
@@ -98,10 +124,34 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.2, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -1.88758 ), Vector3( 0, 0, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 0 ), Vector3( 0, 0, -0.4 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/barel:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 1.19318 ), Vector3( 0, 0, 1.19318 ), Vector3( 0, 0, 0.496567 ), Vector3( 0, 0, 1.19318 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/MeshInstance2:translation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 1.11783 ), Vector3( 0, 0, 1.11783 ), Vector3( 0, 0, 1.01 ), Vector3( 0, 0, 1.11783 ) ]
 }
 
 [node name="auto_cannon" type="Spatial"]
@@ -116,21 +166,40 @@ mesh = SubResource( 1 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 2 )
 
+[node name="MeshInstance2" type="MeshInstance" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1.11783 )
+mesh = SubResource( 16 )
+material/0 = SubResource( 17 )
+
 [node name="barel" type="MeshInstance" parent="pivot"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1.19318 )
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
 
-[node name="MeshInstance2" type="MeshInstance" parent="pivot"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1.11783 )
-mesh = SubResource( 16 )
-material/0 = SubResource( 17 )
-
-[node name="MeshInstance" type="MeshInstance" parent="pivot"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 3.28554 )
+[node name="MeshInstance" type="MeshInstance" parent="pivot/barel"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.09236, -9.146e-08 )
 mesh = SubResource( 12 )
+skeleton = NodePath("../..")
 material/0 = SubResource( 13 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="pivot/barel"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -1.89784, -0.0158954 )
+mesh = SubResource( 18 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 19 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="pivot/barel"]
+transform = Transform( 1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, -0.290197, -1.60129, 6.99945e-08 )
+mesh = SubResource( 20 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 21 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="pivot/barel"]
+transform = Transform( 1, 0, 0, 0, 1, 1.06581e-14, 0, -1.06581e-14, 1, 0.291314, -1.60129, 6.99945e-08 )
+mesh = SubResource( 20 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 21 )
 
 [node name="spark" type="Spatial" parent="pivot"]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0.161261 )

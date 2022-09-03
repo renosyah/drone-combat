@@ -47,12 +47,14 @@ remotesync func _take_damage(_damage : int, _hit_by :Dictionary):
 		return
 		
 	hit_by_player.from_dictionary(_hit_by)
+	
 	emit_signal("on_take_damage", self, _damage, hit_by_player)
 	
-remotesync func _dead():
+remotesync func _dead(_kill_by :Dictionary):
 	is_dead = true
 	set_process(false)
 	
+	hit_by_player.from_dictionary(_kill_by)
 	emit_signal("on_dead", self, hit_by_player)
 	
 remotesync func _reset():
@@ -112,15 +114,16 @@ func take_damage(_damage : int, hit_by_player : PlayerData):
 		return
 		
 	if hp < 1:
-		dead()
+		dead(hit_by_player)
+		return
 		
 	rpc_unreliable("_take_damage", _damage, hit_by_player.to_dictionary())
 	
-func dead():
+func dead(kill_by_player : PlayerData):
 	if not _is_master():
 		return
 		
-	rpc("_dead")
+	rpc("_dead", kill_by_player.to_dictionary())
 	
 func reset():
 	if not _is_master():

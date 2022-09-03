@@ -109,14 +109,14 @@ remotesync func _reset():
 	
 	emit_signal("on_ready", self)
 	
-remotesync func _dead():
-	._dead()
+remotesync func _dead(_kill_by :Dictionary):
+	._dead(_kill_by)
 	
 	_hp_bar.update_bar(0, max_hp)
 	_explosion.explode()
 	
 	if is_instance_valid(_turret):
-		_turret.dead()
+		_turret.dead(hit_by_player)
 		
 ############################################################
 # Called when the node enters the scene tree for the first time.

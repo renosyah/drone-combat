@@ -1,11 +1,15 @@
 extends Control
 
+const BUTTON_RESPAWN_ENABLE_COLOR = Color(0.619608, 0.105882, 0.105882)
+const BUTTON_RESPAWN_DISABLE_COLOR = Color(0.402344, 0.402344, 0.402344)
+const DEKSTOP =  ["Server", "Windows", "WinRT", "X11"]
+
 signal on_joystick_input(output,is_pressed)
 signal on_respawn_button_press()
 signal on_spectate_previous()
 signal on_spectate_next()
 
-const DEKSTOP =  ["Server", "Windows", "WinRT", "X11"]
+var respawn_time:float = 10.0
 
 onready var _is_dekstop :bool = OS.get_name() in DEKSTOP
 
@@ -17,6 +21,11 @@ onready var _menu = $CanvasLayer/menu
 
 onready var _event_message = $CanvasLayer/control/event_message
 onready var _tween = $CanvasLayer/Tween
+
+onready var _respawn_btn = $CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn
+onready var _respawn_btn_color = $CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn/ColorRect
+onready var _respawn_btn_label = $CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn/Label
+onready var _respawn_timer = $CanvasLayer/respawn_timer
 
 onready var _mini_map = $CanvasLayer/MiniMap
 onready var _player_name = $CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar/player_name
@@ -31,6 +40,14 @@ func _ready():
 	show_control_screen()
 	validate_input_by_platform()
 	check_sfx_setting()
+	
+func _process(delta):
+	if _respawn_timer.is_stopped():
+		_respawn_btn_label.text = "Respawn"
+		set_process(false)
+		
+	else:
+		_respawn_btn_label.text = "Wait (" + str(int(_respawn_timer.time_left)) + ")"
 	
 func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = ""):
 	var score :ScoreData = ScoreData.new()
@@ -62,8 +79,20 @@ func validate_input_by_platform():
 	_joystick.visible = not _is_dekstop
 	
 func show_death_screen():
+	_respawn_timer.wait_time = respawn_time
+	_respawn_timer.start()
+	set_process(true)
+	
 	_control.visible = false
 	_death_screen.visible = true
+	
+	_respawn_btn.disabled = true
+	_respawn_btn_color.color = BUTTON_RESPAWN_DISABLE_COLOR
+	
+	yield(_respawn_timer,"timeout")
+	
+	_respawn_btn.disabled = false
+	_respawn_btn_color.color = BUTTON_RESPAWN_ENABLE_COLOR
 	
 func show_control_screen():
 	_death_screen.visible = false

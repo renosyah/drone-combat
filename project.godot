@@ -120,6 +120,11 @@ _global_script_classes=[ {
 "path": "res://addons/Godot-Touch-Input-Manager/CustomInputEvents/InputEventSingleScreenTouch.gd"
 }, {
 "base": "BaseData",
+"class": "MapData",
+"language": "GDScript",
+"path": "res://data/map/MapData.gd"
+}, {
+"base": "BaseData",
 "class": "MapStuffData",
 "language": "GDScript",
 "path": "res://data/map_stuff/MapStuffData.gd"
@@ -197,6 +202,7 @@ _global_script_class_icons={
 "InputEventSingleScreenDrag": "",
 "InputEventSingleScreenTap": "",
 "InputEventSingleScreenTouch": "",
+"MapData": "",
 "MapStuffData": "",
 "MiniMap": "",
 "PlayerData": "",

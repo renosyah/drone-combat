@@ -4,6 +4,7 @@ class_name BaseMap
 signal on_map_click(_pos)
 
 export var max_stuff = 120
+export var stuff_directory = "res://map/model/"
 
 var _click_translation = Vector3.ZERO
 var _input_detector : Node
@@ -60,7 +61,7 @@ func get_rand_pos() -> Vector3:
 	
 func _find_obj_paths() -> Array:
 	var png_paths := []
-	var dir_queue := ["res://map/model/"]
+	var dir_queue := [stuff_directory]
 	var dir: Directory
 	var file: String
 	while file or not dir_queue.empty():
