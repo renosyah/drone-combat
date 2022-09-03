@@ -47,6 +47,11 @@ remotesync func _heal(_hp_added : int):
 	if is_dead:
 		return
 		
+	if hp + _hp_added > max_hp:
+		hp = max_hp
+	else:
+		hp += _hp_added
+	
 	emit_signal("on_heal", self, _hp_added)
 	
 remotesync func _take_damage(_damage : int, _hit_by :Dictionary):
@@ -111,12 +116,7 @@ func heal(_hp_added : int):
 	if not _is_master():
 		return
 		
-	if hp + _hp_added > max_hp:
-		hp = max_hp
-	else:
-		hp += _hp_added
-	
-	rpc_unreliable("_heal", _hp_added)
+	rpc("_heal", _hp_added)
 	
 func take_damage(_damage : int, hit_by_player : PlayerData):
 	if not _is_master():

@@ -189,7 +189,7 @@ func resupply(_ammo_added :int):
 	if not _is_master():
 		return
 	
-	rpc_unreliable("_resupply", _ammo_added)
+	rpc("_resupply", _ammo_added)
 	
 ############################################################
 # function
