@@ -7,8 +7,8 @@ const DEFAULT_IP : String = '127.0.0.1'
 const DEFAULT_PORT : int = 31400
 const MAX_PLAYERS : int = 5
 const PLAYER_HOST_ID : int = 1
-const LATENCY_TWEEN = 0.30
-const LATENCY_DELAY = 0.15
+const LATENCY_TWEEN = 0.10
+const LATENCY_DELAY = 0.08
 
 # for server data only
 var players : Dictionary = {}
