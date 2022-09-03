@@ -47,7 +47,7 @@ func _process(delta):
 		set_process(false)
 		
 	else:
-		_respawn_btn_label.text = "Wait (" + str(int(_respawn_timer.time_left - 1)) + ")"
+		_respawn_btn_label.text = "Wait (" + str(int(_respawn_timer.time_left + 1)) + ")"
 	
 func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = ""):
 	var score :ScoreData = ScoreData.new()
