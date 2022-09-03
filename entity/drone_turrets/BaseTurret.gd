@@ -16,12 +16,10 @@ export var scanning_speed:float = 0.07
 # movement
 export var elevation_speed_deg: float = 45
 export var rotation_speed_deg: float = 90
-# bullets
-export var muzzle_velocity: float = 50
+
 # constraints
 export var min_elevation: float = -15
 export var max_elevation: float = 60
-
 
 ################################
 # PARAMS

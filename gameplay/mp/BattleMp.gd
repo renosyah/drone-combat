@@ -102,11 +102,11 @@ func load_map_stuff():
 	if is_server():
 		_map.generate_random_stuff_placement()
 		_map.spawn_random_stuff_placement()
-		Global.mp_game_data["stuffs"] = _map.stuffs
+		Global.mp_game_data["map_stuffs"] = _map.stuffs
 		Global.on_host_game_session_ready(Global.mp_game_data)
 		
 	else:
-		_map.stuffs = Global.mp_game_data["stuffs"]
+		_map.stuffs = Global.mp_game_data["map_stuffs"]
 		_map.spawn_random_stuff_placement()
 	
 func on_map_click(_pos : Vector3):
@@ -138,6 +138,7 @@ func _load_ui():
 	_ui.connect("on_spectate_next", self, "_on_spectate_next")
 	
 	_ui.set_camera(_camera)
+	_ui.respawn_time = Global.mp_game_data["respawn_time"]
 	
 func on_joystick_input(output : Vector2, is_pressed : bool):
 	pass
@@ -177,7 +178,7 @@ var _bots = []
 var _players = []
 var _all = []
 
-func spawn_drones_and_get_drone_owned_by(local_player_id : String) -> BaseHull:
+func spawn_drones_and_get_drone_owned_by(local_player : PlayerData) -> BaseHull:
 	var drone : BaseHull
 	
 	for data in Global.mp_players:
@@ -191,30 +192,36 @@ func spawn_drones_and_get_drone_owned_by(local_player_id : String) -> BaseHull:
 		player.from_dictionary(data)
 		
 		var spawned = spawner.spawn(player, self, spawn_pos)
-		_ui.add_minimap_object(spawned)
-		_ui.update_scoreboard(player.player_id, 0, 0,spawner.color, player.player_name)
-		
 		if spawned is BaseEntity:
 			spawned.connect("on_ready", self, "on_drone_ready")
 			spawned.connect("on_dead", self, "on_drone_dead")
 			spawned.connect("on_turret_dead", self, "on_drone_turret_dead")
 			spawned.connect("on_take_damage", self, "on_drone_take_damage")
 			
-		spawned.set_hp_bar(Color.red, true)
-			
-		if player.player_id == local_player_id:
+		if player.player_id == local_player.player_id:
 			drone = spawned
 			spawned.set_hp_bar(Color.green, false)
 			
 		if data.has("is_bot"):
 			spawned.waypoint_mode = true
 			_bots.append(spawned)
+			
 		else:
 			_players.append(spawned)
 			
+		_ui.update_scoreboard(player.player_id, 0, 0,spawner.color, player.player_name)
 		_all.append(spawned)
 		
 	return drone
+	
+func set_minimap_player_objects(local_drone_player : PlayerData):
+	for spawned in _all:
+		var player_from_drone :PlayerData = spawned.player
+		var is_friendly = (player_from_drone.player_team == local_drone_player.player_team)
+		var show_hp_bar = (player_from_drone.player_id != local_drone_player.player_id)
+		var hp_bar_color = Color.blue if is_friendly else Color.red
+		spawned.set_hp_bar(hp_bar_color, show_hp_bar)
+		_ui.add_minimap_object(spawned, is_friendly)
 	
 func respawn_drone(drone : NodePath):
 	if is_server():
@@ -250,7 +257,6 @@ func on_drone_ready(_entity :BaseEntity):
 	pass
 	
 func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData):
-		
 	if randf() > 0.2 and _damage < 10:
 		return
 		

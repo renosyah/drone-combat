@@ -6,10 +6,12 @@ var respawn_cicle_index = 0
 var bot_command_cicle = 0
 
 func _ready():
-	drone = spawn_drones_and_get_drone_owned_by(Global.player.player_id)
+	drone = spawn_drones_and_get_drone_owned_by(Global.player)
+	.set_minimap_player_objects(drone.player)
 	_set_respawn_cicle_index(_all.find(drone,0))
-	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
 	.load_map_stuff()
+	
+	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
 	
 ################################################################
 # drone control

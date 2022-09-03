@@ -64,13 +64,14 @@ func _process(_delta):
 		else:
 			remove_object(item)
 		
-func add_object(object : Spatial, _name : String = ""):
+func add_object(object :Spatial, is_friendly :bool):
 	var new_marker = icons["troop"].duplicate()
 	grid.add_child(new_marker)
 	grid.move_child(new_marker, 0)
 	new_marker.show()
 	markers[object] = new_marker
-	markers[object].get_child(0).text = _name
+	
+	markers[object].modulate = Color.blue if is_friendly else Color.red
 	
 	
 func remove_object(object):

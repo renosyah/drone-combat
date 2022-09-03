@@ -5,9 +5,6 @@ const ENABLE_BOT = true
 const BUTTON_BATTLE_ENABLE_COLOR = Color(0, 0.592157, 0.035294)
 const BUTTON_BATTLE_DISABLE_COLOR = Color(0.27451, 0.27451, 0.27451)
 
-const PLAYER_STATUS_NOT_READY = "NOT_READY"
-const PLAYER_STATUS_READY = "READY"
-
 
 onready var _server_advertise = $server_advertise
 onready var _player_holder = $CanvasLayer/control/VBoxContainer/ScrollContainer/VBoxContainer
@@ -23,6 +20,15 @@ onready var _dialog_exit_option = $CanvasLayer/simple_dialog_option
 # sync lobby
 var player_joined : Array = []
 
+remote func _request_update_player_joined_status(from : int, data : Dictionary):
+	for i in player_joined:
+		if i["player_id"] == data["player_id"]:
+			i["flag"] = Global.PLAYER_STATUS_READY
+			i["status"] = "Ready"
+			break
+			
+	rpc("_update_player_joined", player_joined)
+	
 remote func _request_append_player_joined(from : int, data : Dictionary):
 	for i in player_joined:
 		if i["player_id"] == data["player_id"]:
@@ -31,6 +37,7 @@ remote func _request_append_player_joined(from : int, data : Dictionary):
 			
 	data["player_team"] = player_joined.size()
 	player_joined.append(data)
+	
 	rpc("_update_player_joined", player_joined)
 	
 remote func _request_erase_player_joined(data : Dictionary):
@@ -102,9 +109,9 @@ func _init_host():
 		return
 	
 func _server_player_connected(_player_network_unique_id : int, _player : Dictionary):
-	var player = create_mp_player()
+	var player = Global.create_mp_player()
 	player["status"] = "Ready"
-	player["flag"] = PLAYER_STATUS_READY
+	player["flag"] = Global.PLAYER_STATUS_READY
 	_request_append_player_joined(Global.client.network_unique_id, player)
 	
 	_server_advertise.setup()
@@ -127,7 +134,7 @@ func _init_join():
 	
 func _client_player_connected(_player_network_unique_id : int, _player : Dictionary):
 	Global.client.network_unique_id = _player_network_unique_id
-	rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id, create_mp_player())
+	rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id, Global.create_mp_player())
 	
 func _on_host_game_session_ready(_mp_game_data : Dictionary):
 	Global.mp_game_data = _mp_game_data
@@ -169,7 +176,7 @@ func _on_add_bot_pressed():
 	if player_joined.size() >= Global.server.max_player:
 		return
 		
-	_request_append_player_joined(Network.PLAYER_HOST_ID, create_bot_player())
+	_request_append_player_joined(Network.PLAYER_HOST_ID, Global.create_bot_player())
 	
 func fill_player_slot():
 	for i in _player_holder.get_children():
@@ -188,21 +195,10 @@ func fill_player_slot():
 		_player_holder.add_child(item)
 		
 func set_player_ready():
-	var data = create_mp_player()
-	data["status"] = "Ready"
-	data["flag"] = PLAYER_STATUS_READY
-
-	if not is_server():
-		rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id,data)
+	if is_server():
 		return
 		
-	for i in player_joined:
-		if i.id == data.id:
-			player_joined.erase(i)
-			break
-		
-	player_joined.append(data)
-	rpc("_update_player_joined", player_joined)
+	rpc_id(Network.PLAYER_HOST_ID, "_request_update_player_joined_status", Global.client.network_unique_id, Global.create_mp_player())
 	
 func _on_player_get_kick(_player):
 	if not is_server():
@@ -228,34 +224,6 @@ func _on_exit_timer_timeout():
 	
 ################################################################
 # utils
-func create_mp_player() -> Dictionary:
-	var drone = Global.player_drone_data
-	return {
-		"player_id" : Global.player.player_id,
-		"player_name" : Global.player.player_name,
-		"player_team" : 0,
-		"status" : "Not Ready",
-		"flag" : PLAYER_STATUS_NOT_READY,
-		"drone_data" : drone.to_dictionary(),
-		"color" : drone.color,
-	}
-	
-func create_bot_player() -> Dictionary:
-	var bot_id = "BOT-" + str(GDUUID.v4())
-	var bot_name = RandomNameGenerator.generate() + " (Bot)"
-	var drone = Global.randomize_drone(bot_id, bot_name)
-	
-	return {
-		"player_id" : bot_id,
-		"player_name" : bot_name,
-		"player_team" : 0,
-		"status" : "Ready",
-		"is_bot" : true,
-		"flag" : PLAYER_STATUS_READY,
-		"drone_data" : drone.to_dictionary(),
-		"color" : drone.color,
-	}
-	
 class MyCustomSorter:
 	static func sort(a, b):
 		if a["player_team"] < b["player_team"]:
@@ -270,7 +238,7 @@ func is_all_player_ready() -> bool:
 		return false
 		
 	for i in player_joined:
-		if i.flag == PLAYER_STATUS_NOT_READY:
+		if i.flag == Global.PLAYER_STATUS_NOT_READY:
 			return false
 	return true
 

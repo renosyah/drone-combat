@@ -52,31 +52,13 @@ func _on_battle_pressed():
 	if err != OK:
 		return
 	
-	
 func _server_player_connected(_player_network_unique_id : int, _player : Dictionary):
-	var player = {
-		"player_id" : Global.player.player_id,
-		"player_name" : Global.player.player_name,
-		"player_team" : 0,
-		"status" : "Ready",
-		"flag" : "READY",
-		"drone_data" : Global.player_drone_data.to_dictionary()
-	}
-	Global.mp_players = [player]
 	Global.mp_game_data["map"] = MapData.MAPS[rand_range(0, MapData.MAPS.size() - 1)]
 	
+	Global.mp_players = [ Global.create_mp_player() ]
 	for i in range(3):
-		var bot_id = "BOT-" + str(GDUUID.v4())
-		var bot_name = RandomNameGenerator.generate() + " (Bot)"
-		var bot = {
-			"player_id" : bot_id,
-			"player_name" : bot_name,
-			"player_team" : i + 1,
-			"is_bot" : true,
-			"status" : "Ready",
-			"flag" : "READY",
-			"drone_data" : Global.randomize_drone(bot_id, bot_name).to_dictionary()
-		}
+		var bot = Global.create_bot_player()
+		bot["player_team"] = i + 1 
 		Global.mp_players.append(bot)
 		
 	get_tree().change_scene("res://gameplay/mp/host/battle.tscn")

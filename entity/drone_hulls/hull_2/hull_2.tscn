@@ -109,5 +109,10 @@ transform = Transform( 1, -7.60145e-08, 4.42423e-08, 7.60144e-08, 0.493927, -0.8
 mesh = SubResource( 10 )
 material/0 = SubResource( 11 )
 
+[node name="MeshInstance13" type="MeshInstance" parent="pivot"]
+transform = Transform( 1, -6.94528e-08, 3.43279e-08, 6.94527e-08, 0.607335, -0.794447, 3.4328e-08, 0.794447, 0.607335, 1.34343e-07, 0.30974, -1.54667 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
 [node name="turret_pos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.704847 )

@@ -75,9 +75,45 @@ var client = {
 }
 
 var mp_players = []
-var mp_game_data = {}
+var mp_game_data = {
+	"respawn_time": 25,
+	"map" : "",
+	"map_stuffs":[]
+
+}
 var mp_exception_message = ""
 
+const PLAYER_STATUS_NOT_READY = "NOT_READY"
+const PLAYER_STATUS_READY = "READY"
+
+func create_mp_player() -> Dictionary:
+	var drone = player_drone_data
+	return {
+		"player_id" : player.player_id,
+		"player_name" : player.player_name,
+		"player_team" : 0,
+		"status" : "Not Ready",
+		"flag" : PLAYER_STATUS_NOT_READY,
+		"drone_data" : drone.to_dictionary(),
+		"color" : drone.color,
+	}
+	
+func create_bot_player() -> Dictionary:
+	var bot_id = "BOT-" + str(GDUUID.v4())
+	var bot_name = RandomNameGenerator.generate() + " (Bot)"
+	var drone = Global.randomize_drone(bot_id, bot_name)
+	
+	return {
+		"player_id" : bot_id,
+		"player_name" : bot_name,
+		"player_team" : 0,
+		"status" : "Ready",
+		"is_bot" : true,
+		"flag" : PLAYER_STATUS_READY,
+		"drone_data" : drone.to_dictionary(),
+		"color" : drone.color,
+	}
+	
 ################################################################
 
 

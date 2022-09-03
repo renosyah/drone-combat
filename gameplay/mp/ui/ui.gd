@@ -27,7 +27,7 @@ onready var _respawn_btn_color = $CanvasLayer/death_screen/VBoxContainer/HBoxCon
 onready var _respawn_btn_label = $CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn/Label
 onready var _respawn_timer = $CanvasLayer/respawn_timer
 
-onready var _mini_map = $CanvasLayer/MiniMap
+onready var _mini_map = $CanvasLayer/control/MiniMap
 onready var _player_name = $CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar/player_name
 onready var _player_hp_bar = $CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar
 
@@ -47,7 +47,7 @@ func _process(delta):
 		set_process(false)
 		
 	else:
-		_respawn_btn_label.text = "Wait (" + str(int(_respawn_timer.time_left)) + ")"
+		_respawn_btn_label.text = "Wait (" + str(int(_respawn_timer.time_left - 1)) + ")"
 	
 func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = ""):
 	var score :ScoreData = ScoreData.new()
@@ -69,8 +69,8 @@ func update_player_hp_bar(player_name :String, hp, max_hp :int):
 	_player_name.text = player_name
 	_player_hp_bar.update_bar(hp, max_hp)
 	
-func add_minimap_object(spawned):
-	_mini_map.add_object(spawned)
+func add_minimap_object(object :Spatial, is_friendly :bool):
+	_mini_map.add_object(object, is_friendly)
 
 func set_camera(_camera : GameplayCamera):
 	_mini_map.set_camera(_camera)

@@ -26,6 +26,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
+[node name="MiniMap" parent="CanvasLayer/control" instance=ExtResource( 5 )]
+margin_left = 45.0
+margin_top = 146.0
+margin_right = -45.0
+margin_bottom = -393.0
+
 [node name="event_message" type="Label" parent="CanvasLayer/control"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.5
@@ -135,13 +141,8 @@ margin_right = 600.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 20, 0 )
 
-[node name="MiniMap" parent="CanvasLayer" instance=ExtResource( 5 )]
-margin_left = 45.0
-margin_top = 146.0
-margin_right = -45.0
-margin_bottom = -393.0
-
 [node name="death_screen" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
