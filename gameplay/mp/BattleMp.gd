@@ -198,9 +198,9 @@ func spawn_drones_and_get_drone_owned_by(local_player : PlayerData) -> BaseHull:
 			spawned.connect("on_dead", self, "on_drone_dead")
 			spawned.connect("on_take_damage", self, "on_drone_take_damage")
 			spawned.connect("on_heal", self, "on_drone_heal")
-			spawned.connect("on_resupply", self, "on_drone_resupply")
 			
 			var turret = spawned.get_turret()
+			turret.connect("on_resupply", self, "on_drone_turret_resupply")
 			turret.connect("on_take_damage", self, "on_drone_turret_take_damage")
 			turret.connect("on_dead", self, "on_drone_turret_dead")
 			
@@ -280,7 +280,7 @@ func on_drone_respawn(_entity :BaseHull):
 func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
 	pass
 	
-func on_drone_resupply(_entity :BaseHull, _ammo_added :int):
+func on_drone_turret_resupply(_entity :BaseTurret, _ammo_added :int):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
 	add_child(msg)
 	
@@ -290,7 +290,7 @@ func on_drone_resupply(_entity :BaseHull, _ammo_added :int):
 	msg.translation.x += rand_range(-spread, spread)
 	msg.translation.y += 2.0 + rand_range(-spread, spread)
 	
-	msg.set_color(Color.black)
+	msg.set_color(Color.gray)
 	msg.set_message("+" + str(_ammo_added))
 	
 	

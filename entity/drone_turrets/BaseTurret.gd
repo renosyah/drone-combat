@@ -1,6 +1,7 @@
 extends BaseEntity
 class_name BaseTurret
 
+signal on_resupply(_turret, _ammo_added)
 signal on_turret_ammo_update(_turret, _ammo_left, _max_ammo)
 
 ################################
@@ -77,6 +78,14 @@ func _set_puppet_ammo(_val : int):
 		return
 		
 	ammo = _puppet_ammo
+	
+remotesync func _resupply(_ammo_added :int):
+	if ammo + _ammo_added > max_ammo:
+		ammo = max_ammo
+	else:
+		ammo += _ammo_added
+		
+	emit_signal("on_resupply", self, _ammo_added)
 	
 remotesync func _open_fire(_target : NodePath):
 	if not is_instance_valid(_weapon):
@@ -175,6 +184,12 @@ func spawn_sensor(_pos : Vector3):
 		
 	if is_instance_valid(_sensor):
 		_sensor.connect("on_spotted", self, "_on_sensor_spotted")
+		
+func resupply(_ammo_added :int):
+	if not _is_master():
+		return
+	
+	rpc_unreliable("_resupply", _ammo_added)
 	
 ############################################################
 # function

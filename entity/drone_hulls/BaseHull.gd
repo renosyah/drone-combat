@@ -2,7 +2,6 @@ extends BaseEntity
 class_name BaseHull
 
 signal on_hull_click(_hull)
-signal on_resupply(_entity, _ammo_added)
 
 # variables
 const NONE = 1
@@ -99,14 +98,6 @@ func _set_puppet_moving_state(_val : int):
 		return
 		
 	_moving_state = _puppet_moving_state
-	
-remotesync func _resupply(_ammo_added : int):
-	if not is_instance_valid(_turret):
-		return
-		
-	_hp_bar.update_ammo_bar(_turret.ammo, _turret.max_ammo)
-
-	emit_signal("on_resupply", self, _ammo_added)
 	
 remotesync func _heal(_hp_added : int):
 	._heal(_hp_added)
@@ -215,8 +206,12 @@ func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 		_turret.rotation_degrees.y = 180.0
 		
 		_turret.connect("on_turret_ammo_update", self, "_on_turret_ammo_update")
+		_turret.connect("on_resupply", self, "_on_turret_resupply")
 	
-func _on_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
+func _on_turret_resupply(_t :BaseTurret, _ammo_added :int):
+	_hp_bar.update_ammo_bar(_t.ammo, _t.max_ammo)
+
+func _on_turret_ammo_update(_t :BaseTurret, _ammo_left :int, _max_ammo :int):
 	_hp_bar.update_ammo_bar(_ammo_left, _max_ammo)
 	
 func get_turret() -> BaseTurret:
@@ -289,18 +284,10 @@ func puppet_moving(_delta):
 	rotation.z = lerp_angle(rotation.z, _puppet_rotation.z, _delta * 5)
 	
 func resupply(_ammo_added : int):
-	if not _is_master():
-		return
-		
 	if not is_instance_valid(_turret):
 		return
 		
-	if _turret.ammo + _ammo_added > _turret.max_ammo:
-		_turret.ammo = _turret.max_ammo
-	else:
-		_turret.ammo += _ammo_added
-	
-	rpc_unreliable("_resupply", _ammo_added)
+	_turret.resupply(_ammo_added)
 	
 func heal(_hp_added : int):
 	.heal(_hp_added)
