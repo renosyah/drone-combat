@@ -21,16 +21,152 @@ script = ExtResource( 2 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="control" type="Control" parent="CanvasLayer"]
+[node name="info" type="VBoxContainer" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="MiniMap" parent="CanvasLayer/control" instance=ExtResource( 5 )]
-margin_left = 45.0
-margin_top = 146.0
-margin_right = -45.0
-margin_bottom = -393.0
+[node name="hbox" type="HBoxContainer" parent="CanvasLayer/info"]
+margin_right = 600.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 120 )
+mouse_filter = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/info/hbox"]
+margin_right = 20.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
+
+[node name="button_score" type="Button" parent="CanvasLayer/info/hbox"]
+modulate = Color( 1, 1, 1, 0.658824 )
+margin_left = 24.0
+margin_right = 104.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 80, 80 )
+icon = ExtResource( 9 )
+flat = true
+expand_icon = true
+
+[node name="MarginContainer" type="Control" parent="CanvasLayer/info/hbox"]
+margin_left = 108.0
+margin_right = 492.0
+margin_bottom = 120.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/info/hbox/MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer"]
+margin_right = 38.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer"]
+margin_left = 42.0
+margin_right = 342.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 300, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="player_hp_bar" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
+margin_top = 28.0
+margin_right = 300.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 0, 50 )
+mouse_filter = 2
+
+[node name="player_name" type="Label" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_fonts/font = ExtResource( 4 )
+text = "Hull"
+align = 1
+valign = 1
+
+[node name="player_ammo_bar" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
+margin_top = 82.0
+margin_right = 300.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 0, 10 )
+mouse_filter = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer"]
+margin_left = 346.0
+margin_right = 384.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="button_menu" type="Button" parent="CanvasLayer/info/hbox"]
+modulate = Color( 1, 1, 1, 0.658824 )
+margin_left = 496.0
+margin_right = 576.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 80, 80 )
+icon = ExtResource( 11 )
+flat = true
+expand_icon = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/info/hbox"]
+margin_left = 580.0
+margin_right = 600.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/info"]
+margin_top = 124.0
+margin_right = 600.0
+margin_bottom = 620.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/info/HBoxContainer"]
+margin_right = 25.0
+margin_bottom = 496.0
+rect_min_size = Vector2( 25, 0 )
+mouse_filter = 2
+
+[node name="overlay_map" parent="CanvasLayer/info/HBoxContainer" instance=ExtResource( 5 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 29.0
+margin_right = 571.0
+margin_bottom = 496.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/info/HBoxContainer"]
+margin_left = 575.0
+margin_right = 600.0
+margin_bottom = 496.0
+rect_min_size = Vector2( 25, 0 )
+mouse_filter = 2
+
+[node name="MarginContainer6" type="MarginContainer" parent="CanvasLayer/info"]
+margin_top = 624.0
+margin_right = 600.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 80, 400 )
+mouse_filter = 2
+
+[node name="control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="event_message" type="Label" parent="CanvasLayer/control"]
 modulate = Color( 1, 1, 1, 0 )
@@ -55,91 +191,6 @@ margin_left = -100.0
 margin_top = -376.0
 margin_right = 100.0
 margin_bottom = -193.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/control"]
-anchor_right = 1.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 120 )
-
-[node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer"]
-margin_right = 20.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 20, 0 )
-
-[node name="button_score" type="Button" parent="CanvasLayer/control/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.658824 )
-margin_left = 24.0
-margin_right = 104.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 80, 80 )
-icon = ExtResource( 9 )
-flat = true
-expand_icon = true
-
-[node name="MarginContainer" type="Control" parent="CanvasLayer/control/HBoxContainer"]
-margin_left = 108.0
-margin_right = 492.0
-margin_bottom = 120.0
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/control/HBoxContainer/MarginContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-alignment = 1
-
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer"]
-margin_right = 38.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 20, 0 )
-size_flags_horizontal = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 42.0
-margin_right = 342.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 300, 0 )
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="player_hp_bar" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
-margin_top = 35.0
-margin_right = 300.0
-margin_bottom = 85.0
-
-[node name="player_name" type="Label" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 1
-custom_fonts/font = ExtResource( 4 )
-text = "Hull"
-align = 1
-valign = 1
-
-[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer"]
-margin_left = 346.0
-margin_right = 384.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 20, 0 )
-size_flags_horizontal = 3
-
-[node name="button_menu" type="Button" parent="CanvasLayer/control/HBoxContainer"]
-modulate = Color( 1, 1, 1, 0.658824 )
-margin_left = 496.0
-margin_right = 576.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 80, 80 )
-icon = ExtResource( 11 )
-flat = true
-expand_icon = true
-
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer"]
-margin_left = 580.0
-margin_right = 600.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 20, 0 )
 
 [node name="death_screen" type="Control" parent="CanvasLayer"]
 visible = false
@@ -486,9 +537,9 @@ one_shot = true
 
 [node name="Tween" type="Tween" parent="CanvasLayer"]
 
+[connection signal="pressed" from="CanvasLayer/info/hbox/button_score" to="." method="_on_button_score_pressed"]
+[connection signal="pressed" from="CanvasLayer/info/hbox/button_menu" to="." method="_on_button_menu_pressed"]
 [connection signal="on_joystick_input" from="CanvasLayer/control/joystick" to="." method="_on_Virtual_joystick_on_joystick_input"]
-[connection signal="pressed" from="CanvasLayer/control/HBoxContainer/button_score" to="." method="_on_button_score_pressed"]
-[connection signal="pressed" from="CanvasLayer/control/HBoxContainer/button_menu" to="." method="_on_button_menu_pressed"]
 [connection signal="pressed" from="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/prev" to="." method="_on_prev_pressed"]
 [connection signal="pressed" from="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn" to="." method="_on_respawn_pressed"]
 [connection signal="pressed" from="CanvasLayer/death_screen/VBoxContainer/HBoxContainer/next" to="." method="_on_next_pressed"]

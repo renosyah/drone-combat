@@ -1,6 +1,8 @@
 extends BaseEntity
 class_name BaseTurret
 
+signal on_turret_ammo_update(_turret, _ammo_left, _max_ammo)
+
 ################################
 # EXPORT PARAMS
 ################################
@@ -12,6 +14,8 @@ export var sensor_scene: Resource
 export var color : Color
 export var spotting_range :int = 18
 export var scanning_speed:float = 0.07
+export var ammo :int = 5
+export var max_ammo :int = 5
 
 # movement
 export var elevation_speed_deg: float = 45
@@ -35,7 +39,6 @@ onready var elevation_speed: float = deg2rad(elevation_speed_deg)
 onready var rotation_speed: float = deg2rad(rotation_speed_deg)
 
 # target calculation
-var ttc: float
 var current_aim = Vector3.ZERO
 
 # states
@@ -54,6 +57,7 @@ func _network_timmer_timeout():
 		return
 		
 	if _is_master():
+		rset_unreliable("_puppet_ammo", ammo)
 		rset_unreliable("_puppet_rotation", body.rotation.y)
 		rset_unreliable("_puppet_elevation", head.rotation_degrees.x)
 		
@@ -65,6 +69,11 @@ puppet var _puppet_elevation: float setget _set_puppet_elevation
 func _set_puppet_elevation(_val: float):
 	_puppet_elevation = _val
 	
+puppet var _puppet_ammo :int setget _set_puppet_ammo
+func _set_puppet_ammo(_val : int):
+	_puppet_ammo = _val
+	ammo = _puppet_ammo
+	
 remotesync func _open_fire(_target : NodePath):
 	if not is_instance_valid(_weapon):
 		return
@@ -74,6 +83,7 @@ remotesync func _open_fire(_target : NodePath):
 		return
 		
 	_weapon.open_fire(_to)
+	emit_signal("on_turret_ammo_update", self, ammo, max_ammo)
 	
 remotesync func _dead(_kill_by :Dictionary):
 	._dead(_kill_by)
@@ -93,7 +103,6 @@ remotesync func _reset():
 	if is_instance_valid(_weapon):
 		_weapon.set_process(true)
 		
-	emit_signal("on_ready", self)
 	
 ################################
 # OVERRIDE FUNCTIONS
@@ -101,7 +110,6 @@ remotesync func _reset():
 func _ready() -> void:
 	tag = "turret"
 	active = false
-	emit_signal("on_ready", self)
 	
 	if not _is_master():
 		return
@@ -196,7 +204,12 @@ func _on_weapon_ready_open_fire(_target : BaseEntity):
 	
 	if is_dead:
 		return
-	
+		
+	if ammo == 0:
+		return
+		
+	ammo -= 1
+		
 	rpc_unreliable("_open_fire", _target.get_path())
 	
 func _on_sensor_spotted(_target : BaseEntity):

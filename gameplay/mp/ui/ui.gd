@@ -8,6 +8,7 @@ signal on_joystick_input(output,is_pressed)
 signal on_respawn_button_press()
 signal on_spectate_previous()
 signal on_spectate_next()
+signal exit_game_session()
 
 var respawn_time:float = 10.0
 
@@ -27,9 +28,10 @@ onready var _respawn_btn_color = $CanvasLayer/death_screen/VBoxContainer/HBoxCon
 onready var _respawn_btn_label = $CanvasLayer/death_screen/VBoxContainer/HBoxContainer/respawn/Label
 onready var _respawn_timer = $CanvasLayer/respawn_timer
 
-onready var _mini_map = $CanvasLayer/control/MiniMap
-onready var _player_name = $CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar/player_name
-onready var _player_hp_bar = $CanvasLayer/control/HBoxContainer/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar
+onready var _overlay_map = $CanvasLayer/info/HBoxContainer/overlay_map
+onready var _player_hp_bar = $CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar
+onready var _player_ammo_bar = $CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/player_ammo_bar
+onready var _player_name = $CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar/player_name
 
 onready var _sfx_sound_setting_icon = $CanvasLayer/menu/VBoxContainer2/HBoxContainer2/sfx_setting/TextureRect
 
@@ -40,6 +42,7 @@ func _ready():
 	show_control_screen()
 	validate_input_by_platform()
 	check_sfx_setting()
+	_player_ammo_bar.set_hp_bar_color(Color.orange)
 	
 func _process(delta):
 	if _respawn_timer.is_stopped():
@@ -65,15 +68,18 @@ func display_event_message(text :String):
 	_tween.interpolate_property(_event_message, "modulate:a",_event_message.modulate.a, 0.0,3.5,Tween.TRANS_SINE)
 	_tween.start()
 	
+func update_player_ammo_bar(ammo, max_ammo :int):
+	_player_ammo_bar.update_bar(ammo, max_ammo)
+	
 func update_player_hp_bar(player_name :String, hp, max_hp :int):
 	_player_name.text = player_name
 	_player_hp_bar.update_bar(hp, max_hp)
 	
 func add_minimap_object(object :Spatial, is_friendly :bool):
-	_mini_map.add_object(object, is_friendly)
+	_overlay_map.add_object(object, is_friendly)
 
 func set_camera(_camera : GameplayCamera):
-	_mini_map.set_camera(_camera)
+	_overlay_map.set_camera(_camera)
 	
 func validate_input_by_platform():
 	_joystick.visible = not _is_dekstop
@@ -85,7 +91,7 @@ func show_death_screen():
 	
 	_control.visible = false
 	_death_screen.visible = true
-	
+
 	_respawn_btn.disabled = true
 	_respawn_btn_color.color = BUTTON_RESPAWN_DISABLE_COLOR
 	
@@ -139,12 +145,8 @@ func _on_respawn_pressed():
 func _on_exit_pressed():
 	_dialog_exit.visible = true
 	
-func exit_game_session():
-	Network.disconnect_from_server()
-	get_tree().change_scene("res://menu/main-menu/main_menu.tscn")
-	
 func _on_simple_dialog_on_exit_on_yes():
-	exit_game_session()
+	emit_signal("exit_game_session")
 	
 func _on_prev_pressed():
 	emit_signal("on_spectate_previous")

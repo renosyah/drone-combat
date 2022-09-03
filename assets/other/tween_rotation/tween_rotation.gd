@@ -1,6 +1,7 @@
 extends Node
 class_name TweenRotation
 
+var speed = 0.5
 var default_rotation_degree :float = 0.0
 var target :Spatial
 
@@ -19,4 +20,4 @@ func _process(delta):
 		set_process(false)
 		return
 		
-	target.rotation.y = lerp_angle(target.rotation.y, deg2rad(default_rotation_degree), delta * 5)
+	target.rotation.y = lerp_angle(target.rotation.y, deg2rad(default_rotation_degree), speed * delta)

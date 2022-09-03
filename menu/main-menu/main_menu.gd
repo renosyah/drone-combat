@@ -12,7 +12,7 @@ func spawn_player_drone():
 		
 	Global.load_player_drone_data()
 	drone = Global.player_drone_data.spawn(Global.player, self, Vector3.ZERO)
-
-
+	
+	
 func _on_main_menu_on_drone_data_change():
 	spawn_player_drone()

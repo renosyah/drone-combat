@@ -1,9 +1,10 @@
 extends KinematicBody
 class_name BaseEntity
 
-signal on_ready(_entity)
 signal on_dead(_entity, _killed_by)
+signal on_heal(_entity, _hp_added)
 signal on_take_damage(_entity, _damage, _hit_by)
+signal on_respawn(_entity)
 
 # identity owner
 var player :PlayerData
@@ -42,6 +43,12 @@ func _set_puppet_hp(_val :float):
 	
 	hp = _puppet_hp
 	
+remotesync func _heal(_hp_added : int):
+	if is_dead:
+		return
+		
+	emit_signal("on_heal", self, _hp_added)
+	
 remotesync func _take_damage(_damage : int, _hit_by :Dictionary):
 	if is_dead:
 		return
@@ -63,12 +70,8 @@ remotesync func _reset():
 	
 	set_process(true)
 	
-	emit_signal("on_ready", self)
-	
 ############################################################
 func _ready():
-	emit_signal("on_ready", self)
-	
 	if not _is_network_running():
 		return
 	
@@ -103,7 +106,18 @@ func moving(_delta):
 	
 func puppet_moving(_delta):
 	pass
+	
+func heal(_hp_added : int):
+	if not _is_master():
+		return
 		
+	if hp + _hp_added > max_hp:
+		hp = max_hp
+	else:
+		hp += _hp_added
+	
+	rpc_unreliable("_heal", _hp_added)
+	
 func take_damage(_damage : int, hit_by_player : PlayerData):
 	if not _is_master():
 		return

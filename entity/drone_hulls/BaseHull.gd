@@ -2,7 +2,6 @@ extends BaseEntity
 class_name BaseHull
 
 signal on_hull_click(_hull)
-signal on_turret_dead(_turret, _hit_by)
 
 # variables
 const NONE = 1
@@ -22,6 +21,9 @@ export var turning_speed : float = 4.0
 
 export var turret_hp :int = 100
 export var turret_max_hp :int = 100
+
+export var turret_ammo :int = 5
+export var turret_max_ammo :int = 5
 
 export var turret_rotation_speed = 90
 
@@ -97,6 +99,19 @@ func _set_puppet_moving_state(_val : int):
 		
 	_moving_state = _puppet_moving_state
 	
+remotesync func _resupply(_ammo_added : int):
+	_hp_bar.update_ammo_bar(turret_ammo, turret_max_ammo)
+	
+	if not is_instance_valid(_turret):
+		return
+		
+	_turret.emit_signal("on_turret_ammo_update", _turret, turret_ammo, turret_max_ammo)
+	
+remotesync func _heal(_hp_added : int):
+	._heal(_hp_added)
+	
+	_hp_bar.update_bar(hp, max_hp)
+	
 remotesync func _take_damage(_damage : int, _hit_by :Dictionary):
 	._take_damage(_damage, _hit_by)
 	
@@ -107,7 +122,7 @@ remotesync func _reset():
 	
 	_hp_bar.update_bar(hp, max_hp)
 	
-	emit_signal("on_ready", self)
+	emit_signal("on_respawn", self)
 	
 remotesync func _dead(_kill_by :Dictionary):
 	._dead(_kill_by)
@@ -123,8 +138,7 @@ remotesync func _dead(_kill_by :Dictionary):
 # override methods
 func _ready():
 	set_process(true)
-	emit_signal("on_ready", self)
-	
+
 	tag = "hull"
 	
 	hp = drone_data.hp
@@ -135,6 +149,9 @@ func _ready():
 	
 	turret_hp = drone_data.turret_hp
 	turret_max_hp = drone_data.turret_max_hp
+	
+	turret_ammo = drone_data.turret_ammo
+	turret_max_ammo = drone_data.turret_max_ammo
 	
 	spotting_range = drone_data.spotting_range
 	scanning_speed = drone_data.scanning_speed
@@ -151,6 +168,7 @@ func _ready():
 	add_child(_bar)
 	_hp_bar = _bar
 	_hp_bar.update_bar(hp, max_hp)
+	_hp_bar.update_ammo_bar(turret_ammo, turret_max_ammo)
 	_hp_bar.set_player_name(player.player_name)
 	_hp_bar.translation.y = 3.8
 	_hp_bar.visible = false
@@ -182,6 +200,8 @@ func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 		_turret_asset.player = player
 		_turret_asset.hp = turret_hp
 		_turret_asset.max_hp = turret_max_hp
+		_turret_asset.ammo = turret_ammo
+		_turret_asset.max_ammo = turret_max_ammo
 		_turret_asset.weapon_scene = weapon_scene
 		_turret_asset.sensor_scene = sensor_scene
 		_turret_asset.color = color
@@ -193,19 +213,13 @@ func spawn_turret(_pos : Vector3 = Vector3.ZERO):
 		_turret.translation = _pos
 		_turret.rotation_degrees.y = 180.0
 		
-	if is_instance_valid(_turret):
-		_turret.connect("on_take_damage", self,"_on_turret_take_damage")
-		_turret.connect("on_dead", self,"_on_turret_on_dead")
+		_turret.connect("on_turret_ammo_update", self, "_on_turret_ammo_update")
 	
-func _on_turret_take_damage(_entity :BaseTurret, _damage :int, _hit_by :PlayerData):
-	emit_signal("on_take_damage", _entity, _damage, hit_by_player)
+func _on_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
+	_hp_bar.update_ammo_bar(_ammo_left, _max_ammo)
 	
-	
-func _on_turret_on_dead(_entity :BaseTurret, _hit_by :PlayerData):
-	if is_dead:
-		return
-		
-	emit_signal("on_turret_dead", _entity, hit_by_player)
+func get_turret() -> BaseTurret:
+	return _turret
 	
 ############################################################
 # function
@@ -273,10 +287,37 @@ func puppet_moving(_delta):
 	rotation.y = lerp_angle(rotation.y, _puppet_rotation.y, _delta * 5)
 	rotation.z = lerp_angle(rotation.z, _puppet_rotation.z, _delta * 5)
 	
+func resupply(_ammo_added : int):
+	if not _is_master():
+		return
+		
+	if not is_instance_valid(_turret):
+		return
+		
+	if _turret.ammo + _ammo_added > _turret.max_ammo:
+		_turret.ammo = _turret.max_ammo
+	else:
+		_turret.ammo += _ammo_added
+	
+	rpc_unreliable("_resupply", _ammo_added)
+	
+func heal(_hp_added : int):
+	.heal(_hp_added)
+	
+	if not _is_master():
+		return
+		
+	if is_instance_valid(_turret):
+		_turret.reset()
+	
 func reset():
 	.reset()
 	
+	if not _is_master():
+		return
+		
 	if is_instance_valid(_turret):
+		_turret.ammo = _turret.max_ammo
 		_turret.reset()
 	
 ############################################################

@@ -136,6 +136,7 @@ func _load_ui():
 	_ui.connect("on_respawn_button_press", self, "on_respawn_button_press")
 	_ui.connect("on_spectate_previous", self, "_on_spectate_previous")
 	_ui.connect("on_spectate_next", self, "_on_spectate_next")
+	_ui.connect("exit_game_session", self, "_on_exit_game_session")
 	
 	_ui.set_camera(_camera)
 	_ui.respawn_time = Global.mp_game_data["respawn_time"]
@@ -192,15 +193,20 @@ func spawn_drones_and_get_drone_owned_by(local_player : PlayerData) -> BaseHull:
 		player.from_dictionary(data)
 		
 		var spawned = spawner.spawn(player, self, spawn_pos)
-		if spawned is BaseEntity:
-			spawned.connect("on_ready", self, "on_drone_ready")
+		if spawned is BaseHull:
+			spawned.connect("on_respawn", self, "on_drone_respawn")
 			spawned.connect("on_dead", self, "on_drone_dead")
-			spawned.connect("on_turret_dead", self, "on_drone_turret_dead")
 			spawned.connect("on_take_damage", self, "on_drone_take_damage")
+			spawned.connect("on_heal", self, "on_drone_heal")
+			
+			var turret = spawned.get_turret()
+			turret.connect("on_take_damage", self, "on_drone_turret_take_damage")
+			turret.connect("on_dead", self, "on_drone_turret_dead")
 			
 		if player.player_id == local_player.player_id:
 			drone = spawned
-			spawned.set_hp_bar(Color.green, false)
+			drone.set_hp_bar(Color.green, false)
+			drone.get_turret().connect("on_turret_ammo_update", self, "on_drone_turret_ammo_update")
 			
 		if data.has("is_bot"):
 			spawned.waypoint_mode = true
@@ -249,12 +255,41 @@ remotesync func _reposition_drone(drone : NodePath, pos : Vector3):
 	if not is_instance_valid(drone_node):
 		return
 		
+	var pos_holder = drone_node.translation
 	drone_node.translation = pos
+	spawn_healing_item(pos_holder)
+	
+################################################################
+# drop item
+func spawn_healing_item(at : Vector3):
+	var item = preload("res://entity/item/ammo_item/ammo_item.tscn").instance()
+	add_child(item)
+	item.translation = at
+	item.translation.y = 0.8
 	
 ################################################################
 # drone event signal handler
-func on_drone_ready(_entity :BaseEntity):
+func on_drone_respawn(_entity :BaseHull):
 	pass
+	
+func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
+	pass
+	
+func on_drone_heal(_entity :BaseEntity, _hp_added :int):
+	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
+	add_child(msg)
+	
+	var spread = 2.0
+	msg.translation = _entity.global_transform.origin
+	msg.translation.z += rand_range(-spread, spread)
+	msg.translation.x += rand_range(-spread, spread)
+	msg.translation.y += 2.0 + rand_range(-spread, spread)
+	
+	msg.set_color(Color.green)
+	msg.set_message("+" + str(_hp_added))
+	
+func on_drone_turret_take_damage(_turret :BaseTurret, _damage :int, _hit_by: PlayerData):
+	on_drone_take_damage(_turret, _damage, _hit_by)
 	
 func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData):
 	if randf() > 0.2 and _damage < 10:
@@ -290,6 +325,17 @@ func on_drone_dead(_entity :BaseEntity, _hit_by: PlayerData):
 	msg.translation = _entity.global_transform.origin
 	msg.set_color(Color.red)
 	msg.set_message("Drone Destroyed!")
+	
+################################################################
+# disposesing
+func _on_exit_game_session():
+	for drone in _all:
+		drone.queue_free()
+		
+	queue_free()
+	
+	Network.disconnect_from_server()
+	get_tree().change_scene("res://menu/main-menu/main_menu.tscn")
 	
 ################################################################
 # utils code

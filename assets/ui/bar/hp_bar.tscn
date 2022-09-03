@@ -8,17 +8,12 @@
 
 [node name="hp_bar" type="Control"]
 margin_right = 500.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 0, 50 )
+margin_bottom = 50.0
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="hp_bar_bg" type="TextureProgress" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 50 )
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 1 )
 tint_progress = Color( 1, 0.376471, 0, 1 )
@@ -31,7 +26,6 @@ __meta__ = {
 [node name="hp_bar" type="TextureProgress" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 50 )
 texture_over = ExtResource( 5 )
 texture_progress = ExtResource( 1 )
 tint_progress = Color( 0.14902, 1, 0, 1 )

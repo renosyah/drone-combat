@@ -12,6 +12,7 @@ func _ready():
 	.load_map_stuff()
 	
 	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
+	_ui.update_player_ammo_bar(drone.turret_ammo, drone.turret_max_ammo)
 	
 ################################################################
 # drone control
@@ -41,14 +42,26 @@ func _set_respawn_cicle_index(val:int):
 	
 ################################################################
 # drone event handler
-func on_drone_ready(_entity :BaseEntity):
-	.on_drone_ready(_entity)
+func on_drone_respawn(_entity :BaseHull):
+	.on_drone_respawn(_entity)
 	
 	if _entity != drone:
 		return
 		
 	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
+	_ui.update_player_ammo_bar(_entity.turret_ammo, _entity.turret_max_ammo)
 	
+func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
+	.on_drone_turret_ammo_update(_turret, _ammo_left, _max_ammo)
+	_ui.update_player_ammo_bar(_ammo_left, _max_ammo)
+	
+func on_drone_heal(_entity :BaseEntity, _hp_added :int):
+	.on_drone_heal(_entity, _hp_added)
+	
+	if _entity != drone:
+		return
+		
+	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
 	
 func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData):
 	.on_drone_take_damage(_entity, _damage, _hit_by)
