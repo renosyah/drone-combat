@@ -53,6 +53,7 @@ var _input_detector :Node
 var _tween_movement :Tween
 var _explosion :Explosion
 var _hp_bar :HpBar3D
+var _sound : AudioStreamPlayer3D
 
 ############################################################
 # multiplayer func
@@ -178,6 +179,12 @@ func _ready():
 	_explosion = preload("res://assets/other/explosion/explosion.tscn").instance()
 	add_child(_explosion)
 	
+	_sound = AudioStreamPlayer3D.new()
+	_sound.bus = "sfx"
+	_sound.unit_db = Global.sound_amplified
+	_sound.unit_size = Global.sound_amplified
+	add_child(_sound)
+	
 	
 func set_hp_bar(_hp_bar_color :Color, _hp_bar_visible :bool):
 	if not is_instance_valid(_hp_bar):
@@ -287,12 +294,16 @@ func resupply(_ammo_added : int):
 	if not is_instance_valid(_turret):
 		return
 		
-		
+	_sound.stream = preload("res://entity/item/sound/item_picked_up.wav")
+	_sound.play()
 		
 	_turret.resupply(_ammo_added)
 	
 func heal(_hp_added : int):
 	.heal(_hp_added)
+	
+	_sound.stream = preload("res://entity/item/sound/item_picked_up.wav")
+	_sound.play()
 	
 	if not _is_master():
 		return

@@ -9,9 +9,14 @@ script = ExtResource( 1 )
 wait_time = 5.0
 autostart = true
 
-[node name="loot_spawner_timer" type="Timer" parent="."]
-wait_time = 10.0
+[node name="health_item_spawner_timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="ammo_item_spawner_timer" type="Timer" parent="."]
+wait_time = 15.0
 autostart = true
 
 [connection signal="timeout" from="bot_action_timer" to="." method="_on_bot_action_timer_timeout"]
-[connection signal="timeout" from="loot_spawner_timer" to="." method="_on_loot_spawner_timer_timeout"]
+[connection signal="timeout" from="health_item_spawner_timer" to="." method="_on_health_item_spawner_timer_timeout"]
+[connection signal="timeout" from="ammo_item_spawner_timer" to="." method="_on_ammo_item_spawner_timer_timeout"]

@@ -138,6 +138,14 @@ func _on_bot_action_timer_timeout():
 	
 	var bot = _bots[bot_command_cicle]
 	var waypoint = _map.get_rand_pos()
+		
+	# 70% chance bot go for item
+	if randf() < 0.70 and _item_holder.get_child_count() > 0:
+		var items = _item_holder.get_children()
+		var item = items[rand_range(0, items.size() - 1)]
+		
+		if is_instance_valid(items):
+			waypoint = item.global_transform.origin
 	
 	if bot.is_dead():
 		return
@@ -154,11 +162,12 @@ func respawn_bot_drone(drone :NodePath):
 	
 	.respawn_drone(drone)
 	
-func _on_loot_spawner_timer_timeout():
-	if randf() > 0.5:
-		rpc("spawn_healing_item", _map.get_rand_pos())
-	else:
-		rpc("spawn_ammo_item", _map.get_rand_pos())
+func _on_ammo_item_spawner_timer_timeout():
+	rpc("spawn_ammo_item", _map.get_rand_pos())
+	
+func _on_health_item_spawner_timer_timeout():
+	rpc("spawn_healing_item", _map.get_rand_pos())
+
 
 
 

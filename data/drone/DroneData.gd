@@ -254,19 +254,19 @@ const sensors :Array = [
 export var player_id:String = ""
 export var player_name:String = ""
 
-export var hp :int = 120
-export var max_hp:int = 120
+export var hp :int = 240
+export var max_hp:int = 240
 
-export var turret_hp :int = 80
-export var turret_max_hp:int = 80
+export var turret_hp :int = 120
+export var turret_max_hp:int = 120
 
-export var turret_ammo :int = 5
-export var turret_max_ammo :int = 5
+export var turret_ammo :int = 300
+export var turret_max_ammo :int = 300
 
-export var turret_rotation_speed = 90
+export var turret_rotation_speed = 65
 
 export var speed:float = 2.0
-export var turning_speed:float = 4.0
+export var turning_speed:float = 2.0
 
 export var spotting_range :int = 16
 export var scanning_speed:float = 0.07

@@ -16,18 +16,18 @@ var _light: DirectionalLight
 export var ui_scene : Resource = preload("res://gameplay/mp/ui/ui.tscn")
 var _ui: Control
 
-var _sound :AudioStreamPlayer3D
+var _item_holder :Node
 
 func _ready():
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
 	
+	_init_item_holder()
 	_load_map()
 	_load_camera()
 	_load_enviroment()
 	_load_light()
 	_load_ui()
-	_load_sound()
 	
 ################################################################
 # network connection watcher
@@ -177,15 +177,6 @@ func _load_light():
 	_light = _light_asset
 	
 ################################################################
-# sound
-func _load_sound():
-	_sound = AudioStreamPlayer3D.new()
-	add_child(_sound)
-	_sound.bus = "sfx"
-	_sound.unit_db = Global.sound_amplified
-	_sound.unit_size = Global.sound_amplified
-	
-################################################################
 # drone spawner
 var _bots = []
 var _players = []
@@ -273,10 +264,17 @@ remotesync func _reposition_drone(drone : NodePath, pos : Vector3):
 	
 ################################################################
 # drop item
+func _init_item_holder():
+	_item_holder = Node.new()
+	add_child(_item_holder)
+
 remotesync func spawn_healing_item(at : Vector3):
+	if _item_holder.get_child_count() > 5:
+		return
+		
 	var item = preload("res://entity/item/healing_item/healing_item.tscn").instance()
-	add_child(item)
-	item.heal_hp = int(rand_range(80, 120))
+	_item_holder.add_child(item)
+	item.heal_hp = int(rand_range(100, 220))
 	item.translation = at
 	item.translation.y = 5
 	
@@ -284,9 +282,12 @@ remotesync func spawn_healing_item(at : Vector3):
 	_ui.add_minimap_object_marker(item, marker_icon, Color.green)
 	
 remotesync func spawn_ammo_item(at : Vector3):
+	if _item_holder.get_child_count() > 5:
+		return
+		
 	var item = preload("res://entity/item/ammo_item/ammo_item.tscn").instance()
-	add_child(item)
-	item.ammo_added = int(rand_range(40, 90))
+	_item_holder.add_child(item)
+	item.ammo_added = int(rand_range(200, 300))
 	item.translation = at
 	item.translation.y = 5
 	
@@ -314,9 +315,6 @@ func on_drone_turret_resupply(_entity :BaseTurret, _ammo_added :int):
 	msg.set_color(Color.gray)
 	msg.set_message("+" + str(_ammo_added))
 	
-	_sound.stream = preload("res://entity/item/sound/item_picked_up.wav")
-	_sound.play()
-	
 	
 func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
@@ -330,9 +328,6 @@ func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	
 	msg.set_color(Color.green)
 	msg.set_message("+" + str(_hp_added))
-	
-	_sound.stream = preload("res://entity/item/sound/item_picked_up.wav")
-	_sound.play()
 	
 	
 func on_drone_turret_take_damage(_turret :BaseTurret, _damage :int, _hit_by: PlayerData):

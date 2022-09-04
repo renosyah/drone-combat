@@ -1,6 +1,8 @@
 extends Area
 class_name BaseItem
 
+var life_time :float = 25.0
+
 var _altitude: float = 0.3
 var _lifetime_timeout :Timer
 
@@ -9,7 +11,7 @@ func _ready():
 	
 	_lifetime_timeout = Timer.new()
 	add_child(_lifetime_timeout)
-	_lifetime_timeout.wait_time = 25
+	_lifetime_timeout.wait_time = life_time
 	_lifetime_timeout.autostart = true
 	_lifetime_timeout.connect("timeout", self, "_on_lifetime_timeout")
 	
@@ -41,4 +43,7 @@ func _on_body_entered(body):
 	
 	
 func on_picked_up_by(body :BaseHull):
+	set_process(false)
 	queue_free()
+	
+	
