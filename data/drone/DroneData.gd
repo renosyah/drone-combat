@@ -37,7 +37,7 @@ const weapons :Array = [
 	},
 	{
 		"module_id":"w-3",
-		"module_name" : "75mm AD" ,
+		"module_name" : "75mm A.T." ,
 		"scene" : "res://entity/weapons/cannon/cannon.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_3.png",
 		"infos" : [
@@ -142,7 +142,7 @@ const turrets :Array = [
 const hulls :Array = [
 	{
 		"module_id":"h-1",
-		"module_name" : "Heavy Hull",
+		"module_name" : "Recta UBM",
 		"scene" : "res://entity/drone_hulls/hull_1/hull_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_1.png",
 		"infos" : [
@@ -159,7 +159,7 @@ const hulls :Array = [
 	},
 	{
 		"module_id":"h-2",
-		"module_name" : "Armored Car Hull",
+		"module_name" : "Izui MK 2",
 		"scene" : "res://entity/drone_hulls/hull_2/hull_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_2.png",
 		"infos" : [
@@ -176,7 +176,7 @@ const hulls :Array = [
 	},
 	{
 		"module_id":"h-3",
-		"module_name" : "Medium Hull",
+		"module_name" : "Howen AM-B",
 		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
 		"infos" : [

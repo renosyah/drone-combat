@@ -6,7 +6,7 @@ export var color :Color
 
 onready var _pivot = $pivot
 onready var _marker_icon = $marker_icon
-onready var _arrow_icon = $pivot/control/HBoxContainer/arrow_icon
+onready var _arrow_icon = $pivot/control/arrow_icon
 
 func _ready():
 	_marker_icon.texture = icon

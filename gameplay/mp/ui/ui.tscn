@@ -128,32 +128,38 @@ margin_bottom = 120.0
 rect_min_size = Vector2( 20, 0 )
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/info"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/info"]
 margin_top = 124.0
+margin_right = 600.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/info"]
+margin_top = 148.0
 margin_right = 600.0
 margin_bottom = 620.0
 mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/info/HBoxContainer"]
-margin_right = 25.0
-margin_bottom = 496.0
-rect_min_size = Vector2( 25, 0 )
+margin_right = 40.0
+margin_bottom = 472.0
+rect_min_size = Vector2( 40, 0 )
 mouse_filter = 2
 
 [node name="overlay_map" parent="CanvasLayer/info/HBoxContainer" instance=ExtResource( 5 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 29.0
-margin_right = 571.0
-margin_bottom = 496.0
+margin_left = 44.0
+margin_right = 556.0
+margin_bottom = 472.0
 size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/info/HBoxContainer"]
-margin_left = 575.0
+margin_left = 560.0
 margin_right = 600.0
-margin_bottom = 496.0
-rect_min_size = Vector2( 25, 0 )
+margin_bottom = 472.0
+rect_min_size = Vector2( 40, 0 )
 mouse_filter = 2
 
 [node name="MarginContainer6" type="MarginContainer" parent="CanvasLayer/info"]

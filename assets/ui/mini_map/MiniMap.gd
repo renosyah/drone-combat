@@ -1,7 +1,7 @@
 extends MarginContainer
 class_name MiniMap
 
-const DIMESION_MULTIPLIER = 90.0
+const DIMESION_MULTIPLIER = 120.0
 
 var zoom = 2.5 # Scale multiplier.
 
@@ -44,7 +44,6 @@ func _process(_delta):
 				markers[item].hide()
 				
 			else:
-				markers[item].scale = Vector2(0.8, 0.8)
 				markers[item].modulate.a = 0.8
 				markers[item].show()
 				
