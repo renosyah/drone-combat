@@ -2,7 +2,6 @@ extends Spatial
 class_name BaseWeapon
 
 signal on_weapon_ready_open_fire(_target)
-signal on_weapon_align_on_target
 
 # identity owner
 var player:PlayerData
@@ -54,8 +53,6 @@ func _process(delta):
 	var body = _sensor.get_collider()
 	if not _is_valid_target(body):
 		return
-		
-	emit_signal("on_weapon_align_on_target")
 		
 	if _attack_timmer.is_stopped():
 		emit_signal("on_weapon_ready_open_fire", body)

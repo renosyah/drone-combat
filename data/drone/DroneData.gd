@@ -36,6 +36,17 @@ const weapons :Array = [
 		"modifier" : {}
 	},
 	{
+		"module_id":"w-5",
+		"module_name" : "ZMB Minigun" ,
+		"scene" : "res://entity/weapons/minigun/minigun.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/weapon_5.png",
+		"infos" : [
+			"Insane Firing Rate",
+			"Very Low Damage"
+		],
+		"modifier" : {}
+	},
+	{
 		"module_id":"w-3",
 		"module_name" : "75mm A.T." ,
 		"scene" : "res://entity/weapons/cannon/cannon.tscn",
@@ -190,7 +201,41 @@ const hulls :Array = [
 			"speed" : 2.5,
 			"turning_speed" : 2.0
 		}
-	}
+	},
+	{
+		"module_id":"h-4",
+		"module_name" : "Recta UBM-B",
+		"scene" : "res://entity/drone_hulls/hull_4/hull_4.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/hull_4.png",
+		"infos" : [
+			"Hp : 240",
+			"Speed : 2",
+			"Travese : 3"
+		],
+		"modifier" : {
+			"hp" : 240,
+			"max_hp" : 240,
+			"speed" : 2.0,
+			"turning_speed" : 3.0
+		}
+	},
+	{
+		"module_id":"h-6",
+		"module_name" : "Izui X-AA",
+		"scene" : "res://entity/drone_hulls/hull_5/hull_5.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/hull_5.png",
+		"infos" : [
+			"Hp : 60",
+			"Speed : 5",
+			"Travese : 2"
+		],
+		"modifier" : {
+			"hp" : 60,
+			"max_hp" : 60,
+			"speed" : 3.5,
+			"turning_speed" : 3.0
+		}
+	},
 ]
 const sensors :Array = [
 	{

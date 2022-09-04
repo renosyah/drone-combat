@@ -1,6 +1,5 @@
 extends BaseWeapon
 
-
 onready var _projectile_spawn_pos = $projectile_spawn_pos
 onready var _projectile_target_pos = $projectile_target_pos
 onready var _animation_player = $AnimationPlayer

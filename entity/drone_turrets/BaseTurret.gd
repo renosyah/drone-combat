@@ -165,7 +165,6 @@ func spawn_weapon(_pos : Vector3):
 		
 	if is_instance_valid(_weapon):
 		_weapon.connect("on_weapon_ready_open_fire", self,"_on_weapon_ready_open_fire")
-		_weapon.connect("on_weapon_align_on_target", self, "_on_weapon_align_on_target")
 		_weapon.is_master = true
 	
 func spawn_sensor(_pos : Vector3):
@@ -218,9 +217,6 @@ func puppet_moving(_delta):
 	
 ################################
 # signal handling
-func _on_weapon_align_on_target():
-	active = false
-	
 func _on_weapon_ready_open_fire(_target : BaseEntity):
 	if not _is_master():
 		return
