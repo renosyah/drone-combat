@@ -9,13 +9,7 @@ var zoom = 2.5 # Scale multiplier.
 var camera : GameplayCamera
 onready var grid = $MarginContainer/Grid
 onready var camera_marker = $MarginContainer/Grid/Camera
-onready var troop_marker = $MarginContainer/Grid/TroopMarker
-
-# Link object icon setting to Sprite marker.
-onready var icons = {
-	"camera": camera_marker,
-	"troop": troop_marker,
-}
+onready var object_marker_template = $MarginContainer/Grid/objectMarker
 
 var map_objects = []
 var grid_scale  # Calculated world to map scale.
@@ -54,25 +48,23 @@ func _process(_delta):
 				markers[item].modulate.a = 0.8
 				markers[item].show()
 				
-				
 			# Don't draw markers outside grid rectangle.
 			obj_pos.x = clamp(obj_pos.x, 0, grid.rect_size.x)
 			obj_pos.y = clamp(obj_pos.y, 0, grid.rect_size.y)
 			markers[item].position = obj_pos
-			markers[item].look_at(camera_marker.rect_position) 
+			markers[item].look_at(camera_marker.rect_global_position) 
 			
 		else:
 			remove_object(item)
 		
-func add_object(object :Spatial, is_friendly :bool):
-	var new_marker = icons["troop"].duplicate()
+func add_object(object :Spatial, marker_icon:Resource, marker_color :Color):
+	var new_marker :MarkerItem = object_marker_template.duplicate()
+	new_marker.icon = marker_icon
+	new_marker.color = marker_color
 	grid.add_child(new_marker)
 	grid.move_child(new_marker, 0)
 	new_marker.show()
 	markers[object] = new_marker
-	
-	markers[object].modulate = Color.blue if is_friendly else Color.red
-	
 	
 func remove_object(object):
 	if object in markers:

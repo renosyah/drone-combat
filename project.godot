@@ -134,6 +134,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://data/map_stuff/MapStuffData.gd"
 }, {
+"base": "Sprite",
+"class": "MarkerItem",
+"language": "GDScript",
+"path": "res://assets/ui/mini_map/marker_item/marker_item.gd"
+}, {
 "base": "MarginContainer",
 "class": "MiniMap",
 "language": "GDScript",
@@ -210,6 +215,7 @@ _global_script_class_icons={
 "InputEventSingleScreenTouch": "",
 "MapData": "",
 "MapStuffData": "",
+"MarkerItem": "",
 "MiniMap": "",
 "PlayerData": "",
 "RandomNameGenerator": "",

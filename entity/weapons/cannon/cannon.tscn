@@ -158,6 +158,7 @@ tracks/3/keys = {
 script = ExtResource( 1 )
 sensor_path = NodePath("RayCast")
 attack_range = 22
+ammo_cost = 20
 
 [node name="pivot" type="Spatial" parent="."]
 

@@ -287,6 +287,8 @@ func resupply(_ammo_added : int):
 	if not is_instance_valid(_turret):
 		return
 		
+		
+		
 	_turret.resupply(_ammo_added)
 	
 func heal(_hp_added : int):

@@ -10,7 +10,7 @@ wait_time = 5.0
 autostart = true
 
 [node name="loot_spawner_timer" type="Timer" parent="."]
-wait_time = 25.0
+wait_time = 15.0
 autostart = true
 
 [connection signal="timeout" from="bot_action_timer" to="." method="_on_bot_action_timer_timeout"]

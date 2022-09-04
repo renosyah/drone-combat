@@ -227,7 +227,12 @@ func _on_weapon_ready_open_fire(_target : BaseEntity):
 	if ammo == 0:
 		return
 		
-	ammo -= 1
+	if not is_instance_valid(_weapon):
+		return
+		
+	ammo -= _weapon.ammo_cost
+	if ammo < 0:
+		ammo = 0
 		
 	rpc_unreliable("_open_fire", _target.get_path())
 	

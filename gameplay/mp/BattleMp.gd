@@ -16,6 +16,8 @@ var _light: DirectionalLight
 export var ui_scene : Resource = preload("res://gameplay/mp/ui/ui.tscn")
 var _ui: Control
 
+var _sound :AudioStreamPlayer3D
+
 func _ready():
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
@@ -25,6 +27,7 @@ func _ready():
 	_load_enviroment()
 	_load_light()
 	_load_ui()
+	_load_sound()
 	
 ################################################################
 # network connection watcher
@@ -174,6 +177,15 @@ func _load_light():
 	_light = _light_asset
 	
 ################################################################
+# sound
+func _load_sound():
+	_sound = AudioStreamPlayer3D.new()
+	add_child(_sound)
+	_sound.bus = "sfx"
+	_sound.unit_db = Global.sound_amplified
+	_sound.unit_size = Global.sound_amplified
+	
+################################################################
 # drone spawner
 var _bots = []
 var _players = []
@@ -228,7 +240,8 @@ func set_minimap_player_objects(local_drone_player : PlayerData):
 		var show_hp_bar = (player_from_drone.player_id != local_drone_player.player_id)
 		var hp_bar_color = Color.blue if is_friendly else Color.red
 		spawned.set_hp_bar(hp_bar_color, show_hp_bar)
-		_ui.add_minimap_object(spawned, is_friendly)
+		var marker_icon = preload("res://assets/ui/mini_map/warning.png")
+		_ui.add_minimap_object_marker(spawned, marker_icon, hp_bar_color)
 	
 func respawn_drone(drone : NodePath):
 	if is_server():
@@ -263,14 +276,22 @@ remotesync func _reposition_drone(drone : NodePath, pos : Vector3):
 remotesync func spawn_healing_item(at : Vector3):
 	var item = preload("res://entity/item/healing_item/healing_item.tscn").instance()
 	add_child(item)
+	item.heal_hp = int(rand_range(80, 120))
 	item.translation = at
 	item.translation.y = 5
+	
+	var marker_icon = preload("res://assets/ui/mini_map/hp.png")
+	_ui.add_minimap_object_marker(item, marker_icon, Color.green)
 	
 remotesync func spawn_ammo_item(at : Vector3):
 	var item = preload("res://entity/item/ammo_item/ammo_item.tscn").instance()
 	add_child(item)
+	item.ammo_added = int(rand_range(40, 90))
 	item.translation = at
 	item.translation.y = 5
+	
+	var marker_icon = preload("res://assets/ui/mini_map/ammo.png")
+	_ui.add_minimap_object_marker(item, marker_icon, Color.black)
 	
 ################################################################
 # drone event signal handler
@@ -293,6 +314,9 @@ func on_drone_turret_resupply(_entity :BaseTurret, _ammo_added :int):
 	msg.set_color(Color.gray)
 	msg.set_message("+" + str(_ammo_added))
 	
+	_sound.stream = preload("res://entity/item/sound/item_picked_up.wav")
+	_sound.play()
+	
 	
 func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
@@ -306,6 +330,10 @@ func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	
 	msg.set_color(Color.green)
 	msg.set_message("+" + str(_hp_added))
+	
+	_sound.stream = preload("res://entity/item/sound/item_picked_up.wav")
+	_sound.play()
+	
 	
 func on_drone_turret_take_damage(_turret :BaseTurret, _damage :int, _hit_by: PlayerData):
 	on_drone_take_damage(_turret, _damage, _hit_by)

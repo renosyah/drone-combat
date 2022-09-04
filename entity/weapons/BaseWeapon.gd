@@ -8,6 +8,7 @@ var player:PlayerData
 
 export var sensor_path: NodePath
 export var attack_range :int = 0
+export var ammo_cost :int = 0
 
 var attack_delay : float = 0.3
 var is_master = false

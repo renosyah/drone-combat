@@ -56,14 +56,14 @@ const turrets :Array = [
 		"infos" : [
 			"Hp : 20",
 			"Rotation : 120",
-			"Ammo Capacity : 80"
+			"Ammo Capacity : 120"
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 120,
 			"turret_hp" : 20,
 			"turret_max_hp" : 20,
-			"turret_ammo" : 80,
-			"turret_max_ammo" : 80
+			"turret_ammo" : 120,
+			"turret_max_ammo" : 120
 		}
 	},
 	{
@@ -74,14 +74,14 @@ const turrets :Array = [
 		"infos" : [
 			"Hp : 120",
 			"Rotation : 65",
-			"Ammo Capacity : 100"
+			"Ammo Capacity : 300"
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 65,
 			"turret_hp" : 120,
 			"turret_max_hp" : 120,
-			"turret_ammo" : 100,
-			"turret_max_ammo" : 100
+			"turret_ammo" : 300,
+			"turret_max_ammo" : 300
 		}
 	},
 	{
@@ -92,14 +92,14 @@ const turrets :Array = [
 		"infos" : [
 			"Hp : 90",
 			"Rotation : 75",
-			"Ammo Capacity : 80"
+			"Ammo Capacity : 200"
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 75,
 			"turret_hp" : 90,
 			"turret_max_hp" : 90,
-			"turret_ammo" : 80,
-			"turret_max_ammo" : 80
+			"turret_ammo" : 200,
+			"turret_max_ammo" : 200
 		}
 	},
 	{
@@ -110,14 +110,14 @@ const turrets :Array = [
 		"infos" : [
 			"Hp : 60",
 			"Rotation : 90",
-			"Ammo Capacity : 80"
+			"Ammo Capacity : 130"
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 90,
 			"turret_hp" : 60,
 			"turret_max_hp" : 60,
-			"turret_ammo" : 80,
-			"turret_max_ammo" : 80
+			"turret_ammo" : 130,
+			"turret_max_ammo" : 130
 		}
 	},
 	{
@@ -128,14 +128,14 @@ const turrets :Array = [
 		"infos" : [
 			"Hp : 100",
 			"Rotation : 70",
-			"Ammo Capacity : 100"
+			"Ammo Capacity : 300"
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 70,
 			"turret_hp" : 100,
 			"turret_max_hp" : 100,
-			"turret_ammo" : 100,
-			"turret_max_ammo" : 100
+			"turret_ammo" : 300,
+			"turret_max_ammo" : 300
 		}
 	},
 ]

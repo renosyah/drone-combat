@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/ui/mini_map/MiniMap.gd" type="Script" id=1]
-[ext_resource path="res://assets/ui/mini_map/arrow.png" type="Texture" id=2]
+[ext_resource path="res://assets/ui/mini_map/marker_item/marker_item.tscn" type="PackedScene" id=2]
 
 [node name="MiniMap" type="MarginContainer"]
 anchor_right = 1.0
@@ -25,19 +25,8 @@ margin_right = 590.0
 margin_bottom = 1014.0
 mouse_filter = 2
 
-[node name="TroopMarker" type="Sprite" parent="MarginContainer/Grid"]
+[node name="objectMarker" parent="MarginContainer/Grid" instance=ExtResource( 2 )]
 visible = false
-modulate = Color( 1, 0, 0, 1 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 2 )
-
-[node name="Label" type="Label" parent="MarginContainer/Grid/TroopMarker"]
-margin_left = -18.0
-margin_top = 10.0
-margin_right = 22.0
-margin_bottom = 24.0
-align = 1
-valign = 1
 
 [node name="Camera" type="TextureRect" parent="MarginContainer/Grid"]
 anchor_left = 0.5

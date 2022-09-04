@@ -80,9 +80,9 @@ func update_player_hp_bar(player_name :String, hp, max_hp :int):
 	_player_name.text = player_name
 	_player_hp_bar.update_bar(hp, max_hp)
 	
-func add_minimap_object(object :Spatial, is_friendly :bool):
-	_overlay_map.add_object(object, is_friendly)
-
+func add_minimap_object_marker(object :Spatial, marker_icon:Resource, marker_color :Color):
+	_overlay_map.add_object(object, marker_icon, marker_color)
+	
 func set_camera(_camera : GameplayCamera):
 	_overlay_map.set_camera(_camera)
 	
