@@ -2,14 +2,25 @@ extends Area
 class_name BaseItem
 
 var _altitude: float = 0.3
+var _lifetime_timeout :Timer
 
 func _ready():
 	connect("body_entered", self,"_on_body_entered")
 	
+	_lifetime_timeout = Timer.new()
+	add_child(_lifetime_timeout)
+	_lifetime_timeout.wait_time = 25
+	_lifetime_timeout.autostart = true
+	_lifetime_timeout.connect("timeout", self, "_on_lifetime_timeout")
+	
 func _process(delta):
 	if int(round(translation.y)) > int(_altitude):
 		translation.y -= 9.0 * delta
-		
+	
+func _on_lifetime_timeout():
+	set_process(false)
+	queue_free()
+	
 func _on_body_entered(body):
 	if not is_instance_valid(body):
 		return

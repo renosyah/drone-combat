@@ -137,13 +137,13 @@ rect_min_size = Vector2( 0, 20 )
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/info"]
 margin_top = 148.0
 margin_right = 600.0
-margin_bottom = 620.0
+margin_bottom = 600.0
 mouse_filter = 2
 size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/info/HBoxContainer"]
 margin_right = 40.0
-margin_bottom = 472.0
+margin_bottom = 452.0
 rect_min_size = Vector2( 40, 0 )
 mouse_filter = 2
 
@@ -152,21 +152,21 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 44.0
 margin_right = 556.0
-margin_bottom = 472.0
+margin_bottom = 452.0
 size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/info/HBoxContainer"]
 margin_left = 560.0
 margin_right = 600.0
-margin_bottom = 472.0
+margin_bottom = 452.0
 rect_min_size = Vector2( 40, 0 )
 mouse_filter = 2
 
 [node name="MarginContainer6" type="MarginContainer" parent="CanvasLayer/info"]
-margin_top = 624.0
+margin_top = 604.0
 margin_right = 600.0
 margin_bottom = 1024.0
-rect_min_size = Vector2( 80, 400 )
+rect_min_size = Vector2( 80, 420 )
 mouse_filter = 2
 
 [node name="control" type="Control" parent="CanvasLayer"]
