@@ -56,7 +56,7 @@ height = 0.2
 next_pass = ExtResource( 3 )
 albedo_color = Color( 0.294118, 0.294118, 0.294118, 1 )
 
-[node name="hull_2" type="KinematicBody"]
+[node name="hull_3" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00345802, 4.76837e-07, 0.0104241 )
 script = ExtResource( 1 )
 

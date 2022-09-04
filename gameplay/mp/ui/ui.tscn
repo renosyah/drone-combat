@@ -199,7 +199,6 @@ margin_right = 100.0
 margin_bottom = -193.0
 
 [node name="death_screen" type="Control" parent="CanvasLayer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
