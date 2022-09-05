@@ -38,15 +38,21 @@ func _ready():
 		
 	if is_instance_valid(_sensor):
 		_sensor.cast_to = _sensor.cast_to * attack_range
+		
+func _on_attack_timmer_timeout():
+	pass
 	
 func add_exception(_node : BaseEntity):
 	_sensor.add_exception(_node)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if not is_master:
-		return
-		
+	if is_master:
+		_master_weapon_handling(delta)
+	else:
+		_puppet_weapon_handling(delta)
+	
+func _master_weapon_handling(delta):
 	if not _sensor.is_colliding():
 		return
 		
@@ -56,17 +62,24 @@ func _process(delta):
 		
 	if _attack_timmer.is_stopped():
 		emit_signal("on_weapon_ready_open_fire", body)
+		_on_attack_timmer_timeout()
 		_attack_timmer.wait_time = attack_delay
 		_attack_timmer.start()
-		
+	
+func _puppet_weapon_handling(delta):
+	if _attack_timmer.is_stopped():
+		_on_attack_timmer_timeout()
+	
 func open_fire(_target : BaseEntity):
 	_play_firing_animation()
 	_spawn_projectile_to(_target)
 
 func _play_firing_animation():
+	if not is_master and _attack_timmer.is_stopped():
+		_attack_timmer.wait_time = attack_delay
+		_attack_timmer.start()
 	# override where project
 	# want to animate each firing
-	pass
 	
 func _spawn_projectile_to(_target : BaseEntity):
 	# override where project

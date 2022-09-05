@@ -12,8 +12,10 @@ func _ready():
 	_lifetime_timeout = Timer.new()
 	add_child(_lifetime_timeout)
 	_lifetime_timeout.wait_time = life_time
-	_lifetime_timeout.autostart = true
+	_lifetime_timeout.autostart = false
+	_lifetime_timeout.one_shot = true
 	_lifetime_timeout.connect("timeout", self, "_on_lifetime_timeout")
+	_lifetime_timeout.start()
 	
 func _process(delta):
 	if int(round(translation.y)) > int(_altitude):

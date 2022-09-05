@@ -20,9 +20,9 @@ func _ready():
 	add_child(minigun_rate_fire)
 	
 	attack_delay = 1.0
-	_attack_timmer.connect("timeout", self, "_on_attack_timmer_timeout")
 	
 func _on_attack_timmer_timeout():
+	._on_attack_timmer_timeout()
 	minigun_firing = false
 	_animation_player.play("RESET")
 	
@@ -40,8 +40,8 @@ func _process(delta):
 		bullet.player = player
 		bullet.is_master = is_master
 		add_child(bullet)
-		bullet.attack_damage = int(rand_range(2,6))
-		bullet.spread = 0.40
+		bullet.attack_damage = int(rand_range(1,3))
+		bullet.spread = 0.60
 		bullet.translation = _projectile_spawn_pos.global_transform.origin
 		bullet.launch(_projectile_target_pos.global_transform.origin)
 		
