@@ -78,6 +78,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=8]
 resource_name = "firing"
 length = 0.5
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("pivot/Spatial:rotation_degrees")
 tracks/0/interp = 1
@@ -97,10 +98,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.3, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ true, false, true ]
+"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -134,7 +135,7 @@ tracks/1/keys = {
 script = ExtResource( 1 )
 sensor_path = NodePath("RayCast")
 attack_range = 12
-ammo_cost = 10
+ammo_cost = 1
 
 [node name="pivot" type="Spatial" parent="."]
 
