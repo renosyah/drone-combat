@@ -224,7 +224,7 @@ func _on_weapon_ready_open_fire(_target : BaseEntity):
 	if is_dead:
 		return
 		
-	if ammo == 0:
+	if ammo < 1:
 		return
 		
 	if not is_instance_valid(_weapon):
