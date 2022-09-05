@@ -63,7 +63,7 @@ func validate_detection(raycast : RayCast):
 	var body = raycast.get_collider()
 	if not _is_type_entity(body):
 		return
-
+		
 	if not _is_valid_target(body):
 		return
 		

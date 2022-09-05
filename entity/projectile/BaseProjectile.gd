@@ -1,7 +1,7 @@
-extends Area
+extends RayCast
 class_name BaseProjectile
 
-const MAX_DISTANCE = 180.0
+const MAX_DISTANCE = 100.0
 
 # identity owner
 var player:PlayerData
@@ -17,7 +17,10 @@ var travel_distance = 0.0
 var velocity = Vector3.ZERO
 
 func _ready():
+	enabled = true
+	cast_to = Vector3(0, 0, -0.3)
 	set_as_toplevel(true)
+	set_process(true)
 
 func launch(to : Vector3):
 	to.z += rand_range(-spread, spread)
@@ -31,15 +34,17 @@ func _process(delta):
 	translation += velocity * _distance
 	travel_distance += _distance
 	
+	validate_collider()
+	
 	if travel_distance > MAX_DISTANCE:
 		stop_projectile()
-		queue_free()
 	
-func _on_projectile_body_entered(body):
-	if not is_instance_valid(body):
+func validate_collider():
+	if not is_colliding():
 		return
 		
-	if body.is_a_parent_of(self):
+	var body = get_collider()
+	if not is_instance_valid(body):
 		return
 		
 	if body is GameplayCamera:
@@ -47,7 +52,6 @@ func _on_projectile_body_entered(body):
 		
 	if body is StaticBody:
 		stop_projectile()
-		queue_free()
 		return
 		
 	if not body is BaseEntity:
@@ -60,11 +64,10 @@ func _on_projectile_body_entered(body):
 		body.take_damage(attack_damage, player)
 	
 	stop_projectile()
-	queue_free()
 	
 func stop_projectile():
 	set_process(false)
-	
+	queue_free()
 	
 	
 	
