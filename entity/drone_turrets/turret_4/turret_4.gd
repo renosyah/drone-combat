@@ -11,6 +11,7 @@ func _ready():
 	$pivot/weapon/MeshInstance3.set_surface_material(0, _material)
 	$pivot/weapon/MeshInstance.set_surface_material(0, _material)
 	$pivot/weapon/MeshInstance2.set_surface_material(0, _material)
+	$pivot/MeshInstance5.set_surface_material(0, _material)
 	
 	.spawn_weapon(weapon_pos.translation)
 	.spawn_sensor(sensor_pos.translation)

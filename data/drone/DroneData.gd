@@ -79,7 +79,7 @@ const turrets :Array = [
 	},
 	{
 		"module_id":"t-2",
-		"module_name" : "Recta MX-B",
+		"module_name" : "Rectketa MX-B",
 		"scene" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
 		"infos" : [
@@ -115,7 +115,7 @@ const turrets :Array = [
 	},
 	{
 		"module_id":"t-4",
-		"module_name" : "OM-7 Auto",
+		"module_name" : "OM-7 Exp",
 		"scene" : "res://entity/drone_turrets/turret_4/turret_4.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_4.png",
 		"infos" : [
@@ -133,7 +133,7 @@ const turrets :Array = [
 	},
 	{
 		"module_id":"t-5",
-		"module_name" : "Recta MX-A",
+		"module_name" : "Rectketa MX-A",
 		"scene" : "res://entity/drone_turrets/turret_5/turret_5.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
 		"infos" : [
@@ -153,7 +153,7 @@ const turrets :Array = [
 const hulls :Array = [
 	{
 		"module_id":"h-1",
-		"module_name" : "Recta UBM",
+		"module_name" : "Rectketa UBM",
 		"scene" : "res://entity/drone_hulls/hull_1/hull_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_1.png",
 		"infos" : [
@@ -204,7 +204,7 @@ const hulls :Array = [
 	},
 	{
 		"module_id":"h-4",
-		"module_name" : "Recta UBM-B",
+		"module_name" : "Rectketa UBM-B",
 		"scene" : "res://entity/drone_hulls/hull_4/hull_4.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_4.png",
 		"infos" : [
