@@ -1,7 +1,7 @@
 extends Area
 class_name BaseItem
 
-var life_time :float = 25.0
+var life_time :float = 65.0
 
 var _altitude: float = 0.3
 var _lifetime_timeout :Timer
