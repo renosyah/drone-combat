@@ -59,7 +59,7 @@ albedo_color = Color( 0.294118, 0.294118, 0.294118, 1 )
 [sub_resource type="CubeMesh" id=15]
 size = Vector3( 0.4, 0.1, 3 )
 
-[sub_resource type="SpatialMaterial" id=16]
+[sub_resource type="SpatialMaterial" id=20]
 albedo_color = Color( 0.156863, 0.156863, 0.156863, 1 )
 
 [sub_resource type="CubeMesh" id=17]
@@ -213,32 +213,32 @@ rotate_speed = 0.2
 [node name="track" type="MeshInstance" parent="pivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.796635, -0.420705, 0.0299818 )
 mesh = SubResource( 15 )
-material/0 = SubResource( 16 )
+material/0 = SubResource( 20 )
 
 [node name="track2" type="MeshInstance" parent="pivot"]
 transform = Transform( 1, 6.62792e-08, 3.04157e-08, -6.62792e-08, 0.652085, 0.758146, 3.04157e-08, -0.758146, 0.652085, 0.796635, -0.151359, 1.73639 )
 mesh = SubResource( 17 )
-material/0 = SubResource( 16 )
+material/0 = SubResource( 20 )
 
 [node name="track3" type="MeshInstance" parent="pivot"]
 transform = Transform( 1, 7.31222e-08, 1.35338e-07, -7.31222e-08, -0.548089, 0.83642, 1.35338e-07, -0.83642, -0.548089, 0.796635, -0.151359, -1.65298 )
 mesh = SubResource( 17 )
-material/0 = SubResource( 16 )
+material/0 = SubResource( 20 )
 
 [node name="track4" type="MeshInstance" parent="pivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.774837, -0.420705, 0.0299817 )
 mesh = SubResource( 15 )
-material/0 = SubResource( 16 )
+material/0 = SubResource( 20 )
 
 [node name="track5" type="MeshInstance" parent="pivot"]
 transform = Transform( 1, 6.62792e-08, 3.04157e-08, -6.62792e-08, 0.652085, 0.758146, 3.04157e-08, -0.758146, 0.652085, -0.774836, -0.151359, 1.73639 )
 mesh = SubResource( 17 )
-material/0 = SubResource( 16 )
+material/0 = SubResource( 20 )
 
 [node name="track6" type="MeshInstance" parent="pivot"]
 transform = Transform( 1, 7.31222e-08, 1.35338e-07, -7.31222e-08, -0.548089, 0.83642, 1.35338e-07, -0.83642, -0.548089, -0.774836, -0.151359, -1.65298 )
 mesh = SubResource( 17 )
-material/0 = SubResource( 16 )
+material/0 = SubResource( 20 )
 
 [node name="turret_pos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )

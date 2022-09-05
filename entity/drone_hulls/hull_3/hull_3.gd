@@ -3,9 +3,15 @@ extends BaseHull
 onready var _turret_pos = $turret_pos
 onready var _wheels = [
 	$pivot/wheel,
+	$pivot/wheel1,
+	$pivot/wheel2,
 	$pivot/wheel3,
 	$pivot/wheel4,
+	$pivot/wheel5,
 	$pivot/wheel6,
+	$pivot/wheel7,
+	$pivot/wheel8,
+	$pivot/wheel9,
 ]
 
 func _each_wheel(spin :bool):

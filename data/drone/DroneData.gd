@@ -149,6 +149,24 @@ const turrets :Array = [
 			"turret_max_ammo" : 300
 		}
 	},
+	{
+		"module_id":"t-6",
+		"module_name" : "A-14 Sperict",
+		"scene" : "res://entity/drone_turrets/turret_6/turret_6.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/turret_6.png",
+		"infos" : [
+			"Hp : 110",
+			"Rotation : 80",
+			"Ammo Capacity : 300"
+		],
+		"modifier" : {
+			"turret_rotation_speed" : 80,
+			"turret_hp" : 110,
+			"turret_max_hp" : 110,
+			"turret_ammo" : 300,
+			"turret_max_ammo" : 300
+		}
+	},
 ]
 const hulls :Array = [
 	{
