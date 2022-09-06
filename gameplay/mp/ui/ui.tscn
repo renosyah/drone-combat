@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://addons/joystick/virtual_joystick.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gameplay/mp/ui/ui.gd" type="Script" id=2]
@@ -12,6 +12,64 @@
 [ext_resource path="res://assets/ui/bar/hp_bar.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/ui/icon/menu.png" type="Texture" id=11]
 [ext_resource path="res://assets/ui/scoreboard/scoreboard.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/ui/icon/no_ammo.png" type="Texture" id=13]
+[ext_resource path="res://assets/ui/icon/no_hp.png" type="Texture" id=14]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("no_ammo_icon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("no_hp_icon:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "beep"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("no_ammo_icon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("no_hp_icon:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="ui" type="Control"]
 anchor_right = 1.0
@@ -28,13 +86,13 @@ mouse_filter = 2
 
 [node name="hbox" type="HBoxContainer" parent="CanvasLayer/info"]
 margin_right = 600.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 0, 120 )
+margin_bottom = 137.0
 mouse_filter = 2
+alignment = 1
 
 [node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/info/hbox"]
 margin_right = 20.0
-margin_bottom = 120.0
+margin_bottom = 137.0
 rect_min_size = Vector2( 20, 0 )
 mouse_filter = 2
 
@@ -42,45 +100,51 @@ mouse_filter = 2
 modulate = Color( 1, 1, 1, 0.658824 )
 margin_left = 24.0
 margin_right = 104.0
-margin_bottom = 120.0
+margin_bottom = 137.0
 rect_min_size = Vector2( 80, 80 )
 icon = ExtResource( 9 )
 flat = true
 expand_icon = true
 
-[node name="MarginContainer" type="Control" parent="CanvasLayer/info/hbox"]
+[node name="MarginContainer" type="CenterContainer" parent="CanvasLayer/info/hbox"]
 margin_left = 108.0
 margin_right = 492.0
-margin_bottom = 120.0
+margin_bottom = 137.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/info/hbox/MarginContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_left = 18.0
+margin_right = 366.0
+margin_bottom = 137.0
 mouse_filter = 2
 alignment = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer"]
-margin_right = 38.0
-margin_bottom = 120.0
+margin_right = 20.0
+margin_bottom = 137.0
 rect_min_size = Vector2( 20, 0 )
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer"]
-margin_left = 42.0
-margin_right = 342.0
-margin_bottom = 120.0
+margin_left = 24.0
+margin_right = 324.0
+margin_bottom = 137.0
 rect_min_size = Vector2( 300, 0 )
 mouse_filter = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="player_hp_bar" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
-margin_top = 28.0
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer"]
 margin_right = 300.0
-margin_bottom = 78.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="player_hp_bar" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
+margin_top = 29.0
+margin_right = 300.0
+margin_bottom = 79.0
 rect_min_size = Vector2( 0, 50 )
 mouse_filter = 2
 
@@ -97,16 +161,47 @@ align = 1
 valign = 1
 
 [node name="player_ammo_bar" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 10 )]
-margin_top = 82.0
+margin_top = 83.0
 margin_right = 300.0
-margin_bottom = 92.0
+margin_bottom = 93.0
 rect_min_size = Vector2( 0, 10 )
 mouse_filter = 2
 
+[node name="MarginContainer" type="HBoxContainer" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 97.0
+margin_right = 300.0
+margin_bottom = 137.0
+rect_min_size = Vector2( 0, 40 )
+alignment = 1
+
+[node name="no_ammo_icon" type="TextureRect" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+modulate = Color( 0.909804, 0.513726, 0, 1 )
+margin_left = 108.0
+margin_right = 148.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 13 )
+expand = true
+
+[node name="no_hp_icon" type="TextureRect" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+modulate = Color( 0.909804, 0.513726, 0, 1 )
+margin_left = 152.0
+margin_right = 192.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 14 )
+expand = true
+flip_v = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+autoplay = "beep"
+anims/RESET = SubResource( 1 )
+anims/beep = SubResource( 2 )
+
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/info/hbox/MarginContainer/HBoxContainer"]
-margin_left = 346.0
-margin_right = 384.0
-margin_bottom = 120.0
+margin_left = 328.0
+margin_right = 348.0
+margin_bottom = 137.0
 rect_min_size = Vector2( 20, 0 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -115,7 +210,7 @@ size_flags_horizontal = 3
 modulate = Color( 1, 1, 1, 0.658824 )
 margin_left = 496.0
 margin_right = 576.0
-margin_bottom = 120.0
+margin_bottom = 137.0
 rect_min_size = Vector2( 80, 80 )
 icon = ExtResource( 11 )
 flat = true
@@ -124,18 +219,19 @@ expand_icon = true
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/info/hbox"]
 margin_left = 580.0
 margin_right = 600.0
-margin_bottom = 120.0
+margin_bottom = 137.0
 rect_min_size = Vector2( 20, 0 )
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/info"]
-margin_top = 124.0
+[node name="MarginContainer7" type="MarginContainer" parent="CanvasLayer/info"]
+margin_top = 141.0
 margin_right = 600.0
-margin_bottom = 144.0
-rect_min_size = Vector2( 0, 20 )
+margin_bottom = 161.0
+rect_min_size = Vector2( 80, 20 )
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/info"]
-margin_top = 148.0
+margin_top = 165.0
 margin_right = 600.0
 margin_bottom = 600.0
 mouse_filter = 2
@@ -143,7 +239,7 @@ size_flags_vertical = 3
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/info/HBoxContainer"]
 margin_right = 40.0
-margin_bottom = 452.0
+margin_bottom = 435.0
 rect_min_size = Vector2( 40, 0 )
 mouse_filter = 2
 
@@ -152,13 +248,13 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 44.0
 margin_right = 556.0
-margin_bottom = 452.0
+margin_bottom = 435.0
 size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/info/HBoxContainer"]
 margin_left = 560.0
 margin_right = 600.0
-margin_bottom = 452.0
+margin_bottom = 435.0
 rect_min_size = Vector2( 40, 0 )
 mouse_filter = 2
 
@@ -170,6 +266,7 @@ rect_min_size = Vector2( 80, 420 )
 mouse_filter = 2
 
 [node name="control" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -199,6 +296,7 @@ margin_right = 100.0
 margin_bottom = -193.0
 
 [node name="death_screen" type="Control" parent="CanvasLayer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -211,14 +309,14 @@ alignment = 1
 
 [node name="MarginContainer5" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer"]
 margin_right = 600.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 80, 100 )
+margin_bottom = 130.0
+rect_min_size = Vector2( 80, 130 )
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/death_screen/VBoxContainer"]
-margin_top = 104.0
+margin_top = 134.0
 margin_right = 600.0
-margin_bottom = 227.0
+margin_bottom = 257.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -231,7 +329,7 @@ align = 1
 valign = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/death_screen/VBoxContainer"]
-margin_top = 231.0
+margin_top = 261.0
 margin_right = 600.0
 margin_bottom = 716.0
 rect_min_size = Vector2( 80, 60 )

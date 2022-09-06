@@ -30,7 +30,7 @@ next_pass = ExtResource( 2 )
 albedo_color = Color( 0.286275, 0.286275, 0.286275, 1 )
 
 [sub_resource type="CubeMesh" id=18]
-size = Vector3( 0.7, 0.5, 1.3 )
+size = Vector3( 0.9, 0.5, 1.3 )
 
 [sub_resource type="SpatialMaterial" id=19]
 albedo_color = Color( 0.337255, 0.337255, 0.337255, 1 )
@@ -68,7 +68,7 @@ mesh = SubResource( 12 )
 material/0 = SubResource( 13 )
 
 [node name="MeshInstance3" type="MeshInstance" parent="pivot"]
-transform = Transform( 1, 0, 0, 0, 0.976563, -0.21523, 0, 0.21523, 0.976563, 0.022611, 0.341729, 0.133841 )
+transform = Transform( 1, 0, 0, 0, 0.976563, -0.21523, 0, 0.21523, 0.976563, 0.0125652, 0.341729, 0.133841 )
 mesh = SubResource( 18 )
 material/0 = SubResource( 19 )
 

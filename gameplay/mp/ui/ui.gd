@@ -33,6 +33,9 @@ onready var _player_hp_bar = $CanvasLayer/info/hbox/MarginContainer/HBoxContaine
 onready var _player_ammo_bar = $CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/player_ammo_bar
 onready var _player_name = $CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar/player_name
 
+onready var _no_ammo_icon = $CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/no_ammo_icon
+onready var _no_hp_icon = $CanvasLayer/info/hbox/MarginContainer/HBoxContainer/VBoxContainer/MarginContainer/no_hp_icon
+
 onready var _sfx_sound_setting_icon = $CanvasLayer/menu/VBoxContainer2/HBoxContainer2/sfx_setting/TextureRect
 
 onready var _dialog_exit = $CanvasLayer/simple_dialog_on_exit
@@ -43,6 +46,7 @@ func _ready():
 	validate_input_by_platform()
 	check_sfx_setting()
 	_player_ammo_bar.set_hp_bar_color(Color.orange)
+	setup_warning_icon()
 	
 func _process(delta):
 	if _respawn_timer.is_stopped():
@@ -75,16 +79,22 @@ func display_event_message(text :String):
 	
 func update_player_ammo_bar(ammo, max_ammo :int):
 	_player_ammo_bar.update_bar(ammo, max_ammo)
+	_no_ammo_icon.visible = ammo <= (max_ammo * 0.25)
 	
 func update_player_hp_bar(player_name :String, hp, max_hp :int):
 	_player_name.text = player_name
 	_player_hp_bar.update_bar(hp, max_hp)
+	_no_hp_icon.visible = hp <= (max_hp * 0.25)
 	
 func add_minimap_object_marker(object :Spatial, marker_icon:Resource, marker_color :Color):
 	_overlay_map.add_object(object, marker_icon, marker_color)
 	
 func set_camera(_camera : GameplayCamera):
 	_overlay_map.set_camera(_camera)
+	
+func setup_warning_icon():
+	_no_ammo_icon.visible = false
+	_no_hp_icon.visible = false
 	
 func validate_input_by_platform():
 	_joystick.visible = not _is_dekstop
