@@ -10,9 +10,9 @@ func _ready():
 	drone = spawn_drones_and_get_drone_owned_by(Global.player)
 	.set_minimap_player_objects(drone.player)
 	_set_respawn_cicle_index(_all.find(drone,0))
-
-	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
-	_ui.update_player_ammo_bar(drone.turret_ammo, drone.turret_max_ammo)
+	
+	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp, false)
+	_ui.update_player_ammo_bar(drone.turret_ammo, drone.turret_max_ammo, false)
 	
 ################################################################
 # drone control
@@ -48,8 +48,8 @@ func on_drone_respawn(_entity :BaseHull):
 	if _entity != drone:
 		return
 		
-	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
-	_ui.update_player_ammo_bar(_entity.turret_ammo, _entity.turret_max_ammo)
+	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp, false)
+	_ui.update_player_ammo_bar(_entity.turret_ammo, _entity.turret_max_ammo, false)
 	
 func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
 	.on_drone_turret_ammo_update(_turret, _ammo_left, _max_ammo)
@@ -73,6 +73,7 @@ func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData
 	if _entity != drone:
 		return
 		
+	_ui.show_hurt()
 	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
 	
 func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
@@ -106,8 +107,7 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 # ui event handler
 func on_respawn_button_press():
 	.on_respawn_button_press()
-	_ui.show_control_screen()
-	
+
 	if not is_instance_valid(drone):
 		return
 		
@@ -146,7 +146,7 @@ func _on_bot_action_timer_timeout():
 		
 		if is_instance_valid(items):
 			waypoint = item.global_transform.origin
-	
+		
 	if bot.is_dead():
 		return
 		

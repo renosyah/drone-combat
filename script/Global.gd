@@ -1,8 +1,10 @@
 extends Node
+const DEKSTOP =  ["Server", "Windows", "WinRT", "X11"]
 
-const sound_amplified = 10
 const player_data_file = "player.data"
 const player_drone_data_file = "player_drone_data.data"
+
+onready var sound_amplified = 10 if not OS.get_name() in Global.DEKSTOP else 5
 
 func _ready():
 	load_player_data()

@@ -12,8 +12,8 @@ func _ready():
 	.init_client()
 	.load_map_stuff()
 	
-	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
-	_ui.update_player_ammo_bar(drone.turret_ammo, drone.turret_max_ammo)
+	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp, false)
+	_ui.update_player_ammo_bar(drone.turret_ammo, drone.turret_max_ammo, false)
 	
 ################################################################
 # drone control
@@ -53,8 +53,8 @@ func on_drone_respawn(_entity :BaseHull):
 	if _entity != drone:
 		return
 		
-	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
-	_ui.update_player_ammo_bar(_entity.turret_ammo, _entity.turret_max_ammo)
+	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp, false)
+	_ui.update_player_ammo_bar(_entity.turret_ammo, _entity.turret_max_ammo, false)
 	
 func on_drone_turret_ready(_turret :BaseTurret):
 	.on_drone_turret_ready(_turret)
@@ -82,6 +82,7 @@ func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData
 	if _entity != drone:
 		return
 		
+	_ui.show_hurt()
 	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
 	
 func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
@@ -111,7 +112,6 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 # ui event handler
 func on_respawn_button_press():
 	.on_respawn_button_press()
-	_ui.show_control_screen()
 	
 	if not is_instance_valid(drone):
 		return

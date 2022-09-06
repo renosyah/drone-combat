@@ -142,7 +142,7 @@ func _load_ui():
 	_ui.connect("exit_game_session", self, "_on_exit_game_session")
 	
 	_ui.set_camera(_camera)
-	_ui.respawn_time = Global.mp_game_data["respawn_time"]
+	_ui.set_respawn_time(Global.mp_game_data["respawn_time"])
 	
 func on_joystick_input(output : Vector2, is_pressed : bool):
 	pass
