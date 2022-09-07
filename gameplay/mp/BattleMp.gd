@@ -292,7 +292,7 @@ remotesync func spawn_ammo_item(at : Vector3):
 	item.translation.y = 5
 	
 	var marker_icon = preload("res://assets/ui/mini_map/ammo.png")
-	_ui.add_minimap_object_marker(item, marker_icon, Color.black)
+	_ui.add_minimap_object_marker(item, marker_icon, Color.orange)
 	
 ################################################################
 # drone event signal handler

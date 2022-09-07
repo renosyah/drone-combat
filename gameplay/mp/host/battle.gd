@@ -146,6 +146,11 @@ func _on_bot_action_timer_timeout():
 		
 		if is_instance_valid(items):
 			waypoint = item.global_transform.origin
+			
+	# 60% chance bot go for kill
+	elif randf() < 0.60:
+		 waypoint = _all[rand_range(0, _all.size() - 1)].global_transform.origin
+		
 		
 	if bot.is_dead():
 		return

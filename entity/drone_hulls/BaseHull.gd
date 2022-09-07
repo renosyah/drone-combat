@@ -73,6 +73,15 @@ func _network_timmer_timeout():
 		rset_unreliable("_puppet_translation", translation)
 		rset_unreliable("_puppet_rotation", rotation)
 		rset_unreliable("_puppet_moving_state", _moving_state)
+		rset_unreliable("_puppet_direction", direction)
+		
+puppet var _puppet_direction :Vector2 setget _set_puppet_direction
+func _set_puppet_direction(_val :Vector2):
+	_puppet_direction = _val
+	if _is_master():
+		return
+		
+	direction = _puppet_direction
 	
 puppet var _puppet_translation :Vector3 setget _set_puppet_translation
 func _set_puppet_translation(_val :Vector3):
@@ -264,7 +273,7 @@ func move_to_waypoint(delta):
 	var _waypoint = Vector3(waypoint.x, _altitude, waypoint.z)
 	var direction_to_waypoint = global_transform.origin.direction_to(_waypoint)
 	var distance_to_target = global_transform.origin.distance_to(_waypoint)
-	direction = direction_to_waypoint
+	direction = Vector2(direction_to_waypoint.x, direction_to_waypoint.z)
 	
 	if distance_to_target > _offset_distance:
 		_transform_turning(_waypoint, delta)

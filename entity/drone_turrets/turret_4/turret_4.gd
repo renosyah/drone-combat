@@ -7,11 +7,7 @@ onready var sensor_pos = $pivot/sensor_pos
 func _ready():
 	var _material = $pivot/MeshInstance.get_surface_material(0).duplicate()
 	_material.albedo_color = color
-
-	$pivot/weapon/MeshInstance3.set_surface_material(0, _material)
-	$pivot/weapon/MeshInstance.set_surface_material(0, _material)
-	$pivot/weapon/MeshInstance2.set_surface_material(0, _material)
-	$pivot/MeshInstance5.set_surface_material(0, _material)
+	$pivot/MeshInstance.set_surface_material(0, _material)
 	
 	.spawn_weapon(weapon_pos.translation)
 	.spawn_sensor(sensor_pos.translation)

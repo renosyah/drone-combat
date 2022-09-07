@@ -8,7 +8,6 @@
 script = ExtResource( 3 )
 
 [node name="pivot" type="Sprite" parent="."]
-scale = Vector2( 1, 1 )
 
 [node name="control" type="Control" parent="pivot"]
 anchor_left = 0.5

@@ -14,17 +14,6 @@ const weapons :Array = [
 		"modifier" : {}
 	},
 	{
-		"module_id":"w-2",
-		"module_name" : "30mm auto",
-		"scene" : "res://entity/weapons/auto_cannon/auto_cannon.tscn",
-		"icon" : "res://assets/ui/choose-module/drone/weapon_2.png",
-		"infos" : [
-			"Mid Firing Rate",
-			"Mid Damage"
-		],
-		"modifier" : {}
-	},
-	{
 		"module_id":"w-4",
 		"module_name" : "Twin .50 cal" ,
 		"scene" : "res://entity/weapons/twin_mg/twin_mg.tscn",
@@ -32,6 +21,17 @@ const weapons :Array = [
 		"infos" : [
 			"Very High Firing Rate",
 			"Very Low Damage"
+		],
+		"modifier" : {}
+	},
+	{
+		"module_id":"w-2",
+		"module_name" : "30mm auto",
+		"scene" : "res://entity/weapons/auto_cannon/auto_cannon.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/weapon_2.png",
+		"infos" : [
+			"Mid Firing Rate",
+			"Mid Damage"
 		],
 		"modifier" : {}
 	},
@@ -56,6 +56,18 @@ const weapons :Array = [
 			"High Damage"
 		],
 		"modifier" : {}
+	},
+	{
+		"module_id":"w-6",
+		"module_name" : "105mm Launcher" ,
+		"scene" : "res://entity/weapons/smothbore/smothbore.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/weapon_6.png",
+		"infos" : [
+			"Slow Firing Rate",
+			"High Damage",
+			"Guided Munition"
+		],
+		"modifier" : {}
 	}
 ]
 const turrets :Array = [
@@ -78,24 +90,6 @@ const turrets :Array = [
 		}
 	},
 	{
-		"module_id":"t-2",
-		"module_name" : "Rectketa MX-B",
-		"scene" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
-		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
-		"infos" : [
-			"Hp : 120",
-			"Rotation : 65",
-			"Ammo Capacity : 300"
-		],
-		"modifier" : {
-			"turret_rotation_speed" : 65,
-			"turret_hp" : 120,
-			"turret_max_hp" : 120,
-			"turret_ammo" : 300,
-			"turret_max_ammo" : 300
-		}
-	},
-	{
 		"module_id":"t-3",
 		"module_name" : "A-12 Homogen",
 		"scene" : "res://entity/drone_turrets/turret_3/turret_3.tscn",
@@ -115,20 +109,38 @@ const turrets :Array = [
 	},
 	{
 		"module_id":"t-4",
-		"module_name" : "OM-7 Exp",
+		"module_name" : "A-14 Homulus",
 		"scene" : "res://entity/drone_turrets/turret_4/turret_4.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_4.png",
 		"infos" : [
-			"Hp : 60",
-			"Rotation : 90",
-			"Ammo Capacity : 130"
+			"Hp : 95",
+			"Rotation : 80",
+			"Ammo Capacity : 200"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 90,
-			"turret_hp" : 60,
-			"turret_max_hp" : 60,
-			"turret_ammo" : 130,
-			"turret_max_ammo" : 130
+			"turret_rotation_speed" : 80,
+			"turret_hp" : 95,
+			"turret_max_hp" : 95,
+			"turret_ammo" : 200,
+			"turret_max_ammo" : 200
+		}
+	},
+	{
+		"module_id":"t-2",
+		"module_name" : "Rectketa MX-B",
+		"scene" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
+		"infos" : [
+			"Hp : 120",
+			"Rotation : 65",
+			"Ammo Capacity : 300"
+		],
+		"modifier" : {
+			"turret_rotation_speed" : 65,
+			"turret_hp" : 120,
+			"turret_max_hp" : 120,
+			"turret_ammo" : 300,
+			"turret_max_ammo" : 300
 		}
 	},
 	{
@@ -170,19 +182,19 @@ const turrets :Array = [
 ]
 const hulls :Array = [
 	{
-		"module_id":"h-1",
-		"module_name" : "Rectketa UBM",
-		"scene" : "res://entity/drone_hulls/hull_1/hull_1.tscn",
-		"icon" : "res://assets/ui/choose-module/drone/hull_1.png",
+		"module_id":"h-3",
+		"module_name" : "Howen AM-B",
+		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
 		"infos" : [
-			"Hp : 240",
-			"Speed : 2",
-			"Travese : 2"
+			"Hp : 170",
+			"Speed : 2.5",
+			"Travese : 2.0"
 		],
 		"modifier" : {
-			"hp" : 240,
-			"max_hp" : 240,
-			"speed" : 2.0,
+			"hp" : 170,
+			"max_hp" : 170,
+			"speed" : 2.5,
 			"turning_speed" : 2.0
 		}
 	},
@@ -204,19 +216,36 @@ const hulls :Array = [
 		}
 	},
 	{
-		"module_id":"h-3",
-		"module_name" : "Howen AM-B",
-		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
-		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
+		"module_id":"h-6",
+		"module_name" : "Izui X-AA",
+		"scene" : "res://entity/drone_hulls/hull_5/hull_5.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/hull_5.png",
 		"infos" : [
-			"Hp : 170",
-			"Speed : 2.5",
-			"Travese : 2.0"
+			"Hp : 60",
+			"Speed : 5",
+			"Travese : 2"
 		],
 		"modifier" : {
-			"hp" : 170,
-			"max_hp" : 170,
-			"speed" : 2.5,
+			"hp" : 60,
+			"max_hp" : 60,
+			"speed" : 3.5,
+			"turning_speed" : 3.0
+		}
+	},
+	{
+		"module_id":"h-1",
+		"module_name" : "Rectketa UBM",
+		"scene" : "res://entity/drone_hulls/hull_1/hull_1.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/hull_1.png",
+		"infos" : [
+			"Hp : 240",
+			"Speed : 2",
+			"Travese : 2"
+		],
+		"modifier" : {
+			"hp" : 240,
+			"max_hp" : 240,
+			"speed" : 2.0,
 			"turning_speed" : 2.0
 		}
 	},
@@ -234,23 +263,6 @@ const hulls :Array = [
 			"hp" : 240,
 			"max_hp" : 240,
 			"speed" : 2.0,
-			"turning_speed" : 3.0
-		}
-	},
-	{
-		"module_id":"h-6",
-		"module_name" : "Izui X-AA",
-		"scene" : "res://entity/drone_hulls/hull_5/hull_5.tscn",
-		"icon" : "res://assets/ui/choose-module/drone/hull_5.png",
-		"infos" : [
-			"Hp : 60",
-			"Speed : 5",
-			"Travese : 2"
-		],
-		"modifier" : {
-			"hp" : 60,
-			"max_hp" : 60,
-			"speed" : 3.5,
 			"turning_speed" : 3.0
 		}
 	},

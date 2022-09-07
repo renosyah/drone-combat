@@ -13,7 +13,7 @@ height = 0.4
 
 [sub_resource type="SpatialMaterial" id=2]
 next_pass = ExtResource( 1 )
-albedo_color = Color( 0.341176, 0.341176, 0.341176, 1 )
+albedo_color = Color( 0.278431, 0.278431, 0.278431, 1 )
 
 [sub_resource type="CylinderMesh" id=8]
 top_radius = 0.2
@@ -22,7 +22,7 @@ height = 1.0
 
 [sub_resource type="SpatialMaterial" id=9]
 next_pass = ExtResource( 1 )
-albedo_color = Color( 0.407843, 0.407843, 0.407843, 1 )
+albedo_color = Color( 0.960784, 0.411765, 0, 1 )
 
 [sub_resource type="Animation" id=4]
 length = 0.001
