@@ -13,6 +13,7 @@ onready var _player_name = $VBoxContainer/hbox/MarginContainer/HBoxContainer/VBo
 
 onready var _player_ammo_bar = $VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/VBoxContainer2/ammo_bar_vertical
 onready var _no_ammo_icon = $VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/HBoxContainer/no_ammo_icon
+onready var _ammo_icon = $VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/HBoxContainer/ammo_icon
 
 onready var _hurt_indicator = $hurt
 
@@ -26,6 +27,7 @@ func _ready():
 	_event_message.modulate.a = 0.0
 	_player_ammo_bar.set_hp_bar_color(Color.orange)
 	_no_ammo_icon.visible = false
+	_ammo_icon.visible = true
 	set_gui_element_visible(true)
 	
 func display_event_message(text :String):
@@ -42,6 +44,7 @@ func update_player_ammo_bar(ammo, max_ammo :int, ui_feedback :bool = true):
 		return
 		
 	_no_ammo_icon.visible = ammo <= (max_ammo * 0.25)
+	_ammo_icon.visible = not _no_ammo_icon.visible
 	
 func update_player_hp_bar(player_name :String, hp, max_hp :int, ui_feedback :bool = true):
 	var is_critical = hp <= (max_hp * 0.25) and hp > 1
