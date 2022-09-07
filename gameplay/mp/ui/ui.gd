@@ -6,6 +6,8 @@ signal on_spectate_previous()
 signal on_spectate_next()
 signal exit_game_session()
 
+var is_player_alive = true
+
 onready var _gui = $CanvasLayer/gui
 onready var _joystick = $CanvasLayer/joystick
 onready var _mp_death_screen = $CanvasLayer/mp_death_screen
@@ -30,6 +32,9 @@ func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white,
 	_scoreboard.update_scoreboard(player_id, kill, death, _color, player_name)
 	
 func display_event_message(text :String):
+	if not is_player_alive:
+		return
+		
 	_gui.display_event_message(text)
 	
 func update_player_ammo_bar(ammo, max_ammo :int, ui_feedback :bool= true):
@@ -48,7 +53,9 @@ func show_hurt():
 	_gui.show_hurt()
 	
 func show_death_screen():
-	_joystick.visible = false
+	is_player_alive = false
+	_gui.set_gui_element_visible(is_player_alive)
+	_joystick.visible = is_player_alive
 	_mp_death_screen.show_death_screen()
 	
 func _on_menu_on_main_menu_press():
@@ -64,7 +71,9 @@ func _on_mp_death_screen_on_previous_press():
 	emit_signal("on_spectate_previous")
 	
 func _on_mp_death_screen_on_respawn_press():
-	_joystick.visible = false
+	is_player_alive = true
+	_gui.set_gui_element_visible(is_player_alive)
+	_joystick.visible = is_player_alive
 	emit_signal("on_respawn_button_press")
 	
 func _on_gui_on_menu_press():

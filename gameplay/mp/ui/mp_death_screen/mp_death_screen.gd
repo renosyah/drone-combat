@@ -7,6 +7,7 @@ signal on_previous_press
 const BUTTON_RESPAWN_ENABLE_COLOR = Color(0.619608, 0.105882, 0.105882)
 const BUTTON_RESPAWN_DISABLE_COLOR = Color(0.402344, 0.402344, 0.402344)
 
+onready var _label = $VBoxContainer/Label
 onready var _respawn_btn = $VBoxContainer/HBoxContainer/respawn
 onready var _respawn_btn_color = $VBoxContainer/HBoxContainer/respawn/ColorRect
 onready var _respawn_btn_label = $VBoxContainer/HBoxContainer/respawn/Label
