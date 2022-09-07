@@ -264,6 +264,7 @@ func move_to_waypoint(delta):
 	var _waypoint = Vector3(waypoint.x, _altitude, waypoint.z)
 	var direction_to_waypoint = global_transform.origin.direction_to(_waypoint)
 	var distance_to_target = global_transform.origin.distance_to(_waypoint)
+	direction = direction_to_waypoint
 	
 	if distance_to_target > _offset_distance:
 		_transform_turning(_waypoint, delta)

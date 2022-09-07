@@ -30,7 +30,7 @@ func _set_puppet_moving_state(_val : int):
 remotesync func _dead(_kill_by :Dictionary):
 	._dead(_kill_by)
 	_each_wheel(false)
-	
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var _material = $pivot/body/MeshInstance.get_surface_material(0).duplicate()
@@ -41,6 +41,12 @@ func _ready():
 		w.set_color(color)
 		
 	_each_wheel(false)
+	
+func moving(_delta):
+	.moving(_delta)
+	
+	for wheel in _wheels:
+		wheel.rotate_speed = 0.15 * direction.length()
 	
 	
 	

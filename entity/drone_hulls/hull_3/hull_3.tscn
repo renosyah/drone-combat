@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://entity/drone_hulls/hull_3/hull_3.gd" type="Script" id=1]
-[ext_resource path="res://entity/wheel/wheel.gd" type="Script" id=2]
 [ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=3]
 [ext_resource path="res://entity/wheel/wheel.tscn" type="PackedScene" id=4]
 
@@ -132,84 +131,74 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.24797
 mesh = SubResource( 21 )
 material/0 = SubResource( 22 )
 
-[node name="wheel" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( 1.74846e-08, 0.4, 6.03983e-08, 0.4, -1.74846e-08, -1.01644e-21, 2.64009e-15, 6.03983e-08, -0.4, 0.790123, 0.0423748, 1.36582 )
 mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
-[node name="wheel1" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel1" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( 3.0598e-08, 0.7, 1.05697e-07, 0.7, -3.0598e-08, -1.77877e-21, 4.62016e-15, 1.05697e-07, -0.7, 0.734803, -0.126934, 0.837768 )
 mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
-[node name="wheel2" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel2" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( 3.0598e-08, 0.7, 1.05697e-07, 0.7, -3.0598e-08, -1.77877e-21, 4.62016e-15, 1.05697e-07, -0.7, 0.734803, -0.126934, 0.126937 )
 mesh = SubResource( 18 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 19 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
-[node name="wheel3" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel3" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( 3.0598e-08, 0.7, 1.05697e-07, 0.7, -3.0598e-08, -1.77877e-21, 4.62016e-15, 1.05697e-07, -0.7, 0.734803, -0.133128, -0.593867 )
 mesh = SubResource( 18 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 19 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
-[node name="wheel4" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel4" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( 2.18557e-08, 0.5, 7.54979e-08, 0.5, -2.18557e-08, -1.27055e-21, 3.30012e-15, 7.54979e-08, -0.5, 0.734803, -0.0333225, -1.15677 )
 mesh = SubResource( 18 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 19 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
-[node name="wheel5" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel5" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( -1.74846e-08, -0.4, 0, 0.4, -1.74846e-08, -1.01644e-21, 1.05879e-21, 0, 0.4, -0.753086, 0.0423748, 1.36582 )
 mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
-[node name="wheel6" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel6" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( -3.0598e-08, -0.7, 0, 0.7, -3.0598e-08, -1.77877e-21, 1.69407e-21, 0, 0.7, -0.739206, -0.126934, 0.837758 )
 mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
-[node name="wheel7" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel7" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( -3.0598e-08, -0.7, 0, 0.7, -3.0598e-08, -1.77877e-21, 1.69407e-21, 0, 0.7, -0.739206, -0.126934, 0.126937 )
 mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
-[node name="wheel8" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel8" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( -3.0598e-08, -0.7, 0, 0.7, -3.0598e-08, -1.77877e-21, 1.69407e-21, 0, 0.7, -0.739206, -0.133128, -0.593867 )
 mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
-[node name="wheel9" type="MeshInstance" parent="pivot" instance=ExtResource( 4 )]
+[node name="wheel9" parent="pivot" instance=ExtResource( 4 )]
 transform = Transform( -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, -1.27055e-21, 1.27055e-21, 0, 0.5, -0.739206, -0.0333225, -1.15677 )
 mesh = SubResource( 12 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
-script = ExtResource( 2 )
 rotate_speed = 0.2
 
 [node name="track" type="MeshInstance" parent="pivot"]

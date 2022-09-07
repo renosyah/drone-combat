@@ -47,4 +47,12 @@ func _ready():
 	_each_wheel(false)
 	
 	
+func moving(_delta):
+	.moving(_delta)
+	
+	for wheel in _wheels:
+		wheel.rotate_speed = 0.15 * direction.length()
+	
+	
+	
 	
