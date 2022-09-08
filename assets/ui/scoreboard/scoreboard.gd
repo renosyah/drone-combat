@@ -21,13 +21,16 @@ func update_score(score :ScoreData):
 	if not _is_in_scores(score):
 		_scores.append(score)
 		
-	for s in _scores:
-		if not s is ScoreData:
+	for _s in _scores:
+		if not _s is ScoreData:
 			continue
 			
+		var s :ScoreData = _s
+		
 		if s.player_id == score.player_id:
 			s.kill_count += score.kill_count
 			s.death_count += score.death_count
+			s.total = s.get_total()
 			break
 			
 	display_scoreboard()
@@ -43,6 +46,8 @@ func _is_in_scores(score :ScoreData) -> bool:
 	return false
 	
 func display_scoreboard():
+	_scores.sort_custom(MyCustomSorter, "sort")
+		
 	for child in _holder.get_children():
 		_holder.remove_child(child)
 		
@@ -58,5 +63,10 @@ func display_scoreboard():
 func _on_resume_pressed():
 	visible = false
 	
-	
+class MyCustomSorter:
+	static func sort(a, b : ScoreData):
+		if a.total > b.total:
+			return true
+		return false
+		
 	

@@ -274,8 +274,8 @@ const sensors :Array = [
 		"scene" : "res://entity/sensor/sensor_1/sensor_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/sensor_1.png",
 		"infos" : [
-			"Scanning Range : 16",
-			"Scanning Speed : 0.07"
+			"Basic sensor",
+			"Develop by Rectketa"
 		],
 		"modifier" : {
 			"spotting_range" : 16,
@@ -288,40 +288,40 @@ const sensors :Array = [
 		"scene" : "res://entity/sensor/sensor_2/sensor_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/sensor_2.png",
 		"infos" : [
-			"Scanning Range : 14",
-			"Scanning Speed : 0.11"
+			"Standard sensor",
+			"Develop by Rectketa"
 		],
 		"modifier" : {
-			"spotting_range" : 14,
-			"scanning_speed" : 0.11
-		}
-	},
-	{
-		"module_id":"s-4",
-		"module_name" : "Mk 3 Hunter",
-		"scene" : "res://entity/sensor/sensor_3/sensor_3.tscn",
-		"icon" : "res://assets/ui/choose-module/drone/sensor_3.png",
-		"infos" : [
-			"Scanning Range : 22",
-			"Scanning Speed : 0.04"
-		],
-		"modifier" : {
-			"spotting_range" : 22,
-			"scanning_speed" : 0.04
+			"spotting_range" : 17,
+			"scanning_speed" : 0.06
 		}
 	},
 	{
 		"module_id":"s-2",
-		"module_name" : "Mk 4 Raptor",
+		"module_name" : "Mk 3 Raptor",
 		"scene" : "res://entity/sensor/sensor_4/sensor_4.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/sensor_4.png",
 		"infos" : [
-			"Scanning Range : 8",
-			"Scanning Speed : 0.16"
+			"Special sensor",
+			"Develop by Rectketa"
 		],
 		"modifier" : {
-			"spotting_range" : 8,
-			"scanning_speed" : 0.16
+			"spotting_range" : 18,
+			"scanning_speed" : 0.08
+		}
+	},
+	{
+		"module_id":"s-4",
+		"module_name" : "Mk 4 Hunter",
+		"scene" : "res://entity/sensor/sensor_3/sensor_3.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/sensor_3.png",
+		"infos" : [
+			"Advance sensor",
+			"Develop by Rectketa"
+		],
+		"modifier" : {
+			"spotting_range" : 19,
+			"scanning_speed" : 0.05
 		}
 	},
 ]
