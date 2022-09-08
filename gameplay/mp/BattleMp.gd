@@ -312,7 +312,7 @@ func on_drone_turret_resupply(_entity :BaseTurret, _ammo_added :int):
 	msg.translation.x += rand_range(-spread, spread)
 	msg.translation.y += 2.0 + rand_range(-spread, spread)
 	
-	msg.set_color(Color.gray)
+	msg.set_color(Color.orange)
 	msg.set_message("+" + str(_ammo_added))
 	
 	
@@ -346,7 +346,7 @@ func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData
 	msg.translation.x += rand_range(-spread, spread)
 	msg.translation.y += 2.0 + rand_range(-spread, spread)
 	
-	msg.set_color(Color.orange)
+	msg.set_color(Color.red)
 	msg.set_message("-" + str(_damage))
 	
 func on_drone_turret_dead(_turret :BaseTurret, _hit_by: PlayerData):

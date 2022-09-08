@@ -23,8 +23,8 @@ export var elevation_speed_deg: float = 45
 export var rotation_speed_deg: float = 90
 
 # constraints
-export var min_elevation: float = -15
-export var max_elevation: float = 60
+export var min_elevation: float = -7
+export var max_elevation: float = 15
 
 ################################
 # PARAMS

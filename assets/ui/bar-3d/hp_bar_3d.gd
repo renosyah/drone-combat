@@ -9,6 +9,7 @@ onready var _2d_ammo_bar = $Viewport/VBoxContainer/ammo_bar
 func _ready():
 	texture = _viewport_hp_bar.get_texture()
 	_2d_ammo_bar.set_hp_bar_color(Color.orange)
+	_2d_ammo_bar.show_label(false)
 	
 func show_label(_show = true):
 	_2d_hp_bar.show_label(_show)
