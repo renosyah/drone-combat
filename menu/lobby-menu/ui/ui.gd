@@ -60,7 +60,10 @@ remotesync func _update_player_joined(data : Array):
 		player_joined = data
 		
 	player_joined.sort_custom(MyCustomSorter, "sort")
-	fill_player_slot()
+	
+	validate_cicle_between_player(cicle_between_player_index)
+	display_player_slot(cicle_between_player_index)
+	emit_signal("spawn_joined_player",cicle_between_player_index, player_joined)
 	
 remotesync func _kick_player(data : Dictionary):
 	for i in player_joined:
@@ -73,8 +76,9 @@ remotesync func _kick_player(data : Dictionary):
 		Network.disconnect_from_server()
 		return
 		
-	cicle_between_player(cicle_between_player_index)
-	fill_player_slot()
+	validate_cicle_between_player(cicle_between_player_index)
+	display_player_slot(cicle_between_player_index)
+	emit_signal("spawn_joined_player",cicle_between_player_index, player_joined)
 	
 ################################################################
 # Called when the node enters the scene tree for the first time.
@@ -184,7 +188,7 @@ func _on_add_bot_pressed():
 		
 	_request_append_player_joined(Network.PLAYER_HOST_ID, Global.create_bot_player())
 	
-func fill_player_slot():
+func display_player_slot(index :int):
 	for i in _player_holder.get_children():
 		_player_holder.remove_child(i)
 	
@@ -193,15 +197,12 @@ func fill_player_slot():
 	_play_button.button_color = BUTTON_BATTLE_DISABLE_COLOR if (not is_all_ready) else BUTTON_BATTLE_ENABLE_COLOR
 	_add_bot_button_icon.visible = ENABLE_BOT and is_server() and player_joined.size() < Global.server.max_player
 	
-	var player = player_joined[cicle_between_player_index]
+	var player = player_joined[index]
 	var item = preload("res://menu/lobby-menu/ui/item/item.tscn").instance()
 	item.data = player
 	item.can_kick = (player["player_id"] != Global.player.player_id and is_server())
 	item.connect("kick", self, "_on_player_get_kick")
 	_player_holder.add_child(item)
-	
-	emit_signal("spawn_joined_player",cicle_between_player_index, player_joined)
-	
 	
 func set_player_ready():
 	if is_server():
@@ -216,11 +217,13 @@ func _on_player_get_kick(_player):
 	rpc("_kick_player", _player)
 
 func _on_prev_pressed():
-	cicle_between_player(cicle_between_player_index + 1)
+	validate_cicle_between_player(cicle_between_player_index + 1)
+	display_player_slot(cicle_between_player_index)
 	emit_signal("on_cicle_between_player", cicle_between_player_index)
 	
 func _on_next_pressed():
-	cicle_between_player(cicle_between_player_index - 1)
+	validate_cicle_between_player(cicle_between_player_index - 1)
+	display_player_slot(cicle_between_player_index)
 	emit_signal("on_cicle_between_player", cicle_between_player_index)
 	
 func _on_back_pressed():
@@ -233,7 +236,7 @@ func _on_simple_dialog_option_on_yes():
 		return
 		
 	_exit_timer.start()
-	rpc("_request_erase_player_joined",{ id = Global.player.player_id })
+	rpc("_request_erase_player_joined", Global.create_mp_player())
 	
 func _on_exit_timer_timeout():
 	Network.disconnect_from_server()
@@ -259,17 +262,14 @@ func is_all_player_ready() -> bool:
 			return false
 	return true
 	
-func cicle_between_player(idx :int):
+func validate_cicle_between_player(idx :int):
 	cicle_between_player_index = idx
 	
 	if cicle_between_player_index > player_joined.size() - 1:
-		cicle_between_player_index = player_joined.size() - 1
+		cicle_between_player_index = 0
 		
 	elif cicle_between_player_index < 0:
 		cicle_between_player_index = player_joined.size() - 1
-		
-	fill_player_slot()
-
 
 
 

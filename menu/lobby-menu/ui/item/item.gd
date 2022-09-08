@@ -2,7 +2,7 @@ extends Control
 
 signal kick(_data)
 
-onready var _color = $HBoxContainer/team_color
+onready var _color = $HBoxContainer/MarginContainer/team_color
 onready var _name = $HBoxContainer/VBoxContainer/player_name
 onready var _status = $HBoxContainer/VBoxContainer/Label
 onready var _kick_btn = $HBoxContainer/panel

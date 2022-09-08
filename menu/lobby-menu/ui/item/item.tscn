@@ -30,11 +30,26 @@ rect_min_size = Vector2( 10, 0 )
 mouse_filter = 2
 size_flags_horizontal = 3
 
-[node name="team_color" type="ColorRect" parent="HBoxContainer"]
+[node name="MarginContainer" type="Button" parent="HBoxContainer"]
 margin_left = 71.0
 margin_right = 171.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
+
+[node name="team_color2" type="ColorRect" parent="HBoxContainer/MarginContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="team_color" type="ColorRect" parent="HBoxContainer/MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 92, 92 )
 color = Color( 0.396078, 0.396078, 0.396078, 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
