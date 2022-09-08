@@ -39,8 +39,8 @@ func display_event_message(text :String):
 	_tween.start()
 	
 func update_player_ammo_bar(ammo, max_ammo :int, ui_feedback :bool = true):
-	_player_ammo_bar.update_bar(ammo if ammo > 1 else 0, max_ammo)
-	
+	_player_ammo_bar.update_bar(ammo, max_ammo)
+		
 	if not ui_feedback:
 		return
 		
@@ -50,8 +50,8 @@ func update_player_ammo_bar(ammo, max_ammo :int, ui_feedback :bool = true):
 func update_player_hp_bar(player_name :String, hp, max_hp :int, ui_feedback :bool = true):
 	var is_critical = hp <= (max_hp * 0.25) and hp > 1
 	_player_name.text = player_name
-	_player_hp_bar.update_bar(hp if hp > 1 else 0, max_hp)
-	
+	_player_hp_bar.update_bar(hp, max_hp)
+		
 	if not ui_feedback:
 		return
 		

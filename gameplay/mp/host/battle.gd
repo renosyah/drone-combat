@@ -48,16 +48,24 @@ func on_drone_respawn(_entity :BaseHull):
 	if _entity != drone:
 		return
 		
-	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp, false)
-	_ui.update_player_ammo_bar(_entity.turret_ammo, _entity.turret_max_ammo, false)
+	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
+	_ui.update_player_ammo_bar(_entity.turret_ammo, _entity.turret_max_ammo)
 	
 func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
 	.on_drone_turret_ammo_update(_turret, _ammo_left, _max_ammo)
+		
+	if _turret != drone.get_turret():
+		return
+		
 	_ui.update_player_ammo_bar(_ammo_left, _max_ammo)
 	
-func on_drone_turret_resupply(_entity :BaseTurret, _ammo_added :int):
-	.on_drone_turret_resupply(_entity, _ammo_added)
-	_ui.update_player_ammo_bar(_entity.ammo, _entity.max_ammo)
+func on_drone_turret_resupply(_turret :BaseTurret, _ammo_added :int):
+	.on_drone_turret_resupply(_turret, _ammo_added)
+		
+	if _turret != drone.get_turret():
+		return
+		
+	_ui.update_player_ammo_bar(_turret.ammo, _turret.max_ammo)
 	
 func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	.on_drone_heal(_entity, _hp_added)

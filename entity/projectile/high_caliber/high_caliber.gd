@@ -1,4 +1,4 @@
 extends BaseProjectile
 
 func _ready():
-	attack_damage = 45
+	attack_damage = int(rand_range(42,48))

@@ -12,7 +12,7 @@ height = 0.7
 albedo_color = Color( 0.294118, 0.294118, 0.294118, 1 )
 
 [sub_resource type="Curve" id=5]
-_data = [ Vector2( 0.0613208, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.79717, 0 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.0524194, 0.56135 ), 0.0, 0.0, 0, 0, Vector2( 0.49328, 0 ), 0.0, 0.0, 0, 0 ]
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 1, 0.494118, 0, 0.768627 )
@@ -31,4 +31,5 @@ material/0 = SubResource( 7 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.254825 )
 width = 0.4
 width_curve = SubResource( 5 )
+max_points = 50
 material = SubResource( 4 )

@@ -23,8 +23,8 @@ export var elevation_speed_deg: float = 45
 export var rotation_speed_deg: float = 90
 
 # constraints
-export var min_elevation: float = -15
-export var max_elevation: float = 60
+export var min_elevation: float = -7
+export var max_elevation: float = 15
 
 ################################
 # PARAMS
@@ -40,7 +40,7 @@ onready var elevation_speed: float = deg2rad(elevation_speed_deg)
 onready var rotation_speed: float = deg2rad(rotation_speed_deg)
 
 # target calculation
-var current_aim = Vector3.ZERO
+var target :BaseEntity
 
 # states
 var active: bool = true
@@ -147,7 +147,7 @@ func _on_reset_turret_timer_timeout():
 		_tween_rotation.default_rotation_degree = 180.0
 		_tween_rotation.start_reset_rotation()
 	
-	current_aim = Vector3.ZERO
+	target = null
 	active = false
 	
 func spawn_weapon(_pos : Vector3):
@@ -202,6 +202,14 @@ func master_moving(delta):
 	if is_dead:
 		return
 		
+	if not is_instance_valid(target):
+		return
+		
+	if target.is_dead():
+		target = null
+		active = false
+		return
+		
 	# move
 	_rotate(delta)
 	_elevate(delta)
@@ -220,8 +228,11 @@ func puppet_moving(_delta):
 func _on_weapon_ready_open_fire(_target : BaseEntity):
 	if not _is_master():
 		return
-	
+		
 	if is_dead:
+		return
+		
+	if _target.is_dead():
 		return
 		
 	if ammo < 1:
@@ -245,7 +256,7 @@ func _on_sensor_spotted(_target : BaseEntity):
 		
 	_tween_rotation.stop_reset_rotation()
 	
-	current_aim = _target.global_transform.origin
+	target = _target
 	active = true
 	
 ################################
@@ -270,11 +281,13 @@ func _elevate(delta: float) -> void:
 # HELPER FUNCTIONS
 ################################
 func _get_local_y() -> float:
+	var current_aim = target.global_transform.origin
 	var local_target = head.to_local(current_aim)
 	var y_angle = Vector3.FORWARD.angle_to(local_target * Vector3(1, 0, 1))
 	return y_angle * sign(local_target.x)
 	
 func _get_global_x() -> float:
+	var current_aim = target.global_transform.origin
 	var local_target = current_aim - head.global_transform.origin
 	return (local_target * Vector3(1, 0, 1)).angle_to(local_target) * -sign(local_target.y)
 	

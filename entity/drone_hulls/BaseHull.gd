@@ -172,6 +172,7 @@ func _ready():
 	_hp_bar.update_bar(hp, max_hp)
 	_hp_bar.update_ammo_bar(turret_ammo, turret_max_ammo)
 	_hp_bar.set_player_name(player.player_name)
+	_hp_bar.show_label(true)
 	_hp_bar.translation.y = 3.8
 	_hp_bar.visible = false
 	
