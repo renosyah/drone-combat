@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/button/border_button.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/ui/icon/arrow.png" type="Texture" id=3]
 [ext_resource path="res://gameplay/mp/ui/mp_death_screen/mp_death_screen.gd" type="Script" id=4]
@@ -83,28 +83,11 @@ margin_bottom = 120.0
 rect_min_size = Vector2( 10, 0 )
 mouse_filter = 2
 
-[node name="respawn" type="Button" parent="VBoxContainer/HBoxContainer"]
+[node name="respawn" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 1 )]
 margin_left = 200.0
 margin_right = 400.0
-margin_bottom = 120.0
-rect_min_size = Vector2( 200, 80 )
-flat = true
-
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/HBoxContainer/respawn"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0.402344, 0.402344, 0.402344, 1 )
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/respawn"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 1 )
-text = "Respawn!"
-align = 1
-valign = 1
+button_color = Color( 0.403922, 0.403922, 0.403922, 1 )
+button_label = "Respawn"
 
 [node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 404.0

@@ -7,87 +7,88 @@
 
 [node name="item" type="Control"]
 anchor_right = 1.0
-margin_bottom = 130.0
-rect_min_size = Vector2( 600, 130 )
+margin_bottom = 100.0
+rect_min_size = Vector2( 600, 100 )
 script = ExtResource( 1 )
 
-[node name="Panel" type="Panel" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -30.0
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 20.0
-margin_top = 17.0
-margin_right = -35.0
-margin_bottom = -16.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="team_color" type="ColorRect" parent="Panel/HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 97.0
-rect_min_size = Vector2( 100, 50 )
-color = Color( 0.396078, 0.396078, 0.396078, 1 )
-
-[node name="MarginContainer2" type="MarginContainer" parent="Panel/HBoxContainer"]
-margin_left = 104.0
-margin_right = 114.0
-margin_bottom = 97.0
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer"]
+margin_right = 55.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 10, 0 )
 mouse_filter = 2
+size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/HBoxContainer"]
-margin_left = 118.0
-margin_right = 249.0
-margin_bottom = 97.0
+[node name="team_color" type="ColorRect" parent="HBoxContainer"]
+visible = false
+margin_left = 47.0
+margin_right = 147.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+color = Color( 0.396078, 0.396078, 0.396078, 1 )
 
-[node name="player_name" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
-margin_right = 131.0
-margin_bottom = 40.0
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 59.0
+margin_right = 159.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 163.0
+margin_right = 413.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 250, 0 )
+alignment = 1
+
+[node name="player_name" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 250.0
+margin_bottom = 54.0
 custom_fonts/font = ExtResource( 3 )
 text = "..."
+align = 1
 
-[node name="Label" type="Label" parent="Panel/HBoxContainer/VBoxContainer"]
-margin_top = 44.0
-margin_right = 131.0
-margin_bottom = 72.0
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 58.0
+margin_right = 250.0
+margin_bottom = 86.0
 custom_colors/font_color = Color( 0.564706, 0.564706, 0.564706, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_constants/shadow_as_outline = 2
 custom_fonts/font = ExtResource( 2 )
 text = "Not Ready"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="Panel/HBoxContainer"]
-margin_left = 253.0
-margin_right = 451.0
-margin_bottom = 97.0
-rect_min_size = Vector2( 100, 0 )
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 417.0
+margin_right = 437.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 20, 0 )
 mouse_filter = 2
-size_flags_horizontal = 3
 
-[node name="panel" type="MarginContainer" parent="Panel/HBoxContainer"]
-margin_left = 455.0
-margin_right = 545.0
-margin_bottom = 97.0
-rect_min_size = Vector2( 90, 0 )
+[node name="panel" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 441.0
+margin_right = 541.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
 
-[node name="kick_player" type="Button" parent="Panel/HBoxContainer/panel"]
-margin_right = 90.0
-margin_bottom = 97.0
+[node name="kick_player" type="Button" parent="HBoxContainer/panel"]
+margin_right = 100.0
+margin_bottom = 100.0
 flat = true
 
-[node name="TextureRect" type="TextureRect" parent="Panel/HBoxContainer/panel/kick_player"]
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/panel/kick_player"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 4 )
@@ -96,4 +97,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Panel/HBoxContainer/panel/kick_player" to="." method="_on_kick_player_pressed"]
+[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 545.0
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="HBoxContainer/panel/kick_player" to="." method="_on_kick_player_pressed"]

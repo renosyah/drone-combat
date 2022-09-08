@@ -5,13 +5,18 @@ const ENABLE_BOT = true
 const BUTTON_BATTLE_ENABLE_COLOR = Color(0, 0.592157, 0.035294)
 const BUTTON_BATTLE_DISABLE_COLOR = Color(0.27451, 0.27451, 0.27451)
 
+signal spawn_joined_player(index, players)
+signal on_cicle_between_player(index)
+
+var cicle_between_player_index = 0
 
 onready var _server_advertise = $server_advertise
-onready var _player_holder = $CanvasLayer/control/VBoxContainer/ScrollContainer/VBoxContainer
+onready var _player_holder = $CanvasLayer/control/VBoxContainer/VBoxContainer
 
-onready var _play_button = $CanvasLayer/control/HBoxContainer/play
-onready var _ready_button = $CanvasLayer/control/HBoxContainer/ready
-onready var _add_bot_button_icon = $CanvasLayer/control/VBoxContainer/PanelContainer/HBoxContainer/add_bot/ColorRect2
+onready var _play_button :BorderButton = $CanvasLayer/control/HBoxContainer2/play
+onready var _ready_button :BorderButton = $CanvasLayer/control/HBoxContainer2/ready
+
+onready var _add_bot_button_icon = $CanvasLayer/control/PanelContainer/HBoxContainer/add_bot/ColorRect2
 
 onready var _exit_timer = $exit_timer
 onready var _dialog_exit_option = $CanvasLayer/simple_dialog_option
@@ -68,6 +73,7 @@ remotesync func _kick_player(data : Dictionary):
 		Network.disconnect_from_server()
 		return
 		
+	cicle_between_player(cicle_between_player_index)
 	fill_player_slot()
 	
 ################################################################
@@ -75,10 +81,10 @@ remotesync func _kick_player(data : Dictionary):
 func _ready():
 	_play_button.visible = is_server()
 	_play_button.disabled = true
-	_play_button.self_modulate = BUTTON_BATTLE_DISABLE_COLOR
+	_play_button.button_color = BUTTON_BATTLE_DISABLE_COLOR
 	
 	_ready_button.visible = not is_server()
-	_ready_button.self_modulate = BUTTON_BATTLE_ENABLE_COLOR
+	_ready_button.button_color = BUTTON_BATTLE_ENABLE_COLOR
 	
 	_add_bot_button_icon.visible = ENABLE_BOT
 	
@@ -152,7 +158,7 @@ func _got_kickout():
 ################################################################
 # ui action
 func _on_ready_pressed():
-	_ready_button.self_modulate = BUTTON_BATTLE_DISABLE_COLOR
+	_ready_button.button_color = BUTTON_BATTLE_DISABLE_COLOR
 	set_player_ready()
 	
 func _on_play_pressed():
@@ -184,16 +190,19 @@ func fill_player_slot():
 	
 	var is_all_ready = is_all_player_ready()
 	_play_button.disabled = (not is_all_ready)
-	_play_button.self_modulate = BUTTON_BATTLE_DISABLE_COLOR if (not is_all_ready) else BUTTON_BATTLE_ENABLE_COLOR
+	_play_button.button_color = BUTTON_BATTLE_DISABLE_COLOR if (not is_all_ready) else BUTTON_BATTLE_ENABLE_COLOR
 	_add_bot_button_icon.visible = ENABLE_BOT and is_server() and player_joined.size() < Global.server.max_player
 	
-	for i in player_joined:
-		var item = preload("res://menu/lobby-menu/ui/item/item.tscn").instance()
-		item.data = i
-		item.can_kick = (i["player_id"] != Global.player.player_id and is_server())
-		item.connect("kick", self, "_on_player_get_kick")
-		_player_holder.add_child(item)
-		
+	var player = player_joined[cicle_between_player_index]
+	var item = preload("res://menu/lobby-menu/ui/item/item.tscn").instance()
+	item.data = player
+	item.can_kick = (player["player_id"] != Global.player.player_id and is_server())
+	item.connect("kick", self, "_on_player_get_kick")
+	_player_holder.add_child(item)
+	
+	emit_signal("spawn_joined_player",cicle_between_player_index, player_joined)
+	
+	
 func set_player_ready():
 	if is_server():
 		return
@@ -205,6 +214,14 @@ func _on_player_get_kick(_player):
 		return
 		
 	rpc("_kick_player", _player)
+
+func _on_prev_pressed():
+	cicle_between_player(cicle_between_player_index + 1)
+	emit_signal("on_cicle_between_player", cicle_between_player_index)
+	
+func _on_next_pressed():
+	cicle_between_player(cicle_between_player_index - 1)
+	emit_signal("on_cicle_between_player", cicle_between_player_index)
 	
 func _on_back_pressed():
 	_dialog_exit_option.display_message("Attention!","Are you sure want back to main menu?")
@@ -241,6 +258,18 @@ func is_all_player_ready() -> bool:
 		if i.flag == Global.PLAYER_STATUS_NOT_READY:
 			return false
 	return true
+	
+func cicle_between_player(idx :int):
+	cicle_between_player_index = idx
+	
+	if cicle_between_player_index > player_joined.size() - 1:
+		cicle_between_player_index = 0
+		
+	elif cicle_between_player_index < 0:
+		cicle_between_player_index = player_joined.size() - 1
+		
+	fill_player_slot()
+
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/ui/server-browser/server_browser.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/ui/icon/weapon.png" type="Texture" id=12]
 [ext_resource path="res://assets/ui/choose-module/choose_drone_module.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/ui/icon/sound_on.png" type="Texture" id=14]
+[ext_resource path="res://assets/button/border_button.tscn" type="PackedScene" id=15]
 
 [node name="main_menu" type="Control"]
 anchor_right = 1.0
@@ -135,6 +136,11 @@ margin_top = -160.0
 [node name="player_name_label2" type="Label" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
 margin_right = 600.0
 margin_bottom = 28.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 1
+custom_constants/shadow_offset_y = 1
 custom_fonts/font = ExtResource( 4 )
 text = "Customize Your Drone"
 align = 1
@@ -159,10 +165,21 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 flat = true
 
-[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_weapon_btn"]
+[node name="ColorRect6" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_weapon_btn"]
 modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_weapon_btn"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 mouse_filter = 2
 texture = ExtResource( 12 )
 expand = true
@@ -174,10 +191,21 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 flat = true
 
-[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn2"]
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn2"]
 modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn2"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 mouse_filter = 2
 texture = ExtResource( 8 )
 expand = true
@@ -189,10 +217,21 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 flat = true
 
-[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_hull_btn"]
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_hull_btn"]
 modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_hull_btn"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 mouse_filter = 2
 texture = ExtResource( 9 )
 expand = true
@@ -204,10 +243,21 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 flat = true
 
-[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_sensor_btn"]
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_sensor_btn"]
 modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_sensor_btn"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 mouse_filter = 2
 texture = ExtResource( 10 )
 expand = true
@@ -224,17 +274,16 @@ modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_color_btn"]
-modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -39.0
-margin_top = -39.0
-margin_right = 39.0
-margin_bottom = 39.0
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 mouse_filter = 2
 color = Color( 0.909804, 0.909804, 0.909804, 1 )
 
@@ -283,94 +332,49 @@ rect_min_size = Vector2( 0, 100 )
 alignment = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
-margin_right = 53.0
+margin_right = 78.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 40, 0 )
 size_flags_horizontal = 3
 
-[node name="host" type="Button" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
-margin_left = 57.0
-margin_right = 157.0
+[node name="host" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer" instance=ExtResource( 15 )]
+margin_left = 82.0
+margin_right = 202.0
 margin_bottom = 100.0
-rect_min_size = Vector2( 100, 80 )
-flat = true
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/host"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0, 0.517647, 0.164706, 1 )
-
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/host"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
-text = "Host"
-align = 1
-valign = 1
+rect_min_size = Vector2( 120, 80 )
+button_color = Color( 0, 0.517647, 0.164706, 1 )
+button_label = "Host"
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
-margin_left = 161.0
-margin_right = 171.0
+margin_left = 206.0
+margin_right = 216.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="battle" type="Button" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
-margin_left = 175.0
-margin_right = 425.0
+[node name="battle" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer" instance=ExtResource( 15 )]
+margin_left = 220.0
+margin_right = 380.0
 margin_bottom = 100.0
-rect_min_size = Vector2( 250, 80 )
-flat = true
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/battle"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0.603922, 0, 0, 1 )
-
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/battle"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Battle"
-align = 1
-valign = 1
+rect_min_size = Vector2( 160, 80 )
+button_color = Color( 0.603922, 0, 0, 1 )
+button_label = "Battle"
 
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
-margin_left = 429.0
-margin_right = 439.0
+margin_left = 384.0
+margin_right = 394.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="join" type="Button" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
-margin_left = 443.0
-margin_right = 543.0
+[node name="join" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer" instance=ExtResource( 15 )]
+margin_left = 398.0
+margin_right = 518.0
 margin_bottom = 100.0
-rect_min_size = Vector2( 100, 80 )
-flat = true
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/join"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-color = Color( 0, 0.223529, 0.490196, 1 )
-
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/join"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
-text = "Join"
-align = 1
-valign = 1
+rect_min_size = Vector2( 120, 80 )
+button_color = Color( 0, 0.223529, 0.490196, 1 )
+button_label = "Join"
 
 [node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
-margin_left = 547.0
+margin_left = 522.0
 margin_right = 600.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 40, 0 )
