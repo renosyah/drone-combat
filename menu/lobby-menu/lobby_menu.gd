@@ -16,7 +16,6 @@ func _ready():
 	ui.connect("spawn_joined_player", self, "_on_ui_spawn_joined_player")
 	ui.connect("on_cicle_between_player", self, "_on_cicle_between_player")
 	_on_ui_spawn_joined_player(0, ui.player_joined)
-	camera.translation = pos[0]
 	
 func _on_ui_spawn_joined_player(index :int, players :Array):
 	for i in holder.get_children():

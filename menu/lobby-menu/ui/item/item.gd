@@ -15,7 +15,6 @@ var data = {}
 func _ready():
 	_color.color = data.color
 	_name.text = data.player_name
-	_name.modulate = data.color
 	_status.text = data.status
 	_panel_kick.visible = can_kick
 

@@ -113,36 +113,62 @@ rect_min_size = Vector2( 60, 60 )
 texture = ExtResource( 8 )
 expand = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/control"]
+[node name="VBoxContainer" type="Control" parent="CanvasLayer/control"]
 margin_top = 104.0
 margin_right = 600.0
-margin_bottom = 836.0
+margin_bottom = 1024.0
 mouse_filter = 2
 size_flags_vertical = 3
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/control/VBoxContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -320.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/control/VBoxContainer/VBoxContainer3"]
+margin_right = 600.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 0, 320 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.27451, 0.27451, 0.27451, 0.756863 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/control/VBoxContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -312.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 0, 320 )
+mouse_filter = 2
 alignment = 2
 
-[node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer/control/VBoxContainer"]
-margin_top = 608.0
+[node name="VBoxContainer" type="HBoxContainer" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2"]
+margin_top = 8.0
 margin_right = 600.0
-margin_bottom = 708.0
+margin_bottom = 108.0
 rect_min_size = Vector2( 0, 100 )
-size_flags_horizontal = 3
+mouse_filter = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/control/VBoxContainer"]
-margin_top = 712.0
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2"]
+margin_top = 112.0
 margin_right = 600.0
-margin_bottom = 732.0
+margin_bottom = 132.0
 rect_min_size = Vector2( 0, 20 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/control"]
-margin_top = 840.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2"]
+margin_top = 136.0
 margin_right = 600.0
-margin_bottom = 940.0
+margin_bottom = 236.0
 rect_min_size = Vector2( 0, 100 )
 mouse_filter = 2
 alignment = 1
 
-[node name="prev" type="Button" parent="CanvasLayer/control/HBoxContainer2"]
+[node name="prev" type="Button" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 margin_left = 82.0
 margin_top = 10.0
 margin_right = 182.0
@@ -151,7 +177,7 @@ rect_min_size = Vector2( 100, 80 )
 size_flags_vertical = 4
 flat = true
 
-[node name="Label" type="TextureRect" parent="CanvasLayer/control/HBoxContainer2/prev"]
+[node name="Label" type="TextureRect" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/prev"]
 modulate = Color( 1, 1, 1, 0.678431 )
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -159,33 +185,33 @@ texture = ExtResource( 1 )
 expand = true
 flip_h = true
 
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer2"]
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 margin_left = 186.0
 margin_right = 196.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 10, 0 )
 mouse_filter = 2
 
-[node name="play" parent="CanvasLayer/control/HBoxContainer2" instance=ExtResource( 5 )]
+[node name="play" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2" instance=ExtResource( 5 )]
 margin_left = 200.0
 margin_right = 400.0
 margin_bottom = 100.0
 button_label = "Play"
 
-[node name="ready" parent="CanvasLayer/control/HBoxContainer2" instance=ExtResource( 5 )]
+[node name="ready" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2" instance=ExtResource( 5 )]
 visible = false
 margin_left = 351.0
 margin_right = 551.0
 button_label = "Ready"
 
-[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/control/HBoxContainer2"]
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 margin_left = 404.0
 margin_right = 414.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 10, 0 )
 mouse_filter = 2
 
-[node name="next" type="Button" parent="CanvasLayer/control/HBoxContainer2"]
+[node name="next" type="Button" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 margin_left = 418.0
 margin_top = 10.0
 margin_right = 518.0
@@ -194,17 +220,17 @@ rect_min_size = Vector2( 100, 80 )
 size_flags_vertical = 4
 flat = true
 
-[node name="Label" type="TextureRect" parent="CanvasLayer/control/HBoxContainer2/next"]
+[node name="Label" type="TextureRect" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/next"]
 modulate = Color( 1, 1, 1, 0.678431 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )
 expand = true
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/control"]
-margin_top = 944.0
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2"]
+margin_top = 240.0
 margin_right = 600.0
-margin_bottom = 1024.0
+margin_bottom = 320.0
 rect_min_size = Vector2( 0, 80 )
 
 [node name="simple_dialog_option" parent="CanvasLayer" instance=ExtResource( 10 )]
@@ -218,9 +244,9 @@ one_shot = true
 
 [connection signal="pressed" from="CanvasLayer/control/PanelContainer/HBoxContainer/back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="CanvasLayer/control/PanelContainer/HBoxContainer/add_bot" to="." method="_on_add_bot_pressed"]
-[connection signal="pressed" from="CanvasLayer/control/HBoxContainer2/prev" to="." method="_on_prev_pressed"]
-[connection signal="pressed" from="CanvasLayer/control/HBoxContainer2/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="CanvasLayer/control/HBoxContainer2/ready" to="." method="_on_ready_pressed"]
-[connection signal="pressed" from="CanvasLayer/control/HBoxContainer2/next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/ready" to="." method="_on_ready_pressed"]
+[connection signal="pressed" from="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/next" to="." method="_on_next_pressed"]
 [connection signal="on_yes" from="CanvasLayer/simple_dialog_option" to="." method="_on_simple_dialog_option_on_yes"]
 [connection signal="timeout" from="exit_timer" to="." method="_on_exit_timer_timeout"]

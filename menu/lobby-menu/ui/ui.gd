@@ -11,10 +11,10 @@ signal on_cicle_between_player(index)
 var cicle_between_player_index = 0
 
 onready var _server_advertise = $server_advertise
-onready var _player_holder = $CanvasLayer/control/VBoxContainer/VBoxContainer
+onready var _player_holder = $CanvasLayer/control/VBoxContainer/VBoxContainer2/VBoxContainer
 
-onready var _play_button :BorderButton = $CanvasLayer/control/HBoxContainer2/play
-onready var _ready_button :BorderButton = $CanvasLayer/control/HBoxContainer2/ready
+onready var _play_button :BorderButton = $CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/play
+onready var _ready_button :BorderButton = $CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/ready
 
 onready var _add_bot_button_icon = $CanvasLayer/control/PanelContainer/HBoxContainer/add_bot/ColorRect2
 
@@ -263,7 +263,7 @@ func cicle_between_player(idx :int):
 	cicle_between_player_index = idx
 	
 	if cicle_between_player_index > player_joined.size() - 1:
-		cicle_between_player_index = 0
+		cicle_between_player_index = player_joined.size() - 1
 		
 	elif cicle_between_player_index < 0:
 		cicle_between_player_index = player_joined.size() - 1
