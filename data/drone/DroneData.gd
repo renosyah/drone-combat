@@ -73,18 +73,18 @@ const weapons :Array = [
 const turrets :Array = [
 	{
 		"module_id":"t-1",
-		"module_name" : "Mk 1 auto",
+		"module_name" : "Mk 1 Auto",
 		"scene" : "res://entity/drone_turrets/turret_1/turret_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_1.png",
 		"infos" : [
-			"Hp : 20",
+			"Hp : 40",
 			"Rotation : 120",
 			"Ammo Capacity : 120"
 		],
 		"modifier" : {
 			"turret_rotation_speed" : 120,
-			"turret_hp" : 20,
-			"turret_max_hp" : 20,
+			"turret_hp" : 40,
+			"turret_max_hp" : 40,
 			"turret_ammo" : 120,
 			"turret_max_ammo" : 120
 		}
@@ -96,11 +96,11 @@ const turrets :Array = [
 		"icon" : "res://assets/ui/choose-module/drone/turret_3.png",
 		"infos" : [
 			"Hp : 90",
-			"Rotation : 75",
+			"Rotation : 90",
 			"Ammo Capacity : 200"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 75,
+			"turret_rotation_speed" : 90,
 			"turret_hp" : 90,
 			"turret_max_hp" : 90,
 			"turret_ammo" : 200,
@@ -114,11 +114,11 @@ const turrets :Array = [
 		"icon" : "res://assets/ui/choose-module/drone/turret_4.png",
 		"infos" : [
 			"Hp : 95",
-			"Rotation : 80",
+			"Rotation : 70",
 			"Ammo Capacity : 200"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 80,
+			"turret_rotation_speed" : 70,
 			"turret_hp" : 95,
 			"turret_max_hp" : 95,
 			"turret_ammo" : 200,
@@ -126,19 +126,19 @@ const turrets :Array = [
 		}
 	},
 	{
-		"module_id":"t-2",
-		"module_name" : "Rectketa MX-B",
-		"scene" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
-		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
+		"module_id":"t-6",
+		"module_name" : "A-15 Sperict",
+		"scene" : "res://entity/drone_turrets/turret_6/turret_6.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/turret_6.png",
 		"infos" : [
-			"Hp : 120",
-			"Rotation : 65",
+			"Hp : 100",
+			"Rotation : 80",
 			"Ammo Capacity : 300"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 65,
-			"turret_hp" : 120,
-			"turret_max_hp" : 120,
+			"turret_rotation_speed" : 80,
+			"turret_hp" : 100,
+			"turret_max_hp" : 100,
 			"turret_ammo" : 300,
 			"turret_max_ammo" : 300
 		}
@@ -149,34 +149,34 @@ const turrets :Array = [
 		"scene" : "res://entity/drone_turrets/turret_5/turret_5.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
 		"infos" : [
-			"Hp : 100",
-			"Rotation : 70",
-			"Ammo Capacity : 300"
+			"Hp : 140",
+			"Rotation : 55",
+			"Ammo Capacity : 500"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 70,
-			"turret_hp" : 100,
-			"turret_max_hp" : 100,
-			"turret_ammo" : 300,
-			"turret_max_ammo" : 300
+			"turret_rotation_speed" : 55,
+			"turret_hp" : 140,
+			"turret_max_hp" : 140,
+			"turret_ammo" : 500,
+			"turret_max_ammo" : 500
 		}
 	},
 	{
-		"module_id":"t-6",
-		"module_name" : "A-14 Sperict",
-		"scene" : "res://entity/drone_turrets/turret_6/turret_6.tscn",
-		"icon" : "res://assets/ui/choose-module/drone/turret_6.png",
+		"module_id":"t-2",
+		"module_name" : "Rectketa MX-B",
+		"scene" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
 		"infos" : [
-			"Hp : 110",
-			"Rotation : 80",
-			"Ammo Capacity : 300"
+			"Hp : 160",
+			"Rotation : 45",
+			"Ammo Capacity : 500"
 		],
 		"modifier" : {
-			"turret_rotation_speed" : 80,
-			"turret_hp" : 110,
-			"turret_max_hp" : 110,
-			"turret_ammo" : 300,
-			"turret_max_ammo" : 300
+			"turret_rotation_speed" : 45,
+			"turret_hp" : 160,
+			"turret_max_hp" : 160,
+			"turret_ammo" : 500,
+			"turret_max_ammo" : 500
 		}
 	},
 ]

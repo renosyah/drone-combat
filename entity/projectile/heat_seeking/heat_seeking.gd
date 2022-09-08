@@ -3,7 +3,7 @@ extends BaseProjectile
 var target :BaseHull
 
 func _ready():
-	attack_damage = 85
+	attack_damage = int(rand_range(22,98))
 	
 func seek():
 	var direction = (target.global_transform.origin - global_transform.origin).normalized()
