@@ -53,13 +53,13 @@ const weapons :Array = [
 		"icon" : "res://assets/ui/choose-module/drone/weapon_3.png",
 		"infos" : [
 			"Slow Firing Rate",
-			"High Damage"
+			"Very High Damage"
 		],
 		"modifier" : {}
 	},
 	{
 		"module_id":"w-6",
-		"module_name" : "105mm Launcher" ,
+		"module_name" : "90mm Launcher" ,
 		"scene" : "res://entity/weapons/smothbore/smothbore.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_6.png",
 		"infos" : [

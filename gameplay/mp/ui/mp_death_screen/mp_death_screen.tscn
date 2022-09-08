@@ -19,14 +19,14 @@ alignment = 1
 
 [node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer"]
 margin_right = 600.0
-margin_bottom = 130.0
-rect_min_size = Vector2( 80, 130 )
+margin_bottom = 30.0
+rect_min_size = Vector2( 80, 30 )
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="VBoxContainer"]
-margin_top = 134.0
+margin_top = 34.0
 margin_right = 600.0
-margin_bottom = 257.0
+margin_bottom = 157.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -39,7 +39,7 @@ align = 1
 valign = 1
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
-margin_top = 261.0
+margin_top = 161.0
 margin_right = 600.0
 margin_bottom = 716.0
 rect_min_size = Vector2( 80, 60 )
