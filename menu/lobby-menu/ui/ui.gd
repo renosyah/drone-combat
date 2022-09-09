@@ -19,7 +19,10 @@ onready var _ready_button :BorderButton = $CanvasLayer/control/VBoxContainer/VBo
 onready var _add_bot_button_icon = $CanvasLayer/control/PanelContainer/HBoxContainer/add_bot/ColorRect2
 
 onready var _exit_timer = $exit_timer
+
+onready var _lobby_menu = $CanvasLayer/control
 onready var _dialog_exit_option = $CanvasLayer/simple_dialog_option
+onready var _loading = $CanvasLayer/simple_loading_dialog
 
 ################################################################
 # sync lobby
@@ -40,7 +43,7 @@ remote func _request_append_player_joined(from : int, data : Dictionary):
 			player_joined.erase(i)
 			break
 			
-	data["player_team"] = player_joined.size()
+	data["player_team"] = player_joined.size() + 1
 	player_joined.append(data)
 	
 	rpc("_update_player_joined", player_joined)
@@ -91,6 +94,7 @@ func _ready():
 	_ready_button.button_color = BUTTON_BATTLE_ENABLE_COLOR
 	
 	_add_bot_button_icon.visible = ENABLE_BOT
+	_show_loading(true)
 	
 	if is_server():
 		_init_host()
@@ -109,7 +113,11 @@ func _notification(what):
 		MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST: 
 			_on_back_pressed()
 			return
-			
+	
+func _show_loading(loading :bool):
+	_lobby_menu.visible = not loading
+	_loading.visible = loading
+	
 ################################################################
 # host player section
 func _init_host():
@@ -119,6 +127,8 @@ func _init_host():
 		return
 	
 func _server_player_connected(_player_network_unique_id : int, _player : Dictionary):
+	_show_loading(false)
+	
 	var player = Global.create_mp_player()
 	player["status"] = "Ready"
 	player["flag"] = Global.PLAYER_STATUS_READY
@@ -143,6 +153,7 @@ func _init_join():
 		return
 	
 func _client_player_connected(_player_network_unique_id : int, _player : Dictionary):
+	_show_loading(false)
 	Global.client.network_unique_id = _player_network_unique_id
 	rpc_id(Network.PLAYER_HOST_ID, "_request_append_player_joined", Global.client.network_unique_id, Global.create_mp_player())
 	
@@ -201,7 +212,9 @@ func display_player_slot(index :int):
 	var item = preload("res://menu/lobby-menu/ui/item/item.tscn").instance()
 	item.data = player
 	item.can_kick = (player["player_id"] != Global.player.player_id and is_server())
+	item.can_switch_team = is_server()
 	item.connect("kick", self, "_on_player_get_kick")
+	item.connect("change_team", self, "_on_player_change_team")
 	_player_holder.add_child(item)
 	
 func set_player_ready():
@@ -210,12 +223,23 @@ func set_player_ready():
 		
 	rpc_id(Network.PLAYER_HOST_ID, "_request_update_player_joined_status", Global.client.network_unique_id, Global.create_mp_player())
 	
+func _on_player_change_team(_player):
+	if not is_server():
+		return
+		
+	_player["player_team"] += 1
+		
+	if _player["player_team"] > 4:
+		_player["player_team"] = 1
+	
+	rpc("_update_player_joined", player_joined)
+	
 func _on_player_get_kick(_player):
 	if not is_server():
 		return
 		
 	rpc("_kick_player", _player)
-
+	
 func _on_prev_pressed():
 	validate_cicle_between_player(cicle_between_player_index + 1)
 	display_player_slot(cicle_between_player_index)
@@ -246,7 +270,7 @@ func _on_exit_timer_timeout():
 # utils
 class MyCustomSorter:
 	static func sort(a, b):
-		if a["player_team"] < b["player_team"]:
+		if a["player_id"] < b["player_id"]:
 			return true
 		return false
 		

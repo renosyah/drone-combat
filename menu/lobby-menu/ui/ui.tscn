@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/ui/icon/arrow.png" type="Texture" id=1]
 [ext_resource path="res://menu/lobby-menu/ui/ui.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=6]
 [ext_resource path="res://assets/ui/server-browser/back.png" type="Texture" id=7]
 [ext_resource path="res://assets/ui/icon/host.png" type="Texture" id=8]
+[ext_resource path="res://assets/ui/simple_loading/simple_loading_dialog.tscn" type="PackedScene" id=9]
 [ext_resource path="res://assets/ui/simple_dialog_option/simple_dialog_option.tscn" type="PackedScene" id=10]
 
 [node name="ui" type="Control"]
@@ -125,6 +126,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -320.0
+rect_min_size = Vector2( 0, 320 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -170,10 +172,9 @@ alignment = 1
 
 [node name="prev" type="Button" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 margin_left = 82.0
-margin_top = 10.0
 margin_right = 182.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 100, 80 )
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
 size_flags_vertical = 4
 flat = true
 
@@ -213,10 +214,9 @@ mouse_filter = 2
 
 [node name="next" type="Button" parent="CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2"]
 margin_left = 418.0
-margin_top = 10.0
 margin_right = 518.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 100, 80 )
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
 size_flags_vertical = 4
 flat = true
 
@@ -234,6 +234,9 @@ margin_bottom = 320.0
 rect_min_size = Vector2( 0, 80 )
 
 [node name="simple_dialog_option" parent="CanvasLayer" instance=ExtResource( 10 )]
+visible = false
+
+[node name="simple_loading_dialog" parent="CanvasLayer" instance=ExtResource( 9 )]
 visible = false
 
 [node name="server_advertise" type="Node" parent="."]
