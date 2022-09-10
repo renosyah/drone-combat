@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://entity/weapons/twin_mg/twin_mg.gd" type="Script" id=1]
+[ext_resource path="res://entity/projectile/mg_bullet/mg_bullet.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.2, 0.2, 1 )
@@ -133,9 +134,10 @@ tracks/3/keys = {
 
 [node name="twin_mg" type="Spatial"]
 script = ExtResource( 1 )
+projectile = ExtResource( 2 )
 sensor_path = NodePath("RayCast")
 attack_range = 12
-ammo_cost = 1
+dispersion = 0.55
 
 [node name="pivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0 )

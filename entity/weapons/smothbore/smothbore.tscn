@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://entity/weapons/smothbore/smothbore.gd" type="Script" id=1]
+[ext_resource path="res://entity/projectile/heat_seeking/heat_seeking.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.4, 0.5, 1 )
@@ -108,9 +109,12 @@ tracks/1/keys = {
 
 [node name="smothbore" type="Spatial"]
 script = ExtResource( 1 )
+projectile = ExtResource( 2 )
 sensor_path = NodePath("RayCast")
 attack_range = 22
 ammo_cost = 20
+dispersion = 0.1
+attack_delay = 6.0
 
 [node name="pivot" type="Spatial" parent="."]
 

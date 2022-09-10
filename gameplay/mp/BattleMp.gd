@@ -201,6 +201,7 @@ func spawn_drones_and_get_drone_owned_by(local_player : PlayerData) -> BaseHull:
 			spawned.connect("on_dead", self, "on_drone_dead")
 			spawned.connect("on_take_damage", self, "on_drone_take_damage")
 			spawned.connect("on_heal", self, "on_drone_heal")
+			spawned.connect("on_respawn_ready", self,"on_drone_respawn_ready")
 			
 			var turret = spawned.get_turret()
 			turret.connect("on_resupply", self, "on_drone_turret_resupply")
@@ -299,6 +300,9 @@ remotesync func spawn_ammo_item(at : Vector3):
 func on_drone_respawn(_entity :BaseHull):
 	pass
 	
+func on_drone_respawn_ready(_entity :BaseHull):
+	pass
+	
 func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
 	pass
 	
@@ -313,7 +317,7 @@ func on_drone_turret_resupply(_entity :BaseTurret, _ammo_added :int):
 	msg.translation.y += 2.0 + rand_range(-spread, spread)
 	
 	msg.set_color(Color.orange)
-	msg.set_message("+" + str(_ammo_added))
+	msg.set_message("+" + str(_ammo_added) + " Ammo")
 	
 	
 func on_drone_heal(_entity :BaseEntity, _hp_added :int):
@@ -327,7 +331,7 @@ func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	msg.translation.y += 2.0 + rand_range(-spread, spread)
 	
 	msg.set_color(Color.green)
-	msg.set_message("+" + str(_hp_added))
+	msg.set_message("+" + str(_hp_added) + " Hp")
 	
 	
 func on_drone_turret_take_damage(_turret :BaseTurret, _damage :int, _hit_by: PlayerData):
@@ -378,16 +382,6 @@ func _on_exit_game_session():
 	
 	Network.disconnect_from_server()
 	get_tree().change_scene("res://menu/main-menu/main_menu.tscn")
-	
-################################################################
-# utils code
-func _create_respawn_time_delay() -> Timer:
-	var _respawn_delay_timer = Timer.new()
-	_respawn_delay_timer.wait_time = 3
-	_respawn_delay_timer.one_shot = true
-	_respawn_delay_timer.autostart = false
-	add_child(_respawn_delay_timer)
-	return _respawn_delay_timer
 	
 ################################################################
 # network utils code

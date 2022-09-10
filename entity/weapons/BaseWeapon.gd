@@ -6,12 +6,15 @@ signal on_weapon_ready_open_fire(_target)
 # identity owner
 var player:PlayerData
 
+export var projectile :Resource
 export var sensor_path: NodePath
 export var attack_range :int = 0
-export var ammo_cost :int = 0
+export var ammo_cost :int = 1
+export var dispersion :float = 0.2 
+export var attack_delay : float = 0.3
 
-var attack_delay : float = 0.3
 var is_master = false
+var _bullets_pool = []
 
 onready var _sensor : RayCast = get_node(sensor_path)
 
@@ -35,7 +38,9 @@ func _ready():
 	_sound.unit_db = Global.sound_amplified
 	_sound.unit_size = Global.sound_amplified
 	add_child(_sound)
-		
+	
+	setup_bullets_pool()
+	
 	if is_instance_valid(_sensor):
 		_sensor.cast_to = _sensor.cast_to * attack_range
 		
@@ -73,7 +78,28 @@ func _puppet_weapon_handling(delta):
 func open_fire(_target : BaseEntity):
 	_play_firing_animation()
 	_spawn_projectile_to(_target)
-
+	
+func create_bullet_instance() -> BaseProjectile:
+	var bullet = projectile.instance()
+	bullet.player = player
+	bullet.is_master = is_master
+	bullet.show_projectile = false
+	add_child(bullet)
+	bullet.spread = dispersion
+	bullet.translation = Vector3.ZERO
+	return bullet
+	
+func setup_bullets_pool():
+	for i in range(25):
+		_bullets_pool.append(create_bullet_instance())
+	
+func get_bullet_from_pool() -> BaseProjectile:
+	for i in _bullets_pool:
+		if not i.show_projectile:
+			return i
+			
+	return create_bullet_instance()
+	
 func _play_firing_animation():
 	if not is_master and _attack_timmer.is_stopped():
 		_attack_timmer.wait_time = attack_delay

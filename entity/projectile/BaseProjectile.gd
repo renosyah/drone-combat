@@ -1,13 +1,16 @@
-extends RayCast
+extends Spatial
 class_name BaseProjectile
 
 const MAX_DISTANCE = 100.0
+
+export var collision_shape : Resource
 
 # identity owner
 var player:PlayerData
 
 var attack_damage : int = 0
 var is_master = false
+var show_projectile = false setget _set_show
 
 # speed
 var speed = 15.0
@@ -17,33 +20,54 @@ var travel_distance = 0.0
 var velocity = Vector3.ZERO
 
 func _ready():
-	enabled = true
-	cast_to = Vector3(0, 0, -0.3)
 	set_as_toplevel(true)
-	set_process(true)
-
+	set_process(false)
+	
+func _set_show(val :bool):
+	show_projectile = val
+	set_process(show_projectile)
+	visible = show_projectile
+	
 func launch(to : Vector3):
 	to.z += rand_range(-spread, spread)
 	to.x += rand_range(-spread, spread)
 	to.y += rand_range(0.0, spread)
 	velocity = translation.direction_to(to)
 	look_at(to, Vector3.UP)
+	_set_show(true)
 	
 func _process(delta):
+	if not show_projectile:
+		stop_projectile()
+		return
+		
 	var _distance = speed * delta
 	translation += velocity * _distance
 	travel_distance += _distance
 	
-	validate_collider()
-	
 	if travel_distance > MAX_DISTANCE:
 		stop_projectile()
-	
-func validate_collider():
-	if not is_colliding():
 		return
 		
-	var body = get_collider()
+	check_collision()
+	
+func check_collision():
+	var query = PhysicsShapeQueryParameters.new()
+	query.set_shape(collision_shape)
+	query.collide_with_bodies = true
+	query.collide_with_areas = false
+	query.collision_mask = 1
+	query.transform = global_transform
+	
+	var results: Array = get_world().direct_space_state.intersect_shape(query, 1)
+	for result in results:
+		validate_collider(result["collider"])
+		return
+	
+func validate_collider(body):
+	if not show_projectile:
+		return
+		
 	if not is_instance_valid(body):
 		return
 		
@@ -66,8 +90,10 @@ func validate_collider():
 	stop_projectile()
 	
 func stop_projectile():
-	set_process(false)
-	queue_free()
+	show_projectile = false
+	set_process(show_projectile)
+	visible = show_projectile
+	travel_distance = 0.0
 	
 	
 	

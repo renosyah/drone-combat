@@ -154,6 +154,7 @@ func spawn_weapon(_pos : Vector3):
 	if weapon_scene:
 		var _weapon_asset = weapon_scene.instance()
 		_weapon_asset.player = player
+		_weapon_asset.is_master = _is_master()
 		head.add_child(_weapon_asset)
 		_weapon = _weapon_asset
 		_weapon.translation = _pos
@@ -165,7 +166,6 @@ func spawn_weapon(_pos : Vector3):
 		
 	if is_instance_valid(_weapon):
 		_weapon.connect("on_weapon_ready_open_fire", self,"_on_weapon_ready_open_fire")
-		_weapon.is_master = true
 	
 func spawn_sensor(_pos : Vector3):
 	if sensor_scene:

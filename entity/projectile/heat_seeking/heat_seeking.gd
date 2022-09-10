@@ -4,7 +4,7 @@ var target :BaseHull
 
 func _ready():
 	attack_damage = int(rand_range(42,48))
-	
+
 func seek():
 	var direction = (target.global_transform.origin - global_transform.origin).normalized()
 	var desired = direction * speed
@@ -22,13 +22,11 @@ func _process(delta):
 	velocity += seek() * delta
 	look_at(target.global_transform.origin,Vector3.UP)
 	global_transform.origin += velocity * delta
-	
-	validate_collider()
-		
 	if travel_distance > MAX_DISTANCE:
 		stop_projectile()
 		return
-
+		
+	check_collision()
 
 
 

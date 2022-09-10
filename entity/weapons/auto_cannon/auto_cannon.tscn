@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://entity/weapons/auto_cannon/auto_cannon.gd" type="Script" id=1]
+[ext_resource path="res://entity/projectile/med_caliber/med_caliber.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.4, 0.2, 1 )
@@ -114,9 +115,11 @@ tracks/1/keys = {
 
 [node name="auto_cannon" type="Spatial"]
 script = ExtResource( 1 )
+projectile = ExtResource( 2 )
 sensor_path = NodePath("RayCast")
 attack_range = 18
 ammo_cost = 4
+attack_delay = 0.4
 
 [node name="pivot" type="Spatial" parent="."]
 

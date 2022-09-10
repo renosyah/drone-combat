@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://entity/weapons/cannon/cannon.gd" type="Script" id=1]
+[ext_resource path="res://entity/projectile/high_caliber/high_caliber.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.4, 0.4, 1 )
@@ -154,11 +155,14 @@ tracks/3/keys = {
 "values": [ Vector3( 0, 0, 1.11783 ), Vector3( 0, 0, 1.11783 ), Vector3( 0, 0, 1.01 ), Vector3( 0, 0, 1.11783 ) ]
 }
 
-[node name="auto_cannon" type="Spatial"]
+[node name="cannon" type="Spatial"]
 script = ExtResource( 1 )
+projectile = ExtResource( 2 )
 sensor_path = NodePath("RayCast")
 attack_range = 22
 ammo_cost = 10
+dispersion = 0.35
+attack_delay = 2.0
 
 [node name="pivot" type="Spatial" parent="."]
 

@@ -15,6 +15,7 @@ onready var _wheels = [
 	$pivot/wheel11,
 	$pivot/wheel12,
 ]
+onready var _fire = $fire
 
 func _each_wheel(spin :bool):
 	for wheel in _wheels:
@@ -36,6 +37,11 @@ func _set_puppet_moving_state(_val : int):
 remotesync func _dead(_kill_by :Dictionary):
 	._dead(_kill_by)
 	_each_wheel(false)
+	_fire.is_burning = true
+	
+remotesync func _reset():
+	._reset()
+	_fire.is_burning = false
 	
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -51,6 +51,17 @@ func on_drone_respawn(_entity :BaseHull):
 	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
 	_ui.update_player_ammo_bar(_entity.turret_ammo, _entity.turret_max_ammo)
 	
+	
+func on_drone_respawn_ready(_entity :BaseHull):
+	.on_drone_respawn_ready(_entity)
+	
+	# respawn feature for bot only
+	if _entity == drone:
+		return
+		
+	respawn_bot_drone(_entity.get_path())
+	
+	
 func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo :int):
 	.on_drone_turret_ammo_update(_turret, _ammo_left, _max_ammo)
 		
@@ -92,7 +103,7 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 	_ui.update_scoreboard(_hit_by.player_id, 1, 0)
 	
 	if _entity in _bots:
-		respawn_bot_drone(_entity.get_path())
+		_entity.start_respawn_delay(Global.mp_game_data["respawn_time"])
 		return
 	
 	if _entity != drone:
@@ -102,13 +113,6 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 		return
 		
 	_ui.update_player_hp_bar(_entity.player.player_name, 0, _entity.max_hp)
-	
-	var _respawn_delay_timer = _create_respawn_time_delay()
-		
-	_respawn_delay_timer.start()
-	yield(_respawn_delay_timer, "timeout")
-	_respawn_delay_timer.queue_free()
-		
 	_ui.show_death_screen()
 	
 ################################################################
@@ -143,36 +147,42 @@ func _on_bot_action_timer_timeout():
 	bot_command_cicle += 1
 	if bot_command_cicle > _bots.size() - 1:
 		bot_command_cicle = 0
-	
-	var bot = _bots[bot_command_cicle]
-	var waypoint = _map.get_rand_pos()
 		
-	# 70% chance bot go for item
-	if randf() < 0.70 and _item_holder.get_child_count() > 0:
+	var bot :BaseHull = _bots[bot_command_cicle]
+	if bot.is_dead():
+		return
+	
+	var targets = _all.duplicate()
+	targets.shuffle()
+	
+	var target_pos = targets[rand_range(0, targets.size() - 1)].global_transform.origin
+	var point = Vector3(target_pos.x, target_pos.y, target_pos.z)
+	point.z += rand_range(-4, 4)
+	point.x += rand_range(-4, 4) 
+	var waypoint = point
+		
+	var chance_to_get_item = randf() < 0.80 # 80%
+	var chance_to_go_somewhere = randf() < 0.40 # 40%
+	var is_bot_hp_low = bot.hp < bot.max_hp * 0.70
+	var is_bot_ammo_low = bot.get_turret().ammo < bot.get_turret().max_ammo * 0.70
+	var is_item_spawn = _item_holder.get_child_count() > 0
+		
+	# bot go for item
+	if chance_to_get_item and (is_bot_ammo_low or is_bot_hp_low) and is_item_spawn:
 		var items = _item_holder.get_children()
 		var item = items[rand_range(0, items.size() - 1)]
 		
 		if is_instance_valid(items):
 			waypoint = item.global_transform.origin
-			
-	# 60% chance bot go for kill
-	elif randf() < 0.60:
-		 waypoint = _all[rand_range(0, _all.size() - 1)].global_transform.origin
 		
-		
-	if bot.is_dead():
-		return
+	# bot go somewhere nice
+	elif chance_to_go_somewhere:
+		waypoint = _map.get_rand_pos()
 		
 	bot.waypoint = waypoint
 	
 	
 func respawn_bot_drone(drone :NodePath):
-	var _respawn_delay_timer = _create_respawn_time_delay()
-	
-	_respawn_delay_timer.start()
-	yield(_respawn_delay_timer, "timeout")
-	_respawn_delay_timer.queue_free()
-	
 	.respawn_drone(drone)
 	
 func _on_ammo_item_spawner_timer_timeout():

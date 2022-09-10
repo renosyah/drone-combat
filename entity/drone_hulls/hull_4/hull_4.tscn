@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://entity/drone_hulls/hull_4/hull_4.gd" type="Script" id=1]
+[ext_resource path="res://assets/other/fire/fire.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=3]
 [ext_resource path="res://entity/wheel/wheel.tscn" type="PackedScene" id=4]
 
@@ -239,6 +240,9 @@ material/0 = SubResource( 16 )
 transform = Transform( 1, 7.31222e-08, 1.35338e-07, -7.31222e-08, -0.548089, 0.83642, 1.35338e-07, -0.83642, -0.548089, -0.774836, -0.151359, -1.65298 )
 mesh = SubResource( 17 )
 material/0 = SubResource( 16 )
+
+[node name="fire" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.300952, -0.82214 )
 
 [node name="turret_pos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 1.01331 )

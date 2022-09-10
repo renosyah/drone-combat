@@ -2,6 +2,7 @@ extends BaseEntity
 class_name BaseHull
 
 signal on_hull_click(_hull)
+signal on_respawn_ready(_hull)
 
 # variables
 const NONE = 1
@@ -54,6 +55,7 @@ var _tween_movement :Tween
 var _explosion :Explosion
 var _hp_bar :HpBar3D
 var _sound : AudioStreamPlayer3D
+var _respawn_delay :Timer
 
 ############################################################
 # multiplayer func
@@ -195,6 +197,13 @@ func _ready():
 	_sound.unit_size = Global.sound_amplified
 	add_child(_sound)
 	
+	_respawn_delay = Timer.new()
+	_respawn_delay.wait_time = 25
+	_respawn_delay.one_shot = true
+	_respawn_delay.autostart = false
+	add_child(_respawn_delay)
+	_respawn_delay.connect("timeout", self, "_on_respawn_delay_timeout")
+	
 	
 func set_hp_bar(_hp_bar_color :Color, _hp_bar_visible :bool):
 	if not is_instance_valid(_hp_bar):
@@ -231,8 +240,16 @@ func _on_turret_resupply(_t :BaseTurret, _ammo_added :int):
 func _on_turret_ammo_update(_t :BaseTurret, _ammo_left :int, _max_ammo :int):
 	_hp_bar.update_ammo_bar(_ammo_left, _max_ammo)
 	
+func start_respawn_delay(time :float = 25.0):
+	_respawn_delay.wait_time = time
+	_respawn_delay.start()
+	
+func _on_respawn_delay_timeout():
+	emit_signal("on_respawn_ready", self)
+	
 func get_turret() -> BaseTurret:
 	return _turret
+	
 	
 ############################################################
 # function

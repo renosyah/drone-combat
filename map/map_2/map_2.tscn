@@ -23,9 +23,9 @@ size = Vector3( 100, 15, 2 )
 [sub_resource type="ConvexPolygonShape" id=8]
 points = PoolVector3Array( -50.1859, -7.68587, -1.18587, 48.1784, 7.25093, 1, 48.1784, -7.38104, 1, 50.1859, 7.55576, -1.18587, -48.1784, 7.25093, 1, 50.1859, -7.68587, -1.18587, -50.1859, 7.55576, -1.18587, -48.1784, -7.38104, 1 )
 
-[node name="map_0" type="StaticBody"]
+[node name="map_2" type="StaticBody"]
 script = ExtResource( 1 )
-max_stuff = 75
+max_stuff = 65
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 6 )

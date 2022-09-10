@@ -1,20 +1,19 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/other/explosion/explosion.gd" type="Script" id=1]
-[ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=2]
 
 [sub_resource type="SphereMesh" id=1]
 
 [sub_resource type="SpatialMaterial" id=2]
-next_pass = ExtResource( 2 )
-albedo_color = Color( 1, 0.513726, 0, 1 )
+flags_unshaded = true
+albedo_color = Color( 1, 0.486275, 0, 1 )
 
 [sub_resource type="SphereMesh" id=3]
 radius = 0.5
 height = 1.0
 
 [sub_resource type="SpatialMaterial" id=4]
-next_pass = ExtResource( 2 )
+flags_unshaded = true
 albedo_color = Color( 1, 0.411765, 0, 1 )
 
 [sub_resource type="Animation" id=5]
@@ -141,7 +140,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0.1, 0.1, 0.1 ), Vector3( 1.4, 1.4, 1.4 ) ]
+"values": [ Vector3( 0.1, 0.1, 0.1 ), Vector3( 1.8, 1.8, 1.8 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("MeshInstance3:scale")
@@ -153,7 +152,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0.1, 0.1, 0.1 ), Vector3( 1.2, 1.2, 1.2 ) ]
+"values": [ Vector3( 0.1, 0.1, 0.1 ), Vector3( 1.7, 1.7, 1.7 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("MeshInstance4:scale")

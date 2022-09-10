@@ -187,13 +187,13 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
 		"infos" : [
-			"Hp : 170",
+			"Hp : 220",
 			"Speed : 3.0",
 			"Travese : 2.0"
 		],
 		"modifier" : {
-			"hp" : 170,
-			"max_hp" : 170,
+			"hp" : 220,
+			"max_hp" : 220,
 			"speed" : 3.0,
 			"turning_speed" : 2.0
 		}
@@ -209,8 +209,8 @@ const hulls :Array = [
 			"Travese : 3"
 		],
 		"modifier" : {
-			"hp" : 60,
-			"max_hp" : 60,
+			"hp" : 80,
+			"max_hp" : 80,
 			"speed" : 5.0,
 			"turning_speed" : 3.0
 		}
@@ -221,13 +221,13 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_5/hull_5.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_5.png",
 		"infos" : [
-			"Hp : 60",
+			"Hp : 80",
 			"Speed : 6",
 			"Travese : 4"
 		],
 		"modifier" : {
-			"hp" : 60,
-			"max_hp" : 60,
+			"hp" : 80,
+			"max_hp" : 80,
 			"speed" : 6,
 			"turning_speed" : 4.0
 		}
@@ -240,13 +240,13 @@ const hulls :Array = [
 		"infos" : [
 			"Hp : 240",
 			"Speed : 2",
-			"Travese : 2"
+			"Travese : 3"
 		],
 		"modifier" : {
 			"hp" : 240,
 			"max_hp" : 240,
 			"speed" : 2.0,
-			"turning_speed" : 2.0
+			"turning_speed" : 3.0
 		}
 	},
 	{
@@ -255,15 +255,15 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_4/hull_4.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_4.png",
 		"infos" : [
-			"Hp : 240",
+			"Hp : 440",
 			"Speed : 2",
-			"Travese : 3"
+			"Travese : 2"
 		],
 		"modifier" : {
-			"hp" : 240,
-			"max_hp" : 240,
+			"hp" : 440,
+			"max_hp" : 440,
 			"speed" : 2.0,
-			"turning_speed" : 3.0
+			"turning_speed" : 2.0
 		}
 	},
 ]

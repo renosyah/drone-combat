@@ -31,6 +31,9 @@ var player_joined : Array = []
 remote func _request_update_player_joined_status(from : int, data : Dictionary):
 	for i in player_joined:
 		if i["player_id"] == data["player_id"]:
+			if i["flag"] == Global.PLAYER_STATUS_READY:
+				return
+				
 			i["flag"] = Global.PLAYER_STATUS_READY
 			i["status"] = "Ready"
 			break
@@ -203,9 +206,8 @@ func display_player_slot(index :int):
 	for i in _player_holder.get_children():
 		_player_holder.remove_child(i)
 	
-	var is_all_ready = is_all_player_ready()
-	_play_button.disabled = (not is_all_ready)
-	_play_button.button_color = BUTTON_BATTLE_DISABLE_COLOR if (not is_all_ready) else BUTTON_BATTLE_ENABLE_COLOR
+	_play_button.disabled = not is_all_player_ready() or not is_team_valid()
+	_play_button.button_color = BUTTON_BATTLE_DISABLE_COLOR if (_play_button.disabled) else BUTTON_BATTLE_ENABLE_COLOR
 	_add_bot_button_icon.visible = ENABLE_BOT and is_server() and player_joined.size() < Global.server.max_player
 	
 	var player = player_joined[index]
@@ -282,9 +284,21 @@ func is_all_player_ready() -> bool:
 		return false
 		
 	for i in player_joined:
-		if i.flag == Global.PLAYER_STATUS_NOT_READY:
+		if i["flag"] == Global.PLAYER_STATUS_NOT_READY:
 			return false
 	return true
+	
+func is_team_valid() -> bool:
+	var team = {}
+		
+	for i in player_joined:
+		team[i["player_team"]] = 1
+		
+	if team.size() == 1:
+		return false
+	
+	return true
+	
 	
 func validate_cicle_between_player(idx :int):
 	cicle_between_player_index = idx

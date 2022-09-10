@@ -9,7 +9,7 @@ points = PoolVector3Array( -50.2732, 0.569672, -50.2732, 50.2732, 0.569672, 50.2
 size = Vector3( 100, 0.5, 100 )
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.521569, 0.32549, 0, 1 )
+albedo_color = Color( 0.321569, 0.14902, 0, 1 )
 
 [sub_resource type="CubeMesh" id=4]
 size = Vector3( 100, 1, 100 )
@@ -23,7 +23,7 @@ size = Vector3( 100, 15, 2 )
 [sub_resource type="ConvexPolygonShape" id=8]
 points = PoolVector3Array( -50.1859, -7.68587, -1.18587, 48.1784, 7.25093, 1, 48.1784, -7.38104, 1, 50.1859, 7.55576, -1.18587, -48.1784, 7.25093, 1, 50.1859, -7.68587, -1.18587, -50.1859, 7.55576, -1.18587, -48.1784, -7.38104, 1 )
 
-[node name="map_0" type="StaticBody"]
+[node name="map_1" type="StaticBody"]
 script = ExtResource( 1 )
 max_stuff = 45
 
