@@ -26,14 +26,28 @@ func load_player_data():
 var player_drone_data : DroneData = DroneData.new()
 
 static func randomize_drone(player_id, player_name :String ) -> DroneData:
+	randomize()
+	
+	var hulls = DroneData.hulls.duplicate()
+	hulls.shuffle()
+	
+	var turrets = DroneData.turrets.duplicate()
+	turrets.shuffle()
+	
+	var weapons = DroneData.weapons.duplicate()
+	weapons.shuffle()
+	
+	var sensors = DroneData.sensors.duplicate()
+	sensors.shuffle()
+	
 	var data = DroneData.new()
 	randomize()
 	data.player_id =  player_id
 	data.player_name =  player_name
-	data.hull_module = DroneModuleData.new().parse_from_dictionary(DroneData.hulls[rand_range(0, DroneData.hulls.size() - 1)])
-	data.turret_module = DroneModuleData.new().parse_from_dictionary(DroneData.turrets[rand_range(0, DroneData.turrets.size() - 1)])
-	data.weapon_module = DroneModuleData.new().parse_from_dictionary(DroneData.weapons[rand_range(0, DroneData.weapons.size() - 1)])
-	data.sensor_module = DroneModuleData.new().parse_from_dictionary(DroneData.sensors[rand_range(0, DroneData.sensors.size() - 1)])
+	data.hull_module = DroneModuleData.new().parse_from_dictionary(hulls[rand_range(0, hulls.size() - 1)])
+	data.turret_module = DroneModuleData.new().parse_from_dictionary(turrets[rand_range(0, turrets.size() - 1)])
+	data.weapon_module = DroneModuleData.new().parse_from_dictionary(weapons[rand_range(0, weapons.size() - 1)])
+	data.sensor_module = DroneModuleData.new().parse_from_dictionary(sensors[rand_range(0, sensors.size() - 1)])
 	data.color = Color(randf(), randf(), randf(), 1.0)
 	return data
 	
@@ -50,7 +64,7 @@ var is_sfx_mute :bool = false setget _set_is_sfx_mute
 func _set_is_sfx_mute(val:bool):
 	is_sfx_mute = val
 	AudioServer.set_bus_mute(AudioServer.get_bus_index("sfx"), is_sfx_mute)
-
+	
 ################################################################
 # multiplayer connection and data
 signal on_host_game_session_ready(_mp_game_data)
@@ -58,7 +72,7 @@ signal on_host_game_session_ready(_mp_game_data)
 remotesync func _on_host_game_session_ready(_mp_game_data : Dictionary):
 	emit_signal("on_host_game_session_ready", _mp_game_data)
 	
-func on_host_game_session_ready(_mp_game_data : Dictionary = {}):	
+func on_host_game_session_ready(_mp_game_data : Dictionary = {}):
 	rpc("_on_host_game_session_ready", _mp_game_data)
 	
 const MODE_HOST = 0
@@ -79,7 +93,7 @@ var client = {
 var mp_players = []
 var mp_game_data = {
 	"respawn_time": 25,
-	"map" : "",
+	"map" : "res://map/map_0/map_0.tscn",
 	"map_stuffs":[]
 
 }
@@ -104,7 +118,7 @@ func create_mp_player() -> Dictionary:
 func create_bot_player() -> Dictionary:
 	var bot_id = "BOT-" + str(GDUUID.v4())
 	var bot_name = RandomNameGenerator.generate() + " (Bot)"
-	var drone = Global.randomize_drone(bot_id, bot_name)
+	var drone = randomize_drone(bot_id, bot_name)
 	
 	return {
 		"number" : 0,
