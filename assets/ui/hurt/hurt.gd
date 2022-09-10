@@ -3,15 +3,24 @@ extends Control
 export var color :Color = Color.red
 
 onready var _border = $border
-onready var _tween = $Tween
+onready var _animation_player= $AnimationPlayer
 
 func _ready():
-	_border.modulate = color
+	_border.self_modulate = color
 	_border.modulate.a = 0.0
-
-func show_hurt(repeated :bool = false):
-	_tween.stop_all()
-	_tween.repeat = repeated
 	
-	_tween.interpolate_property(_border,"modulate:a", 1.0, 0.0, 0.8,Tween.TRANS_SINE)
-	_tween.start()
+func hide_hurt():
+	_animation_player.stop(true)
+	_border.modulate.a = 0.0
+	
+func show_hurt():
+	if _animation_player.is_playing():
+		return
+		
+	_animation_player.play("hurt")
+	
+func show_hurting():
+	if _animation_player.is_playing():
+		return
+		
+	_animation_player.play("hurting")

@@ -1,6 +1,10 @@
 extends Node
 class_name BattleMp
 
+const DAMAGE = 1
+const CRITICAL_DAMAGE = 2
+const NO_DAMAGE = 3
+
 var map_scene : Resource
 var _map : BaseMap
 

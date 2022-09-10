@@ -38,24 +38,14 @@ func display_event_message(text :String):
 	_tween.interpolate_property(_event_message, "modulate:a",_event_message.modulate.a, 0.0,3.5,Tween.TRANS_SINE)
 	_tween.start()
 	
-func update_player_ammo_bar(ammo, max_ammo :int, ui_feedback :bool = true):
+func update_player_ammo_bar(ammo, max_ammo :int):
 	_player_ammo_bar.update_bar(ammo, max_ammo)
-		
-	if not ui_feedback:
-		return
-		
 	_no_ammo_icon.visible = ammo <= (max_ammo * 0.25)
 	_ammo_icon.visible = not _no_ammo_icon.visible
 	
-func update_player_hp_bar(player_name :String, hp, max_hp :int, ui_feedback :bool = true):
-	var is_critical = hp <= (max_hp * 0.25) and hp > 1
+func update_player_hp_bar(player_name :String, hp, max_hp :int):
 	_player_name.text = player_name
 	_player_hp_bar.update_bar(hp, max_hp)
-		
-	if not ui_feedback:
-		return
-		
-	_hurt_indicator.show_hurt(is_critical)
 	
 func add_minimap_object_marker(object :Spatial, marker_icon:Resource, marker_color :Color):
 	_overlay_map.add_object(object, marker_icon, marker_color)
@@ -63,9 +53,15 @@ func add_minimap_object_marker(object :Spatial, marker_icon:Resource, marker_col
 func set_camera(_camera : GameplayCamera):
 	_overlay_map.set_camera(_camera)
 	
-func show_hurt():
-	_hurt_indicator.show_hurt()
-	
+func show_hurt(type :int):
+	match type:
+		1:
+			_hurt_indicator.show_hurt()
+		2:
+			_hurt_indicator.show_hurting()
+		3:
+			_hurt_indicator.hide_hurt()
+		
 func set_gui_element_visible(show :bool):
 	for i in _gui_elements:
 		i.visible = show

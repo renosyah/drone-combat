@@ -37,11 +37,11 @@ func display_event_message(text :String):
 		
 	_gui.display_event_message(text)
 	
-func update_player_ammo_bar(ammo, max_ammo :int, ui_feedback :bool= true):
-	_gui.update_player_ammo_bar(ammo, max_ammo, ui_feedback)
+func update_player_ammo_bar(ammo, max_ammo :int):
+	_gui.update_player_ammo_bar(ammo, max_ammo)
 	
-func update_player_hp_bar(player_name :String, hp, max_hp :int, ui_feedback :bool= true):
-	_gui.update_player_hp_bar(player_name, hp, max_hp, ui_feedback)
+func update_player_hp_bar(player_name :String, hp, max_hp :int):
+	_gui.update_player_hp_bar(player_name, hp, max_hp)
 	
 func add_minimap_object_marker(object :Spatial, marker_icon:Resource, marker_color :Color):
 	_gui.add_minimap_object_marker(object, marker_icon, marker_color)
@@ -49,8 +49,8 @@ func add_minimap_object_marker(object :Spatial, marker_icon:Resource, marker_col
 func set_camera(_camera : GameplayCamera):
 	_gui.set_camera(_camera)
 	
-func show_hurt():
-	_gui.show_hurt()
+func show_hurt(type :int):
+	_gui.show_hurt(type)
 	
 func show_death_screen():
 	is_player_alive = false

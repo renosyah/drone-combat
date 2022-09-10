@@ -11,8 +11,8 @@ func _ready():
 	.set_minimap_player_objects(drone.player)
 	_set_respawn_cicle_index(_all.find(drone,0))
 	
-	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp, false)
-	_ui.update_player_ammo_bar(drone.turret_ammo, drone.turret_max_ammo, false)
+	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
+	_ui.update_player_ammo_bar(drone.turret_ammo, drone.turret_max_ammo)
 	
 ################################################################
 # drone control
@@ -48,6 +48,7 @@ func on_drone_respawn(_entity :BaseHull):
 	if _entity != drone:
 		return
 		
+	_ui.show_hurt(NO_DAMAGE)
 	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
 	_ui.update_player_ammo_bar(_entity.turret_ammo, _entity.turret_max_ammo)
 	
@@ -84,6 +85,10 @@ func on_drone_heal(_entity :BaseEntity, _hp_added :int):
 	if _entity != drone:
 		return
 		
+	var is_normal = _entity.hp >= (_entity.max_hp * 0.25)
+	if is_normal:
+		_ui.show_hurt(NO_DAMAGE)
+		
 	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
 	
 func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData):
@@ -92,7 +97,8 @@ func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData
 	if _entity != drone:
 		return
 		
-	_ui.show_hurt()
+	var is_critical = _entity.hp <= (_entity.max_hp * 0.25) and _entity.hp > 1
+	_ui.show_hurt(CRITICAL_DAMAGE if is_critical else DAMAGE)
 	_ui.update_player_hp_bar(_entity.player.player_name, _entity.hp, _entity.max_hp)
 	
 func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
@@ -112,6 +118,7 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 	if not _entity.is_dead():
 		return
 		
+	_ui.show_hurt(NO_DAMAGE)
 	_ui.update_player_hp_bar(_entity.player.player_name, 0, _entity.max_hp)
 	_ui.show_death_screen()
 	
