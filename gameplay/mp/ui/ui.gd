@@ -28,8 +28,8 @@ func _ready():
 func set_respawn_time(time :int):
 	_mp_death_screen.set_respawn_time(time)
 	
-func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = ""):
-	_scoreboard.update_scoreboard(player_id, kill, death, _color, player_name)
+func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = "", player_team: int = 0):
+	_scoreboard.update_scoreboard(player_id, kill, death, _color, player_name, player_team)
 	
 func display_event_message(text :String):
 	if not is_player_alive:

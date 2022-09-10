@@ -220,7 +220,7 @@ func spawn_drones_and_get_drone_owned_by(local_player : PlayerData) -> BaseHull:
 		else:
 			_players.append(spawned)
 			
-		_ui.update_scoreboard(player.player_id, 0, 0,spawner.color, player.player_name)
+		_ui.update_scoreboard(player.player_id, 0, 0,spawner.color, player.player_name, player.player_team)
 		_all.append(spawned)
 		
 	return drone

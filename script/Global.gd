@@ -91,6 +91,7 @@ const PLAYER_STATUS_READY = "READY"
 func create_mp_player() -> Dictionary:
 	var drone = player_drone_data
 	return {
+		"number" : 0,
 		"player_id" : player.player_id,
 		"player_name" : player.player_name,
 		"player_team" : 0,
@@ -106,6 +107,7 @@ func create_bot_player() -> Dictionary:
 	var drone = Global.randomize_drone(bot_id, bot_name)
 	
 	return {
+		"number" : 0,
 		"player_id" : bot_id,
 		"player_name" : bot_name,
 		"player_team" : 0,

@@ -5,11 +5,12 @@ const item_template = preload("res://assets/ui/scoreboard/item/item.tscn")
 onready var _scores :Array = []
 onready var _holder = $VBoxContainer2/holder
 	
-func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = ""):
+func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = "", player_team : int = 0):
 	var score :ScoreData = ScoreData.new()
 	score.player_color = _color
 	score.player_id = player_id
 	score.player_name = player_name
+	score.player_team = player_team
 	score.kill_count = kill
 	score.death_count = death
 	update_score(score)

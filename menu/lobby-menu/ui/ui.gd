@@ -47,6 +47,7 @@ remote func _request_append_player_joined(from : int, data : Dictionary):
 			break
 			
 	data["player_team"] = player_joined.size() + 1
+	data["number"] = player_joined.size()
 	player_joined.append(data)
 	
 	rpc("_update_player_joined", player_joined)
@@ -272,7 +273,7 @@ func _on_exit_timer_timeout():
 # utils
 class MyCustomSorter:
 	static func sort(a, b):
-		if a["player_id"] < b["player_id"]:
+		if a["number"] < b["number"]:
 			return true
 		return false
 		

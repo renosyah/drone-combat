@@ -99,8 +99,8 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 	.on_drone_dead(_entity, _hit_by)
 	
 	_ui.display_event_message(_hit_by.player_name + " Kill " + _entity.player.player_name)
-	_ui.update_scoreboard(_entity.player.player_id, 0, 1)
-	_ui.update_scoreboard(_hit_by.player_id, 1, 0)
+	_ui.update_scoreboard(_entity.player.player_id, 0, 1, _entity.player.player_team)
+	_ui.update_scoreboard(_hit_by.player_id, 1, 0, _entity.player.player_team)
 	
 	if _entity in _bots:
 		_entity.start_respawn_delay(Global.mp_game_data["respawn_time"])

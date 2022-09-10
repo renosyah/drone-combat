@@ -93,8 +93,8 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 	.on_drone_dead(_entity, _hit_by)
 	
 	_ui.display_event_message(_hit_by.player_name + " Kill " + _entity.player.player_name)
-	_ui.update_scoreboard(_entity.player.player_id, 0, 1)
-	_ui.update_scoreboard(_hit_by.player_id, 1, 0)
+	_ui.update_scoreboard(_entity.player.player_id, 0, 1, _entity.player.player_team)
+	_ui.update_scoreboard(_hit_by.player_id, 1, 0, _entity.player.player_team)
 	
 	if _entity != drone:
 		return
@@ -103,13 +103,6 @@ func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 		return
 		
 	_ui.update_player_hp_bar(_entity.player.player_name, 0, _entity.max_hp)
-	
-	var _respawn_delay_timer = _create_respawn_time_delay()
-		
-	_respawn_delay_timer.start()
-	yield(_respawn_delay_timer, "timeout")
-	_respawn_delay_timer.queue_free()
-		
 	_ui.show_death_screen()
 	
 ################################################################
