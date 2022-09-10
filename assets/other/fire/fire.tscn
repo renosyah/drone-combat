@@ -3,8 +3,14 @@
 [ext_resource path="res://assets/other/fire/fire.gd" type="Script" id=1]
 
 [sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
 flags_unshaded = true
 vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
 
 [sub_resource type="SphereMesh" id=4]
 material = SubResource( 3 )
@@ -27,7 +33,7 @@ lifetime_randomness = 0.2
 mesh = SubResource( 4 )
 gravity = Vector3( 0, 6, 0 )
 scale_amount_curve = SubResource( 5 )
-color = Color( 1, 0.368627, 0, 1 )
+color = Color( 1, 0.360784, 0, 1 )
 __meta__ = {
 "_editor_description_": ""
 }

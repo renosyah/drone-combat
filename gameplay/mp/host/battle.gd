@@ -152,13 +152,18 @@ func _on_bot_action_timer_timeout():
 	if bot.is_dead():
 		return
 	
-	var targets = _all.duplicate()
+	var targets = []
+	for i in _all:
+		if not i.is_dead():
+			targets.append(i)
+		
+	randomize()
 	targets.shuffle()
 	
 	var target_pos = targets[rand_range(0, targets.size() - 1)].global_transform.origin
 	var point = Vector3(target_pos.x, target_pos.y, target_pos.z)
-	point.z += rand_range(-4, 4)
-	point.x += rand_range(-4, 4) 
+	point.z += rand_range(-6, 6)
+	point.x += rand_range(-6, 6) 
 	var waypoint = point
 		
 	var chance_to_get_item = randf() < 0.80 # 80%
