@@ -58,7 +58,6 @@ func _network_timmer_timeout():
 		return
 		
 	if _is_master():
-		rset_unreliable("_puppet_ammo", ammo)
 		rset_unreliable("_puppet_rotation", body.rotation.y)
 		rset_unreliable("_puppet_elevation", head.rotation_degrees.x)
 		
@@ -70,24 +69,13 @@ puppet var _puppet_elevation: float setget _set_puppet_elevation
 func _set_puppet_elevation(_val: float):
 	_puppet_elevation = _val
 	
-puppet var _puppet_ammo :int setget _set_puppet_ammo
-func _set_puppet_ammo(_val : int):
-	_puppet_ammo = _val
-	
-	if _is_master():
-		return
-		
-	ammo = _puppet_ammo
-	
-remotesync func _resupply(_ammo_added :int):
-	if ammo + _ammo_added > max_ammo:
-		ammo = max_ammo
-	else:
-		ammo += _ammo_added
+remotesync func _resupply(_current_ammo, _ammo_added :int):
+	if not _is_master():
+		ammo = _current_ammo
 		
 	emit_signal("on_resupply", self, _ammo_added)
 	
-remotesync func _open_fire(_target : NodePath):
+remotesync func _open_fire(_ammo_left :int, _target : NodePath):
 	if not is_instance_valid(_weapon):
 		return
 		
@@ -188,8 +176,13 @@ func spawn_sensor(_pos : Vector3):
 func resupply(_ammo_added :int):
 	if not _is_master():
 		return
-	
-	rpc("_resupply", _ammo_added)
+		
+	if ammo + _ammo_added > max_ammo:
+		ammo = max_ammo
+	else:
+		ammo += _ammo_added
+		
+	rpc("_resupply", ammo, _ammo_added)
 	
 ############################################################
 # function
@@ -245,7 +238,7 @@ func _on_weapon_ready_open_fire(_target : BaseEntity):
 	if ammo < 0:
 		ammo = 0
 		
-	rpc_unreliable("_open_fire", _target.get_path())
+	rpc_unreliable("_open_fire", ammo, _target.get_path())
 	
 func _on_sensor_spotted(_target : BaseEntity):
 	if not _is_master():

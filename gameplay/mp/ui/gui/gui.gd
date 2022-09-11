@@ -16,11 +16,13 @@ onready var _no_ammo_icon = $VBoxContainer/HBoxContainer/MarginContainer3/Margin
 onready var _ammo_icon = $VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/HBoxContainer/ammo_icon
 
 onready var _hurt_indicator = $hurt
+onready var _battle_time = $VBoxContainer/MarginContainer7/HBoxContainer/time
 
 onready var _gui_elements = [
 		$VBoxContainer/hbox/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar,
 		$VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2,
-		$VBoxContainer/HBoxContainer/overlay_map
+		$VBoxContainer/HBoxContainer/overlay_map,
+		$VBoxContainer/MarginContainer7/HBoxContainer
 	]
 
 # Called when the node enters the scene tree for the first time.
@@ -37,6 +39,9 @@ func display_event_message(text :String):
 	
 	_tween.interpolate_property(_event_message, "modulate:a",_event_message.modulate.a, 0.0,3.5,Tween.TRANS_SINE)
 	_tween.start()
+	
+func update_battle_time(time_left:int):
+	_battle_time.text = Utils.format_time(time_left,  Utils.FORMAT_MINUTES | Utils.FORMAT_SECONDS, "%02d", ":")
 	
 func update_player_ammo_bar(ammo, max_ammo :int):
 	_player_ammo_bar.update_bar(ammo, max_ammo)

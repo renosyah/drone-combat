@@ -188,7 +188,6 @@ func _on_play_pressed():
 		return
 		
 	Global.mp_players = player_joined
-	Global.mp_game_data["map"] = MapData.MAPS[rand_range(0, MapData.MAPS.size() - 1)]
 	get_tree().change_scene("res://gameplay/mp/host/battle.tscn")
 	
 func _on_add_bot_pressed():

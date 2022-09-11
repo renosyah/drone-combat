@@ -2,6 +2,7 @@ extends Control
 
 signal on_drone_data_change()
 
+onready var _host_setting = $CanvasLayer/host_setting
 onready var _server_browser = $CanvasLayer/server_browser
 onready var _dialog_exit_option = $CanvasLayer/simple_dialog_option
 
@@ -47,8 +48,6 @@ func _on_battle_pressed():
 		return
 	
 func _server_player_connected(_player_network_unique_id : int, _player : Dictionary):
-	Global.mp_game_data["map"] = MapData.MAPS[rand_range(0, MapData.MAPS.size() - 1)]
-	
 	Global.mp_players = [ Global.create_mp_player() ]
 	for i in range(3):
 		var bot = Global.create_bot_player()
@@ -59,9 +58,12 @@ func _server_player_connected(_player_network_unique_id : int, _player : Diction
 	
 	
 func _on_host_pressed():
+	_host_setting.visible = true
+	
+	
+func _on_host_setting_create():
 	Global.mode = Global.MODE_HOST
 	get_tree().change_scene("res://menu/lobby-menu/lobby_menu.tscn")
-	
 	
 func _on_join_pressed():
 	_server_browser.visible = true
@@ -183,6 +185,8 @@ func _on_input_color_on_pick(_color):
 	Global.player_drone_data.color = _color
 	Global.player_drone_data.save_data(Global.player_drone_data_file)
 	emit_signal("on_drone_data_change")
+
+
 
 
 

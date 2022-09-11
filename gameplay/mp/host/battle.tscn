@@ -17,6 +17,10 @@ autostart = true
 wait_time = 15.0
 autostart = true
 
+[node name="battle_time_loop" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="bot_action_timer" to="." method="_on_bot_action_timer_timeout"]
 [connection signal="timeout" from="health_item_spawner_timer" to="." method="_on_health_item_spawner_timer_timeout"]
 [connection signal="timeout" from="ammo_item_spawner_timer" to="." method="_on_ammo_item_spawner_timer_timeout"]
+[connection signal="timeout" from="battle_time_loop" to="." method="_on_battle_time_loop_timeout"]

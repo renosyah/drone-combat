@@ -92,7 +92,8 @@ var client = {
 
 var mp_players = []
 var mp_game_data = {
-	"respawn_time": 25,
+	"battle_time" : 300,
+	"respawn_time": 15,
 	"map" : "res://map/map_0/map_0.tscn",
 	"map_stuffs":[]
 

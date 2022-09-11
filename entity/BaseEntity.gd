@@ -22,41 +22,23 @@ var _network_timmer : Timer
 ############################################################
 # multiplayer func
 func _network_timmer_timeout():
+	pass
+	
+remotesync func _heal(_hp_left, _hp_added : int):
 	if is_dead:
-		return
-		
-	if not _is_network_running():
 		return
 		
 	if not _is_master():
-		return
+		hp = _hp_left
 		
-	rset_unreliable("_puppet_hp", hp)
-	
-	
-puppet var _puppet_hp : float setget _set_puppet_hp
-func _set_puppet_hp(_val :float):
-	_puppet_hp = _val
-	
-	if _is_master():
-		return
-	
-	hp = _puppet_hp
-	
-remotesync func _heal(_hp_added : int):
-	if is_dead:
-		return
-		
-	if hp + _hp_added > max_hp:
-		hp = max_hp
-	else:
-		hp += _hp_added
-	
 	emit_signal("on_heal", self, _hp_added)
 	
-remotesync func _take_damage(_damage : int, _hit_by :Dictionary):
+remotesync func _take_damage(_hp_left, _damage : int, _hit_by :Dictionary):
 	if is_dead:
 		return
+		
+	if not _is_master():
+		hp = _hp_left
 		
 	hit_by_player.from_dictionary(_hit_by)
 	
@@ -116,7 +98,12 @@ func heal(_hp_added : int):
 	if not _is_master():
 		return
 		
-	rpc("_heal", _hp_added)
+	if hp + _hp_added > max_hp:
+		hp = max_hp
+	else:
+		hp += _hp_added
+	
+	rpc("_heal", hp, _hp_added)
 	
 func take_damage(_damage : int, hit_by_player : PlayerData):
 	if not _is_master():
@@ -131,7 +118,7 @@ func take_damage(_damage : int, hit_by_player : PlayerData):
 		dead(hit_by_player)
 		return
 		
-	rpc_unreliable("_take_damage", _damage, hit_by_player.to_dictionary())
+	rpc_unreliable("_take_damage", hp, _damage, hit_by_player.to_dictionary())
 	
 func dead(kill_by_player : PlayerData):
 	if not _is_master():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/ui/mini_map/MiniMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/bar/hp_bar.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://assets/ui/bar/hp_bar_vertical.tscn" type="PackedScene" id=8]
 [ext_resource path="res://gameplay/mp/ui/gui/gui.gd" type="Script" id=9]
 [ext_resource path="res://assets/ui/icon/ammo.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_16.tres" type="DynamicFont" id=11]
+[ext_resource path="res://assets/ui/icon/time.png" type="Texture" id=12]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -154,15 +156,42 @@ margin_bottom = 100.0
 rect_min_size = Vector2( 20, 0 )
 mouse_filter = 2
 
-[node name="MarginContainer7" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer7" type="CenterContainer" parent="VBoxContainer"]
 margin_top = 104.0
 margin_right = 600.0
-margin_bottom = 124.0
+margin_bottom = 144.0
 rect_min_size = Vector2( 80, 20 )
 mouse_filter = 2
 
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer7"]
+margin_left = 243.0
+margin_right = 357.0
+margin_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer7/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 12 )
+expand = true
+
+[node name="time" type="Label" parent="VBoxContainer/MarginContainer7/HBoxContainer"]
+margin_left = 44.0
+margin_top = 6.0
+margin_right = 114.0
+margin_bottom = 34.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+custom_fonts/font = ExtResource( 11 )
+text = "00:00"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 128.0
+margin_top = 148.0
 margin_right = 600.0
 margin_bottom = 620.0
 mouse_filter = 2
@@ -170,22 +199,22 @@ size_flags_vertical = 3
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
 margin_right = 70.0
-margin_bottom = 492.0
+margin_bottom = 472.0
 rect_min_size = Vector2( 70, 0 )
 mouse_filter = 2
 
 [node name="MarginContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer3"]
 margin_right = 70.0
-margin_bottom = 492.0
+margin_bottom = 472.0
 rect_min_size = Vector2( 70, 300 )
 mouse_filter = 2
 size_flags_vertical = 3
 alignment = 1
 
 [node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2"]
-margin_top = 67.0
+margin_top = 57.0
 margin_right = 70.0
-margin_bottom = 367.0
+margin_bottom = 357.0
 rect_min_size = Vector2( 70, 300 )
 mouse_filter = 2
 alignment = 1
@@ -198,16 +227,16 @@ rect_min_size = Vector2( 20, 300 )
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2"]
-margin_top = 371.0
+margin_top = 361.0
 margin_right = 70.0
-margin_bottom = 381.0
+margin_bottom = 371.0
 rect_min_size = Vector2( 0, 10 )
 mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2"]
-margin_top = 385.0
+margin_top = 375.0
 margin_right = 70.0
-margin_bottom = 425.0
+margin_bottom = 415.0
 mouse_filter = 2
 alignment = 1
 
@@ -236,13 +265,13 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 74.0
 margin_right = 526.0
-margin_bottom = 492.0
+margin_bottom = 472.0
 size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 530.0
 margin_right = 600.0
-margin_bottom = 492.0
+margin_bottom = 472.0
 rect_min_size = Vector2( 70, 0 )
 mouse_filter = 2
 

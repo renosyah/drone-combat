@@ -135,3 +135,13 @@ func _process(delta):
 	_camera.translation = drone_to_follow.global_transform.origin
 	_camera.translation.y = 0.0
 	
+################################################################
+# battle time
+func update_battle_time(time_left:int):
+	.update_battle_time(time_left)
+	_ui.update_battle_time(time_left)
+	
+func battle_finish(scores :Array):
+	.battle_finish(scores)
+	_ui.set_scores(scores)
+

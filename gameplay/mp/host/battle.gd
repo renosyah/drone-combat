@@ -4,6 +4,9 @@ var drone :BaseHull
 var drone_to_follow :BaseHull
 var respawn_cicle_index = 0
 var bot_command_cicle = 0
+var battle_time_left = 0
+
+onready var _battle_time_loop = $battle_time_loop
 
 func _ready():
 	.load_map_stuff()
@@ -13,6 +16,9 @@ func _ready():
 	
 	_ui.update_player_hp_bar(drone.player.player_name, drone.hp, drone.max_hp)
 	_ui.update_player_ammo_bar(drone.turret_ammo, drone.turret_max_ammo)
+	
+	battle_time_left = Global.mp_game_data["battle_time"]
+	_battle_time_loop.start()
 	
 ################################################################
 # drone control
@@ -202,7 +208,33 @@ func _on_ammo_item_spawner_timer_timeout():
 	
 func _on_health_item_spawner_timer_timeout():
 	rpc("spawn_healing_item", _map.get_rand_pos())
+	
+################################################################
+# battle time
+func _on_battle_time_loop_timeout():
+	battle_time_left -= 1
+	rpc_unreliable("_update_battle_time", battle_time_left)
+	
+	if battle_time_left <= 0:
+		battle_time_timeout()
+		return 
+		
+	_battle_time_loop.start()
+	
+func battle_time_timeout():
+	for drone in _all:
+		drone.is_dead = true
+		drone.get_turret().is_dead = true
+		
+	rpc("_battle_finish", _ui.get_scores())
+	
+func update_battle_time(time_left:int):
+	.update_battle_time(time_left)
+	_ui.update_battle_time(time_left)
 
+func battle_finish(scores :Array):
+	.battle_finish(scores)
+	_ui.set_scores(scores)
 
 
 

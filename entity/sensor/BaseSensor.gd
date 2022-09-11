@@ -26,7 +26,7 @@ var _sound : AudioStreamPlayer3D
 func _ready():
 	_air_sensor = RayCast.new()
 	add_child(_air_sensor)
-	_air_sensor.enabled = true
+	_air_sensor.enabled = false
 	_air_sensor.cast_to = Vector3(0,0,1) * spotting_range
 	
 	_ground_sensor = RayCast.new()
@@ -52,7 +52,7 @@ func _process(delta):
 	_air_sensor.global_transform.origin.y = air_sensor_altitude
 	_ground_sensor.global_transform.origin.y = ground_sensor_altitude
 	
-	validate_detection(_air_sensor)
+	#validate_detection(_air_sensor)
 	validate_detection(_ground_sensor)
 	
 	

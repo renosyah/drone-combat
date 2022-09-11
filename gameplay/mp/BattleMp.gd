@@ -71,17 +71,24 @@ func init_client():
 	if is_server():
 		return
 		
+	Global.connect("on_host_game_session_ready", self, "_on_host_game_session_ready_rematch")
+	
 	network_timmer = Timer.new()
 	network_timmer.wait_time = latency_delay
 	network_timmer.connect("timeout", self , "on_client_pool_network_request")
 	network_timmer.autostart = true
 	add_child(network_timmer)
 	
+	
 func on_client_pool_network_request():
 	# send request every latency
 	# to server for commanding
 	# client unit
 	pass
+	
+func _on_host_game_session_ready_rematch(_mp_game_data : Dictionary):
+	Global.mp_game_data = _mp_game_data
+	get_tree().change_scene("res://gameplay/mp/client/battle.tscn")
 	
 ################################################################
 # for commanding
@@ -144,9 +151,11 @@ func _load_ui():
 	_ui.connect("on_spectate_previous", self, "_on_spectate_previous")
 	_ui.connect("on_spectate_next", self, "_on_spectate_next")
 	_ui.connect("exit_game_session", self, "_on_exit_game_session")
+	_ui.connect("on_rematch", self, "_on_rematch")
 	
 	_ui.set_camera(_camera)
 	_ui.set_respawn_time(Global.mp_game_data["respawn_time"])
+	_ui.display_rematch(is_server())
 	
 func on_joystick_input(output : Vector2, is_pressed : bool):
 	pass
@@ -159,6 +168,12 @@ func _on_spectate_previous():
 	
 func _on_spectate_next():
 	pass
+	
+func _on_rematch():
+	if not is_server():
+		return
+		
+	get_tree().change_scene("res://gameplay/mp/host/battle.tscn")
 	
 ################################################################
 # env
@@ -375,6 +390,20 @@ func on_drone_dead(_entity :BaseEntity, _hit_by: PlayerData):
 	msg.translation = _entity.global_transform.origin
 	msg.set_color(Color.red)
 	msg.set_message("Drone Destroyed!")
+	
+################################################################
+# game event
+remotesync func _update_battle_time(time_left:int):
+	update_battle_time(time_left)
+	
+func update_battle_time(time_left:int):
+	pass
+	
+remotesync func _battle_finish(scores :Array):
+	battle_finish(scores)
+	
+func battle_finish(scores :Array):
+	pass
 	
 ################################################################
 # disposesing

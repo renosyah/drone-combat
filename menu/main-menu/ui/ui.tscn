@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/ui/server-browser/server_browser.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/ui/icon/setting.png" type="Texture" id=14]
 [ext_resource path="res://assets/button/border_button.tscn" type="PackedScene" id=15]
 [ext_resource path="res://menu/main-menu/ui/setting/setting.tscn" type="PackedScene" id=16]
+[ext_resource path="res://menu/main-menu/ui/host_setting/host_setting.tscn" type="PackedScene" id=17]
 
 [node name="main_menu" type="Control"]
 anchor_right = 1.0
@@ -385,6 +386,9 @@ margin_right = 600.0
 margin_bottom = 219.0
 rect_min_size = Vector2( 0, 40 )
 
+[node name="host_setting" parent="CanvasLayer" instance=ExtResource( 17 )]
+visible = false
+
 [node name="server_browser" parent="CanvasLayer" instance=ExtResource( 1 )]
 visible = false
 
@@ -413,6 +417,7 @@ visible = false
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/battle" to="." method="_on_battle_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/join" to="." method="_on_join_pressed"]
+[connection signal="create" from="CanvasLayer/host_setting" to="." method="_on_host_setting_create"]
 [connection signal="close" from="CanvasLayer/server_browser" to="." method="_on_server_browser_close"]
 [connection signal="on_error" from="CanvasLayer/server_browser" to="." method="_on_server_browser_on_error"]
 [connection signal="on_join" from="CanvasLayer/server_browser" to="." method="_on_server_browser_on_join"]

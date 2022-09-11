@@ -46,6 +46,20 @@ func _is_in_scores(score :ScoreData) -> bool:
 			
 	return false
 	
+func set_scores(scores :Array):
+	_scores.clear()
+	for score in scores:
+		var score_data : ScoreData = ScoreData.new()
+		score_data.from_dictionary(score)
+		_scores.append(score_data)
+	
+func get_scores() -> Array:
+	var scores = []
+	for score in _scores:
+		scores.append(score.to_dictionary())
+		
+	return scores
+	
 func display_scoreboard():
 	_scores.sort_custom(MyCustomSorter, "sort")
 		

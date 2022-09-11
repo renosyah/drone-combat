@@ -111,13 +111,13 @@ func _set_puppet_moving_state(_val : int):
 		
 	_moving_state = _puppet_moving_state
 	
-remotesync func _heal(_hp_added : int):
-	._heal(_hp_added)
+remotesync func _heal(_hp_left, _hp_added : int):
+	._heal(_hp_left, _hp_added)
 	
 	_hp_bar.update_bar(hp, max_hp)
 	
-remotesync func _take_damage(_damage : int, _hit_by :Dictionary):
-	._take_damage(_damage, _hit_by)
+remotesync func _take_damage(_hp_left, _damage : int, _hit_by :Dictionary):
+	._take_damage(_hp_left, _damage, _hit_by)
 	
 	_hp_bar.update_bar(hp, max_hp)
 	

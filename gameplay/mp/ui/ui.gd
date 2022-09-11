@@ -4,6 +4,7 @@ signal on_joystick_input(output,is_pressed)
 signal on_respawn_button_press()
 signal on_spectate_previous()
 signal on_spectate_next()
+signal on_rematch()
 signal exit_game_session()
 
 var is_player_alive = true
@@ -12,6 +13,7 @@ onready var _gui = $CanvasLayer/gui
 onready var _joystick = $CanvasLayer/joystick
 onready var _mp_death_screen = $CanvasLayer/mp_death_screen
 onready var _scoreboard = $CanvasLayer/scoreboard
+onready var _battle_end = $CanvasLayer/battle_end
 onready var _menu = $CanvasLayer/menu
 
 onready var _dialog_exit = $CanvasLayer/simple_dialog_on_exit
@@ -23,13 +25,30 @@ func _ready():
 	_mp_death_screen.visible = false
 	_dialog_exit.visible = false
 	_scoreboard.visible = false
+	_battle_end.visible = false
 	_menu.visible = false
 	
 func set_respawn_time(time :int):
 	_mp_death_screen.set_respawn_time(time)
 	
+func update_battle_time(time_left:int):
+	_gui.update_battle_time(time_left)
+	
 func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = "", player_team: int = 0):
 	_scoreboard.update_scoreboard(player_id, kill, death, _color, player_name, player_team)
+
+func display_rematch(_show : bool):
+	_battle_end.display_rematch(_show)
+	
+func set_scores(scores :Array):
+	_scoreboard.set_scores(scores)
+	_battle_end.set_scores(scores)
+	_scoreboard.display_scoreboard()
+	_battle_end.display_scoreboard()
+	_battle_end.visible = true
+	
+func get_scores() -> Array:
+	return _scoreboard.get_scores()
 	
 func display_event_message(text :String):
 	if not is_player_alive:
@@ -84,7 +103,12 @@ func _on_gui_on_score_press():
 	
 func _on_joystick_on_joystick_input(output, is_pressed):
 	emit_signal("on_joystick_input", output, is_pressed)
-
+	
+func _on_battle_end_main_menu():
+	_dialog_exit.visible = true
+	
+func _on_battle_end_rematch():
+	emit_signal("on_rematch")
 
 
 
@@ -92,5 +116,10 @@ func _on_joystick_on_joystick_input(output, is_pressed):
 
 
  
+
+
+
+
+
 
 
