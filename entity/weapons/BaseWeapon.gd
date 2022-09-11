@@ -1,6 +1,8 @@
 extends Spatial
 class_name BaseWeapon
 
+const MAX_BULLET_INSTANCE = 25
+
 signal on_weapon_ready_open_fire(_target)
 
 # identity owner
@@ -42,22 +44,22 @@ func _ready():
 	setup_bullets_pool()
 	
 	if is_instance_valid(_sensor):
+		_sensor.enabled = is_master
 		_sensor.cast_to = _sensor.cast_to * attack_range
 		
-func _on_attack_timmer_timeout():
-	pass
 	
 func add_exception(_node : BaseEntity):
 	_sensor.add_exception(_node)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if is_master:
-		_master_weapon_handling(delta)
-	else:
-		_puppet_weapon_handling(delta)
+	if not is_master:
+		set_process(false)
+		return
+		
+	_weapon_handling(delta)
 	
-func _master_weapon_handling(delta):
+func _weapon_handling(delta):
 	if not _sensor.is_colliding():
 		return
 		
@@ -67,13 +69,8 @@ func _master_weapon_handling(delta):
 		
 	if _attack_timmer.is_stopped():
 		emit_signal("on_weapon_ready_open_fire", body)
-		_on_attack_timmer_timeout()
 		_attack_timmer.wait_time = attack_delay
 		_attack_timmer.start()
-	
-func _puppet_weapon_handling(delta):
-	if _attack_timmer.is_stopped():
-		_on_attack_timmer_timeout()
 	
 func open_fire(_target : BaseEntity):
 	_play_firing_animation()
@@ -90,7 +87,7 @@ func create_bullet_instance() -> BaseProjectile:
 	return bullet
 	
 func setup_bullets_pool():
-	for i in range(25):
+	for i in range(MAX_BULLET_INSTANCE):
 		_bullets_pool.append(create_bullet_instance())
 	
 func get_bullet_from_pool() -> BaseProjectile:
@@ -98,14 +95,14 @@ func get_bullet_from_pool() -> BaseProjectile:
 		if not i.show_projectile:
 			return i
 			
-	return create_bullet_instance()
+	var bullet = create_bullet_instance()
+	_bullets_pool.append(bullet)
+	return bullet
 	
 func _play_firing_animation():
-	if not is_master and _attack_timmer.is_stopped():
-		_attack_timmer.wait_time = attack_delay
-		_attack_timmer.start()
 	# override where project
 	# want to animate each firing
+	pass
 	
 func _spawn_projectile_to(_target : BaseEntity):
 	# override where project

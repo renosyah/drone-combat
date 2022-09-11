@@ -154,7 +154,7 @@ func _process(delta):
 ################################################################
 # bot action
 func _on_bot_action_timer_timeout():
-	if _bots.empty():
+	if _bots.empty() or battle_time_left <= 0:
 		return
 		
 	bot_command_cicle += 1

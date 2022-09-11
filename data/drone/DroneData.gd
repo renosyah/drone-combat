@@ -204,7 +204,7 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_2/hull_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_2.png",
 		"infos" : [
-			"Hp : 60",
+			"Hp : 80",
 			"Speed : 5",
 			"Travese : 3"
 		],
@@ -238,12 +238,12 @@ const hulls :Array = [
 		"scene" : "res://entity/drone_hulls/hull_1/hull_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_1.png",
 		"infos" : [
-			"Hp : 240",
+			"Hp : 320",
 			"Speed : 2",
 			"Travese : 3"
 		],
 		"modifier" : {
-			"hp" : 240,
+			"hp" : 320,
 			"max_hp" : 240,
 			"speed" : 2.0,
 			"turning_speed" : 3.0
