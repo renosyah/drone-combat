@@ -49,25 +49,15 @@ margin_bottom = 270.0
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
 margin_right = 600.0
 margin_bottom = 40.0
-
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/VBoxContainer/HBoxContainer2"]
-margin_right = 80.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 80, 0 )
+alignment = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer2/VBoxContainer/HBoxContainer2"]
-margin_left = 84.0
-margin_right = 157.0
+margin_left = 263.0
+margin_right = 336.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
 text = "Map"
 valign = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/VBoxContainer/HBoxContainer2"]
-margin_left = 161.0
-margin_right = 241.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 80, 0 )
 
 [node name="MarginContainer9" type="MarginContainer" parent="VBoxContainer2/VBoxContainer"]
 margin_top = 44.0
@@ -81,18 +71,19 @@ margin_right = 600.0
 margin_bottom = 138.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/VBoxContainer/HBoxContainer3"]
-margin_right = 80.0
+margin_right = 82.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
+size_flags_horizontal = 3
 
 [node name="grass" parent="VBoxContainer2/VBoxContainer/HBoxContainer3" instance=ExtResource( 4 )]
-margin_left = 84.0
-margin_right = 225.0
+margin_left = 86.0
+margin_right = 226.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 100, 80 )
+rect_min_size = Vector2( 140, 80 )
 size_flags_horizontal = 3
 button_color = Color( 0.152941, 0.533333, 0, 1 )
-button_label = "Grass"
+button_label = "  Grass  "
 
 [node name="Color" type="ColorRect" parent="VBoxContainer2/VBoxContainer/HBoxContainer3/grass"]
 anchor_right = 1.0
@@ -101,13 +92,13 @@ mouse_filter = 2
 color = Color( 0.117647, 0.117647, 0.117647, 0.552941 )
 
 [node name="dirt" parent="VBoxContainer2/VBoxContainer/HBoxContainer3" instance=ExtResource( 4 )]
-margin_left = 229.0
+margin_left = 230.0
 margin_right = 370.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 100, 80 )
+rect_min_size = Vector2( 140, 80 )
 size_flags_horizontal = 3
 button_color = Color( 0.52549, 0.223529, 0, 1 )
-button_label = "Dirt"
+button_label = "  Dirt  "
 
 [node name="Color" type="ColorRect" parent="VBoxContainer2/VBoxContainer/HBoxContainer3/dirt"]
 anchor_right = 1.0
@@ -117,12 +108,12 @@ color = Color( 0.117647, 0.117647, 0.117647, 0.552941 )
 
 [node name="snow" parent="VBoxContainer2/VBoxContainer/HBoxContainer3" instance=ExtResource( 4 )]
 margin_left = 374.0
-margin_right = 515.0
+margin_right = 514.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 100, 80 )
+rect_min_size = Vector2( 140, 80 )
 size_flags_horizontal = 3
 button_color = Color( 0.552941, 0.552941, 0.552941, 1 )
-button_label = "Snow"
+button_label = "  Snow  "
 
 [node name="Color" type="ColorRect" parent="VBoxContainer2/VBoxContainer/HBoxContainer3/snow"]
 anchor_right = 1.0
@@ -131,10 +122,11 @@ mouse_filter = 2
 color = Color( 0.117647, 0.117647, 0.117647, 0.552941 )
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/VBoxContainer/HBoxContainer3"]
-margin_left = 519.0
-margin_right = 599.0
+margin_left = 518.0
+margin_right = 600.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
+size_flags_horizontal = 3
 
 [node name="MarginContainer9" type="MarginContainer" parent="VBoxContainer2"]
 margin_top = 274.0
@@ -150,25 +142,15 @@ margin_bottom = 446.0
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer2"]
 margin_right = 600.0
 margin_bottom = 40.0
-
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/VBoxContainer2/HBoxContainer2"]
-margin_right = 80.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 80, 0 )
+alignment = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer2/VBoxContainer2/HBoxContainer2"]
-margin_left = 84.0
-margin_right = 436.0
+margin_left = 124.0
+margin_right = 476.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
 text = "Battle Time (minute)"
 valign = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/VBoxContainer2/HBoxContainer2"]
-margin_left = 440.0
-margin_right = 520.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 80, 0 )
 
 [node name="MarginContainer9" type="MarginContainer" parent="VBoxContainer2/VBoxContainer2"]
 margin_top = 44.0
@@ -182,18 +164,19 @@ margin_right = 600.0
 margin_bottom = 138.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/VBoxContainer2/HBoxContainer3"]
-margin_right = 80.0
+margin_right = 82.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
+size_flags_horizontal = 3
 
 [node name="short" parent="VBoxContainer2/VBoxContainer2/HBoxContainer3" instance=ExtResource( 4 )]
-margin_left = 84.0
-margin_right = 225.0
+margin_left = 86.0
+margin_right = 226.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 100, 80 )
+rect_min_size = Vector2( 140, 80 )
 size_flags_horizontal = 3
 button_color = Color( 0.333333, 0.333333, 0.333333, 1 )
-button_label = "5 M"
+button_label = "  5 M  "
 
 [node name="Color" type="ColorRect" parent="VBoxContainer2/VBoxContainer2/HBoxContainer3/short"]
 anchor_right = 1.0
@@ -202,13 +185,13 @@ mouse_filter = 2
 color = Color( 0.117647, 0.117647, 0.117647, 0.552941 )
 
 [node name="normal" parent="VBoxContainer2/VBoxContainer2/HBoxContainer3" instance=ExtResource( 4 )]
-margin_left = 229.0
+margin_left = 230.0
 margin_right = 370.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 100, 80 )
+rect_min_size = Vector2( 140, 80 )
 size_flags_horizontal = 3
 button_color = Color( 0.333333, 0.333333, 0.333333, 1 )
-button_label = "10 M"
+button_label = "  10 M  "
 
 [node name="Color" type="ColorRect" parent="VBoxContainer2/VBoxContainer2/HBoxContainer3/normal"]
 anchor_right = 1.0
@@ -218,12 +201,12 @@ color = Color( 0.117647, 0.117647, 0.117647, 0.552941 )
 
 [node name="long" parent="VBoxContainer2/VBoxContainer2/HBoxContainer3" instance=ExtResource( 4 )]
 margin_left = 374.0
-margin_right = 515.0
+margin_right = 514.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 100, 80 )
+rect_min_size = Vector2( 140, 80 )
 size_flags_horizontal = 3
 button_color = Color( 0.333333, 0.333333, 0.333333, 1 )
-button_label = "15 M"
+button_label = "  15 M  "
 
 [node name="Color" type="ColorRect" parent="VBoxContainer2/VBoxContainer2/HBoxContainer3/long"]
 anchor_right = 1.0
@@ -232,10 +215,11 @@ mouse_filter = 2
 color = Color( 0.117647, 0.117647, 0.117647, 0.552941 )
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/VBoxContainer2/HBoxContainer3"]
-margin_left = 519.0
-margin_right = 599.0
+margin_left = 518.0
+margin_right = 600.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
+size_flags_horizontal = 3
 
 [node name="MarginContainer10" type="MarginContainer" parent="VBoxContainer2"]
 margin_top = 450.0
@@ -251,25 +235,15 @@ margin_bottom = 622.0
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer3"]
 margin_right = 600.0
 margin_bottom = 40.0
-
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/VBoxContainer3/HBoxContainer2"]
-margin_right = 80.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 80, 0 )
+alignment = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer2/VBoxContainer3/HBoxContainer2"]
-margin_left = 84.0
-margin_right = 491.0
+margin_left = 96.0
+margin_right = 503.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 2 )
 text = "Respawn Time (second)"
 valign = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/VBoxContainer3/HBoxContainer2"]
-margin_left = 495.0
-margin_right = 575.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 80, 0 )
 
 [node name="MarginContainer9" type="MarginContainer" parent="VBoxContainer2/VBoxContainer3"]
 margin_top = 44.0
@@ -283,18 +257,19 @@ margin_right = 600.0
 margin_bottom = 138.0
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/VBoxContainer3/HBoxContainer3"]
-margin_right = 80.0
+margin_right = 82.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
+size_flags_horizontal = 3
 
 [node name="respawn_short" parent="VBoxContainer2/VBoxContainer3/HBoxContainer3" instance=ExtResource( 4 )]
-margin_left = 84.0
-margin_right = 225.0
+margin_left = 86.0
+margin_right = 226.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 100, 80 )
+rect_min_size = Vector2( 140, 80 )
 size_flags_horizontal = 3
 button_color = Color( 0.333333, 0.333333, 0.333333, 1 )
-button_label = "15 S"
+button_label = "  15 S  "
 
 [node name="Color" type="ColorRect" parent="VBoxContainer2/VBoxContainer3/HBoxContainer3/respawn_short"]
 anchor_right = 1.0
@@ -303,13 +278,13 @@ mouse_filter = 2
 color = Color( 0.117647, 0.117647, 0.117647, 0.552941 )
 
 [node name="respawn_normal" parent="VBoxContainer2/VBoxContainer3/HBoxContainer3" instance=ExtResource( 4 )]
-margin_left = 229.0
+margin_left = 230.0
 margin_right = 370.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 100, 80 )
+rect_min_size = Vector2( 140, 80 )
 size_flags_horizontal = 3
 button_color = Color( 0.333333, 0.333333, 0.333333, 1 )
-button_label = "20 S"
+button_label = "  20 S  "
 
 [node name="Color" type="ColorRect" parent="VBoxContainer2/VBoxContainer3/HBoxContainer3/respawn_normal"]
 anchor_right = 1.0
@@ -319,12 +294,12 @@ color = Color( 0.117647, 0.117647, 0.117647, 0.552941 )
 
 [node name="respawn_long" parent="VBoxContainer2/VBoxContainer3/HBoxContainer3" instance=ExtResource( 4 )]
 margin_left = 374.0
-margin_right = 515.0
+margin_right = 514.0
 margin_bottom = 80.0
-rect_min_size = Vector2( 100, 80 )
+rect_min_size = Vector2( 140, 80 )
 size_flags_horizontal = 3
 button_color = Color( 0.333333, 0.333333, 0.333333, 1 )
-button_label = "25 S"
+button_label = "  25 S  "
 
 [node name="Color" type="ColorRect" parent="VBoxContainer2/VBoxContainer3/HBoxContainer3/respawn_long"]
 anchor_right = 1.0
@@ -333,10 +308,11 @@ mouse_filter = 2
 color = Color( 0.117647, 0.117647, 0.117647, 0.552941 )
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/VBoxContainer3/HBoxContainer3"]
-margin_left = 519.0
-margin_right = 599.0
+margin_left = 518.0
+margin_right = 600.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
+size_flags_horizontal = 3
 
 [node name="MarginContainer6" type="MarginContainer" parent="VBoxContainer2"]
 margin_top = 626.0
