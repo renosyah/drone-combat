@@ -244,7 +244,7 @@ const hulls :Array = [
 		],
 		"modifier" : {
 			"hp" : 320,
-			"max_hp" : 240,
+			"max_hp" : 320,
 			"speed" : 2.0,
 			"turning_speed" : 3.0
 		}
