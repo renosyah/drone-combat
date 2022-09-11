@@ -26,6 +26,9 @@ func on_client_pool_network_request():
 	if not is_instance_valid(drone):
 		return
 		
+	if not .is_network_on():
+		return
+
 	rpc_unreliable_id(Network.PLAYER_HOST_ID, "_move_drone", drone.get_path(), command)
 	
 func _on_spectate_previous():

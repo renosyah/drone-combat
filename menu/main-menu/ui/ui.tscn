@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/ui/server-browser/server_browser.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/button/border_button.tscn" type="PackedScene" id=15]
 [ext_resource path="res://menu/main-menu/ui/setting/setting.tscn" type="PackedScene" id=16]
 [ext_resource path="res://menu/main-menu/ui/host_setting/host_setting.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/ui/simple_dialog_message/exception_message.tscn" type="PackedScene" id=18]
 
 [node name="main_menu" type="Control"]
 anchor_right = 1.0
@@ -405,6 +406,9 @@ visible = false
 visible = false
 
 [node name="choose_drone_module" parent="CanvasLayer" instance=ExtResource( 13 )]
+visible = false
+
+[node name="exception_message" parent="CanvasLayer" instance=ExtResource( 18 )]
 visible = false
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control3/HBoxContainer/change_name" to="." method="_on_change_name_pressed"]

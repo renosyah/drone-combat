@@ -76,6 +76,9 @@ remotesync func _resupply(_current_ammo, _ammo_added :int):
 	emit_signal("on_resupply", self, _ammo_added)
 	
 remotesync func _open_fire(_ammo_left :int, _target : NodePath):
+	if not _is_master():
+		ammo = _ammo_left
+		
 	if not is_instance_valid(_weapon):
 		return
 		

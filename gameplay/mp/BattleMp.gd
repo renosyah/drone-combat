@@ -60,7 +60,8 @@ func on_player_disynchronize(_player_name : String):
 	pass
 	
 func on_host_disconnected():
-	pass
+	Global.mp_exception_message = "Unexpected exit by Server!"
+	get_tree().change_scene("res://menu/main-menu/main_menu.tscn")
 	
 ################################################################
 # client pooling request

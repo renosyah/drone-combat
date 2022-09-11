@@ -15,15 +15,27 @@ onready var _input_color_btn_color = $CanvasLayer/VBoxContainer/Control2/VBoxCon
 onready var _choose_module_dialog = $CanvasLayer/choose_drone_module
 onready var _setting = $CanvasLayer/setting
 
+onready var _error_dialog = $CanvasLayer/exception_message
+
 func _ready():
 	_dialog_exit_option.visible = false
+	_error_dialog.visible = false
 	
 	_server_browser.start_finding()
 	init_drone_data_setting()
+	check_error()
 	
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
 	
+	
+func check_error():
+	if Global.mp_exception_message.empty():
+		return
+		
+	_error_dialog.display_message("Error!", Global.mp_exception_message)
+	_error_dialog.visible = true
+	Global.mp_exception_message = ""
 	
 func _notification(what):
 	match what:
