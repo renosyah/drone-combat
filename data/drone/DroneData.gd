@@ -90,6 +90,24 @@ const turrets :Array = [
 		}
 	},
 	{
+		"module_id":"t-7",
+		"module_name" : "Mk 2 Auto",
+		"scene" : "res://entity/drone_turrets/turret_7/turret_7.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/turret_7.png",
+		"infos" : [
+			"Hp : 60",
+			"Rotation : 110",
+			"Ammo Capacity : 140"
+		],
+		"modifier" : {
+			"turret_rotation_speed" : 110,
+			"turret_hp" : 60,
+			"turret_max_hp" : 60,
+			"turret_ammo" : 140,
+			"turret_max_ammo" : 140
+		}
+	},
+	{
 		"module_id":"t-3",
 		"module_name" : "A-12 Homogen",
 		"scene" : "res://entity/drone_turrets/turret_3/turret_3.tscn",
@@ -182,14 +200,31 @@ const turrets :Array = [
 ]
 const hulls :Array = [
 	{
+		"module_id":"h-6",
+		"module_name" : "Howen AM-A",
+		"scene" : "res://entity/drone_hulls/hull_6/hull_6.tscn",
+		"icon" : "res://assets/ui/choose-module/drone/hull_6.png",
+		"infos" : [
+			"Hp : 120",
+			"Speed : 4",
+			"Travese : 2"
+		],
+		"modifier" : {
+			"hp" : 120,
+			"max_hp" : 120,
+			"speed" : 4.0,
+			"turning_speed" : 2.0
+		}
+	},
+	{
 		"module_id":"h-3",
 		"module_name" : "Howen AM-B",
 		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
 		"infos" : [
 			"Hp : 220",
-			"Speed : 3.0",
-			"Travese : 2.0"
+			"Speed : 3",
+			"Travese : 2"
 		],
 		"modifier" : {
 			"hp" : 220,
@@ -228,7 +263,7 @@ const hulls :Array = [
 		"modifier" : {
 			"hp" : 80,
 			"max_hp" : 80,
-			"speed" : 6,
+			"speed" : 6.0,
 			"turning_speed" : 4.0
 		}
 	},

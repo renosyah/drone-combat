@@ -66,6 +66,9 @@ func on_drone_respawn_ready(_entity :BaseHull):
 	if _entity == drone:
 		return
 		
+	if battle_time_left <= 0:
+		return
+		
 	respawn_bot_drone(_entity.get_path())
 	
 	

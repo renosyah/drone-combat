@@ -271,8 +271,8 @@ func master_moving(delta):
 func move_by_input(delta):
 	if  direction != Vector2.ZERO:
 		direction.normalized()
-		_transform_turning(Vector3(direction.x, _altitude , direction.y) + translation, delta)
 		_moving_state = MOVING
+		_transform_turning(Vector3(direction.x, _altitude , direction.y) + translation, delta)
 		_velocity = Vector3(direction.x, _altitude , direction.y) * speed
 	else:
 		_moving_state = IDDLE
@@ -294,8 +294,8 @@ func move_to_waypoint(delta):
 	direction = Vector2(direction_to_waypoint.x, direction_to_waypoint.z)
 	
 	if distance_to_target > _offset_distance:
-		_transform_turning(_waypoint, delta)
 		_moving_state = MOVING
+		_transform_turning(_waypoint, delta)
 		_velocity = direction_to_waypoint * speed
 		
 	else:
@@ -304,7 +304,6 @@ func move_to_waypoint(delta):
 		waypoint = null
 		
 	_velocity = move_and_slide(_velocity, Vector3.UP)
-		
 	
 func moving(_delta):
 	if is_dead:
