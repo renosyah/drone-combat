@@ -200,7 +200,7 @@ const turrets :Array = [
 ]
 const hulls :Array = [
 	{
-		"module_id":"h-6",
+		"module_id":"h-7",
 		"module_name" : "Howen AM-A",
 		"scene" : "res://entity/drone_hulls/hull_6/hull_6.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_6.png",
@@ -386,7 +386,7 @@ var turret_module:DroneModuleData = DroneModuleData.new().parse_from_dictionary(
 var weapon_module:DroneModuleData = DroneModuleData.new().parse_from_dictionary(weapons[0])
 var sensor_module:DroneModuleData = DroneModuleData.new().parse_from_dictionary(sensors[0])
 
-export var color :Color = Color.gray
+export var color :Color = Color.red
 
 func from_dictionary(data : Dictionary):
 	.from_dictionary(data)

@@ -65,6 +65,7 @@ func validate_detection(raycast : RayCast):
 		return
 		
 	if not _is_valid_target(body):
+		_current_detected = null
 		return
 		
 	if not _is_close_to(body):
