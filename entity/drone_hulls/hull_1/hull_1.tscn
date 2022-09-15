@@ -54,7 +54,6 @@ bottom_radius = 0.4
 height = 0.2
 
 [sub_resource type="SpatialMaterial" id=4]
-next_pass = ExtResource( 3 )
 albedo_color = Color( 0.294118, 0.294118, 0.294118, 1 )
 
 [sub_resource type="CubeMesh" id=15]
