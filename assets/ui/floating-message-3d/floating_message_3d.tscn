@@ -4,8 +4,13 @@
 [ext_resource path="res://assets/ui/floating-message-3d/floating_message_3d.gd" type="Script" id=2]
 
 [node name="floating_message" type="Spatial"]
+visible = false
 script = ExtResource( 2 )
 
 [node name="message_3d" parent="." instance=ExtResource( 1 )]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+generate_lightmap = false
+billboard = 1
 
 [node name="Tween" type="Tween" parent="."]

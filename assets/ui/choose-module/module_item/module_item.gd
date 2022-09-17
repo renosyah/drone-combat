@@ -11,6 +11,7 @@ var module_data :DroneModuleData
 onready var _module_name = $Control/VBoxContainer/MarginContainer/VBoxContainer/module_name
 onready var _module_info = $Control/VBoxContainer/MarginContainer/VBoxContainer/module_info
 onready var _module_image = $Control/module_icon
+onready var _locked = $Control/locked
 
 onready var _button_mount = $mount
 onready var _button_color = $mount/ColorRect
@@ -30,13 +31,20 @@ func _ready():
 		
 	_module_image.texture = load(module_data.icon)
 	
-	if enable_mount:
-		_button_mount.disabled = true
-		_button_color.color = BUTTON_DISABLE_COLOR
-	else:
+	var is_unlocked = is_unlocked()
+	_locked.visible = not is_unlocked
+	_button_label.text = "Mount" if is_unlocked else "Locked"
+	
+	if enable_mount and is_unlocked:
 		_button_mount.disabled = false
 		_button_color.color = BUTTON_ENABLE_COLOR
+	else:
+		_button_mount.disabled = true
+		_button_color.color = BUTTON_DISABLE_COLOR
 	
+	
+func is_unlocked() -> bool:
+	return module_data.module_id in Global.player_unlocked_modules
 	
 func _on_mount_pressed():
 	emit_signal("on_module_choosed", module_data)

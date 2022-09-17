@@ -14,6 +14,9 @@ func parse_from_dictionary(data : Dictionary):
 	return self
 	
 func from_dictionary(data : Dictionary):
+	if data.empty():
+		return
+		
 	module_id = data["module_id"]
 	module_name = data["module_name"]
 	icon = data["icon"]

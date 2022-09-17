@@ -5,7 +5,6 @@ const DAMAGE = 1
 const CRITICAL_DAMAGE = 2
 const NO_DAMAGE = 3
 
-var map_scene : Resource
 var _map : BaseMap
 
 export var camera_scene : Resource = preload("res://assets/gameplay-camera/gameplay_camera.tscn")
@@ -22,10 +21,13 @@ var _ui: Control
 
 var _item_holder :Node
 
+var floating_message_pool = []
+
 func _ready():
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
 	
+	_init_floating_message_pool()
 	_init_item_holder()
 	_load_map()
 	_load_camera()
@@ -102,12 +104,32 @@ remote func _move_drone(_target : NodePath, _input : Vector2):
 		return
 		
 	drone.direction = _input
-		
+	
+################################################################
+# floating message pool
+func _init_floating_message_pool():
+	for i in range(25):
+		var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
+		add_child(msg)
+		floating_message_pool.append(msg)
+	
+func _get_floating_message() -> Spatial:
+	for i in floating_message_pool:
+		if i.hide == true:
+			return i
+			
+	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
+	add_child(msg)
+	floating_message_pool.append(msg)
+	return msg
+	
 ################################################################
 # map
 func _load_map():
-	map_scene = load(Global.mp_game_data["map"])
-	var _map_asset = map_scene.instance()
+	var map_data :MapData = MapData.new()
+	map_data.from_dictionary(Global.mp_game_data["map"])
+	
+	var _map_asset = load(map_data.scene).instance()
 	add_child(_map_asset)
 	_map = _map_asset
 	_map.translation.y = -0.5
@@ -327,9 +349,9 @@ func on_drone_turret_ammo_update(_turret :BaseTurret, _ammo_left :int, _max_ammo
 	pass
 	
 func on_drone_turret_resupply(_entity :BaseTurret, _ammo_added :int):
-	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
-	add_child(msg)
-	
+	var msg = _get_floating_message()
+	msg.show()
+		
 	var spread = 2.0
 	msg.translation = _entity.global_transform.origin
 	msg.translation.z += rand_range(-spread, spread)
@@ -341,8 +363,8 @@ func on_drone_turret_resupply(_entity :BaseTurret, _ammo_added :int):
 	
 	
 func on_drone_heal(_entity :BaseEntity, _hp_added :int):
-	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
-	add_child(msg)
+	var msg = _get_floating_message()
+	msg.show()
 	
 	var spread = 2.0
 	msg.translation = _entity.global_transform.origin
@@ -361,8 +383,8 @@ func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData
 	if randf() > 0.2 and _damage < 10:
 		return
 		
-	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
-	add_child(msg)
+	var msg = _get_floating_message()
+	msg.show()
 	
 	var spread = 2.0
 	msg.translation = _entity.global_transform.origin
@@ -374,8 +396,8 @@ func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData
 	msg.set_message("-" + str(_damage))
 	
 func on_drone_turret_dead(_turret :BaseTurret, _hit_by: PlayerData):
-	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
-	add_child(msg)
+	var msg = _get_floating_message()
+	msg.show()
 	
 	var spread = 2.0
 	msg.translation = _turret.global_transform.origin
@@ -386,8 +408,9 @@ func on_drone_turret_dead(_turret :BaseTurret, _hit_by: PlayerData):
 	msg.set_message("Turret Disabled!")
 	
 func on_drone_dead(_entity :BaseEntity, _hit_by: PlayerData):
-	var msg = preload("res://assets/ui/floating-message-3d/floating_message_3d.tscn").instance()
-	add_child(msg)
+	var msg = _get_floating_message()
+	msg.show()
+	
 	msg.translation = _entity.global_transform.origin
 	msg.set_color(Color.red)
 	msg.set_message("Drone Destroyed!")

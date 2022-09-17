@@ -14,7 +14,7 @@ const weapons :Array = [
 		"modifier" : {}
 	},
 	{
-		"module_id":"w-4",
+		"module_id":"w-2",
 		"module_name" : "Twin .50 cal" ,
 		"scene" : "res://entity/weapons/twin_mg/twin_mg.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_4.png",
@@ -25,7 +25,7 @@ const weapons :Array = [
 		"modifier" : {}
 	},
 	{
-		"module_id":"w-2",
+		"module_id":"w-3",
 		"module_name" : "30mm auto",
 		"scene" : "res://entity/weapons/auto_cannon/auto_cannon.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_2.png",
@@ -36,7 +36,7 @@ const weapons :Array = [
 		"modifier" : {}
 	},
 	{
-		"module_id":"w-5",
+		"module_id":"w-4",
 		"module_name" : "ZMB Minigun" ,
 		"scene" : "res://entity/weapons/minigun/minigun.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_5.png",
@@ -47,7 +47,7 @@ const weapons :Array = [
 		"modifier" : {}
 	},
 	{
-		"module_id":"w-3",
+		"module_id":"w-5",
 		"module_name" : "75mm A.T." ,
 		"scene" : "res://entity/weapons/cannon/cannon.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_3.png",
@@ -90,7 +90,7 @@ const turrets :Array = [
 		}
 	},
 	{
-		"module_id":"t-7",
+		"module_id":"t-2",
 		"module_name" : "Mk 2 Auto",
 		"scene" : "res://entity/drone_turrets/turret_7/turret_7.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_7.png",
@@ -144,7 +144,7 @@ const turrets :Array = [
 		}
 	},
 	{
-		"module_id":"t-6",
+		"module_id":"t-5",
 		"module_name" : "A-15 Sperict",
 		"scene" : "res://entity/drone_turrets/turret_6/turret_6.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_6.png",
@@ -162,7 +162,7 @@ const turrets :Array = [
 		}
 	},
 	{
-		"module_id":"t-5",
+		"module_id":"t-6",
 		"module_name" : "Rectketa MX-A",
 		"scene" : "res://entity/drone_turrets/turret_5/turret_5.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
@@ -180,7 +180,7 @@ const turrets :Array = [
 		}
 	},
 	{
-		"module_id":"t-2",
+		"module_id":"t-7",
 		"module_name" : "Rectketa MX-B",
 		"scene" : "res://entity/drone_turrets/turret_2/turret_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_2.png",
@@ -200,7 +200,7 @@ const turrets :Array = [
 ]
 const hulls :Array = [
 	{
-		"module_id":"h-7",
+		"module_id":"h-1",
 		"module_name" : "Howen AM-A",
 		"scene" : "res://entity/drone_hulls/hull_6/hull_6.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_6.png",
@@ -217,7 +217,7 @@ const hulls :Array = [
 		}
 	},
 	{
-		"module_id":"h-3",
+		"module_id":"h-2",
 		"module_name" : "Howen AM-B",
 		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
@@ -234,7 +234,7 @@ const hulls :Array = [
 		}
 	},
 	{
-		"module_id":"h-2",
+		"module_id":"h-3",
 		"module_name" : "Izui MK 2",
 		"scene" : "res://entity/drone_hulls/hull_2/hull_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_2.png",
@@ -251,7 +251,7 @@ const hulls :Array = [
 		}
 	},
 	{
-		"module_id":"h-6",
+		"module_id":"h-4",
 		"module_name" : "Izui X-AA",
 		"scene" : "res://entity/drone_hulls/hull_5/hull_5.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_5.png",
@@ -268,7 +268,7 @@ const hulls :Array = [
 		}
 	},
 	{
-		"module_id":"h-1",
+		"module_id":"h-5",
 		"module_name" : "Rectketa UBM",
 		"scene" : "res://entity/drone_hulls/hull_1/hull_1.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_1.png",
@@ -285,7 +285,7 @@ const hulls :Array = [
 		}
 	},
 	{
-		"module_id":"h-4",
+		"module_id":"h-6",
 		"module_name" : "Rectketa UBM-B",
 		"scene" : "res://entity/drone_hulls/hull_4/hull_4.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_4.png",
@@ -318,7 +318,7 @@ const sensors :Array = [
 		}
 	},
 	{
-		"module_id":"s-3",
+		"module_id":"s-2",
 		"module_name" : "Mk 2 Eagle",
 		"scene" : "res://entity/sensor/sensor_2/sensor_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/sensor_2.png",
@@ -332,7 +332,7 @@ const sensors :Array = [
 		}
 	},
 	{
-		"module_id":"s-2",
+		"module_id":"s-3",
 		"module_name" : "Mk 3 Raptor",
 		"scene" : "res://entity/sensor/sensor_4/sensor_4.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/sensor_4.png",

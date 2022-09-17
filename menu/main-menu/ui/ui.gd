@@ -2,6 +2,8 @@ extends Control
 
 signal on_drone_data_change()
 
+onready var _choose_misson = $CanvasLayer/choose_mission
+onready var _choose_map = $CanvasLayer/choose_map
 onready var _host_setting = $CanvasLayer/host_setting
 onready var _server_browser = $CanvasLayer/server_browser
 onready var _dialog_exit_option = $CanvasLayer/simple_dialog_option
@@ -18,6 +20,7 @@ onready var _setting = $CanvasLayer/setting
 onready var _error_dialog = $CanvasLayer/exception_message
 
 func _ready():
+	_choose_misson.visible = false
 	_dialog_exit_option.visible = false
 	_error_dialog.visible = false
 	
@@ -54,24 +57,32 @@ func init_drone_data_setting():
 	
 	
 func _on_battle_pressed():
+	_choose_misson.missions = SpMissionData.MISSIONS
+	_choose_misson.show_missions()
+	_choose_misson.visible = true
+	
+func _on_choose_mission_on_mission_choosed(_mission_data):
+	Global.sp_game_data = _mission_data
 	Network.connect("server_player_connected", self ,"_server_player_connected")
 	var err = Network.create_server(Global.server.max_player, Global.server.port,{"name" : Global.player.player_name})
 	if err != OK:
 		return
 	
 func _server_player_connected(_player_network_unique_id : int, _player : Dictionary):
-	Global.mp_players = [ Global.create_mp_player() ]
-	for i in range(3):
-		var bot = Global.create_bot_player()
-		bot["player_team"] = i + 1 
-		Global.mp_players.append(bot)
-		
-	get_tree().change_scene("res://gameplay/mp/host/battle.tscn")
+	get_tree().change_scene("res://assets/ui/mission_briefing/mission_briefing.tscn")
 	
 	
 func _on_host_pressed():
-	_host_setting.visible = true
+	var current_map :MapData = MapData.new()
+	current_map.from_dictionary(Global.mp_game_data["map"])
+	_choose_map.current_map_id = current_map.map_id
+	_choose_map.maps = MapData.MAPS
+	_choose_map.show_maps()
+	_choose_map.visible = true
 	
+func _on_choose_map_on_map_choosed(_map_data :Dictionary):
+	Global.mp_game_data["map"] = _map_data
+	_host_setting.visible = true
 	
 func _on_host_setting_create():
 	Global.mode = Global.MODE_HOST
@@ -197,6 +208,12 @@ func _on_input_color_on_pick(_color):
 	Global.player_drone_data.color = _color
 	Global.player_drone_data.save_data(Global.player_drone_data_file)
 	emit_signal("on_drone_data_change")
+
+
+
+
+
+
 
 
 
