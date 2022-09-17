@@ -34,6 +34,9 @@ func update_player_hp_bar(player_name :String, hp, max_hp :int):
 func add_minimap_object_marker(object :Spatial, marker_icon:Resource, marker_color :Color):
 	_gui.add_minimap_object_marker(object, marker_icon, marker_color)
 	
+func remove_minimap_object_marker(object :Spatial):
+	_gui.remove_minimap_object_marker(object)
+	
 func set_camera(_camera : GameplayCamera):
 	_gui.set_camera(_camera)
 	

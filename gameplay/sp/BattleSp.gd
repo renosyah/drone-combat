@@ -118,11 +118,10 @@ func on_joystick_input(output : Vector2, is_pressed : bool):
 	pass
 	
 func _on_next_mission_press():
-	var next_index = Global.sp_game_data.mission_index + 1
-	if next_index > SpMissionData.MISSIONS.size() - 1:
+	if Global.is_last_mission():
 		return
 		
-	Global.sp_game_data.from_dictionary(SpMissionData.MISSIONS[next_index])
+	Global.sp_game_data.from_dictionary(Global.get_next_mission())
 	get_tree().change_scene("res://assets/ui/mission_briefing/mission_briefing.tscn")
 	
 func _on_restart_mission_press():

@@ -169,18 +169,22 @@ func _on_bot_action_timer_timeout():
 		return
 	
 	var targets = []
-	for i in _all:
-		if not i.is_dead():
-			targets.append(i)
-		
-	randomize()
-	targets.shuffle()
+	var waypoint = Vector3.ZERO
 	
-	var target_pos = targets[rand_range(0, targets.size() - 1)].global_transform.origin
-	var point = Vector3(target_pos.x, target_pos.y, target_pos.z)
-	point.z += rand_range(-6, 6)
-	point.x += rand_range(-6, 6) 
-	var waypoint = point
+	for i in _all:
+		if not i.is_dead() and i.team() != bot.team():
+			targets.append(i)
+			
+	if not targets.empty():
+		randomize()
+		targets.shuffle()
+		
+		var target_pos = targets[rand_range(0, targets.size())].global_transform.origin
+		var point = Vector3(target_pos.x, target_pos.y, target_pos.z)
+		point.z += rand_range(-6, 6)
+		point.x += rand_range(-6, 6) 
+		waypoint = point
+		
 		
 	var chance_to_get_item = randf() < 0.80 # 80%
 	var chance_to_go_somewhere = randf() < 0.40 # 40%

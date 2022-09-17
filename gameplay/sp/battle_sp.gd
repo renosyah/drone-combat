@@ -68,10 +68,12 @@ func on_drone_take_damage(_entity :BaseEntity, _damage :int, _hit_by: PlayerData
 func on_drone_dead(_entity: BaseEntity, _hit_by: PlayerData):
 	.on_drone_dead(_entity, _hit_by)
 	
-	if _entity != drone:
+	if not _entity.is_dead():
 		return
 		
-	if not _entity.is_dead():
+	_ui.remove_minimap_object_marker(_entity)
+	
+	if _entity != drone:
 		return
 		
 	_ui.show_hurt(NO_DAMAGE)
@@ -107,18 +109,22 @@ func _on_bot_action_timer_timeout():
 		return
 	
 	var targets = []
-	for i in _bots:
-		if not i.is_dead():
-			targets.append(i)
-		
-	randomize()
-	targets.shuffle()
+	var waypoint = Vector3.ZERO
 	
-	var target_pos = targets[rand_range(0, targets.size())].global_transform.origin
-	var point = Vector3(target_pos.x, target_pos.y, target_pos.z)
-	point.z += rand_range(-6, 6)
-	point.x += rand_range(-6, 6) 
-	var waypoint = point
+	for i in _all:
+		if not i.is_dead() and i.team() != bot.team():
+			targets.append(i)
+			
+	if not targets.empty():
+		randomize()
+		targets.shuffle()
+		
+		var target_pos = targets[rand_range(0, targets.size())].global_transform.origin
+		var point = Vector3(target_pos.x, target_pos.y, target_pos.z)
+		point.z += rand_range(-6, 6)
+		point.x += rand_range(-6, 6) 
+		waypoint = point
+		
 		
 	var chance_to_get_item = randf() < 0.80 # 80%
 	var chance_to_go_somewhere = randf() < 0.40 # 40%
@@ -167,16 +173,15 @@ func check_unlockable():
 		_ui.show_unlocked_item(Global.sp_game_data.unlocked_module.module_name ,load(Global.sp_game_data.unlocked_module.icon))
 		
 	if not Global.sp_game_data.unlocked_map.map_id.empty():
-		Global.update_player_unlocked_modules(Global.sp_game_data.unlocked_map.map_id)
+		Global.update_player_unlocked_maps(Global.sp_game_data.unlocked_map.map_id)
 		_ui.show_unlocked_item(Global.sp_game_data.unlocked_map.map_name, load(Global.sp_game_data.unlocked_map.map_icon))
 		
-	var next_index = Global.sp_game_data.mission_index + 1
-	if next_index > SpMissionData.MISSIONS.size() - 1:
+	if Global.is_last_mission():
 		_ui.show_campaign_finish()
 		return
 	
 	var unlocked_mission : SpMissionData = SpMissionData.new()
-	unlocked_mission.from_dictionary(SpMissionData.MISSIONS[Global.sp_game_data.mission_index + 1])
+	unlocked_mission.from_dictionary(Global.get_next_mission())
 	Global.update_player_unlocked_missions(unlocked_mission.mission_id)
 	
 	

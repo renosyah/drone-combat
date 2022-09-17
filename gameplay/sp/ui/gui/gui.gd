@@ -49,6 +49,9 @@ func update_player_hp_bar(player_name :String, hp, max_hp :int):
 func add_minimap_object_marker(object :Spatial, marker_icon:Resource, marker_color :Color):
 	_overlay_map.add_object(object, marker_icon, marker_color)
 	
+func remove_minimap_object_marker(object :Spatial):
+	_overlay_map.remove_object(object)
+	
 func set_camera(_camera : GameplayCamera):
 	_overlay_map.set_camera(_camera)
 	

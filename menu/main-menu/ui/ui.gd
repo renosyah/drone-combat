@@ -57,7 +57,7 @@ func init_drone_data_setting():
 	
 	
 func _on_battle_pressed():
-	_choose_misson.missions = SpMissionData.MISSIONS
+	_choose_misson.missions = Global.campaign_missions
 	_choose_misson.show_missions()
 	_choose_misson.visible = true
 	

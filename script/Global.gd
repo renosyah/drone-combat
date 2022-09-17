@@ -1,6 +1,7 @@
 extends Node
 const DEKSTOP =  ["Server", "Windows", "WinRT", "X11"]
 
+const player_campaign_missions_data_file = "player_campaign_missions.data"
 const player_data_file = "player.data"
 const player_unlocked_missions_data_file = "player_unlocked_missions.data"
 const player_unlocked_modules_data_file = "player_unlocked_modules.data"
@@ -10,6 +11,9 @@ const player_drone_data_file = "player_drone_data.data"
 onready var sound_amplified = 10 if not OS.get_name() in Global.DEKSTOP else 5
 
 func _ready():
+	load_campaign_mission()
+	generate_campaign_mission()
+	
 	load_player_unlocked_missions()
 	init_player_unlocked_missions()
 	
@@ -117,6 +121,79 @@ func init_player_unlocked_missions():
 	
 	player_unlocked_missions = ["chapter-1_mission-1"]
 	SaveLoad.save(player_unlocked_missions_data_file, player_unlocked_missions)
+	
+################################################################
+# campaign
+var campaign_missions :Array = []
+	
+func load_campaign_mission():
+	var is_exist = SaveLoad.load_save(player_campaign_missions_data_file) != null
+	if not is_exist:
+		return
+		
+	campaign_missions = SaveLoad.load_save(player_campaign_missions_data_file)
+	
+func generate_campaign_mission():
+	var is_exist = SaveLoad.load_save(player_campaign_missions_data_file) != null
+	if is_exist:
+		return
+		
+	var campaign_data = CampaignData.new()
+	
+	var mission_index = 0
+	for i in range(0, 16):
+		var mission :SpMissionData = create_mission(campaign_data.chapter_1_id + str(i + 1), mission_index)
+		mission.mission_name = campaign_data.chapter_1_mission_name[i]
+		mission.mission_objective = campaign_data.chapter_1_mission_objective[i]
+		mission.mission_bot_drones = campaign_data.chapter_1_mission_bot_drone[i]
+		mission.unlocked_module.from_dictionary(campaign_data.chapter_1_mission_reward_module[i])
+		if i == 15:
+			mission.unlocked_map.from_dictionary(MapData.MAPS[1])
+			
+		mission.mission_map.from_dictionary(MapData.MAPS[0])
+		campaign_missions.append(mission.to_dictionary())
+		mission_index += 1
+		
+
+	for i in range(0, 16):
+		var mission :SpMissionData = create_mission(CampaignData.chapter_2_id + str(i + 1), mission_index)
+		mission.mission_name = campaign_data.chapter_2_mission_name[i]
+		mission.mission_objective = campaign_data.chapter_2_mission_objective[i]
+		mission.mission_bot_drones = campaign_data.chapter_2_mission_bot_drone[i]
+		mission.unlocked_module.from_dictionary(campaign_data.chapter_2_mission_reward_module[i])
+		if i == 14:
+			mission.unlocked_map.from_dictionary(MapData.MAPS[2])
+			
+		mission.mission_map.from_dictionary(MapData.MAPS[1])
+		campaign_missions.append(mission.to_dictionary())
+		mission_index += 1
+		
+	for i in range(0, 16):
+		var mission :SpMissionData = create_mission(CampaignData.chapter_3_id + str(i + 1), mission_index)
+		mission.mission_name = campaign_data.chapter_3_mission_name[i]
+		mission.mission_objective = campaign_data.chapter_3_mission_objective[i]
+		mission.mission_bot_drones = campaign_data.chapter_3_mission_bot_drone[i]
+		mission.unlocked_module.from_dictionary(campaign_data.chapter_3_mission_reward_module[i])
+		
+		mission.mission_map.from_dictionary(MapData.MAPS[2])
+		campaign_missions.append(mission.to_dictionary())
+		mission_index += 1
+		
+	SaveLoad.save(player_campaign_missions_data_file, campaign_missions)
+	
+func create_mission(mission_id :String, mission_index :int) -> SpMissionData:
+	var mission :SpMissionData = SpMissionData.new()
+	mission.mission_id = mission_id
+	mission.mission_index = mission_index
+	return mission
+	
+func is_last_mission() -> bool:
+	var next_index = Global.sp_game_data.mission_index + 1
+	return next_index > campaign_missions.size() - 1
+	
+func get_next_mission() -> Dictionary:
+	var next_index = Global.sp_game_data.mission_index + 1
+	return campaign_missions[next_index]
 	
 ################################################################
 # player
