@@ -2,7 +2,7 @@ extends MarginContainer
 
 signal on_restart_mission_press
 signal on_next_mission_press
-signal on_exit_press
+signal on_credit_press
 
 onready var _title = $VBoxContainer2/HBoxContainer/Label2
 onready var _next_button_layout = $VBoxContainer2/HBoxContainer3/HBoxContainer
@@ -31,5 +31,5 @@ func _on_restart_pressed():
 func _on_next_pressed():
 	emit_signal("on_next_mission_press")
 
-func _on_exit_pressed():
-	emit_signal("on_exit_press")
+func _on_credit_pressed():
+	emit_signal("on_credit_press")

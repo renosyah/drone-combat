@@ -386,7 +386,7 @@ var turret_module:DroneModuleData = DroneModuleData.new().parse_from_dictionary(
 var weapon_module:DroneModuleData = DroneModuleData.new().parse_from_dictionary(weapons[0])
 var sensor_module:DroneModuleData = DroneModuleData.new().parse_from_dictionary(sensors[0])
 
-export var color :Color = Color.blue
+export var color :Color = Color("#000080")
 
 func from_dictionary(data : Dictionary):
 	.from_dictionary(data)

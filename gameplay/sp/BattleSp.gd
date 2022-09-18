@@ -111,6 +111,7 @@ func _load_ui():
 	_ui.connect("exit_game_session", self, "_on_exit_game_session")
 	_ui.connect("on_next_mission_press", self, "_on_next_mission_press")
 	_ui.connect("on_restart_mission_press", self ,"_on_restart_mission_press")
+	_ui.connect("on_open_credit", self, "_on_open_credit")
 	
 	_ui.set_camera(_camera)
 	
@@ -126,6 +127,10 @@ func _on_next_mission_press():
 	
 func _on_restart_mission_press():
 	get_tree().reload_current_scene()
+	
+func _on_open_credit():
+	Network.disconnect_from_server()
+	get_tree().change_scene("res://menu/credit-menu/credit_menu.tscn")
 	
 ################################################################
 # env
@@ -183,7 +188,7 @@ func spawn_bot_drones():
 func spawn_player_drones() -> BaseHull:
 	var spawner = DroneData.new()
 	spawner.from_dictionary(Global.player_drone_data.to_dictionary())
-	spawner.color = Color.blue
+	spawner.color = Color("#000080")
 	
 	var spawn_pos = _map.get_rand_pos()
 	spawn_pos.y = 8.0

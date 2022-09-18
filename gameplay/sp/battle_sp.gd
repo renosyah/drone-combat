@@ -168,14 +168,9 @@ func _on_mission_checker_timeout():
 	
 	
 func check_unlockable():
-	if not Global.sp_game_data.unlocked_module.module_id.empty():
-		Global.update_player_unlocked_modules(Global.sp_game_data.unlocked_module.module_id)
-		_ui.show_unlocked_item(Global.sp_game_data.unlocked_module.module_name ,load(Global.sp_game_data.unlocked_module.icon))
-		
-	if not Global.sp_game_data.unlocked_map.map_id.empty():
-		Global.update_player_unlocked_maps(Global.sp_game_data.unlocked_map.map_id)
-		_ui.show_unlocked_item(Global.sp_game_data.unlocked_map.map_name, load(Global.sp_game_data.unlocked_map.map_icon))
-		
+	check_module_unlock()
+	check_map_unlock()
+	
 	if Global.is_last_mission():
 		_ui.show_campaign_finish()
 		return
@@ -184,8 +179,29 @@ func check_unlockable():
 	unlocked_mission.from_dictionary(Global.get_next_mission())
 	Global.update_player_unlocked_missions(unlocked_mission.mission_id)
 	
+func check_module_unlock():
+	var module = Global.sp_game_data.unlocked_module
+	if module.module_id.empty():
+		return
+		
+	if module.module_id in Global.player_unlocked_modules:
+		return
+		
+	Global.update_player_unlocked_modules(module.module_id)
+	_ui.show_unlocked_item(module.module_name ,load(module.icon))
 	
 	
+func check_map_unlock():
+	var map = Global.sp_game_data.unlocked_map;
+	if map.map_id.empty():
+		return
+		
+	if map.map_id in Global.player_unlocked_maps:
+		return
+		
+	Global.update_player_unlocked_maps(map.map_id)
+	_ui.show_unlocked_item(map.map_name, load(map.map_icon))
+		
 	
 	
 	

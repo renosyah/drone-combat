@@ -114,12 +114,12 @@ margin_right = 186.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="exit" parent="VBoxContainer2/HBoxContainer4" instance=ExtResource( 1 )]
+[node name="credit" parent="VBoxContainer2/HBoxContainer4" instance=ExtResource( 1 )]
 margin_left = 190.0
 margin_right = 410.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 220, 80 )
-button_label = "Exit"
+button_label = "Credit"
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/HBoxContainer4"]
 margin_left = 414.0
@@ -135,4 +135,4 @@ rect_min_size = Vector2( 0, 25 )
 
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer3/restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer3/HBoxContainer/next" to="." method="_on_next_pressed"]
-[connection signal="pressed" from="VBoxContainer2/HBoxContainer4/exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer4/credit" to="." method="_on_credit_pressed"]

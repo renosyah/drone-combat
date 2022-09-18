@@ -1,7 +1,8 @@
 extends Control
 
 signal on_joystick_input(output,is_pressed)
-signal exit_game_session()
+signal exit_game_session
+signal on_open_credit
 signal on_restart_mission_press
 signal on_next_mission_press
 
@@ -44,14 +45,17 @@ func show_hurt(type :int):
 	_gui.show_hurt(type)
 	
 func show_mission_is_success():
+	_gui.set_gui_element_visible(false)
 	_battle_end.visible = true
 	_battle_end.set_mission_is_success()
 	
 func show_mission_is_failed():
+	_gui.set_gui_element_visible(false)
 	_battle_end.visible = true
 	_battle_end.set_mission_is_failed()
 	
 func show_campaign_finish():
+	_gui.set_gui_element_visible(false)
 	_battle_end.visible = true
 	_battle_end.set_campaign_finish()
 	
@@ -75,8 +79,8 @@ func _on_gui_on_menu_press():
 func _on_joystick_on_joystick_input(output, is_pressed):
 	emit_signal("on_joystick_input", output, is_pressed)
 	
-func _on_battle_end_main_menu():
-	_dialog_exit.visible = true
+func _on_battle_end_on_credit_press():
+	emit_signal("on_open_credit")
 	
 func _on_battle_end_on_next_mission_press():
 	emit_signal("on_next_mission_press")

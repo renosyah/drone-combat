@@ -43,7 +43,7 @@ mouse_filter = 2
 
 [connection signal="on_menu_press" from="CanvasLayer/gui" to="." method="_on_gui_on_menu_press"]
 [connection signal="on_joystick_input" from="CanvasLayer/joystick" to="." method="_on_joystick_on_joystick_input"]
-[connection signal="on_exit_press" from="CanvasLayer/battle_end" to="." method="_on_battle_end_on_exit_press"]
+[connection signal="on_credit_press" from="CanvasLayer/battle_end" to="." method="_on_battle_end_on_credit_press"]
 [connection signal="on_next_mission_press" from="CanvasLayer/battle_end" to="." method="_on_battle_end_on_next_mission_press"]
 [connection signal="on_restart_mission_press" from="CanvasLayer/battle_end" to="." method="_on_battle_end_on_restart_mission_press"]
 [connection signal="on_main_menu_press" from="CanvasLayer/menu" to="." method="_on_menu_on_main_menu_press"]

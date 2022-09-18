@@ -3,40 +3,40 @@ class_name CampaignData
 
 const chapter_1_id = "chapter-1_mission-"
 const chapter_1_mission_name = [
-	"Warm up",
-	"Friend in need",
+	"Warm Up",
+	"Friend In Need",
 	"Ambush",
 	"Retake",
-	"Hay Bob",
+	"Oh, Hey Bob!",
 	"Regroup",
-	"Search and rescue",
-	"Bring it on",
-	"Heat of jungle",
-	"Lone wolf",
-	"Hay mark",
-	"With or without",
+	"Search And Rescue",
+	"Bring It On!",
+	"Heat Of Jungle",
+	"Lone Wolf",
+	"He, Hey Mark",
+	"With Or Without",
 	"Clear Area",
-	"Shockwave",
-	"No mercy",
+	"Shockwave Here",
+	"No Mercy",
 	"Extraction"
 ]
 const chapter_1_mission_objective = [
-	"Defeat enemy drone",
-	"Assist heikel",
-	"Assist heikel & cobra",
-	"Defeat all 4 drone",
-	"Defeat drone boss : Bob",
-	"Defeat all 4 drone & Regroup with heikel",
-	"Defeat all 6 drone & save cobra",
-	"Assist cobra",
-	"Assist heikel",
-	"Defeat all 4 drone",
-	"Defeat drone boss : Mark",
-	"Assist heikel & cobra",
-	"Defeat all 6 drone",
-	"Defeat drone boss : Shockwave",
-	"Defeat all 6 drone",
-	"Assist heikel & cobra by defeat all 6 drone",
+	"Defeat Enemy Drone",
+	"Assist Heikel",
+	"Assist Heikel And Cobra",
+	"Defeat All 4 Drone",
+	"Defeat Bob",
+	"Defeat All 4 Drone And Join Heikel",
+	"Defeat All 6 Drone And Save Cobra",
+	"Assist Cobra",
+	"Assist Heikel",
+	"Defeat All 4 Drone",
+	"Defeat Mark",
+	"Assist Heikel And Cobra",
+	"Defeat All 6 Drone",
+	"Defeat Shockwave",
+	"Defeat All 6 Drone",
+	"Assist Heikel And Cobra",
 ]
 const chapter_1_mission_reward_module = [
 	{},
@@ -65,46 +65,45 @@ var chapter_1_mission_bot_drone = [
 	[grunt_drone(),grunt_drone(), grunt_drone(),grunt_drone(), sergeant_grunt_drone(), sergeant_grunt_drone()],
 	[boss_shockwave()],
 	[grunt_drone(),grunt_drone(), grunt_drone(),grunt_drone(), sergeant_grunt_drone(), sergeant_grunt_drone()],
-	[grunt_drone(), grunt_drone(),grunt_drone(),grunt_drone(),grunt_drone(),grunt_drone(),
-	sergeant_grunt_drone(), sergeant_grunt_drone(),ally_heikel(), ally_cobra()],
+	[grunt_drone(), grunt_drone(),grunt_drone(),grunt_drone(),sergeant_grunt_drone(), sergeant_grunt_drone(),ally_heikel(), ally_cobra()],
 ]
 
 const chapter_2_id = "chapter-2_mission-"
 const chapter_2_mission_name = [
-	"Dirt and wind",
+	"Dirt And Wind",
 	"Bandits",
-	"Wheel vs track",
-	"Back on Track",
-	"Agains odd",
-	"Wash up",
-	"Damn, Kugger",
-	"Smoke and fire",
-	"Noise of wind",
-	"Dirt in my eyes",
-	"Must do it",
-	"Old friend",
-	"Rattling snake",
-	"Spending time",
+	"Wheel VS Track",
+	"Back On Track",
+	"Agains Odds",
+	"Wash Up!",
+	"Damn You, Kugger",
+	"Smoke And Fire",
+	"Noise Of Wind",
+	"Dirt In My Engine",
+	"Must Do It",
+	"Old Friend",
+	"The Rattling Snake",
+	"Spending Time",
 	"Separate",
-	"Behind rock"
+	"Behind Rock"
 ]
 const chapter_2_mission_objective = [
-	"Defeat your pursuer",
-	"Defeat a bandit drone",
-	"Defeat all wheel drones",
-	"Meet Sand & defeat all enemy",
-	"Defeat all 4 wheel drones",
-	"Assist sand",
-	"Defeat bos drone : Kugger",
-	"Defeat a marauder drone",
-	"Defeat all 2 marauder",
-	"Assist sand",
-	"Defeat 2 grunt & 2 wheel drones",
-	"Assis sand & heikel",
-	"Defeat bos drone : snake",
-	"Defeat all 4 marauder",
-	"Defeat all 6 wheel drone",
-	"Defeat a recketa guard"
+	"Defeat Your Pursuer",
+	"Defeat A Bandit Drone",
+	"Defeat All Wheel Drones",
+	"Assist Sand And Defeat All Enemy",
+	"Defeat All 4 Wheel Drones",
+	"Assist Sand",
+	"Defeat Kugger",
+	"Defeat A Marauder Drone",
+	"Defeat All 2 Marauder Drones",
+	"Assist Sand",
+	"Defeat 2 Grunt And 2 Wheel Drones",
+	"Assis Sand And Heikel",
+	"Defeat Snake",
+	"Defeat All 4 Marauder Drones",
+	"Defeat All 6 Wheel Drones",
+	"Defeat A Recketa Guard"
 ]
 const chapter_2_mission_reward_module = [
 	{},{},
@@ -144,39 +143,39 @@ var chapter_2_mission_bot_drone = [
 const chapter_3_id = "chapter-3_mission-"
 const chapter_3_mission_name = [
 	"Blizzard",
-	"Snow & oil",
+	"Snow And Oil",
 	"Tick Steel",
 	"Juggernaut",
 	"Avalance",
 	"Lose Direction",
-	"Risen up",
-	"Preparing for worse",
+	"Risen Up",
+	"Preparing For Worse",
 	"Colonel Baton",
-	"Run & Hide",
-	"Take by force",
-	"Let them Taste",
-	"Mayor Kura",
-	"What, this again?",
-	"General Kepin",
+	"Run And Hide",
+	"Take By Force",
+	"Let Them Taste",
+	"Major Kura",
+	"What, This Again!?",
+	"General Kelpin",
 	"Final End"
 ]
 const chapter_3_mission_objective = [
-	"Regroup with zilo",
-	"Defeat 2 recketa guard",
-	"Defeat recketa elite",
-	"assist juggernaut",
-	"Defeat all enemy",
-	"Assist jugernaut & zilo",
-	"Defeat 4 recketa guard",
-	"Defeat 2 recketa guard & 2 recketa elite",
-	"Defeat bos drone : Colonel Baton",
-	"Defeat 2 recketa elite",
-	"Defeat recketa elite & 2 recketa guard",
-	"Defeat all 3 recketa guard",
-	"Defeat bos drone : Mayor Kura",
-	"Defeat all enemy drone",
-	"Defeat bos drone : General Kelpin",
-	"Defeat all 3 recketa elite & escape"
+	"Regroup With Zilo",
+	"Defeat 2 Recketa Guard",
+	"Defeat Recketa Elite",
+	"assist Juggernaut",
+	"Defeat All Enemy",
+	"Assist Jugernaut And Zilo",
+	"Defeat 4 Recketa Guard",
+	"Defeat 2 Recketa Guard And 2 Recketa Elite",
+	"Defeat Colonel Baton",
+	"Defeat 2 Recketa Elite",
+	"Defeat Recketa Elite And 2 Recketa Guard",
+	"Defeat All 3 Recketa Guard",
+	"Defeat Major Kura",
+	"Defeat All Enemy Drone",
+	"Defeat General Kelpin",
+	"Defeat All 3 Recketa Elite And Escape"
 ]
 const chapter_3_mission_reward_module = [
 	DroneData.turrets[3],
@@ -229,7 +228,7 @@ func ally_cobra() -> Dictionary:
 			"turret_module": DroneData.turrets[1],
 			"weapon_module": DroneData.weapons[0],
 			"sensor_module": DroneData.sensors[0],
-			"color": Color.blue
+			"color": Color("#000080")
 		}
 	}
 	
@@ -247,7 +246,7 @@ func ally_heikel() -> Dictionary:
 			"turret_module": DroneData.turrets[0],
 			"weapon_module": DroneData.weapons[0],
 			"sensor_module": DroneData.sensors[0],
-			"color": Color.blue
+			"color": Color("#000080")
 		}
 	}
 	
@@ -265,7 +264,7 @@ func ally_sand() -> Dictionary:
 			"turret_module": DroneData.turrets[1],
 			"weapon_module": DroneData.weapons[1],
 			"sensor_module": DroneData.sensors[1],
-			"color": Color.blue
+			"color": Color("#000080")
 		}
 	}
 	
@@ -283,7 +282,7 @@ func ally_zilo() -> Dictionary:
 			"turret_module": DroneData.turrets[4],
 			"weapon_module": DroneData.weapons[2],
 			"sensor_module": DroneData.sensors[1],
-			"color": Color.blue
+			"color": Color("#000080")
 		}
 	}
 	
@@ -299,9 +298,9 @@ func ally_juggernaut() -> Dictionary:
 			"player_name": "Juggernaut",
 			"hull_module" : DroneData.hulls[4],
 			"turret_module": DroneData.turrets[5],
-			"weapon_module": DroneData.weapons[2],
+			"weapon_module": DroneData.weapons[4],
 			"sensor_module": DroneData.sensors[3],
-			"color": Color.blue
+			"color": Color("#000080")
 		}
 	}
 	
