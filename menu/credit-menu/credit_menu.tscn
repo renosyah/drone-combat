@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://map/map_0/map_0.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/enviroment/DirectionalLight.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://map/model/Bush1.obj" type="ArrayMesh" id=9]
 [ext_resource path="res://map/model/Tree3.obj" type="ArrayMesh" id=10]
 [ext_resource path="res://map/model/Rock1.obj" type="ArrayMesh" id=11]
+[ext_resource path="res://menu/credit-menu/ui/ui.tscn" type="PackedScene" id=12]
 
 [node name="credit_menu" type="Node"]
 
@@ -173,5 +174,8 @@ material/1 = null
 
 [node name="WorldEnvironment" parent="." instance=ExtResource( 3 )]
 
+[node name="ui" parent="." instance=ExtResource( 12 )]
+
 [node name="cameraPivot" parent="." instance=ExtResource( 4 )]
 transform = Transform( -0.904172, 0.257172, -0.34108, 0, 0.798467, 0.602038, 0.427169, 0.544346, -0.721951, 0, 0, 0.0998206 )
+is_enable = false

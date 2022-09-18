@@ -16,25 +16,49 @@ var credits = [
 	{
 		"credit_name" : "Creator",
 		"credit_details" : [
-			"Reno Syahputra (renosyah)"
+			"Renosyah"
 		]
 	},
 	{
 		"credit_name" : "3D model & Asset",
 		"credit_details" : [
-			"Reno Syahputra (renosyah)"
+			"Renosyah"
 		]
 	},
 	{
 		"credit_name" : "Campaign & map",
 		"credit_details" : [
-			"Reno Syahputra (renosyah)"
+			"Renosyah"
 		]
 	},
 	{
 		"credit_name" : "Sound",
 		"credit_details" : [
-			"Reno Syahputra (renosyah)"
+			"Renosyah"
+		]
+	},
+	{
+		"credit_name" : "About Me",
+		"credit_details" : [
+			"Reno Syahputra (Renosyah)",
+		]
+	},
+	{
+		"credit_name" : "Linkedin",
+		"credit_details" : [
+			"https://id.linkedin.com/in/reno-syahputra-839840142",
+		]
+	},
+	{
+		"credit_name" : "Facebook",
+		"credit_details" : [
+			"https://www.facebook.com/renosyah975"
+		]
+	},
+	{
+		"credit_name" : "Thank You",
+		"credit_details" : [
+			"Have A Nice Day"
 		]
 	},
 ]

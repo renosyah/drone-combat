@@ -175,7 +175,7 @@ const chapter_3_mission_objective = [
 	"Defeat Major Kura",
 	"Defeat All Enemy Drone",
 	"Defeat General Kelpin",
-	"Defeat All 3 Recketa Elite And Escape"
+	"Defeat All Recketa Guard And Escape"
 ]
 const chapter_3_mission_reward_module = [
 	DroneData.turrets[3],
