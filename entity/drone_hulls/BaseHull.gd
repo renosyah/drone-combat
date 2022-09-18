@@ -250,7 +250,6 @@ func _on_respawn_delay_timeout():
 func get_turret() -> BaseTurret:
 	return _turret
 	
-	
 ############################################################
 # function
 func master_moving(delta):
@@ -305,10 +304,6 @@ func move_to_waypoint(delta):
 		
 	_velocity = move_and_slide(_velocity, Vector3.UP)
 	
-func moving(_delta):
-	if is_dead:
-		return
-	
 func puppet_moving(_delta):
 	if is_dead:
 		return
@@ -320,6 +315,9 @@ func puppet_moving(_delta):
 func resupply(_ammo_added : int):
 	if not is_instance_valid(_turret):
 		return
+	
+	if is_dead:
+		return
 		
 	_sound.stream = preload("res://entity/item/sound/item_picked_up.wav")
 	_sound.play()
@@ -329,6 +327,9 @@ func resupply(_ammo_added : int):
 func heal(_hp_added : int):
 	.heal(_hp_added)
 	
+	if is_dead:
+		return
+		
 	_sound.stream = preload("res://entity/item/sound/item_picked_up.wav")
 	_sound.play()
 	

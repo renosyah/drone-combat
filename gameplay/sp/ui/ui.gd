@@ -46,16 +46,19 @@ func show_hurt(type :int):
 	
 func show_mission_is_success():
 	_gui.set_gui_element_visible(false)
+	_joystick.visible = false
 	_battle_end.visible = true
 	_battle_end.set_mission_is_success()
 	
 func show_mission_is_failed():
 	_gui.set_gui_element_visible(false)
+	_joystick.visible = false
 	_battle_end.visible = true
 	_battle_end.set_mission_is_failed()
 	
 func show_campaign_finish():
 	_gui.set_gui_element_visible(false)
+	_joystick.visible = false
 	_battle_end.visible = true
 	_battle_end.set_campaign_finish()
 	

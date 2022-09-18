@@ -74,7 +74,7 @@ func _ready():
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	moving(delta)
 	
 	if not _is_network_running():
@@ -98,6 +98,9 @@ func heal(_hp_added : int):
 	if not _is_master():
 		return
 		
+	if is_dead:
+		return
+		
 	if hp + _hp_added > max_hp:
 		hp = max_hp
 	else:
@@ -108,12 +111,12 @@ func heal(_hp_added : int):
 func take_damage(_damage : int, hit_by_player : PlayerData):
 	if not _is_master():
 		return
-		
-	hp -= _damage
 	
 	if is_dead:
 		return
 		
+	hp -= _damage
+
 	if hp < 1:
 		dead(hit_by_player)
 		return
