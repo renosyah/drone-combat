@@ -63,31 +63,35 @@ var credits = [
 	},
 ]
 
-var credit_queue_pos = 0
-
 onready var _holder = $CanvasLayer/Control/holder
 onready var _main_menu_button = $CanvasLayer/Control/main_menu
 
 func _ready():
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
+
+	for i in credits:
+		var item = preload("res://menu/credit-menu/ui/item/credit_item.tscn").instance()
+		item.credit_name = i["credit_name"]
+		item.credit_details = i["credit_details"]
+		_holder.add_child(item)
+		
+		var margin = MarginContainer.new()
+		margin.rect_min_size.y = 100
+		_holder.add_child(margin)
+		
+	var m = MarginContainer.new()
+	m.rect_min_size.y = 1000
+	_holder.add_child(m)
 	
-	_on_Timer_timeout()
 	_main_menu_button.visible = false
 
-func _on_Timer_timeout():
-	
-	if credit_queue_pos > credits.size() - 1:
+func _process(delta):
+	_holder.rect_position.y -= 50 * delta
+	if _holder.rect_position.y < -2000:
+		set_process(false)
 		return
-		
-	var item = preload("res://menu/credit-menu/ui/item/credit_item.tscn").instance()
-	item.credit_name = credits[credit_queue_pos]["credit_name"]
-	item.credit_details = credits[credit_queue_pos]["credit_details"]
-	_holder.add_child(item)
-	item.rect_position.y = 1000
-	
-	credit_queue_pos += 1
-	
+
 func _on_main_menu_pressed():
 	get_tree().change_scene("res://menu/main-menu/main_menu.tscn")
 
