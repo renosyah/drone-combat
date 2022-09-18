@@ -90,6 +90,7 @@ func _process(delta):
 	_holder.rect_position.y -= 50 * delta
 	if _holder.rect_position.y < -2000:
 		set_process(false)
+		_on_main_menu_pressed()
 		return
 
 func _on_main_menu_pressed():
