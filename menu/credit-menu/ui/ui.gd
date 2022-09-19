@@ -22,7 +22,8 @@ var credits = [
 	{
 		"credit_name" : "3D model & Asset",
 		"credit_details" : [
-			"Renosyah"
+			"Renosyah",
+			"Quaternius"
 		]
 	},
 	{
