@@ -99,7 +99,7 @@ const chapter_2_mission_objective = [
 	"Defeat All 2 Marauder Drones",
 	"Assist Sand",
 	"Defeat 2 Grunt And 2 Wheel Drones",
-	"Assis Sand And Heikel",
+	"Assist Sand And Heikel",
 	"Defeat Snake",
 	"Defeat All 4 Marauder Drones",
 	"Defeat All 6 Wheel Drones",

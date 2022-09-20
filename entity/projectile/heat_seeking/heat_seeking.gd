@@ -5,7 +5,7 @@ var target :BaseHull
 var _explosion :Explosion
 
 func _ready():
-	attack_damage = int(rand_range(42,48))
+	attack_damage = int(rand_range(52,68))
 	
 	_explosion = preload("res://assets/other/explosion/explosion.tscn").instance()
 	get_parent().add_child(_explosion)

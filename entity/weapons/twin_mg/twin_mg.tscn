@@ -138,6 +138,7 @@ projectile = ExtResource( 2 )
 sensor_path = NodePath("RayCast")
 attack_range = 12
 dispersion = 0.55
+attack_delay = 0.25
 
 [node name="pivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 0, 0 )

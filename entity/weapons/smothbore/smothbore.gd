@@ -20,6 +20,6 @@ func _spawn_projectile_to(_target : BaseEntity):
 	._spawn_projectile_to(_target)
 	var bullet = get_bullet_from_pool()
 	bullet.target = _target
-	bullet.speed = 0.98
+	bullet.speed = 1.25
 	bullet.translation = _projectile_spawn_pos.global_transform.origin
 	bullet.launch(_projectile_target_pos.global_transform.origin)

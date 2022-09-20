@@ -114,7 +114,7 @@ sensor_path = NodePath("RayCast")
 attack_range = 22
 ammo_cost = 20
 dispersion = 0.1
-attack_delay = 6.0
+attack_delay = 4.0
 
 [node name="pivot" type="Spatial" parent="."]
 
