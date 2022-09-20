@@ -167,42 +167,48 @@ func _on_bot_action_timer_timeout():
 	var bot :BaseHull = _bots[bot_command_cicle]
 	if bot.is_dead():
 		return
-	
+		
+	var waypoint = _map.get_rand_pos()
+		
 	var targets = []
-	var waypoint = Vector3.ZERO
-	
 	for i in _all:
-		if not i.is_dead() and i.team() != bot.team():
-			targets.append(i)
+		if i.is_dead():
+			continue
 			
+		if i.team() == bot.team():
+			continue
+			
+		targets.append(i)
+		
+		
 	if not targets.empty():
 		randomize()
 		targets.shuffle()
 		
-		var target_pos = targets[rand_range(0, targets.size())].global_transform.origin
+		var target_pos = targets[0].global_transform.origin
 		var point = Vector3(target_pos.x, target_pos.y, target_pos.z)
 		point.z += rand_range(-6, 6)
 		point.x += rand_range(-6, 6) 
 		waypoint = point
 		
-		
-	var chance_to_get_item = randf() < 0.80 # 80%
-	var chance_to_go_somewhere = randf() < 0.40 # 40%
 	var is_bot_hp_low = bot.hp < bot.max_hp * 0.70
 	var is_bot_ammo_low = bot.get_turret().ammo < bot.get_turret().max_ammo * 0.70
 	var is_item_spawn = _item_holder.get_child_count() > 0
-		
+	
 	# bot go for item
-	if chance_to_get_item and (is_bot_ammo_low or is_bot_hp_low) and is_item_spawn:
-		var items = _item_holder.get_children()
-		var item = items[rand_range(0, items.size() - 1)]
-		
-		if is_instance_valid(items):
-			waypoint = item.global_transform.origin
-		
-	# bot go somewhere nice
-	elif chance_to_go_somewhere:
-		waypoint = _map.get_rand_pos()
+	if (is_bot_ammo_low or is_bot_hp_low) and is_item_spawn:
+		var items = []
+		for item in  _item_holder.get_children():
+			if not is_instance_valid(item):
+				continue
+				
+			items.append(item)
+			
+			
+		if not items.empty():
+			randomize()
+			items.shuffle()
+			waypoint = items[0].global_transform.origin
 		
 	bot.waypoint = waypoint
 	
