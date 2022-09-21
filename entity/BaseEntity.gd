@@ -74,7 +74,7 @@ func _ready():
 	
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _process(delta):
 	moving(delta)
 	
 	if not _is_network_running():
