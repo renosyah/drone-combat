@@ -48,6 +48,7 @@ var active: bool = true
 # misc
 var _reset_turret_timer : Timer
 var _tween_rotation : TweenRotation
+var _invisible_body : Spatial
 
 ############################################################
 # multiplayer func
@@ -58,7 +59,7 @@ func _network_timmer_timeout():
 		return
 		
 	if _is_master():
-		rset_unreliable("_puppet_rotation", body.rotation.y)
+		rset_unreliable("_puppet_rotation", _invisible_body.rotation.y)
 		rset_unreliable("_puppet_elevation", head.rotation_degrees.x)
 		
 puppet var _puppet_rotation: float setget _set_puppet_rotation
@@ -125,8 +126,12 @@ func _ready() -> void:
 	add_child(_timer)
 	_reset_turret_timer = _timer
 	
+	_invisible_body = Spatial.new()
+	get_parent().add_child(_invisible_body)
+	_invisible_body.rotation_degrees.y = 180.0
+	
 	var _tween_rot = preload("res://assets/other/tween_rotation/tween_rotation.tscn").instance()
-	_tween_rot.target = self
+	_tween_rot.target = _invisible_body
 	add_child(_tween_rot)
 	_tween_rotation = _tween_rot
 	
@@ -191,6 +196,12 @@ func resupply(_ammo_added :int):
 # function
 func master_moving(delta):
 	.master_moving(delta)
+	
+	if not _invisible_body or not body:
+		return
+		
+	body.rotation.y = lerp_angle(body.rotation.y, _invisible_body.rotation.y, delta * 5)
+	
 	# if not active do nothing
 	if not active:
 		return
@@ -261,7 +272,7 @@ func _on_sensor_spotted(_target : BaseEntity):
 func _rotate(delta: float) -> void:
 	var y_target = _get_local_y()
 	var final_y = sign(y_target) * min(rotation_speed * delta, abs(y_target))
-	body.rotate_y(final_y)
+	_invisible_body.rotate_y(final_y)
 	
 func _elevate(delta: float) -> void:
 	var x_target = _get_global_x()
