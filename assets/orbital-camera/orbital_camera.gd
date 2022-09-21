@@ -18,7 +18,6 @@ var drag_speed : float = 0.025
 func _ready():
 	pass
 	
-
 func _process(delta):
 	if not is_enable:
 		return
@@ -27,10 +26,7 @@ func _process(delta):
 	velocity.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	rotation_degrees.y += velocity.x * delta * 100
 	
-func parsing_input(event):
-	_unhandled_input(event)
-	
-func _unhandled_input(event):
+func _input(event):
 	if not is_enable:
 		return
 		
@@ -41,8 +37,6 @@ func _unhandled_input(event):
 	elif event.is_action("scroll_up"):
 		if(_camera.translation.z - zoom_speed + 1.0 >= min_zoom):
 			_camera.translation.z -= zoom_speed + 1.0
-			
-			
 			
 	if event is InputEventScreenTouch:
 		if event.pressed:
@@ -55,18 +49,19 @@ func _unhandled_input(event):
 		if events.size() == 1:
 			# turn input type vector2 to vector3
 			rotation_degrees.y += -event.relative.x * (_camera.translation.z * drag_speed)
+			get_tree().set_input_as_handled()
 			
 		elif events.size() == 2:
+			if not events.has(0) or not events.has(1):
+				return
+				
 			var drag_distance = events[0].position.distance_to(events[1].position)
 			if abs(drag_distance - last_drag_distance) > zoom_sensitivity:
 				var new_zoom = (1 + zoom_speed) if drag_distance < last_drag_distance else (1 - zoom_speed)
 				new_zoom = clamp(_camera.translation.z * new_zoom, min_zoom, max_zoom)
 				_camera.translation.z = new_zoom
 				last_drag_distance = drag_distance
+			get_tree().set_input_as_handled()
 				
 	var _opacity = (((_camera.translation.z - min_zoom) * 100) / (max_zoom - min_zoom)) / 100.0
-	
 	emit_signal("on_camera_moving", translation, _opacity)
-		
-		
-		
