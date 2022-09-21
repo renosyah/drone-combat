@@ -153,8 +153,67 @@ margin_right = 480.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 80, 0 )
 
-[node name="MarginContainer6" type="MarginContainer" parent="VBoxContainer2"]
+[node name="MarginContainer9" type="MarginContainer" parent="VBoxContainer2"]
 margin_top = 216.0
+margin_right = 480.0
+margin_bottom = 241.0
+rect_min_size = Vector2( 80, 20 )
+size_flags_vertical = 3
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer2"]
+margin_top = 245.0
+margin_right = 480.0
+margin_bottom = 328.0
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/HBoxContainer5"]
+margin_right = 80.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 80, 0 )
+
+[node name="Label3" type="Label" parent="VBoxContainer2/HBoxContainer5"]
+margin_left = 84.0
+margin_right = 234.0
+margin_bottom = 83.0
+custom_fonts/font = ExtResource( 2 )
+text = "Dynamic
+Joystick"
+valign = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer2/HBoxContainer5"]
+margin_left = 238.0
+margin_right = 312.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 20, 0 )
+size_flags_horizontal = 3
+
+[node name="dynamic_joystic_setting" type="Button" parent="VBoxContainer2/HBoxContainer5"]
+margin_left = 316.0
+margin_right = 396.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 80, 80 )
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer2/HBoxContainer5/dynamic_joystic_setting"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -40.0
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/HBoxContainer5"]
+margin_left = 400.0
+margin_right = 480.0
+margin_bottom = 83.0
+rect_min_size = Vector2( 80, 0 )
+
+[node name="MarginContainer6" type="MarginContainer" parent="VBoxContainer2"]
+margin_top = 332.0
 margin_right = 480.0
 margin_bottom = 412.0
 rect_min_size = Vector2( 80, 80 )
@@ -193,4 +252,5 @@ rect_min_size = Vector2( 0, 100 )
 
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer2/sfx_setting" to="." method="_on_sfx_setting_pressed"]
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer4/orientation_setting" to="." method="_on_orientation_setting_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer5/dynamic_joystic_setting" to="." method="_on_dynamic_joystic_setting_pressed"]
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer3/close" to="." method="_on_close_pressed"]

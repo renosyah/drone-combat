@@ -13,6 +13,7 @@ func _ready():
 		return
 		
 	_joystick.visible = true
+	_joystick.joystick_mode = VirtualJoystick.JoystickMode.FIXED if Global.setting_data.is_joystick_fixed else VirtualJoystick.JoystickMode.DYNAMIC
 	_joystick.connect("on_joystick_input", self, "_on_joystick_on_joystick_input")
 	
 	

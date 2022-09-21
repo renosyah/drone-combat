@@ -7,6 +7,7 @@ const player_unlocked_missions_data_file = "player_unlocked_missions.data"
 const player_unlocked_modules_data_file = "player_unlocked_modules.data"
 const player_unlocked_maps_data_file = "player_unlocked_maps.data"
 const player_drone_data_file = "player_drone_data.data"
+const player_setting_data_file = "player_setting_data.data"
 
 onready var sound_amplified = 10 if not OS.get_name() in Global.DEKSTOP else 5
 
@@ -25,6 +26,9 @@ func _ready():
 	
 	load_player_data()
 	load_player_drone_data()
+	
+	load_setting()
+	apply_setting_data()
 	
 ################################################################
 # player progress modules
@@ -259,12 +263,19 @@ func load_player_drone_data():
 	player_drone_data.player_name = player.player_name
 	
 ################################################################
-# sound
-var is_sfx_mute :bool = false setget _set_is_sfx_mute
-
-func _set_is_sfx_mute(val:bool):
-	is_sfx_mute = val
-	AudioServer.set_bus_mute(AudioServer.get_bus_index("sfx"), is_sfx_mute)
+# setting
+var setting_data :SettingData = SettingData.new()
+	
+func load_setting():
+	var setting = SaveLoad.load_save(player_setting_data_file)
+	if setting == null:
+		return
+		
+	setting_data.from_dictionary(setting)
+	
+func apply_setting_data():
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("sfx"), setting_data.is_sfx_mute)
+	setting_data.save_data(player_setting_data_file)
 	
 ################################################################
 # multiplayer connection and data

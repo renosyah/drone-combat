@@ -190,6 +190,11 @@ _global_script_classes=[ {
 "path": "res://addons/LANServerBroadcast/server_listener/ServerListener.gd"
 }, {
 "base": "BaseData",
+"class": "SettingData",
+"language": "GDScript",
+"path": "res://data/setting_data/SettingData.gd"
+}, {
+"base": "BaseData",
 "class": "SpMissionData",
 "language": "GDScript",
 "path": "res://data/sp_mission/SpMissionData.gd"
@@ -246,6 +251,7 @@ _global_script_class_icons={
 "ScoreData": "",
 "ServerAdvertiser": "res://addons/LANServerBroadcast/server_advertiser/server_advertiser.png",
 "ServerListener": "res://addons/LANServerBroadcast/server_listener/server_listener.png",
+"SettingData": "",
 "SpMissionData": "",
 "TweenRotation": "",
 "Utils": "",
