@@ -27,6 +27,7 @@ func _ready():
 	get_tree().set_quit_on_go_back(false)
 	get_tree().set_auto_accept_quit(false)
 	
+	_init_connection_watcher()
 	_init_floating_message_pool()
 	_init_item_holder()
 	_load_map()
@@ -38,7 +39,7 @@ func _ready():
 ################################################################
 # network connection watcher
 # for both client and host
-func init_connection_watcher():
+func _init_connection_watcher():
 	Network.connect("server_disconnected", self , "_server_disconnected")
 	Network.connect("connection_closed", self , "_connection_closed")
 	
@@ -56,7 +57,7 @@ func _server_disconnected():
 	on_host_disconnected()
 	
 func _connection_closed():
-	print("exit by Client!")
+	pass
 	
 func on_player_disynchronize(_player_name : String):
 	pass
