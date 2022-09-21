@@ -103,7 +103,7 @@ const chapter_2_mission_objective = [
 	"Defeat Snake",
 	"Defeat All 4 Marauder Drones",
 	"Defeat All 6 Wheel Drones",
-	"Defeat A Recketa Guard"
+	"Defeat A Rectketa Guard"
 ]
 const chapter_2_mission_reward_module = [
 	{},{},
@@ -161,21 +161,21 @@ const chapter_3_mission_name = [
 ]
 const chapter_3_mission_objective = [
 	"Regroup With Zilo",
-	"Defeat 2 Recketa Guard",
-	"Defeat Recketa Elite",
+	"Defeat 2 Rectketa Guard",
+	"Defeat Rectketa Elite",
 	"assist Juggernaut",
 	"Defeat All Enemy",
 	"Assist Jugernaut And Zilo",
-	"Defeat 4 Recketa Guard",
-	"Defeat 2 Recketa Guard And 2 Recketa Elite",
+	"Defeat 4 Rectketa Guard",
+	"Defeat 2 Rectketa Guard And 2 Rectketa Elite",
 	"Defeat Colonel Baton",
-	"Defeat 2 Recketa Elite",
-	"Defeat Recketa Elite And 2 Recketa Guard",
-	"Defeat All 3 Recketa Guard",
+	"Defeat 2 Rectketa Elite",
+	"Defeat Rectketa Elite And 2 Rectketa Guard",
+	"Defeat All 3 Rectketa Guard",
 	"Defeat Major Kura",
 	"Defeat All Enemy Drone",
 	"Defeat General Kelpin",
-	"Defeat All Recketa Guard And Escape"
+	"Defeat All Rectketa Guard And Escape"
 ]
 const chapter_3_mission_reward_module = [
 	DroneData.turrets[3],
@@ -795,12 +795,12 @@ func recketa_guard_drone() -> Dictionary:
 	return {
 		"player" : {
 			"player_id" : id,
-			"player_name" : "Recketa Guard",
+			"player_name" : "Rectketa Guard",
 			"player_team" : 3,
 		},
 		"drone_data" : {
 			"player_id": id,
-			"player_name": "Recketa Guard",
+			"player_name": "Rectketa Guard",
 			"hull_module" : DroneData.hulls[4],
 			"turret_module": DroneData.turrets[3],
 			"weapon_module": DroneData.weapons[2],
@@ -814,12 +814,12 @@ func recketa_elite_drone() -> Dictionary:
 	return {
 		"player" : {
 			"player_id" : id,
-			"player_name" : "Recketa Elite",
+			"player_name" : "Rectketa Elite",
 			"player_team" : 3,
 		},
 		"drone_data" : {
 			"player_id": id,
-			"player_name": "Recketa Elite",
+			"player_name": "Rectketa Elite",
 			"hull_module" : DroneData.hulls[5],
 			"turret_module": DroneData.turrets[5],
 			"weapon_module": DroneData.weapons[2],

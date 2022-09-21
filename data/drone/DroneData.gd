@@ -19,8 +19,9 @@ const weapons :Array = [
 		"scene" : "res://entity/weapons/twin_mg/twin_mg.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/weapon_4.png",
 		"infos" : [
-			"Very High Firing Rate",
-			"Very Low Damage"
+			"High Firing Rate",
+			"Low Damage",
+			"Double Projectile"
 		],
 		"modifier" : {}
 	},
@@ -91,7 +92,7 @@ const turrets :Array = [
 	},
 	{
 		"module_id":"t-2",
-		"module_name" : "Mk 2 Auto",
+		"module_name" : "Mk 2 Cobra",
 		"scene" : "res://entity/drone_turrets/turret_7/turret_7.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/turret_7.png",
 		"infos" : [
@@ -201,7 +202,7 @@ const turrets :Array = [
 const hulls :Array = [
 	{
 		"module_id":"h-1",
-		"module_name" : "Howen AM-A",
+		"module_name" : "AM-A LT",
 		"scene" : "res://entity/drone_hulls/hull_6/hull_6.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_6.png",
 		"infos" : [
@@ -218,7 +219,7 @@ const hulls :Array = [
 	},
 	{
 		"module_id":"h-2",
-		"module_name" : "Howen AM-B",
+		"module_name" : "AM-B Medium",
 		"scene" : "res://entity/drone_hulls/hull_3/hull_3.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_3.png",
 		"infos" : [
@@ -235,7 +236,7 @@ const hulls :Array = [
 	},
 	{
 		"module_id":"h-3",
-		"module_name" : "Izui MK 2",
+		"module_name" : "Lizard MK 2",
 		"scene" : "res://entity/drone_hulls/hull_2/hull_2.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_2.png",
 		"infos" : [
@@ -252,7 +253,7 @@ const hulls :Array = [
 	},
 	{
 		"module_id":"h-4",
-		"module_name" : "Izui X-AA",
+		"module_name" : "Lizard X-AA",
 		"scene" : "res://entity/drone_hulls/hull_5/hull_5.tscn",
 		"icon" : "res://assets/ui/choose-module/drone/hull_5.png",
 		"infos" : [
