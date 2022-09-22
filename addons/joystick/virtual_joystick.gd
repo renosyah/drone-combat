@@ -70,7 +70,10 @@ onready var _default_color : Color = _tip.modulate
 func _ready() -> void:
 	if not OS.has_touchscreen_ui_hint() and visibility_mode == VisibilityMode.TOUCHSCREEN_ONLY:
 		hide()
-
+		
+func _process(delta):
+	emit_signal("on_joystick_input", _output)
+	
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
 		if event.pressed:
@@ -125,8 +128,6 @@ func _update_joystick(touch_position: Vector2) -> void:
 	
 	if use_input_actions:
 		_update_input_actions()
-		
-	emit_signal("on_joystick_input", _output, _pressed)
 
 func _update_input_actions():
 	if _output.x < 0:
