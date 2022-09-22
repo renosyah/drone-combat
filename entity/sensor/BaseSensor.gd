@@ -8,7 +8,7 @@ var player:PlayerData
 
 export var scanning_speed:float = 0.07
 export var spotting_range : int = 1
-export var ground_sensor_altitude = 0.5
+export var ground_sensor_altitude = 0.2
 export var air_sensor_altitude = 10.0
 
 onready var _detected_sounds = [

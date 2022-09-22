@@ -256,10 +256,12 @@ func master_moving(delta):
 	if is_dead:
 		return
 		
-	if int(round(translation.y)) > int(_altitude):
+	if int(round(global_transform.origin.y)) > int(_altitude):
 		_velocity.y += _gravity * delta
 		_velocity = move_and_slide(_velocity, Vector3.UP)
 		return
+		
+	translation.y = _altitude
 		
 	if waypoint_mode:
 		move_to_waypoint(delta)
