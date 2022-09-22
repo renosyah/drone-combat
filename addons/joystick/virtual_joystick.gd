@@ -72,7 +72,7 @@ func _ready() -> void:
 		hide()
 		
 func _process(delta):
-	emit_signal("on_joystick_input", _output)
+	emit_signal("on_joystick_input", _output, _pressed)
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventScreenTouch:
