@@ -795,12 +795,12 @@ func recketa_guard_drone() -> Dictionary:
 	return {
 		"player" : {
 			"player_id" : id,
-			"player_name" : "Rectketa Guard",
+			"player_name" : "Guard",
 			"player_team" : 3,
 		},
 		"drone_data" : {
 			"player_id": id,
-			"player_name": "Rectketa Guard",
+			"player_name": "Guard",
 			"hull_module" : DroneData.hulls[4],
 			"turret_module": DroneData.turrets[3],
 			"weapon_module": DroneData.weapons[2],
@@ -814,12 +814,12 @@ func recketa_elite_drone() -> Dictionary:
 	return {
 		"player" : {
 			"player_id" : id,
-			"player_name" : "Rectketa Elite",
+			"player_name" : "Elite",
 			"player_team" : 3,
 		},
 		"drone_data" : {
 			"player_id": id,
-			"player_name": "Rectketa Elite",
+			"player_name": "Elite",
 			"hull_module" : DroneData.hulls[5],
 			"turret_module": DroneData.turrets[5],
 			"weapon_module": DroneData.weapons[2],
