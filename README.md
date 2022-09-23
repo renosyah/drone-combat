@@ -4,7 +4,10 @@ the simple drone battle
 
 
 ## Feature
+- single player campaign
 - multiplayer pvp or coop only up to 4 player
+- challenging bot to fight agains
+- customizable combat drone
 
 
 
@@ -15,28 +18,28 @@ the simple drone battle
 
 
 ## Gameplay
-![GitHub Logo](/ss/1.jpg)
+![GitHub Logo](/ss/1.jpg =180x370)
 
 - Single Player Campaign
 
- ![GitHub Logo](/ss/7.jpg) 
+![GitHub Logo](/ss/7.jpg =180x370) 
 
 
 - Customize your drone
 
-![GitHub Logo](/ss/3.jpg) ![GitHub Logo](/ss/4.jpg) 
+![GitHub Logo](/ss/3.jpg =180x370) ![GitHub Logo](/ss/4.jpg =180x370) 
 
-![GitHub Logo](/ss/5.jpg) ![GitHub Logo](/ss/6.jpg) 
+![GitHub Logo](/ss/5.jpg =180x370) ![GitHub Logo](/ss/6.jpg =180x370) 
 
 
 - Create lobby and play agains your friend
 
-![GitHub Logo](/ss/2.jpg) 
+![GitHub Logo](/ss/2.jpg =180x370) 
 
 
 - Have fun destroy all drone
 
-![GitHub Logo](/ss/8.jpg) ![GitHub Logo](/ss/9.jpg)
+![GitHub Logo](/ss/8.jpg =180x370) ![GitHub Logo](/ss/9.jpg =180x370)
 
 
 
