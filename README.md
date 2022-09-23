@@ -18,28 +18,28 @@ the simple drone battle
 
 
 ## Gameplay
-![GitHub Logo](/ss/1.jpg =180x370)
+![](https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/1.jpg =180x370)
 
 - Single Player Campaign
 
-![GitHub Logo](/ss/7.jpg =180x370) 
+![](https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/7.jpg =180x370) 
 
 
 - Customize your drone
 
-![GitHub Logo](/ss/3.jpg =180x370) ![GitHub Logo](/ss/4.jpg =180x370) 
+![](https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/3.jpg =180x370) ![](https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/4.jpg =180x370) 
 
-![GitHub Logo](/ss/5.jpg =180x370) ![GitHub Logo](/ss/6.jpg =180x370) 
+![](https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/5.jpg =180x370) ![](https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/6.jpg =180x370) 
 
 
 - Create lobby and play agains your friend
 
-![GitHub Logo](/ss/2.jpg =180x370) 
+![](https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/2.jpg =180x370) 
 
 
 - Have fun destroy all drone
 
-![GitHub Logo](/ss/8.jpg =180x370) ![GitHub Logo](/ss/9.jpg =180x370)
+![](https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/8.jpg =180x370) ![](https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/9.jpg =180x370)
 
 
 
