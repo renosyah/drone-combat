@@ -18,11 +18,8 @@ the simple drone battle
 
 
 ## Gameplay
-<img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/1.jpg" width="180" height="370" />
-
 - Single Player Campaign
-
-<img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/7.jpg" width="180" height="370" />
+<img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/1.jpg" width="180" height="370" /> <img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/7.jpg" width="180" height="370" />
 
 
 - Customize your drone
@@ -32,14 +29,9 @@ the simple drone battle
 <img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/5.jpg" width="180" height="370" /> <img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/6.jpg" width="180" height="370" />
 
 
-- Create lobby and play agains your friend
+- Play agains your friend & Have fun
 
-<img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/2.jpg" width="180" height="370" />
-
-
-- Have fun destroy all drone
-
-<img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/8.jpg" width="180" height="370" /> <img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/9.jpg" width="180" height="370" />
+<img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/2.jpg" width="180" height="370" /> <img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/8.jpg" width="180" height="370" /> <img src="https://raw.githubusercontent.com/renosyah/drone-combat/master/ss/9.jpg" width="180" height="370" />
 
 
 
