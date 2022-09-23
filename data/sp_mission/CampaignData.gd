@@ -163,7 +163,7 @@ const chapter_3_mission_objective = [
 	"Regroup With Zilo",
 	"Defeat 2 Rectketa Guard",
 	"Defeat Rectketa Elite",
-	"assist Juggernaut",
+	"Assist Juggernaut",
 	"Defeat All Enemy",
 	"Assist Jugernaut And Zilo",
 	"Defeat 4 Rectketa Guard",
