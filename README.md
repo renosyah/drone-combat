@@ -15,22 +15,28 @@ the simple drone battle
 
 
 ## Gameplay
-![GitHub Logo](/ss/1.jpg) 
+![GitHub Logo](/ss/1.jpg)
+
+- Single Player Campaign
+
+ ![GitHub Logo](/ss/7.jpg) 
 
 
 - Customize your drone
 
-![GitHub Logo](/ss/2.jpg) ![GitHub Logo](/ss/2_1.jpg) ![GitHub Logo](/ss/2_2.jpg)
+![GitHub Logo](/ss/3.jpg) ![GitHub Logo](/ss/4.jpg) 
+
+![GitHub Logo](/ss/5.jpg) ![GitHub Logo](/ss/6.jpg) 
 
 
 - Create lobby and play agains your friend
 
-![GitHub Logo](/ss/3.jpg)
+![GitHub Logo](/ss/2.jpg) 
 
 
 - Have fun destroy all drone
 
-![GitHub Logo](/ss/4.jpg) ![GitHub Logo](/ss/5.jpg) ![GitHub Logo](/ss/6.jpg)
+![GitHub Logo](/ss/8.jpg) ![GitHub Logo](/ss/9.jpg)
 
 
 
