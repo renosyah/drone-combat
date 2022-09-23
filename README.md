@@ -13,7 +13,10 @@ the simple drone battle
 
 ## Addons
 - server browser/finder use modify addon from [LANServerBroadcast by Wavesonics](https://github.com/Wavesonics/LANServerBroadcast).
-- validate mobile input touch use modify addon from [Godot-Touch-Input-Manager by Federico-Ciuffardi](https://github.com/Federico-Ciuffardi/Godot-Touch-Input-Manager).
+- virtual joystick use modify addon from [godot-touch-input by Rayuse](https://github.com/Rayuse/godot-touch-input).
+
+## Asset
+- tree, rock & bush mesh asset from [Simple Nature Pack by quaternius](https://quaternius.com/packs/simplenature.html)
 
 
 
