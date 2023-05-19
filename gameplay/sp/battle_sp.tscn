@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://gameplay/sp/battle_sp.gd" type="Script" id=1]
+
+[node name="battle" type="Node"]
+script = ExtResource( 1 )
+
+[node name="bot_action_timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="mission_checker" type="Timer" parent="."]
+autostart = true
+
+[node name="health_item_spawner_timer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="ammo_item_spawner_timer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[connection signal="timeout" from="bot_action_timer" to="." method="_on_bot_action_timer_timeout"]
+[connection signal="timeout" from="mission_checker" to="." method="_on_mission_checker_timeout"]
+[connection signal="timeout" from="health_item_spawner_timer" to="." method="_on_health_item_spawner_timer_timeout"]
+[connection signal="timeout" from="ammo_item_spawner_timer" to="." method="_on_ammo_item_spawner_timer_timeout"]

@@ -1,0 +1,174 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://entity/weapons/mg/mg.gd" type="Script" id=1]
+[ext_resource path="res://entity/projectile/mg_bullet/mg_bullet.tscn" type="PackedScene" id=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 0.2, 0.2, 1 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[sub_resource type="CylinderMesh" id=3]
+top_radius = 0.03
+bottom_radius = 0.04
+height = 1.7
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.0862745, 0.0862745, 0.0862745, 1 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 0.7, 0.3, 0.3 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0.317647, 0.317647, 0.317647, 1 )
+
+[sub_resource type="CubeMesh" id=10]
+size = Vector3( 0.6, 0.2, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 1, 0.466667, 0, 1 )
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/spark:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "firing"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, -0.3 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/spark:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/spark:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[node name="mg" type="Spatial"]
+script = ExtResource( 1 )
+projectile = ExtResource( 2 )
+sensor_path = NodePath("RayCast")
+attack_range = 12
+attack_delay = 0.2
+
+[node name="pivot" type="Spatial" parent="."]
+
+[node name="body" type="MeshInstance" parent="pivot"]
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 2 )
+
+[node name="barel" type="MeshInstance" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.555089 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 4 )
+
+[node name="mag_box" type="MeshInstance" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.102509, 0.169889 )
+mesh = SubResource( 5 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 6 )
+
+[node name="spark" type="Spatial" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.161469 )
+visible = false
+
+[node name="MeshInstance" type="MeshInstance" parent="pivot/spark"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2492 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="pivot/spark"]
+transform = Transform( 0.87112, -0.491071, 0, 0.491071, 0.87112, 0, 0, 0, 1, 0, 0, 1.2492 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="pivot/spark"]
+transform = Transform( 0.426411, 0.90453, 0, -0.90453, 0.426411, 0, 0, 0, 1, 0, 0, 1.2492 )
+mesh = SubResource( 10 )
+material/0 = SubResource( 11 )
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5 )
+enabled = true
+cast_to = Vector3( 0, 0, 1 )
+
+[node name="projectile_spawn_pos" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.46318 )
+
+[node name="projectile_target_pos" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.17587 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/RESET = SubResource( 7 )
+anims/firing = SubResource( 8 )
+anims/idle = SubResource( 9 )

@@ -1,0 +1,432 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/ui/server-browser/server_browser.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=2]
+[ext_resource path="res://menu/main-menu/ui/ui.gd" type="Script" id=3]
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_16.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/ui/simple_dialog_option/simple_dialog_option.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/ui/icon/rename.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/input-name/input_name.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/ui/icon/turret.jpg" type="Texture" id=8]
+[ext_resource path="res://assets/ui/icon/hull.jpg" type="Texture" id=9]
+[ext_resource path="res://assets/ui/icon/radar.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/input-color/input_color.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/ui/icon/weapon.png" type="Texture" id=12]
+[ext_resource path="res://assets/ui/choose-module/choose_drone_module.tscn" type="PackedScene" id=13]
+[ext_resource path="res://assets/ui/icon/setting.png" type="Texture" id=14]
+[ext_resource path="res://assets/button/border_button.tscn" type="PackedScene" id=15]
+[ext_resource path="res://menu/main-menu/ui/setting/setting.tscn" type="PackedScene" id=16]
+[ext_resource path="res://menu/main-menu/ui/host_setting/host_setting.tscn" type="PackedScene" id=17]
+[ext_resource path="res://assets/ui/simple_dialog_message/exception_message.tscn" type="PackedScene" id=18]
+[ext_resource path="res://assets/ui/choose-map/choose_map.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/ui/choose-mission/choose_mission.tscn" type="PackedScene" id=20]
+
+[node name="main_menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/Control3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control3/VBoxContainer2"]
+margin_right = 600.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.27451, 0.27451, 0.27451, 0.756863 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/Control3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+margin_left = 104.0
+margin_right = 219.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="change_name" type="Button" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+margin_left = 223.0
+margin_right = 283.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 60, 80 )
+flat = true
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer/change_name"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
+texture = ExtResource( 6 )
+expand = true
+
+[node name="player_name_label" type="Label" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+margin_left = 287.0
+margin_top = 30.0
+margin_right = 396.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 2 )
+text = "Player"
+align = 1
+valign = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+margin_left = 400.0
+margin_right = 516.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="setting" type="Button" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+margin_left = 520.0
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 80, 100 )
+flat = true
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer/setting"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.0
+margin_top = -30.0
+margin_right = 30.0
+margin_bottom = 30.0
+texture = ExtResource( 14 )
+expand = true
+
+[node name="Control2" type="Control" parent="CanvasLayer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 600.0
+margin_bottom = 770.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/Control2"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -160.0
+
+[node name="player_name_label2" type="Label" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 28.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 1
+custom_constants/shadow_offset_y = 1
+custom_fonts/font = ExtResource( 4 )
+text = "Customize Your Drone"
+align = 1
+valign = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
+margin_top = 32.0
+margin_right = 600.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 0, 14 )
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
+margin_top = 50.0
+margin_right = 600.0
+margin_bottom = 150.0
+alignment = 1
+
+[node name="drone_weapon_btn" type="Button" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2"]
+margin_left = 42.0
+margin_right = 142.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+flat = true
+
+[node name="ColorRect6" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_weapon_btn"]
+modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_weapon_btn"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 2
+texture = ExtResource( 12 )
+expand = true
+
+[node name="drone_turret_btn2" type="Button" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2"]
+margin_left = 146.0
+margin_right = 246.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+flat = true
+
+[node name="ColorRect5" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn2"]
+modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn2"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="drone_hull_btn" type="Button" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2"]
+margin_left = 250.0
+margin_right = 350.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+flat = true
+
+[node name="ColorRect4" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_hull_btn"]
+modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_hull_btn"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+
+[node name="drone_sensor_btn" type="Button" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2"]
+margin_left = 354.0
+margin_right = 454.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+flat = true
+
+[node name="ColorRect3" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_sensor_btn"]
+modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_sensor_btn"]
+modulate = Color( 0.627451, 0.627451, 0.627451, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 2
+texture = ExtResource( 10 )
+expand = true
+
+[node name="drone_color_btn" type="Button" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2"]
+margin_left = 458.0
+margin_right = 558.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+flat = true
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_color_btn"]
+modulate = Color( 0.509804, 0.509804, 0.509804, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_color_btn"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+mouse_filter = 2
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control2/VBoxContainer"]
+margin_top = 154.0
+margin_right = 600.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
+margin_top = 774.0
+margin_right = 600.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 0, 250 )
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 125 )
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer3"]
+margin_right = 600.0
+margin_bottom = 250.0
+rect_min_size = Vector2( 0, 125 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.27451, 0.27451, 0.27451, 0.756863 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 125 )
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer"]
+margin_top = 44.0
+margin_right = 600.0
+margin_bottom = 124.0
+rect_min_size = Vector2( 0, 80 )
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
+margin_right = 78.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 40, 0 )
+size_flags_horizontal = 3
+
+[node name="host" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer" instance=ExtResource( 15 )]
+margin_left = 82.0
+margin_right = 202.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 120, 80 )
+button_color = Color( 0, 0.517647, 0.164706, 1 )
+button_label = "Host"
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
+margin_left = 206.0
+margin_right = 216.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="battle" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer" instance=ExtResource( 15 )]
+margin_left = 220.0
+margin_right = 380.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 160, 80 )
+button_color = Color( 0.603922, 0, 0, 1 )
+button_label = "Battle"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
+margin_left = 384.0
+margin_right = 394.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="join" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer" instance=ExtResource( 15 )]
+margin_left = 398.0
+margin_right = 518.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 120, 80 )
+button_color = Color( 0, 0.223529, 0.490196, 1 )
+button_label = "Join"
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer"]
+margin_left = 522.0
+margin_right = 600.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 40, 0 )
+size_flags_horizontal = 3
+
+[node name="choose_mission" parent="CanvasLayer" instance=ExtResource( 20 )]
+visible = false
+
+[node name="choose_map" parent="CanvasLayer" instance=ExtResource( 19 )]
+visible = false
+
+[node name="host_setting" parent="CanvasLayer" instance=ExtResource( 17 )]
+visible = false
+
+[node name="server_browser" parent="CanvasLayer" instance=ExtResource( 1 )]
+visible = false
+
+[node name="simple_dialog_option" parent="CanvasLayer" instance=ExtResource( 5 )]
+visible = false
+
+[node name="input_name" parent="CanvasLayer" instance=ExtResource( 7 )]
+visible = false
+
+[node name="input_color" parent="CanvasLayer" instance=ExtResource( 11 )]
+visible = false
+
+[node name="setting" parent="CanvasLayer" instance=ExtResource( 16 )]
+visible = false
+
+[node name="choose_drone_module" parent="CanvasLayer" instance=ExtResource( 13 )]
+visible = false
+
+[node name="exception_message" parent="CanvasLayer" instance=ExtResource( 18 )]
+visible = false
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control3/HBoxContainer/change_name" to="." method="_on_change_name_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control3/HBoxContainer/setting" to="." method="_on_setting_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_weapon_btn" to="." method="_on_drone_weapon_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn2" to="." method="_on_drone_turret_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_hull_btn" to="." method="_on_drone_hull_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_sensor_btn" to="." method="_on_drone_sensor_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_color_btn" to="." method="_on_drone_color_btn_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/battle" to="." method="_on_battle_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control/VBoxContainer/HBoxContainer/join" to="." method="_on_join_pressed"]
+[connection signal="on_mission_choosed" from="CanvasLayer/choose_mission" to="." method="_on_choose_mission_on_mission_choosed"]
+[connection signal="on_map_choosed" from="CanvasLayer/choose_map" to="." method="_on_choose_map_on_map_choosed"]
+[connection signal="create" from="CanvasLayer/host_setting" to="." method="_on_host_setting_create"]
+[connection signal="close" from="CanvasLayer/server_browser" to="." method="_on_server_browser_close"]
+[connection signal="on_error" from="CanvasLayer/server_browser" to="." method="_on_server_browser_on_error"]
+[connection signal="on_join" from="CanvasLayer/server_browser" to="." method="_on_server_browser_on_join"]
+[connection signal="on_yes" from="CanvasLayer/simple_dialog_option" to="." method="_on_simple_dialog_option_on_yes"]
+[connection signal="on_continue" from="CanvasLayer/input_name" to="." method="_on_input_name_on_continue"]
+[connection signal="on_pick" from="CanvasLayer/input_color" to="." method="_on_input_color_on_pick"]

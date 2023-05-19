@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://entity/projectile/high_caliber/high_caliber.gd" type="Script" id=1]
+[ext_resource path="res://assets/other/trail/trail.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entity/projectile/high_caliber/high_caliber.tres" type="Shape" id=3]
+
+[sub_resource type="CylinderMesh" id=6]
+top_radius = 0.04
+bottom_radius = 0.2
+height = 0.7
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_color = Color( 0.294118, 0.294118, 0.294118, 1 )
+
+[node name="high_caliber" type="Spatial"]
+script = ExtResource( 1 )
+collision_shape = ExtResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
+
+[node name="trail" parent="." instance=ExtResource( 2 )]

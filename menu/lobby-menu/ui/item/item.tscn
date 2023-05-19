@@ -1,0 +1,166 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://menu/lobby-menu/ui/item/item.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/ui/icon/kick.png" type="Texture" id=4]
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_14.tres" type="DynamicFont" id=5]
+
+[node name="item" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 0.0976563
+rect_min_size = Vector2( 600, 100 )
+mouse_filter = 2
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -30.0
+mouse_filter = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="HBoxContainer"]
+margin_right = 67.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="team_button" type="Button" parent="HBoxContainer"]
+margin_left = 71.0
+margin_right = 171.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+
+[node name="team_color2" type="ColorRect" parent="HBoxContainer/team_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 100, 100 )
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="team_color" type="ColorRect" parent="HBoxContainer/team_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 92, 92 )
+mouse_filter = 2
+color = Color( 0.396078, 0.396078, 0.396078, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/team_button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/team_button/VBoxContainer"]
+margin_top = 20.0
+margin_right = 100.0
+margin_bottom = 36.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "Team"
+align = 1
+
+[node name="player_team" type="Label" parent="HBoxContainer/team_button/VBoxContainer"]
+margin_top = 40.0
+margin_right = 100.0
+margin_bottom = 80.0
+custom_constants/shadow_as_outline = 0
+custom_fonts/font = ExtResource( 3 )
+text = "1"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 175.0
+margin_right = 425.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 250, 0 )
+alignment = 1
+
+[node name="player_name" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 14.0
+margin_right = 250.0
+margin_bottom = 54.0
+custom_constants/shadow_as_outline = 0
+custom_fonts/font = ExtResource( 3 )
+text = "hello"
+align = 1
+valign = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+margin_top = 58.0
+margin_right = 250.0
+margin_bottom = 86.0
+custom_colors/font_color = Color( 0.666667, 0.666667, 0.666667, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 2
+custom_fonts/font = ExtResource( 2 )
+text = "Not Ready"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="panel" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 429.0
+margin_right = 529.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 100, 100 )
+
+[node name="kick_player" type="Button" parent="HBoxContainer/panel"]
+margin_right = 100.0
+margin_bottom = 100.0
+flat = true
+
+[node name="bg2" type="ColorRect" parent="HBoxContainer/panel/kick_player"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 100, 100 )
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="bg" type="ColorRect" parent="HBoxContainer/panel/kick_player"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+rect_min_size = Vector2( 92, 92 )
+mouse_filter = 2
+color = Color( 0.615686, 0, 0, 1 )
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/panel/kick_player"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -30.0
+margin_top = -30.0
+margin_right = 30.0
+margin_bottom = 30.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="MarginContainer4" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 533.0
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="HBoxContainer/team_button" to="." method="_on_team_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/panel/kick_player" to="." method="_on_kick_player_pressed"]

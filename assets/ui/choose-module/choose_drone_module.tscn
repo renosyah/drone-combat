@@ -1,0 +1,107 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/ui/choose-module/choose_drone_module.gd" type="Script" id=2]
+[ext_resource path="res://assets/ui/icon/back.png" type="Texture" id=3]
+
+[node name="choose_drone_module" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 600 )
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.905882 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 0, 100 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+
+[node name="button_close" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
+margin_right = 80.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 80, 80 )
+icon = ExtResource( 3 )
+flat = true
+expand_icon = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/Control/HBoxContainer"]
+margin_left = 84.0
+margin_right = 245.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="title" type="Label" parent="VBoxContainer/Control/HBoxContainer"]
+margin_left = 249.0
+margin_top = 20.0
+margin_right = 351.0
+margin_bottom = 80.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 1 )
+text = "Hull"
+align = 1
+valign = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Control/HBoxContainer"]
+margin_left = 355.0
+margin_right = 516.0
+margin_bottom = 100.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Control/HBoxContainer"]
+margin_left = 520.0
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 80, 80 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 104.0
+margin_right = 600.0
+margin_bottom = 1024.0
+size_flags_vertical = 3
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 248.0
+margin_bottom = 920.0
+size_flags_vertical = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 920.0
+rect_min_size = Vector2( 40, 80 )
+size_flags_vertical = 3
+
+[node name="holder" type="HBoxContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+margin_left = 44.0
+margin_right = 44.0
+margin_bottom = 920.0
+size_flags_vertical = 3
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/ScrollContainer/HBoxContainer"]
+margin_left = 48.0
+margin_right = 248.0
+margin_bottom = 920.0
+rect_min_size = Vector2( 200, 80 )
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer/button_close" to="." method="_on_button_close_pressed"]

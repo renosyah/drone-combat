@@ -1,0 +1,140 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=1]
+[ext_resource path="res://entity/item/ammo_item/ammo_item.gd" type="Script" id=2]
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.369902, 0.361204, 0.384236 )
+
+[sub_resource type="CylinderMesh" id=7]
+top_radius = 0.04
+bottom_radius = 0.2
+height = 0.4
+
+[sub_resource type="SpatialMaterial" id=2]
+next_pass = ExtResource( 1 )
+albedo_color = Color( 0.278431, 0.278431, 0.278431, 1 )
+
+[sub_resource type="CylinderMesh" id=8]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0
+
+[sub_resource type="SpatialMaterial" id=9]
+next_pass = ExtResource( 1 )
+albedo_color = Color( 0.960784, 0.411765, 0, 1 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spatial:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spatial:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0.5, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Spatial:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Spatial:translation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0.2, 0 ) ]
+}
+
+[node name="ammo_item" type="Area"]
+input_ray_pickable = false
+monitorable = false
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.1, 0 )
+shape = SubResource( 6 )
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
+
+[node name="shell" type="Spatial" parent="Spatial"]
+transform = Transform( 0.259794, -0.963555, -0.063784, 0.963555, 0.254298, 0.0830302, -0.0637841, -0.0830303, 0.994503, 0.177245, 0.601607, 0.0541512 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial/shell"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762369, 0 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 2 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Spatial/shell"]
+mesh = SubResource( 8 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 9 )
+
+[node name="shell2" type="Spatial" parent="Spatial"]
+transform = Transform( 0.259794, -0.963555, -0.0637841, 0.963555, 0.254298, 0.0830301, -0.063784, -0.0830302, 0.994504, 0.0981349, 0.256485, -0.0847914 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial/shell2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762369, 0 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 2 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Spatial/shell2"]
+mesh = SubResource( 8 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 9 )
+
+[node name="shell3" type="Spatial" parent="Spatial"]
+transform = Transform( 0.259794, -0.963555, -0.0637841, 0.963555, 0.254298, 0.0830301, -0.063784, -0.0830302, 0.994504, 0.088173, 0.338512, 0.282039 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Spatial/shell3"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.762369, 0 )
+mesh = SubResource( 7 )
+skeleton = NodePath("../../..")
+material/0 = SubResource( 2 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="Spatial/shell3"]
+mesh = SubResource( 8 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 9 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/RESET = SubResource( 4 )
+anims/idle = SubResource( 5 )

@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_16.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/ui/scoreboard/item/item.gd" type="Script" id=2]
+
+[node name="item" type="HBoxContainer"]
+margin_right = 600.0
+margin_bottom = 50.0
+mouse_filter = 2
+size_flags_vertical = 0
+script = ExtResource( 2 )
+
+[node name="MarginContainer5" type="MarginContainer" parent="."]
+margin_right = 20.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 20, 0 )
+
+[node name="MarginContainer" type="CenterContainer" parent="."]
+margin_left = 24.0
+margin_right = 124.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 80, 80 )
+
+[node name="color" type="ColorRect" parent="MarginContainer"]
+margin_top = 15.0
+margin_right = 100.0
+margin_bottom = 65.0
+rect_min_size = Vector2( 100, 50 )
+color = Color( 0.396078, 0.396078, 0.396078, 1 )
+
+[node name="MarginContainer2" type="CenterContainer" parent="."]
+margin_left = 128.0
+margin_right = 368.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
+
+[node name="player_name" type="Label" parent="MarginContainer2"]
+margin_left = 85.0
+margin_top = 26.0
+margin_right = 154.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 1 )
+text = "name"
+
+[node name="MarginContainer3" type="CenterContainer" parent="."]
+margin_left = 372.0
+margin_right = 472.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 100, 0 )
+
+[node name="kill_count" type="Label" parent="MarginContainer3"]
+margin_left = 42.0
+margin_top = 26.0
+margin_right = 57.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+
+[node name="MarginContainer4" type="CenterContainer" parent="."]
+margin_left = 476.0
+margin_right = 576.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 100, 0 )
+
+[node name="death_count" type="Label" parent="MarginContainer4"]
+margin_left = 42.0
+margin_top = 26.0
+margin_right = 57.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 1 )
+text = "0"
+
+[node name="MarginContainer6" type="MarginContainer" parent="."]
+margin_left = 580.0
+margin_right = 600.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 20, 0 )

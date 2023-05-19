@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://map/BaseMap.gd" type="Script" id=1]
+
+[sub_resource type="PlaneMesh" id=7]
+size = Vector2( 100, 100 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.321569, 0.14902, 0, 1 )
+
+[sub_resource type="ConvexPolygonShape" id=19]
+points = PoolVector3Array( -50, 0, -50, -50, 0, 50, 50, 0, -50, 50, 0, 50 )
+
+[sub_resource type="PlaneMesh" id=12]
+size = Vector2( 100, 15 )
+
+[sub_resource type="ConvexPolygonShape" id=15]
+points = PoolVector3Array( -50, 0, -7.5, -50, 0, 7.5, 50, 0, -7.5, 50, 0, 7.5 )
+
+[sub_resource type="PlaneMesh" id=11]
+size = Vector2( 100, 15 )
+
+[sub_resource type="ConvexPolygonShape" id=16]
+points = PoolVector3Array( -50, 0, -7.5, -50, 0, 7.5, 50, 0, -7.5, 50, 0, 7.5 )
+
+[sub_resource type="PlaneMesh" id=13]
+size = Vector2( 100, 15 )
+
+[sub_resource type="ConvexPolygonShape" id=17]
+points = PoolVector3Array( -50, 0, -7.5, -50, 0, 7.5, 50, 0, -7.5, 50, 0, 7.5 )
+
+[sub_resource type="PlaneMesh" id=14]
+size = Vector2( 100, 15 )
+
+[sub_resource type="ConvexPolygonShape" id=18]
+points = PoolVector3Array( -50, 0, -7.5, -50, 0, 7.5, 50, 0, -7.5, 50, 0, 7.5 )
+
+[node name="map_1" type="StaticBody"]
+script = ExtResource( 1 )
+max_stuff = 45
+
+[node name="grass" type="MeshInstance" parent="."]
+cast_shadow = 0
+mesh = SubResource( 7 )
+material/0 = SubResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 19 )
+
+[node name="wall" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 48.8977 )
+
+[node name="CSGMesh" type="MeshInstance" parent="wall"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
+mesh = SubResource( 12 )
+
+[node name="CollisionShape" type="CollisionShape" parent="wall"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 15 )
+
+[node name="wall2" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -49.2263 )
+
+[node name="CSGMesh" type="MeshInstance" parent="wall2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
+mesh = SubResource( 11 )
+
+[node name="CollisionShape" type="CollisionShape" parent="wall2"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 16 )
+
+[node name="wall3" type="StaticBody" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -48.7415, 0, -0.339489 )
+
+[node name="CSGMesh" type="MeshInstance" parent="wall3"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
+mesh = SubResource( 13 )
+
+[node name="CollisionShape" type="CollisionShape" parent="wall3"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 17 )
+
+[node name="wall4" type="StaticBody" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 48.8835, 0, -0.339489 )
+
+[node name="CSGMesh" type="MeshInstance" parent="wall4"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
+mesh = SubResource( 14 )
+
+[node name="CollisionShape" type="CollisionShape" parent="wall4"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 18 )

@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://entity/drone_turrets/turret_3/turret_3.gd" type="Script" id=1]
+[ext_resource path="res://addons/3DOutline/Outline.material" type="Material" id=2]
+
+[sub_resource type="ConvexPolygonShape" id=14]
+points = PoolVector3Array( -0.656335, -0.178607, -0.0167412, 0.680459, -0.231522, 0.10191, 0.674098, -0.212535, 0.067305, -0.117726, 0.242201, 0.38718, 0.0505551, 0.208801, -0.421375, 0.102631, -0.25, -0.684417, -0.102639, -0.25, 0.684417, 0.318046, 0.240855, 0.251059, -0.318051, 0.240852, -0.251056, -0.410545, -0.25, -0.564631, 0.35171, 0.241017, -0.20085, 0.359219, -0.25, 0.598798, -0.564498, -0.25, 0.410409, 0.564489, -0.25, -0.410409, -0.387137, 0.242256, 0.117749, -0.632966, -0.25, -0.290757, 0.117718, 0.242203, 0.387182, 0.353172, -0.228967, -0.588718, 0.59879, -0.25, 0.359225, -0.117726, 0.242201, -0.38718, 0.387134, 0.24226, 0.117751, -0.359227, -0.25, 0.598798, -0.167863, -0.211867, -0.655127, -0.251059, 0.240852, 0.318048, 0.655129, -0.21187, -0.167863, -0.387137, 0.242256, -0.117749, 0.251053, 0.240855, -0.318051, 0.067429, -0.212525, 0.674074, -0.662371, -0.231206, 0.186778, 0.421378, 0.208805, -0.0504289, -0.518046, -0.210803, -0.43454, 0.469884, -0.211686, 0.486716, 0.117718, 0.242203, -0.387182, 0.251056, 0.240858, 0.318055, 0.632957, -0.25, -0.290757, -0.0673079, -0.212532, -0.674096, -0.680457, -0.231518, -0.101909, -0.351714, 0.241014, 0.200847, -0.251062, 0.240855, -0.318052, -0.290759, -0.25, -0.632965, -0.0505637, 0.2088, 0.421374, -0.219077, -0.212538, 0.640329, 0.188249, -0.25, 0.667267, -0.632966, -0.25, 0.290757, 0.167991, -0.211872, -0.655145, -0.469898, -0.211688, 0.486721, 0.469894, -0.21169, -0.486726, -0.421348, 0.208852, 0.0504401, 0.640331, -0.212541, 0.219077, 0.684409, -0.25, -0.102502, 0.387134, 0.24226, -0.117751, 0.290751, -0.25, -0.632965, -0.0673079, -0.212532, 0.674095, 0.674098, -0.212536, -0.0673051, 0.067429, -0.212525, -0.674073, -0.680466, -0.231521, 0.10191, 0.268563, -0.211717, 0.621007, -0.585643, -0.19438, -0.317988, -0.318054, 0.240855, 0.251059, 0.31805, 0.240858, -0.251062, -0.421358, 0.208857, -0.0504413, -0.21718, 0.156787, -0.40073, -0.662398, -0.231215, -0.186786, 0.20095, 0.240986, 0.351672 )
+
+[sub_resource type="CylinderMesh" id=8]
+top_radius = 0.4
+bottom_radius = 0.7
+height = 0.5
+
+[sub_resource type="SpatialMaterial" id=10]
+next_pass = ExtResource( 2 )
+albedo_color = Color( 0.635294, 0.635294, 0.635294, 1 )
+
+[sub_resource type="CubeMesh" id=6]
+size = Vector3( 1, 0.4, 1 )
+
+[sub_resource type="SpatialMaterial" id=7]
+next_pass = ExtResource( 2 )
+albedo_color = Color( 0.407843, 0.407843, 0.407843, 1 )
+
+[sub_resource type="CylinderMesh" id=12]
+top_radius = 0.8
+bottom_radius = 0.8
+height = 0.1
+
+[sub_resource type="SpatialMaterial" id=13]
+next_pass = ExtResource( 2 )
+albedo_color = Color( 0.286275, 0.286275, 0.286275, 1 )
+
+[sub_resource type="CubeMesh" id=9]
+size = Vector3( 0.3, 0.6, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 0.435294, 0.435294, 0.435294, 1 )
+
+[node name="turret_3" type="KinematicBody"]
+input_ray_pickable = false
+script = ExtResource( 1 )
+body_path = NodePath(".")
+head_path = NodePath("pivot/weapon")
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.314069, 0 )
+shape = SubResource( 14 )
+
+[node name="pivot" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.314069, 0 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 10 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 7.10543e-15, 0, 1, 7.39865e-08, 0.212872, -0.531498 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="pivot"]
+mesh = SubResource( 12 )
+material/0 = SubResource( 13 )
+
+[node name="weapon" type="Spatial" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.277917, 0.35 )
+
+[node name="weapon_pos" type="Position3D" parent="pivot/weapon"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00299999, 0.19616 )
+
+[node name="MeshInstance" type="MeshInstance" parent="pivot/weapon"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2118, -0.381571 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 11 )
+
+[node name="sensor_pos" type="Position3D" parent="pivot"]
+transform = Transform( 1, 0, 7.10543e-15, 0, 1, 0, 0, 0, 1, 1.85619e-08, 0.425665, -0.683938 )

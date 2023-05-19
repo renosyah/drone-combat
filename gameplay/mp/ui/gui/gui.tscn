@@ -1,0 +1,319 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/ui/mini_map/MiniMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/ui/bar/hp_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/ui/hurt/hurt.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/ui/icon/menu.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/icon/score.png" type="Texture" id=6]
+[ext_resource path="res://assets/ui/icon/no_ammo.png" type="Texture" id=7]
+[ext_resource path="res://assets/ui/bar/hp_bar_vertical.tscn" type="PackedScene" id=8]
+[ext_resource path="res://gameplay/mp/ui/gui/gui.gd" type="Script" id=9]
+[ext_resource path="res://assets/ui/icon/ammo.png" type="Texture" id=10]
+[ext_resource path="res://assets/ui/fonts/montserrat_eb_16.tres" type="DynamicFont" id=11]
+[ext_resource path="res://assets/ui/icon/time.png" type="Texture" id=12]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/HBoxContainer/no_ammo_icon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "beep"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/HBoxContainer/no_ammo_icon:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.160784 ) ]
+}
+
+[node name="gui" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 9 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="hbox" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 600.0
+margin_bottom = 100.0
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer/hbox"]
+margin_right = 10.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 10, 0 )
+mouse_filter = 2
+
+[node name="button_score" type="Button" parent="VBoxContainer/hbox"]
+modulate = Color( 1, 1, 1, 0.658824 )
+margin_left = 14.0
+margin_right = 94.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 80, 80 )
+icon = ExtResource( 6 )
+flat = true
+expand_icon = true
+
+[node name="MarginContainer" type="CenterContainer" parent="VBoxContainer/hbox"]
+margin_left = 98.0
+margin_right = 492.0
+margin_bottom = 100.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/hbox/MarginContainer"]
+margin_left = 23.0
+margin_right = 371.0
+margin_bottom = 100.0
+mouse_filter = 2
+alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/hbox/MarginContainer/HBoxContainer"]
+margin_right = 20.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/hbox/MarginContainer/HBoxContainer"]
+margin_left = 24.0
+margin_right = 324.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 300, 100 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/hbox/MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 0, 25 )
+
+[node name="player_hp_bar" parent="VBoxContainer/hbox/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 29.0
+margin_right = 300.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 0, 50 )
+mouse_filter = 2
+
+[node name="player_name" type="Label" parent="VBoxContainer/hbox/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_fonts/font = ExtResource( 4 )
+text = "Hull"
+align = 1
+valign = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer/hbox/MarginContainer/HBoxContainer"]
+margin_left = 328.0
+margin_right = 348.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="button_menu" type="Button" parent="VBoxContainer/hbox"]
+modulate = Color( 1, 1, 1, 0.658824 )
+margin_left = 496.0
+margin_right = 576.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 80, 80 )
+icon = ExtResource( 5 )
+flat = true
+expand_icon = true
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/hbox"]
+margin_left = 580.0
+margin_right = 600.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
+
+[node name="MarginContainer7" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 104.0
+margin_right = 600.0
+margin_bottom = 184.0
+rect_min_size = Vector2( 100, 80 )
+mouse_filter = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer7"]
+margin_left = 243.0
+margin_right = 357.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer7/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 12 )
+expand = true
+
+[node name="time" type="Label" parent="VBoxContainer/MarginContainer7/HBoxContainer"]
+margin_left = 44.0
+margin_top = 6.0
+margin_right = 114.0
+margin_bottom = 34.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/line_spacing = 1
+custom_constants/shadow_offset_y = 1
+custom_constants/shadow_as_outline = 1
+custom_fonts/font = ExtResource( 11 )
+text = "00:00"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 188.0
+margin_right = 600.0
+margin_bottom = 620.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 70.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 70, 0 )
+mouse_filter = 2
+
+[node name="MarginContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer3"]
+margin_right = 70.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 70, 300 )
+mouse_filter = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer2" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2"]
+margin_top = 37.0
+margin_right = 70.0
+margin_bottom = 337.0
+rect_min_size = Vector2( 70, 300 )
+mouse_filter = 2
+alignment = 1
+
+[node name="ammo_bar_vertical" parent="VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/VBoxContainer2" instance=ExtResource( 8 )]
+margin_left = 25.0
+margin_right = 45.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 20, 300 )
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2"]
+margin_top = 341.0
+margin_right = 70.0
+margin_bottom = 351.0
+rect_min_size = Vector2( 0, 10 )
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2"]
+margin_top = 355.0
+margin_right = 70.0
+margin_bottom = 395.0
+mouse_filter = 2
+alignment = 1
+
+[node name="no_ammo_icon" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/HBoxContainer"]
+visible = false
+modulate = Color( 1, 0.423529, 0, 1 )
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
+texture = ExtResource( 7 )
+expand = true
+
+[node name="ammo_icon" type="TextureRect" parent="VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/HBoxContainer"]
+modulate = Color( 1, 0.498039, 0, 1 )
+margin_left = 15.0
+margin_right = 55.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+mouse_filter = 2
+texture = ExtResource( 10 )
+expand = true
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 74.0
+margin_right = 94.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 20, 0 )
+mouse_filter = 2
+
+[node name="overlay_map" parent="VBoxContainer/HBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 98.0
+margin_right = 506.0
+margin_bottom = 432.0
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 510.0
+margin_right = 600.0
+margin_bottom = 432.0
+rect_min_size = Vector2( 90, 0 )
+mouse_filter = 2
+
+[node name="MarginContainer6" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 624.0
+margin_right = 600.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 80, 400 )
+mouse_filter = 2
+
+[node name="hurt" parent="." instance=ExtResource( 3 )]
+
+[node name="event_message" type="Label" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -300.0
+margin_right = 300.0
+margin_bottom = 422.0
+rect_min_size = Vector2( 0, 400 )
+custom_fonts/font = ExtResource( 4 )
+text = "Your Drone
+Is Dead!"
+align = 1
+valign = 1
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "beep"
+anims/RESET = SubResource( 3 )
+anims/beep = SubResource( 2 )
+
+[connection signal="pressed" from="VBoxContainer/hbox/button_score" to="." method="_on_button_score_pressed"]
+[connection signal="pressed" from="VBoxContainer/hbox/button_menu" to="." method="_on_button_menu_pressed"]
