@@ -16,7 +16,7 @@ onready var _player_holder = $CanvasLayer/control/VBoxContainer/VBoxContainer2/V
 onready var _play_button :BorderButton = $CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/play
 onready var _ready_button :BorderButton = $CanvasLayer/control/VBoxContainer/VBoxContainer2/HBoxContainer2/ready
 
-onready var _add_bot_button_icon = $CanvasLayer/control/PanelContainer/HBoxContainer/add_bot/ColorRect2
+onready var _add_bot_button_icon = $CanvasLayer/control/PanelContainer/SafeArea/HBoxContainer/add_bot/ColorRect2
 
 onready var _exit_timer = $exit_timer
 

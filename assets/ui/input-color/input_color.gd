@@ -55,8 +55,8 @@ signal on_pick(_color)
 onready var _custom = $VBoxContainer/custom
 onready var _pallete = $VBoxContainer/pallete
 
-onready var _custom_btn = $VBoxContainer/PanelContainer/HBoxContainer/custom
-onready var _pallete_btn = $VBoxContainer/PanelContainer/HBoxContainer/pallete
+onready var _custom_btn = $VBoxContainer/PanelContainer/SafeArea/HBoxContainer/custom
+onready var _pallete_btn = $VBoxContainer/PanelContainer/SafeArea/HBoxContainer/pallete
 
 onready var _holder = $VBoxContainer/pallete/ItemList
 

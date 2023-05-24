@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/ui/bar/hp_bar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/mini_map/MiniMap.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/ui/hurt/hurt.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/ui/bar/hp_bar_vertical.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=5]
 [ext_resource path="res://assets/ui/icon/menu.png" type="Texture" id=6]
@@ -256,8 +255,6 @@ margin_right = 600.0
 margin_bottom = 1024.0
 rect_min_size = Vector2( 80, 400 )
 mouse_filter = 2
-
-[node name="hurt" parent="." instance=ExtResource( 3 )]
 
 [node name="event_message" type="Label" parent="."]
 modulate = Color( 1, 1, 1, 0 )

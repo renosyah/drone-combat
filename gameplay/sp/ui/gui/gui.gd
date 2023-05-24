@@ -14,8 +14,6 @@ onready var _player_ammo_bar = $VBoxContainer/HBoxContainer/MarginContainer3/Mar
 onready var _no_ammo_icon = $VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/HBoxContainer/no_ammo_icon
 onready var _ammo_icon = $VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2/HBoxContainer/ammo_icon
 
-onready var _hurt_indicator = $hurt
-
 onready var _gui_elements = [
 		$VBoxContainer/hbox/MarginContainer/HBoxContainer/VBoxContainer/player_hp_bar,
 		$VBoxContainer/HBoxContainer/MarginContainer3/MarginContainer2,
@@ -55,15 +53,6 @@ func remove_minimap_object_marker(object :Spatial):
 func set_camera(_camera : GameplayCamera):
 	_overlay_map.set_camera(_camera)
 	
-func show_hurt(type :int):
-	match type:
-		1:
-			_hurt_indicator.show_hurt()
-		2:
-			_hurt_indicator.show_hurting()
-		3:
-			_hurt_indicator.hide_hurt()
-		
 func set_gui_element_visible(show :bool):
 	for i in _gui_elements:
 		i.visible = show

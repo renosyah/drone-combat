@@ -9,7 +9,7 @@ export var maps: Array = []
 export var title:String = "Map"
 
 onready var _holder = $VBoxContainer/ScrollContainer/HBoxContainer/holder
-onready var _title = $VBoxContainer/Control/HBoxContainer/title
+onready var _title = $VBoxContainer/Control/SafeArea/HBoxContainer/title
 
 func show_maps():
 	_title.text = title

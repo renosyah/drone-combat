@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/ui/choose-module/choose_drone_module.gd" type="Script" id=2]
 [ext_resource path="res://assets/ui/icon/back.png" type="Texture" id=3]
+[ext_resource path="res://addons/SafeArea/SafeArea.gd" type="Script" id=4]
 
 [node name="choose_drone_module" type="Control"]
 anchor_right = 1.0
@@ -19,23 +20,29 @@ color = Color( 0, 0, 0, 0.905882 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Control" type="Control" parent="VBoxContainer"]
+[node name="Control" type="MarginContainer" parent="VBoxContainer"]
 margin_right = 600.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
+mouse_filter = 2
 
 [node name="ColorRect2" type="ColorRect" parent="VBoxContainer/Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+margin_right = 600.0
+margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
 color = Color( 0, 0, 0, 1 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="SafeArea" type="MarginContainer" parent="VBoxContainer/Control"]
+margin_right = 600.0
+margin_bottom = 100.0
+script = ExtResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Control/SafeArea"]
+margin_right = 600.0
+margin_bottom = 100.0
 alignment = 1
 
-[node name="button_close" type="Button" parent="VBoxContainer/Control/HBoxContainer"]
+[node name="button_close" type="Button" parent="VBoxContainer/Control/SafeArea/HBoxContainer"]
 margin_right = 80.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 80, 80 )
@@ -43,13 +50,13 @@ icon = ExtResource( 3 )
 flat = true
 expand_icon = true
 
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/Control/HBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/Control/SafeArea/HBoxContainer"]
 margin_left = 84.0
 margin_right = 245.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 
-[node name="title" type="Label" parent="VBoxContainer/Control/HBoxContainer"]
+[node name="title" type="Label" parent="VBoxContainer/Control/SafeArea/HBoxContainer"]
 margin_left = 249.0
 margin_top = 20.0
 margin_right = 351.0
@@ -61,13 +68,13 @@ text = "Hull"
 align = 1
 valign = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Control/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Control/SafeArea/HBoxContainer"]
 margin_left = 355.0
 margin_right = 516.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Control/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Control/SafeArea/HBoxContainer"]
 margin_left = 520.0
 margin_right = 600.0
 margin_bottom = 100.0
@@ -104,4 +111,4 @@ margin_bottom = 920.0
 rect_min_size = Vector2( 200, 80 )
 size_flags_vertical = 3
 
-[connection signal="pressed" from="VBoxContainer/Control/HBoxContainer/button_close" to="." method="_on_button_close_pressed"]
+[connection signal="pressed" from="VBoxContainer/Control/SafeArea/HBoxContainer/button_close" to="." method="_on_button_close_pressed"]

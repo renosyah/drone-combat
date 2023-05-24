@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/ui/icon/locked.png" type="Texture" id=1]
 [ext_resource path="res://assets/button/border_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/ui/choose-module/drone/hull_1.png" type="Texture" id=4]
 [ext_resource path="res://gameplay/sp/ui/unlocked_notification/unlocked_notification.gd" type="Script" id=5]
+[ext_resource path="res://addons/SafeArea/SafeArea.gd" type="Script" id=6]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -143,16 +144,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.905882 )
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="SafeArea" type="MarginContainer" parent="."]
 anchor_right = 1.0
-margin_bottom = 170.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2"]
+[node name="Container" type="Control" parent="SafeArea"]
+margin_right = 600.0
+margin_bottom = 1024.0
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SafeArea/Container"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -300.0
+margin_right = 300.0
+margin_bottom = 175.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="SafeArea/Container/VBoxContainer2"]
 margin_right = 600.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 
-[node name="title2" type="Label" parent="VBoxContainer2"]
+[node name="title2" type="Label" parent="SafeArea/Container/VBoxContainer2"]
 margin_top = 24.0
 margin_right = 600.0
 margin_bottom = 107.0
@@ -166,13 +179,13 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer2"]
+[node name="MarginContainer3" type="MarginContainer" parent="SafeArea/Container/VBoxContainer2"]
 margin_top = 111.0
 margin_right = 600.0
 margin_bottom = 131.0
 rect_min_size = Vector2( 0, 20 )
 
-[node name="title" type="Label" parent="VBoxContainer2"]
+[node name="title" type="Label" parent="SafeArea/Container/VBoxContainer2"]
 visible = false
 margin_top = 135.0
 margin_right = 600.0
@@ -186,7 +199,7 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/Container"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -203,14 +216,14 @@ size_flags_horizontal = 4
 texture = ExtResource( 4 )
 expand = true
 
-[node name="locked" type="ColorRect" parent="TextureRect"]
+[node name="locked" type="ColorRect" parent="SafeArea/Container/TextureRect"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 100, 100 )
 mouse_filter = 2
 color = Color( 0.490196, 0.490196, 0.490196, 0.737255 )
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect/locked"]
+[node name="TextureRect" type="TextureRect" parent="SafeArea/Container/TextureRect/locked"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -221,30 +234,33 @@ margin_right = 50.0
 margin_bottom = 50.0
 texture = ExtResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="SafeArea/Container"]
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+margin_left = -150.0
 margin_top = -164.0
+margin_right = 150.0
 
-[node name="continue" parent="VBoxContainer" instance=ExtResource( 2 )]
+[node name="continue" parent="SafeArea/Container/VBoxContainer" instance=ExtResource( 2 )]
 visible = false
-margin_left = 175.0
-margin_right = 425.0
+margin_left = 25.0
+margin_right = 275.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 250, 80 )
 size_flags_horizontal = 4
 button_color = Color( 0, 0.517647, 0.164706, 1 )
 button_label = "Continue"
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="SafeArea/Container/VBoxContainer"]
 margin_top = 84.0
-margin_right = 600.0
+margin_right = 300.0
 margin_bottom = 164.0
 rect_min_size = Vector2( 0, 80 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SafeArea/Container"]
 anims/RESET = SubResource( 1 )
 anims/unlocked = SubResource( 2 )
 
-[connection signal="pressed" from="VBoxContainer/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="SafeArea/Container/VBoxContainer/continue" to="." method="_on_continue_pressed"]

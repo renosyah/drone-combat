@@ -1,8 +1,8 @@
 extends Control
 
-onready var _animation = $AnimationPlayer
-onready var _item = $TextureRect
-onready var _title = $VBoxContainer2/title
+onready var _animation = $SafeArea/Container/AnimationPlayer
+onready var _item = $SafeArea/Container/TextureRect
+onready var _title = $SafeArea/Container/VBoxContainer2/title
 
 var item_unlocked :Resource
 var title :String

@@ -9,7 +9,7 @@ export var modules : Array = []
 export var title:String = "Module"
 
 onready var _holder = $VBoxContainer/ScrollContainer/HBoxContainer/holder
-onready var _title = $VBoxContainer/Control/HBoxContainer/title
+onready var _title = $VBoxContainer/Control/SafeArea/HBoxContainer/title
 
 func show_modules():
 	_title.text = title

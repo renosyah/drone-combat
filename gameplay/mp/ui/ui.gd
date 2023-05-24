@@ -9,14 +9,15 @@ signal exit_game_session()
 
 var is_player_alive = true
 
-onready var _gui = $CanvasLayer/gui
-onready var _joystick = $CanvasLayer/joystick
-onready var _mp_death_screen = $CanvasLayer/mp_death_screen
+onready var _gui = $CanvasLayer/SafeArea/gui
+onready var _joystick = $CanvasLayer/SafeArea/joystick
+onready var _mp_death_screen = $CanvasLayer/SafeArea/mp_death_screen
 onready var _scoreboard = $CanvasLayer/scoreboard
-onready var _battle_end = $CanvasLayer/battle_end
-onready var _menu = $CanvasLayer/menu
+onready var _battle_end = $CanvasLayer/SafeArea/battle_end
+onready var _menu = $CanvasLayer/SafeArea/menu
+onready var _hurt = $CanvasLayer/hurt
 
-onready var _dialog_exit = $CanvasLayer/simple_dialog_on_exit
+onready var _dialog_exit = $CanvasLayer/SafeArea/simple_dialog_on_exit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -69,8 +70,14 @@ func set_camera(_camera : GameplayCamera):
 	_gui.set_camera(_camera)
 	
 func show_hurt(type :int):
-	_gui.show_hurt(type)
-	
+	match type:
+		1:
+			_hurt.show_hurt()
+		2:
+			_hurt.show_hurting()
+		3:
+			_hurt.hide_hurt()
+		
 func show_death_screen():
 	is_player_alive = false
 	_gui.set_gui_element_visible(is_player_alive)

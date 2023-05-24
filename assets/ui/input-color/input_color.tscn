@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/ui/input-color/input_color.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/ui/icon/back.png" type="Texture" id=4]
 [ext_resource path="res://assets/ui/icon/custom.png" type="Texture" id=5]
 [ext_resource path="res://assets/ui/icon/pick_color.png" type="Texture" id=6]
+[ext_resource path="res://addons/SafeArea/SafeArea.gd" type="Script" id=7]
 
 [node name="input_color" type="Control"]
 anchor_right = 1.0
@@ -30,24 +31,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="MarginContainer" parent="VBoxContainer"]
 margin_right = 600.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 0, 120 )
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 593.0
-margin_bottom = 113.0
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/PanelContainer"]
+margin_right = 600.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 100 )
+color = Color( 0, 0, 0, 1 )
 
-[node name="back" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
-margin_right = 100.0
-margin_bottom = 106.0
+[node name="SafeArea" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+margin_right = 600.0
+margin_bottom = 120.0
+mouse_filter = 2
+script = ExtResource( 7 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/SafeArea"]
+margin_right = 600.0
+margin_bottom = 120.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer"]
+margin_right = 10.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="back" type="Button" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer"]
+margin_left = 14.0
+margin_right = 114.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 100, 100 )
 custom_fonts/font = ExtResource( 1 )
 flat = true
@@ -55,7 +69,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer/back"]
+[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/back"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 80, 80 )
@@ -65,27 +79,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="margin" type="CenterContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
-margin_left = 104.0
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer"]
+margin_left = 118.0
+margin_top = 40.0
 margin_right = 482.0
-margin_bottom = 106.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer/margin"]
-margin_left = 102.0
-margin_top = 33.0
-margin_right = 276.0
-margin_bottom = 73.0
+margin_bottom = 80.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
 text = "Pick Color"
 align = 1
 valign = 1
 
-[node name="custom" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="custom" type="Button" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer"]
 margin_left = 486.0
 margin_right = 586.0
-margin_bottom = 106.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 100, 100 )
 custom_fonts/font = ExtResource( 1 )
 flat = true
@@ -93,7 +101,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer/custom"]
+[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/custom"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 80, 80 )
@@ -103,11 +111,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="pallete" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="pallete" type="Button" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer"]
 visible = false
-margin_left = 486.0
-margin_right = 586.0
-margin_bottom = 106.0
+margin_left = 500.0
+margin_right = 600.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 100, 100 )
 custom_fonts/font = ExtResource( 1 )
 flat = true
@@ -115,7 +123,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer/pallete"]
+[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/pallete"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 80, 80 )
@@ -124,6 +132,12 @@ expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer"]
+margin_left = 590.0
+margin_right = 600.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 10, 0 )
 
 [node name="custom" type="VBoxContainer" parent="VBoxContainer"]
 margin_top = 124.0
@@ -428,9 +442,9 @@ margin_right = 600.0
 size_flags_horizontal = 3
 columns = 3
 
-[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/custom" to="." method="_on_custom_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/pallete" to="." method="_on_pallete_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/custom" to="." method="_on_custom_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/pallete" to="." method="_on_pallete_pressed"]
 [connection signal="value_changed" from="VBoxContainer/custom/R/hbox/R_slider" to="." method="_on_R_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/custom/G/hbox/G_slider" to="." method="_on_G_slider_value_changed"]
 [connection signal="value_changed" from="VBoxContainer/custom/B/hbox/B_slider" to="." method="_on_B_slider_value_changed"]

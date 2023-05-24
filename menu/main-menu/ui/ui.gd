@@ -8,7 +8,7 @@ onready var _host_setting = $CanvasLayer/host_setting
 onready var _server_browser = $CanvasLayer/server_browser
 onready var _dialog_exit_option = $CanvasLayer/simple_dialog_option
 
-onready var _player_name_label = $CanvasLayer/VBoxContainer/Control3/HBoxContainer/player_name_label
+onready var _player_name_label = $CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer/player_name_label
 onready var _input_name_dialog = $CanvasLayer/input_name
 
 onready var _input_color_dialog = $CanvasLayer/input_color

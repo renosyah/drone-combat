@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/ui/scoreboard/scoreboard.gd" type="Script" id=3]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_16.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/ui/scoreboard/item/item.gd" type="Script" id=5]
+[ext_resource path="res://addons/SafeArea/SafeArea.gd" type="Script" id=6]
 
 [node name="scoreboard" type="Control"]
 anchor_right = 1.0
@@ -16,16 +17,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0470588, 0.0470588, 0.0470588, 0.956863 )
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="SafeArea" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 6 )
 
-[node name="MarginContainer8" type="MarginContainer" parent="VBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="SafeArea"]
+margin_right = 600.0
+margin_bottom = 1024.0
+
+[node name="MarginContainer8" type="MarginContainer" parent="SafeArea/VBoxContainer2"]
 margin_right = 600.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 80, 30 )
 
-[node name="Label2" type="Label" parent="VBoxContainer2"]
+[node name="Label2" type="Label" parent="SafeArea/VBoxContainer2"]
 margin_top = 34.0
 margin_right = 600.0
 margin_bottom = 94.0
@@ -34,13 +41,13 @@ text = "Score"
 align = 1
 valign = 1
 
-[node name="MarginContainer7" type="MarginContainer" parent="VBoxContainer2"]
+[node name="MarginContainer7" type="MarginContainer" parent="SafeArea/VBoxContainer2"]
 margin_top = 98.0
 margin_right = 600.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 80, 30 )
 
-[node name="item" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="item" type="HBoxContainer" parent="SafeArea/VBoxContainer2"]
 margin_top = 132.0
 margin_right = 600.0
 margin_bottom = 212.0
@@ -48,18 +55,18 @@ mouse_filter = 2
 size_flags_vertical = 0
 script = ExtResource( 5 )
 
-[node name="MarginContainer5" type="MarginContainer" parent="VBoxContainer2/item"]
+[node name="MarginContainer5" type="MarginContainer" parent="SafeArea/VBoxContainer2/item"]
 margin_right = 20.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 20, 0 )
 
-[node name="MarginContainer" type="CenterContainer" parent="VBoxContainer2/item"]
+[node name="MarginContainer" type="CenterContainer" parent="SafeArea/VBoxContainer2/item"]
 margin_left = 24.0
 margin_right = 104.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 80 )
 
-[node name="color" type="ColorRect" parent="VBoxContainer2/item/MarginContainer"]
+[node name="color" type="ColorRect" parent="SafeArea/VBoxContainer2/item/MarginContainer"]
 visible = false
 margin_left = -10.0
 margin_top = 15.0
@@ -68,13 +75,13 @@ margin_bottom = 65.0
 rect_min_size = Vector2( 100, 50 )
 color = Color( 0.396078, 0.396078, 0.396078, 1 )
 
-[node name="MarginContainer2" type="CenterContainer" parent="VBoxContainer2/item"]
+[node name="MarginContainer2" type="CenterContainer" parent="SafeArea/VBoxContainer2/item"]
 margin_left = 108.0
 margin_right = 368.0
 margin_bottom = 80.0
 size_flags_horizontal = 3
 
-[node name="player_name" type="Label" parent="VBoxContainer2/item/MarginContainer2"]
+[node name="player_name" type="Label" parent="SafeArea/VBoxContainer2/item/MarginContainer2"]
 margin_left = 94.0
 margin_top = 26.0
 margin_right = 166.0
@@ -82,13 +89,13 @@ margin_bottom = 54.0
 custom_fonts/font = ExtResource( 4 )
 text = "Name"
 
-[node name="MarginContainer3" type="CenterContainer" parent="VBoxContainer2/item"]
+[node name="MarginContainer3" type="CenterContainer" parent="SafeArea/VBoxContainer2/item"]
 margin_left = 372.0
 margin_right = 472.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 100, 0 )
 
-[node name="kill_count" type="Label" parent="VBoxContainer2/item/MarginContainer3"]
+[node name="kill_count" type="Label" parent="SafeArea/VBoxContainer2/item/MarginContainer3"]
 margin_left = 29.0
 margin_top = 26.0
 margin_right = 70.0
@@ -96,13 +103,13 @@ margin_bottom = 54.0
 custom_fonts/font = ExtResource( 4 )
 text = "Kill"
 
-[node name="MarginContainer4" type="CenterContainer" parent="VBoxContainer2/item"]
+[node name="MarginContainer4" type="CenterContainer" parent="SafeArea/VBoxContainer2/item"]
 margin_left = 476.0
 margin_right = 576.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 100, 0 )
 
-[node name="death_count" type="Label" parent="VBoxContainer2/item/MarginContainer4"]
+[node name="death_count" type="Label" parent="SafeArea/VBoxContainer2/item/MarginContainer4"]
 margin_left = 12.0
 margin_top = 26.0
 margin_right = 87.0
@@ -110,51 +117,51 @@ margin_bottom = 54.0
 custom_fonts/font = ExtResource( 4 )
 text = "Death"
 
-[node name="MarginContainer6" type="MarginContainer" parent="VBoxContainer2/item"]
+[node name="MarginContainer6" type="MarginContainer" parent="SafeArea/VBoxContainer2/item"]
 margin_left = 580.0
 margin_right = 600.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 20, 0 )
 
-[node name="MarginContainer9" type="MarginContainer" parent="VBoxContainer2"]
+[node name="MarginContainer9" type="MarginContainer" parent="SafeArea/VBoxContainer2"]
 margin_top = 216.0
 margin_right = 600.0
 margin_bottom = 231.0
 rect_min_size = Vector2( 80, 15 )
 
-[node name="holder" type="VBoxContainer" parent="VBoxContainer2"]
+[node name="holder" type="VBoxContainer" parent="SafeArea/VBoxContainer2"]
 margin_top = 235.0
 margin_right = 600.0
 margin_bottom = 836.0
 rect_min_size = Vector2( 80, 80 )
 size_flags_vertical = 3
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer2"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="SafeArea/VBoxContainer2"]
 margin_top = 840.0
 margin_right = 600.0
 margin_bottom = 920.0
 alignment = 1
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/HBoxContainer3"]
+[node name="MarginContainer2" type="MarginContainer" parent="SafeArea/VBoxContainer2/HBoxContainer3"]
 margin_left = 91.0
 margin_right = 171.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
 
-[node name="resume" type="Button" parent="VBoxContainer2/HBoxContainer3"]
+[node name="resume" type="Button" parent="SafeArea/VBoxContainer2/HBoxContainer3"]
 margin_left = 175.0
 margin_right = 425.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 250, 80 )
 flat = true
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer2/HBoxContainer3/resume"]
+[node name="ColorRect" type="ColorRect" parent="SafeArea/VBoxContainer2/HBoxContainer3/resume"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 color = Color( 0.247059, 0.247059, 0.247059, 1 )
 
-[node name="Label" type="Label" parent="VBoxContainer2/HBoxContainer3/resume"]
+[node name="Label" type="Label" parent="SafeArea/VBoxContainer2/HBoxContainer3/resume"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
@@ -164,16 +171,16 @@ text = "Resume"
 align = 1
 valign = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/HBoxContainer3"]
+[node name="MarginContainer" type="MarginContainer" parent="SafeArea/VBoxContainer2/HBoxContainer3"]
 margin_left = 429.0
 margin_right = 509.0
 margin_bottom = 80.0
 rect_min_size = Vector2( 80, 0 )
 
-[node name="MarginContainer4" type="MarginContainer" parent="VBoxContainer2"]
+[node name="MarginContainer4" type="MarginContainer" parent="SafeArea/VBoxContainer2"]
 margin_top = 924.0
 margin_right = 600.0
 margin_bottom = 1024.0
 rect_min_size = Vector2( 0, 100 )
 
-[connection signal="pressed" from="VBoxContainer2/HBoxContainer3/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="SafeArea/VBoxContainer2/HBoxContainer3/resume" to="." method="_on_resume_pressed"]

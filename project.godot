@@ -282,6 +282,12 @@ Admob="*res://addons/google_admob/Admob.gd"
 window/size/width=600
 window/size/height=1024
 window/handheld/orientation="portrait"
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/SafeArea/plugin.cfg" )
 
 [global]
 

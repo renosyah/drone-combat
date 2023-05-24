@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/ui/server-browser/back.png" type="Texture" id=1]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://assets/ui/server-browser/server_browser.gd" type="Script" id=4]
 [ext_resource path="res://addons/LANServerBroadcast/server_listener/ServerListener.gd" type="Script" id=5]
 [ext_resource path="res://assets/ui/server-browser/refresh.png" type="Texture" id=6]
+[ext_resource path="res://addons/SafeArea/SafeArea.gd" type="Script" id=7]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -42,9 +43,6 @@ tracks/0/keys = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -64,24 +62,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="PanelContainer" type="MarginContainer" parent="VBoxContainer"]
 margin_right = 600.0
 margin_bottom = 120.0
 rect_min_size = Vector2( 0, 120 )
 mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 593.0
-margin_bottom = 113.0
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/PanelContainer"]
+margin_right = 600.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 0, 100 )
+color = Color( 0, 0, 0, 1 )
 
-[node name="back" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="SafeArea" type="MarginContainer" parent="VBoxContainer/PanelContainer"]
+margin_right = 600.0
+margin_bottom = 120.0
+mouse_filter = 2
+script = ExtResource( 7 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer/SafeArea"]
+margin_right = 600.0
+margin_bottom = 120.0
+
+[node name="back" type="Button" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer"]
 margin_right = 100.0
-margin_bottom = 106.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 100, 100 )
 custom_fonts/font = ExtResource( 3 )
 flat = true
@@ -89,7 +94,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer/back"]
+[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/back"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -105,27 +110,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="margin" type="CenterContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+[node name="margin" type="CenterContainer" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer"]
 margin_left = 104.0
-margin_right = 482.0
-margin_bottom = 106.0
+margin_right = 496.0
+margin_bottom = 120.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer/margin"]
-margin_left = 135.0
-margin_top = 23.0
-margin_right = 242.0
-margin_bottom = 83.0
+[node name="Label" type="Label" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/margin"]
+margin_left = 142.0
+margin_top = 30.0
+margin_right = 249.0
+margin_bottom = 90.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "Join"
 align = 1
 valign = 1
 
-[node name="refresh" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
-margin_left = 486.0
-margin_right = 586.0
-margin_bottom = 106.0
+[node name="refresh" type="Button" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer"]
+margin_left = 500.0
+margin_right = 600.0
+margin_bottom = 120.0
 rect_min_size = Vector2( 100, 100 )
 custom_fonts/font = ExtResource( 3 )
 flat = true
@@ -133,7 +138,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/HBoxContainer/refresh"]
+[node name="ColorRect2" type="TextureRect" parent="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/refresh"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -180,5 +185,5 @@ anims/loading = SubResource( 2 )
 [connection signal="error_listening" from="server_listener" to="." method="_on_server_listener_error_listening"]
 [connection signal="new_server" from="server_listener" to="." method="_on_server_listener_new_server"]
 [connection signal="remove_server" from="server_listener" to="." method="_on_server_listener_remove_server"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="VBoxContainer/PanelContainer/HBoxContainer/refresh" to="." method="_on_refresh_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/SafeArea/HBoxContainer/refresh" to="." method="_on_refresh_pressed"]

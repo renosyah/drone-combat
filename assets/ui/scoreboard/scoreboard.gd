@@ -3,7 +3,7 @@ extends Control
 const item_template = preload("res://assets/ui/scoreboard/item/item.tscn")
 
 onready var _scores :Array = []
-onready var _holder = $VBoxContainer2/holder
+onready var _holder = $SafeArea/VBoxContainer2/holder
 	
 func update_scoreboard(player_id, kill, death :int, _color :Color = Color.white, player_name :String = "", player_team : int = 0):
 	var score :ScoreData = ScoreData.new()

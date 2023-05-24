@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_48.tres" type="DynamicFont" id=1]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=2]
 [ext_resource path="res://menu/main-menu/ui/host_setting/host_setting.gd" type="Script" id=3]
 [ext_resource path="res://assets/button/border_button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/SafeArea/SafeArea.gd" type="Script" id=5]
 
 [node name="host_setting" type="Control"]
 anchor_right = 1.0
@@ -25,6 +26,7 @@ rect_min_size = Vector2( 480, 600 )
 margin_right = 600.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 80, 30 )
+script = ExtResource( 5 )
 
 [node name="Label2" type="Label" parent="VBoxContainer2"]
 margin_top = 34.0

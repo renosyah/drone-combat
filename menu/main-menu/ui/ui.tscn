@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/ui/server-browser/server_browser.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/ui/fonts/montserrat_eb_32.tres" type="DynamicFont" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://assets/ui/simple_dialog_message/exception_message.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/ui/choose-map/choose_map.tscn" type="PackedScene" id=19]
 [ext_resource path="res://assets/ui/choose-mission/choose_mission.tscn" type="PackedScene" id=20]
+[ext_resource path="res://addons/SafeArea/SafeArea.gd" type="Script" id=21]
 
 [node name="main_menu" type="Control"]
 anchor_right = 1.0
@@ -34,48 +35,48 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="Control3" type="Control" parent="CanvasLayer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 margin_right = 600.0
 margin_bottom = 100.0
-rect_min_size = Vector2( 0, 100 )
+mouse_filter = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/Control3"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/Control3/VBoxContainer2"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/VBoxContainer/MarginContainer"]
 margin_right = 600.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color( 0.27451, 0.27451, 0.27451, 0.756863 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/Control3"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Control3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer"]
+margin_right = 600.0
+margin_bottom = 100.0
+mouse_filter = 2
+script = ExtResource( 21 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/Control3"]
+margin_right = 600.0
+margin_bottom = 100.0
 alignment = 1
 
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer"]
 margin_right = 100.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 
-[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer"]
 margin_left = 104.0
 margin_right = 219.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 
-[node name="change_name" type="Button" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+[node name="change_name" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer"]
 margin_left = 223.0
 margin_right = 283.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 60, 80 )
 flat = true
 
-[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer/change_name"]
+[node name="ColorRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer/change_name"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -89,7 +90,7 @@ mouse_filter = 2
 texture = ExtResource( 6 )
 expand = true
 
-[node name="player_name_label" type="Label" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+[node name="player_name_label" type="Label" parent="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer"]
 margin_left = 287.0
 margin_top = 30.0
 margin_right = 396.0
@@ -99,20 +100,20 @@ text = "Player"
 align = 1
 valign = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer"]
 margin_left = 400.0
 margin_right = 516.0
 margin_bottom = 100.0
 size_flags_horizontal = 3
 
-[node name="setting" type="Button" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer"]
+[node name="setting" type="Button" parent="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer"]
 margin_left = 520.0
 margin_right = 600.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 80, 100 )
 flat = true
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/Control3/HBoxContainer/setting"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer/setting"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -411,8 +412,8 @@ visible = false
 [node name="exception_message" parent="CanvasLayer" instance=ExtResource( 18 )]
 visible = false
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control3/HBoxContainer/change_name" to="." method="_on_change_name_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Control3/HBoxContainer/setting" to="." method="_on_setting_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer/change_name" to="." method="_on_change_name_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/MarginContainer/Control3/HBoxContainer/setting" to="." method="_on_setting_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_weapon_btn" to="." method="_on_drone_weapon_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_turret_btn2" to="." method="_on_drone_turret_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/Control2/VBoxContainer/HBoxContainer2/drone_hull_btn" to="." method="_on_drone_hull_btn_pressed"]

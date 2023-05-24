@@ -1,13 +1,13 @@
-extends MarginContainer
+extends Control
 
 signal on_restart_mission_press
 signal on_next_mission_press
 signal on_credit_press
 
-onready var _title = $VBoxContainer2/HBoxContainer/Label2
-onready var _next_button_layout = $VBoxContainer2/HBoxContainer3/HBoxContainer
-onready var _button_layout = $VBoxContainer2/HBoxContainer3
-onready var _button_exit_layout = $VBoxContainer2/HBoxContainer4
+onready var _title = $MarginContainer/VBoxContainer2/HBoxContainer/Label2
+onready var _next_button_layout = $MarginContainer/VBoxContainer2/HBoxContainer3/HBoxContainer
+onready var _button_layout = $MarginContainer/VBoxContainer2/HBoxContainer3
+onready var _button_exit_layout = $MarginContainer/VBoxContainer2/HBoxContainer4
 
 func _ready():
 	_button_exit_layout.visible = false
