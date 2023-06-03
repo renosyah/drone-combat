@@ -19,7 +19,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CanvasLayer/Control/VBoxContainer/Label3:modulate")
+tracks/1/path = NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/Label3:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -47,7 +47,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CanvasLayer/Control/VBoxContainer/Label3:modulate")
+tracks/1/path = NodePath("CanvasLayer/Control/VBoxContainer/HBoxContainer/Label3:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -98,17 +98,35 @@ margin_right = 600.0
 margin_bottom = 532.0
 rect_min_size = Vector2( 0, 20 )
 
-[node name="Label3" type="Label" parent="CanvasLayer/Control/VBoxContainer"]
-modulate = Color( 1, 1, 1, 0 )
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
 margin_top = 536.0
 margin_right = 600.0
 margin_bottom = 576.0
+alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="Label3" type="Label" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 44.0
+margin_right = 556.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 text = "..."
 align = 1
 valign = 1
 autowrap = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+margin_left = 560.0
+margin_right = 600.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "show_mission"

@@ -1,7 +1,7 @@
 extends Control
 
 onready var _mission_name = $CanvasLayer/Control/VBoxContainer/Label2
-onready var _mission_objective = $CanvasLayer/Control/VBoxContainer/Label3
+onready var _mission_objective = $CanvasLayer/Control/VBoxContainer/HBoxContainer/Label3
 onready var _timer = $Timer
 onready var animation_player = $AnimationPlayer
 

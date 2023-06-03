@@ -17,7 +17,7 @@ func stop_projectile():
 	_explosion.explode()
 	
 func seek():
-	var direction = (target.global_transform.origin - global_transform.origin).normalized()
+	var direction = global_transform.origin.direction_to(target.global_transform.origin)
 	var desired = direction * speed
 	return (desired - velocity).normalized() * 50.0
 	

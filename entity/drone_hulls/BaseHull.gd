@@ -39,7 +39,7 @@ export var color : Color
 
 var _turret : BaseTurret
 
-var _offset_distance = 0.5
+var _offset_distance = 1.5
 var _altitude = 0.0
 var _gravity = -12.0
 var _velocity = Vector3.ZERO
@@ -274,7 +274,8 @@ func move_by_input(delta):
 		direction.normalized()
 		_moving_state = MOVING
 		_transform_turning(Vector3(direction.x, _altitude , direction.y) + translation, delta)
-		_velocity = Vector3(direction.x, _altitude , direction.y) * speed
+		var _input_power = -clamp(direction.length(), 0 , 1)
+		_velocity = transform.basis.z * _input_power * speed
 	else:
 		_moving_state = IDDLE
 		_velocity = Vector3.ZERO
@@ -297,7 +298,8 @@ func move_to_waypoint(delta):
 	if distance_to_target > _offset_distance:
 		_moving_state = MOVING
 		_transform_turning(_waypoint, delta)
-		_velocity = direction_to_waypoint * speed
+		var _input_power = -clamp(direction.length(), 0 , 1)
+		_velocity = transform.basis.z * _input_power * speed
 		
 	else:
 		_moving_state = IDDLE
